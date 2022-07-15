@@ -1,0 +1,62 @@
+* {
+  	box-sizing: border-box;
+  	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+  	font-size: 16px;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+body {
+    overflow-x: hidden;
+}
+.topnav {
+  background-color: #f39faa;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #f5bfcc;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #faf39f;
+  color: white;
+}
+
+.topnav a.logoutBtn {
+  position: absolute;
+  left: 93%;
+  height: 58px;
+  color: #faf39f;
+  font-weight: bold;
+}
+.topnav a.searchLogoutBtn {
+  position: absolute;
+  left: 93%;
+  top: 0%;
+  height: 58px;
+  color: #faf39f;
+  font-weight: bold;
+}
+
+button.followBtn {
+  position: absolute;
+  top: 9.5%;
+  background-color: #faf39f;
+}
+table.table[id="otherProfileTable"] {
+  position: absolute;
+  top: 14%;
+}

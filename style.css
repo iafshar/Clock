@@ -155,8 +155,13 @@ body {
   text-align: center;
 }
 
+.start{
+  height: 100%;
+  width: 100%;
+}
+
 a {
-  width: 120px;
+  width: max-content;
   height: 20px;
   font-size: 20px;
   font-weight: bold;
@@ -175,33 +180,44 @@ a:hover{
   color: #fff8ef;
     transition: color 0.2s;
 }
+
 a.loginBtn {
   position: absolute;
   left: 50%;
+  top: 40%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
+
 a.signUpBtn{
   position: absolute;
   left: 50%;
-  top: 55%;
+  top: 60%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
 
 a.noAccountBtn {
   position: absolute;
   left: 50%;
-  top: 70%;
+  top: 80%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
+
 a.premiumBtn {
+  width: 120px;
   font-size: 20px;
   position: absolute;
   left: 35%;
 }
 a.basicBtn {
+  width: 120px;
   position: absolute;
   left: 65%;
 }
 
 a.already {
-  width: 245px;
   position: absolute;
   left: 45%;
   top: 80%;

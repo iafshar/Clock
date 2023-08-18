@@ -93,12 +93,14 @@ body {
   	display: flex;
   	flex-wrap: wrap;
   	justify-content: center;
-  	padding-top: 200px;
+    height: 100%;
+    width: 100%;
 }
 
 .login form input[type="password"] {
-    position: relative;
-    left: 50px;
+    position: absolute;
+    left: 50%;
+    top: 35%;
     font-size: 27px;
     font-weight: bold;
     background-color: #f39faa;
@@ -108,13 +110,15 @@ body {
   	border: 3px solid #faf39f;
     margin-top: 60px;
   	padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 
 .login form input[type="text"]{
     font-size: 27px;
     font-weight: bold;
-    position: relative;
-    left: 360px;
+    position: absolute;
+    left: 50%;
+    top: 35%;
     background-color: #f39faa;
     color: #faf39f;
   	width: 310px;
@@ -122,6 +126,7 @@ body {
   	border: 3px solid #faf39f;
     margin-bottom: 20px;
   	padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 ::placeholder {
   font-weight: bold;
@@ -130,13 +135,14 @@ body {
 .login form input[type="submit"] {
     font-size: 27px;
     text-align: center;
-    position: relative;
-    right: 205px;
-    top: 140px;
+    position: absolute;
+    left: 50%;
+    top: 35%;
   	width: 200px;
     height: 60px;
   	padding: 15px;
- 	  margin-top: 20px;
+ 	  margin-top: 130px;
+    transform: translate(-50%, 0%);
   	background-color: #faf39f;
   	border: 0;
   	cursor: pointer;

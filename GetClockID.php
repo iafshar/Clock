@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
 
     // echoing JSON response(prints it)
     $_SESSION["ClockID"] = $ClockID;
-    $_SESSION["name"] = $Name;
+    $_SESSION["clockName"] = $Name;
 }
 
 

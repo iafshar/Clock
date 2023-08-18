@@ -3,7 +3,8 @@
 /*
  * Following code will list all the records on the table
  */
-include '/opt/lampp/htdocs/NEA5/get_UserID.php';
+session_start();
+include '/get_UserID.php';
 
 $_SESSION["tempo"] = 0;
 $_SESSION["Error"] = "";
@@ -15,7 +16,8 @@ require_once __DIR__ . '/db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
-
+$UserID = $_SESSION["UserID"];
+//echo '<script>console.log("here")</script>';
 // get all clocks from clocks table
 $sql = ("SELECT * FROM Clocks WHERE UserID='$UserID'");
 $result = $db->get_con()->query($sql);
@@ -57,6 +59,8 @@ if ($result->num_rows > 0) {
     // no clocks found
     $response["success"] = 0;
     $response["message"] = "No records found";
+    $response["SesUID"] = $_SESSION["UserID"];
+    $response["UID"] = $UserID;
 
     // echo no users JSON
     echo json_encode($response);

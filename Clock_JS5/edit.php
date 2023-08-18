@@ -3,7 +3,7 @@
 // <!-- updates the data of the clock in the database after the user has editted an existing clock -->
 session_start();
 
-$conn = mysqli_connect('localhost', 'root', '', 'NEA');
+$conn = mysqli_connect('localhost', 'root', '', 'ClockDB');
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -11,7 +11,7 @@ if (!$conn) {
 
 $UserID = $_SESSION["UserID"];
 $ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["name"];
+$Name = $_SESSION["clockName"];
 $Circles = $_GET["Circles"];
 $Tempo = $_GET["tempo"];
 $Shared = $_GET["shared"];
@@ -19,7 +19,7 @@ if($Shared == 1){
   $DateShared = date('Y-m-d H:i:s');
 }
 else{
-  $DateShared = NULL;
+  $DateShared = date('0-0-0 0:0:0');
 }
 
 $Delete = "DELETE FROM Circles Where ClockID='$ClockID'";
@@ -66,7 +66,7 @@ if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
      VALUES ('$ClockID','$SoundID','$X','$Y')";
     mysqli_query($conn, $CircInsert);
   }
- header("Location:http://localhost:8080/NEA5/MyClocks.php");
+ header("Location:http://localhost:8080/Clock/MyClocks.php");
 
  } else {
      echo "Error: " . $Insert . "<br>" . mysqli_error($conn);

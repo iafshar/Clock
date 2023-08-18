@@ -36,6 +36,7 @@ if ($Username != NULL){
         array_push($response["Users"], $record);
 
     }
+    $response["success"] = 1;
 }
 else {
     // no products found
@@ -45,7 +46,7 @@ else {
     // // echo no users JSON
 }
 $_SESSION['response'] = $response;
-header("Location:http://localhost:8080/NEA5/searchResults.html");
+header("Location:http://localhost:8080/Clock/searchResults.html");
 }
 
 ?>

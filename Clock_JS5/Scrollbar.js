@@ -39,12 +39,12 @@ class HScrollbar {
 
     fill(clockColor); // colour of the text
     if (this.spos > this.swidth-60){  // if the slider gets too close to the end of the screen it stops moving the text to avoid it going past the screen
-      text(nf(this.tempo,3,0), this.swidth-60, this.ypos-8);
+      text(this.tempo, this.swidth-60, this.ypos-8);
       this.numX = this.swidth-60;
       this.numY = this.ypos-8;
     }
     else{
-      text(nf(this.tempo,3,0), this.spos-3, this.ypos-8); // else it moves the text along with the slider
+      text(this.tempo, this.spos-3, this.ypos-8); // else it moves the text along with the slider
       this.numX = this.spos-3;
       this.numY = this.ypos-8;
     }

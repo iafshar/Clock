@@ -20,11 +20,11 @@ $count = mysqli_num_rows($result);
 
 if ($count == 5 && $Premium == 0 || $count == 20 && $Premium == 1){
     $_SESSION["Error"] = "You have reached your clock limit.";
-    header("Location:http://localhost:8080/NEA5/MyClocks.php");
+    header("Location:http://localhost:8080/Clock/MyClocks.php");
 }
 else {
     $_SESSION["Error"] = "";
-    header("Location:http://localhost:8080/NEA5/Clock_JS5/index.html");
+    header("Location:http://localhost:8080/Clock/Clock_JS5/index.html");
 }
 
 ?>

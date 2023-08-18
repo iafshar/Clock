@@ -1,8 +1,10 @@
 
 <?php
 // <!-- the profile page of the user -->
+session_start();
 require_once __DIR__ . '/get_UserID.php';
-echo $_SESSION["Error"]; ?>
+echo $_SESSION["Error"]; 
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -20,12 +22,15 @@ echo $_SESSION["Error"]; ?>
         if (this.readyState == 4 && this.status == 200) {
             var myRecords = JSON.parse(this.responseText);
             var rows = "";
-            for (i=0;i<myRecords.Clocks.length;i++) {
+            if (myRecords.success != 0){
+              for (i=0;i<myRecords.Clocks.length;i++) {
                 var myRecord = myRecords.Clocks[i];
                 var newRow = "<tr class='table-row'><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.Shared+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='deletedata'>🗑️</button></td><td><button class='editdata'>Edit</button></td><td><button class='viewComments'>View Comments</button></td></tr>";
                 rows = rows+newRow
+              }
+              document.getElementById("resultRows").innerHTML = rows;
             }
-            document.getElementById("resultRows").innerHTML = rows;
+            
         }
     };
 

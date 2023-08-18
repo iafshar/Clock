@@ -39,7 +39,7 @@ function mousePressed() {
       CheckMouseClicked = hiHat;
     }
     else if (signUp.overButton()){
-      window.open("http://localhost:8080/NEA5/choose.html", "_self")
+      window.open("http://localhost:8080/Clock/choose.html", "_self")
     }
     for (i = 0;i<Circles.length;i++){
       if (CircleOnScreen && pointCircle(Circles[i].ox, Circles[i].oy, mouseX, mouseY, CircleDiameter/2)){
@@ -79,7 +79,7 @@ function mousePressed() {
     else if (mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){
       hs1.tempo = 0;
       first = 0;
-      second = 0;
+      secnd = 0;
     }
     else {
       for (i=0;i<Nums.length;i++){

@@ -11,7 +11,7 @@ if (!$conn) {
 }
 
 $ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["name"];
+$Name = $_SESSION["clockName"];
 $UserID = $_SESSION["UserID"];
 
 $Check = "SELECT * FROM Votes WHERE UserID='$UserID' AND ClockID='$ClockID' AND Dislike=1";

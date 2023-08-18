@@ -13,6 +13,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if(isset($_POST['location'])){
+  
   if($_SESSION["Premium"] == 1){
     if(isset($_POST['Maker'])){
       $Maker = $_POST['Maker'];
@@ -29,11 +30,11 @@ if(isset($_POST['location'])){
       $UserID = $_SESSION["SearchedUserID"];
     }
     if(isset($_POST['clockName']) && strlen($_POST['comment']) > 0){
+      
 
       $clockName = $_POST['clockName'];
       $GetClockID = "SELECT * FROM Clocks WHERE UserID='$UserID' AND Name='$clockName'";
       $resultClock = $db->get_con()->query($GetClockID);
-
       if ($resultClock->num_rows > 0) {
           while ($row = $resultClock->fetch_assoc()) {
               $ClockID = $row["ClockID"];

@@ -21,7 +21,7 @@ function mousePressed() {
         }
       }
     }
-    if (save.overButton()){
+    if (saveBtn.overButton()){
         shared = 0;
         if(edited){
           var circs = [];
@@ -46,7 +46,7 @@ function mousePressed() {
 
           xmlhttp.open("GET", "edit.php?tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
           xmlhttp.send();
-          window.open("http://localhost:8080/NEA5/MyClocks.php", '_self');
+          window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
         }
         else{
           screen = 2;
@@ -79,7 +79,7 @@ function mousePressed() {
 
             xmlhttp.open("GET", "edit.php?tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
             xmlhttp.send();
-            window.open("http://localhost:8080/NEA5/MyClocks.php", '_self');
+            window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
           }
         }
         else{
@@ -124,7 +124,7 @@ function mousePressed() {
     else if (mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){
       hs1.tempo = 0;
       first = 0;
-      second = 0;
+      secnd = 0;
     }
     else {
       for (i=0;i<Nums.length;i++){
@@ -142,7 +142,7 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, save, share];
+    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, saveBtn, share];
     buttonCheck = false;
     for(var i = 0;i < Buttons.length;i++){
       if(Buttons[i].overButton()){
@@ -193,18 +193,18 @@ function keyPressed(){
   }
   else if(screen == 2){
     if(keyCode>=65 && keyCode<=90){
-      name += key;
+      clockName += key;
     }
     else if(keyCode>=48 && keyCode<=57){
-      name += key;
+      clockName += key;
     }
     else if(keyCode == 8){
-      name = name.substring(0, name.length - 1);
+      clockName = clockName.substring(0, clockName.length - 1);
     }
-    else if(keyCode == 32){
-      name += key;
+    else if(keyCode == 190 || keyCode == 189){
+      clockName += key;
     }
-    else if(keyCode == 13 && name.length > 0){
+    else if(keyCode == 13 && clockName.length > 0){
       saving();
     }
   }

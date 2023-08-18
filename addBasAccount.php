@@ -91,11 +91,11 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
     $_SESSION["Error"] .= "The two passwords do not match <br>";
   }
   if($invalid) {
-     header("Location:http://localhost:8080/NEA5/basSignUp.php");
+     header("Location:http://localhost:8080/Clock/basSignUp.php");
       }
   else{
      if (mysqli_query($conn, $Insert)) {
-          header("Location:http://localhost:8080/NEA5/MyClocks.php");
+          header("Location:http://localhost:8080/Clock/MyClocks.php");
       } else {
           echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
       }

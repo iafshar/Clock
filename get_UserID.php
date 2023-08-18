@@ -17,8 +17,7 @@ $query = "SELECT * FROM `Users` WHERE Username='$Username' and Password='$Passwo
 $result = $db->get_con()->query($query);
 
 $UserID = NULL;
-
-if ($result->num_rows > 0) {
+if ($result->num_rows != NULL && $result->num_rows > 0) {
     // looping through all results
 
     while ($row = $result->fetch_assoc()) {

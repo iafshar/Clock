@@ -7,13 +7,13 @@ $response = array();
 
 $response["tempo"] = $_SESSION["tempo"];
 
-require_once '/opt/lampp/htdocs/NEA5/db_connect.php';
+require_once '../db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
 
 $ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["name"];
+$Name = $_SESSION["clockName"];
 
 $GetCircles = "SELECT * FROM Circles WHERE ClockID='$ClockID'";
 $result = $db->get_con()->query($GetCircles);

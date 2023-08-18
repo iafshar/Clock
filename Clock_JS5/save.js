@@ -2,7 +2,7 @@
 function naming(){
   background(255);
   text("Name Your Clock",width/2-150, 200);
-  text(name,width/2-150,height/2);
+  text(clockName,width/2-150,height/2);
 }
 
 function saving(){
@@ -26,7 +26,7 @@ function saving(){
   }
   var xmlhttp = new XMLHttpRequest();
 
-  xmlhttp.open("GET", "send.php?name=" + name + "&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
+  xmlhttp.open("GET", "send.php?clockName=" + clockName + "&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
   xmlhttp.send();
-  window.open("http://localhost:8080/NEA5/MyClocks.php", '_self');
+  window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
 }

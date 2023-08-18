@@ -23,11 +23,11 @@ $Insert = "INSERT INTO Followings (FollowerID,FollowedID)
 
 if ($count != 0){
   mysqli_query($conn, $Delete);
-  header("Location:http://localhost:8080/NEA5/otherProfile.php");
+  header("Location:http://localhost:8080/Clock/otherProfile.php");
 }
 
 else if (mysqli_query($conn, $Insert)) {
-       header("Location:http://localhost:8080/NEA5/otherProfile.php");
+       header("Location:http://localhost:8080/Clock/otherProfile.php");
    } else {
        echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
    }

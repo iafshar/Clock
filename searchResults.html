@@ -15,13 +15,15 @@
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myRecords = JSON.parse(this.responseText);
-            var rows = "";
-            for (i=0;i<myRecords.Users.length;i++) {
-                 var myRecord = myRecords.Users[i];
-                 var newRow = "<tr class='table-row'><td>"+myRecord.Username+"</td></tr>";
-                 rows = rows+newRow
+            if(myRecords.success == 1) {
+              var rows = "";
+              for (i=0;i<myRecords.Users.length;i++) {
+                  var myRecord = myRecords.Users[i];
+                  var newRow = "<tr class='table-row'><td>"+myRecord.Username+"</td></tr>";
+                  rows = rows+newRow
+              }
+              document.getElementById("resultRows").innerHTML = rows;
             }
-            document.getElementById("resultRows").innerHTML = rows;
         }
     };
 

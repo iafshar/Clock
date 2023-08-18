@@ -11,16 +11,16 @@ function preload(){ //This function runs before the program is fully loaded.
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
         savedCircles = data.Circles;
-        if(data.tempo != 0){
+        if(data.tempo != null && data.tempo != 0){
           edited = true;
           starting = data.tempo;
         }
       }
   };
-
   xmlhttp.open("GET", "get.php", true);
   xmlhttp.send();
   keypadImg = loadImage('keypad.png')
+  
 }
 
 function setup() {
@@ -180,7 +180,7 @@ function setup() {
   hiHats = [hiHat,hiHat2,hiHat3,hiHat4,hiHat5,hiHat6,hiHat7,hiHat8,hiHat9,hiHat10,hiHat11,hiHat12,hiHat13,hiHat14,hiHat15,hiHat16,hiHat17,hiHat18,hiHat19,hiHat20,hiHat21,hiHat22,hiHat23,hiHat24,hiHat25,];
   hiHatCount = 0;
 
-  save = new Button(1020,buttonY,buttonWidth,buttonHeight,"SAVE",YELLOW,LIGHT_YELLOW);
+  saveBtn = new Button(1020,buttonY,buttonWidth,buttonHeight,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(890,buttonY,buttonWidth,buttonHeight,"SHARE",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(optionX,buttonY,optionWidth,buttonHeight,"SNARE",Snares,snareCount,RED,LIGHT_RED);
@@ -196,7 +196,7 @@ function setup() {
   angle = 270;
 
   first = 0;
-  second = 0;
+  secnd = 0;
   ClickCount = 0;
   stop1 = false;
   stop2 = false;
@@ -214,7 +214,7 @@ function setup() {
 
   Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
-  name = "";
+  clockName = "";
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
@@ -266,7 +266,7 @@ function clock() {
     Options[i].drawButton();
   }
 
-  save.drawButton();
+  saveBtn.drawButton();
   share.drawButton();
 
   drawSlider(hs1);

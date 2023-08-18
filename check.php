@@ -21,7 +21,7 @@ while ($row = $result1->fetch_assoc()) {
 }
 
 $_SESSION["SearchedUserID"] = $SearchedUserID;
-header("Location:otherProfile.html");
+header("Location:otherProfile.php");
 
 
  ?>

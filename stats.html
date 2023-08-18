@@ -15,13 +15,15 @@
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myRecords = JSON.parse(this.responseText);
-            var rows = "";
-            for (i=0;i<myRecords.Comments.length;i++) {
-                var myRecord = myRecords.Comments[i];
-                var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
-                rows = rows+newRow
+            if(myRecords.success == 1) {
+              var rows = "";
+              for (i=0;i<myRecords.Comments.length;i++) {
+                  var myRecord = myRecords.Comments[i];
+                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
+                  rows = rows+newRow
+              }
+              document.getElementById("resultRows").innerHTML = rows;
             }
-            document.getElementById("resultRows").innerHTML = rows;
         }
     };
 

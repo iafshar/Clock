@@ -46,12 +46,15 @@ if ($result->num_rows > 0) {
         $record["Ratio"] = $dislikes/$likes;
         array_push($response["ClocksUnsorted"], $record);
 				// Puts each record in the array not sorted by their like:dislike ratio
+        $response["discover"] = 1;
       }
     }
     // success
     $response["success"] = 1;
     $response["ClocksSorted"] = array();
-    array_push($response["ClocksSorted"], merge_sort($response["ClocksUnsorted"],"Ratio"));
+    if(count($response["ClocksUnsorted"]) > 0) {
+      array_push($response["ClocksSorted"], merge_sort($response["ClocksUnsorted"],"Ratio"));
+    }
 		// Now a merge sort function which I have created has been applied to the unsorted clocks
 		// and the array now has all the clocks sorted by their like:dislike ratio
 

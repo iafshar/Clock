@@ -15,7 +15,7 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 $ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["name"];
+$Name = $_SESSION["clockName"];
 $UserID = $_SESSION["UserID"];
 
 $DeleteCircles = "DELETE FROM Circles Where ClockID='$ClockID'";

@@ -18,7 +18,7 @@ echo $_SESSION["Error"]; ?>
 				<div>
 					<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 					<input type="password" name="Password1" placeholder="Password" id="password" autocomplete="new-password" required>
-					<input type="password" name="Password2" placeholder="Confirm Password" id="password" autocomplete="new-password" required>
+					<input type="password" name="Password2" placeholder="Confirm Password" id="confirm-password" autocomplete="new-password" required>
 					<input type="email" name="Email" placeholder="Email" id="email" autocomplete="email" required>
 					<input type="submit" value="Sign-Up">
 				</div>

@@ -210,22 +210,36 @@ a.premiumBtn {
   font-size: 20px;
   position: absolute;
   left: 35%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
 a.basicBtn {
   width: 120px;
   position: absolute;
   left: 65%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
 
 a.already {
   position: absolute;
-  left: 45%;
+  left: 50%;
   top: 80%;
+  transform: translate(-50%, 0%);
+  text-align: center;
 }
+
 a .premiumInfo { display: none; }
 a:hover .premiumAcc { display: none; }
-a:hover .premiumInfo { display: inline; }
+
+a:hover .premiumInfo { 
+  display: inline; 
+  width: max-content;
+}
 
 a .basicInfo { display: none; }
 a:hover .basicAcc { display: none; }
-a:hover .basicInfo { display: inline; }
+
+a:hover .basicInfo { 
+  display: inline;
+  width: max-content; }

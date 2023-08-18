@@ -15,8 +15,8 @@ echo $_SESSION["Error"] ?>
 			<form action="checkAccount.php"
 			<?php $_SESSION["Error"]=NULL;?>
 			method="post">
-				<input type="text" name="Username" placeholder="Username" id="username" required>
-				<input type="password" name="Password" placeholder="Password" id="password" required>
+				<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
+				<input type="password" name="Password" placeholder="Password" id="password" autocomplete="current-password" required>
 				<input type="submit" value="Login">
 			</form>
 		</div>

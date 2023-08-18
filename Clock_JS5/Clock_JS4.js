@@ -215,6 +215,7 @@ function setup() {
   Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
   clockName = "";
+  deleteNameDelay = 100;
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
@@ -310,6 +311,8 @@ function clock() {
 
   hit = false;
 
+  
+
   for (i = 0;i<Circles.length;i++) {
     Circles[i].drawCircle();
     Circles[i].onScreen = true;
@@ -323,6 +326,7 @@ function clock() {
   }
 
   angle += tempo;
+
 }
 
 function draw(){
@@ -334,6 +338,6 @@ function draw(){
     enter = 0;
   }
   else{
-    naming();
+    naming(deleteNameDelay);
   }
 }

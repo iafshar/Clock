@@ -3,6 +3,15 @@ function naming(){
   background(255);
   text("Name Your Clock",width/2-150, 200);
   text(clockName,width/2-150,height/2);
+  console.log(deleteNameDelay);
+  if (keyIsDown(8) && deleteNameDelay == 100) {
+    clockName = clockName.substring(0, clockName.length - 1);
+    deleteNameDelay = 0;
+  }
+  else if (deleteNameDelay < 100) {
+
+    deleteNameDelay += 20;
+  }
 }
 
 function saving(){

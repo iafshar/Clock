@@ -198,14 +198,12 @@ function keyPressed(){
     else if(keyCode>=48 && keyCode<=57){
       clockName += key;
     }
-    else if(keyCode == 8){
-      clockName = clockName.substring(0, clockName.length - 1);
-    }
     else if(keyCode == 190 || keyCode == 189){
       clockName += key;
     }
     else if(keyCode == 13 && clockName.length > 0){
       saving();
     }
+        
   }
 }

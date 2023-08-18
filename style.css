@@ -13,13 +13,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 200px;
+  height: 100%;
+  width: 100%;
 }
 .signUp form input[type="submit"] {
     font-size: 27px;
     text-align: center;
     position: absolute;
-    left: 43.7%;
+    left: 50%;
     top: 70%;
   	width: 200px;
     height: 60px;
@@ -31,6 +32,7 @@ body {
   	font-weight: bold;
   	color: #f39faa;
   	transition: background-color 0.2s;
+    transform: translate(-50%, 0%);
 }
 .signUp form input[type="submit"]:hover {
 	background-color: #fff8ef;
@@ -38,7 +40,7 @@ body {
 }
 .signUp form input[name="Password1"] {
     position: absolute;
-    left: 40%;
+    left: 50%;
     top: 30%;
     font-size: 27px;
     font-weight: bold;
@@ -48,10 +50,11 @@ body {
     height: 50px;
     border: 3px solid #faf39f;
     padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 .signUp form input[name="Password2"] {
     position: absolute;
-    left: 40%;
+    left: 50%;
     top: 40%;
     font-size: 27px;
     font-weight: bold;
@@ -61,10 +64,11 @@ body {
     height: 50px;
     border: 3px solid #faf39f;
     padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 .signUp form input[type="text"] {
     position: absolute;
-    left: 40%;
+    left: 50%;
     top: 20%;
     font-size: 27px;
     font-weight: bold;
@@ -74,10 +78,11 @@ body {
   	height: 50px;
   	border: 3px solid #faf39f;
   	padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 .signUp form input[type="email"] {
     position: absolute;
-    left: 40%;
+    left: 50%;
     top: 50%;
     font-size: 27px;
     font-weight: bold;
@@ -87,6 +92,7 @@ body {
     height: 50px;
     border: 3px solid #faf39f;
     padding: 0 15px;
+    transform: translate(-50%, 0%);
 }
 
 .login form {

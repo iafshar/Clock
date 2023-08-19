@@ -215,7 +215,9 @@ function setup() {
   Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
   clockName = "";
+  enterBtn = new Button(width/2-buttonWidth/2,height/2+150,buttonWidth,buttonHeight,"ENTER",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
   deleteNameDelay = 100;
+
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
@@ -269,6 +271,7 @@ function clock() {
 
   saveBtn.drawButton();
   share.drawButton();
+  
 
   drawSlider(hs1);
   tempo = hs1.tempo/40;
@@ -338,6 +341,6 @@ function draw(){
     enter = 0;
   }
   else{
-    naming(deleteNameDelay);
+    naming();
   }
 }

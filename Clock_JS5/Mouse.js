@@ -100,7 +100,7 @@ function mousePressed() {
     enter = 0;
   }
   }
-  else{
+  else if (screen == 1) {
       if (mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
       if (ClickCount==2||ClickCount==0){ //clicked as a condition
         ClickCount = 1;
@@ -129,11 +129,15 @@ function mousePressed() {
     else {
       for (i=0;i<Nums.length;i++){
         if (dist(mouseX,mouseY,Nums[i].x,Nums[i].y)<Nums[i].diameter/2){
-           print(Nums[i].text);
            hs1.tempo += Nums[i].text;
            hs1.tempo = int(hs1.tempo);
         }
       }
+    }
+  }
+  else { //if screen == 2
+    if (enterBtn.overButton() && clockName.length > 0) {
+      saving();
     }
   }
 }

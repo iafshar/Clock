@@ -1,8 +1,10 @@
 // function for naming your clock after you choose to save or share it for the first time
 function naming(){
   background(255);
-  fill(0);
+  fill(0,0,0);
   strokeWeight(1);
+  stroke(0);
+  textAlign(LEFT);
   text("Type to name your clock",width/2-textWidth("Type to name your clock")/2, 200);
   text(clockName,width/2-textWidth(clockName)/2,height/2);
   strokeWeight(4);
@@ -15,6 +17,15 @@ function naming(){
 
     deleteNameDelay += 20;
   }
+  if (clockName.length > 0) {
+    enterBtn.buttonColor = BLACK;
+    enterBtn.hoverColor = GREY;
+  }
+  else {
+    enterBtn.buttonColor = LIGHT_ECLIPSE;
+    enterBtn.hoverColor = LIGHT_ECLIPSE;
+  }
+  enterBtn.drawButton();
 }
 
 function saving(){

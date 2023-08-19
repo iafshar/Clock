@@ -1,8 +1,9 @@
 // function for naming your clock after you choose to save or share it for the first time
 function naming(){
   background(255);
-  text("Name Your Clock",width/2-150, 200);
-  text(clockName,width/2-150,height/2);
+  text("Type to name your clock",width/2-textWidth("Type to name your clock")/2, 200);
+  line(80,height/2+15,width-80,height/2+15);
+  text(clockName,width/2-textWidth(clockName)/2,height/2);
   if (keyIsDown(8) && deleteNameDelay == 100) {
     clockName = clockName.substring(0, clockName.length - 1);
     deleteNameDelay = 0;

@@ -19,6 +19,12 @@ else if (isset($_POST['search'])){
 
 $db = new DB_CONNECT();
 if ($Username != NULL){
+  for ($i = 0; $i < count($_SESSION["Searches"]); $i++) {
+    if ($_SESSION["Searches"][$i] == $Username) {
+      unset($_SESSION["Searches"][$i]);
+      break;
+    }
+  }
   array_unshift($_SESSION["Searches"],$Username);
   if(sizeof($_SESSION["Searches"]) > 5){
     array_pop($_SESSION["Searches"]);

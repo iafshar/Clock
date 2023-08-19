@@ -15,7 +15,7 @@ $_SESSION["Error"] = NULL; // This will be a string containing all the errors th
 		<div class="start">
 			<form>
 				<a href="choose.html" class="signUpBtn">Sign-Up</a>
-				<a href="Clock_JS_NoAcc/index.html" class="noAccountBtn">No Account</a>
+				<a href="Clock_NoAccount/index.html" class="noAccountBtn">No Account</a>
 				<a href="login.php" class="loginBtn">Login</a>
 			</form>
 		</div>

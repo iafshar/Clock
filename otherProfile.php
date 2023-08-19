@@ -76,7 +76,7 @@
        var xmlhttp = new XMLHttpRequest();
        xmlhttp.open("GET", "GetClockID.php?choose=7&clockName="+name+"&tempo="+tempo, true);
        xmlhttp.send();
-       window.open('Clock_JS_ReadOnly/index.html','_self');
+       window.open('Clock_ReadOnly/index.html','_self');
       });
     });
     </script>

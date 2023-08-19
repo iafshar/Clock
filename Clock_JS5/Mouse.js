@@ -192,16 +192,11 @@ function keyPressed(){
     }
   }
   else if(screen == 2){
-    if(keyCode>=65 && keyCode<=90){
+    // 65-90 are letters, 48-57 are numbers, 190 is period, 189 is dash
+    if(((keyCode>=65 && keyCode<=90) || (keyCode>=48 && keyCode<=57) || (keyCode == 190 || keyCode == 189)) && clockName.length <= 40){
       clockName += key;
     }
-    else if(keyCode>=48 && keyCode<=57){
-      clockName += key;
-    }
-    else if(keyCode == 190 || keyCode == 189){
-      clockName += key;
-    }
-    else if(keyCode == 13 && clockName.length > 0){
+    else if(keyCode == 13 && clockName.length > 0){ // enter
       saving();
     }
         

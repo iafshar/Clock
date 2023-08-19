@@ -74,7 +74,7 @@ echo $_SESSION["Error"];
        var xmlhttp = new XMLHttpRequest();
        xmlhttp.open("GET", "GetClockID.php?choose=4&clockName="+name+"&tempo="+tempo, true);
        xmlhttp.send();
-       window.open('Clock_JS5/index.html','_self');
+       window.open('Clock_User/index.html','_self');
       });
     });
     </script>

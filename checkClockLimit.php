@@ -24,7 +24,7 @@ if ($count == 5 && $Premium == 0 || $count == 20 && $Premium == 1){
 }
 else {
     $_SESSION["Error"] = "";
-    header("Location:http://localhost:8080/Clock/Clock_JS5/index.html");
+    header("Location:http://localhost:8080/Clock/Clock_User/index.html");
 }
 
 ?>

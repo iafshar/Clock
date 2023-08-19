@@ -20,12 +20,17 @@ function naming(){
   if (clockName.length > 0) {
     enterBtn.buttonColor = BLACK;
     enterBtn.hoverColor = GREY;
+    clearBtn.buttonColor = BLACK;
+    clearBtn.hoverColor = GREY;
   }
   else {
     enterBtn.buttonColor = LIGHT_ECLIPSE;
     enterBtn.hoverColor = LIGHT_ECLIPSE;
+    clearBtn.buttonColor = LIGHT_ECLIPSE;
+    clearBtn.hoverColor = LIGHT_ECLIPSE;
   }
   enterBtn.drawButton();
+  clearBtn.drawButton();
 }
 
 function saving(){

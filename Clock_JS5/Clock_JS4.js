@@ -215,8 +215,11 @@ function setup() {
   Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
   clockName = "";
-  enterBtn = new Button(width/2-buttonWidth/2,height/2+150,buttonWidth,buttonHeight,"ENTER",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
-  deleteNameDelay = 100;
+  enterBtn = new Button(width/2-buttonWidth-10,height/2+150,buttonWidth,buttonHeight,"ENTER",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
+  clearBtn = new Button(width/2+10,height/2+150,buttonWidth,buttonHeight,"CLEAR",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
+  
+  deleteNameDelay = 100; // used to delay deleting characters from clock name so that clicking backspace once doesnt remove a bunch of chars
+
 
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){

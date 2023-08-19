@@ -139,6 +139,9 @@ function mousePressed() {
     if (enterBtn.overButton() && clockName.length > 0) {
       saving();
     }
+    else if (clearBtn.overButton()) {
+      clockName = "";
+    }
   }
 }
 

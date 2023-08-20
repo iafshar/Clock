@@ -1,9 +1,9 @@
 // code for the clock page, draw, setup and preload
 function preload(){ //This function runs before the program is fully loaded.
-  cymbalSound = loadSound("Sounds/cymbal.mp3");  //It makes sense to load the sounds here so that there are no time delays
-  kickSound = loadSound("Sounds/kick.mp3");
-  hiHatSound = loadSound("Sounds/hiHat.mp3");
-  snareSound = loadSound("Sounds/snare.mp3");
+  cymbalSound = loadSound("../Sounds/cymbal.mp3");  //It makes sense to load the sounds here so that there are no time delays
+  kickSound = loadSound("../Sounds/kick.mp3");
+  hiHatSound = loadSound("../Sounds/hiHat.mp3");
+  snareSound = loadSound("../Sounds/snare.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
   edited = false;

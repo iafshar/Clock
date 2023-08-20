@@ -1,8 +1,8 @@
 function preload(){
-  cymbalSound = loadSound("Sounds/cymbal.mp3");
-  kickSound = loadSound("Sounds/kick.mp3");
-  hiHatSound = loadSound("Sounds/hiHat.mp3");
-  snareSound = loadSound("Sounds/snare.mp3");
+  cymbalSound = loadSound("../Sounds/cymbal.mp3");
+  kickSound = loadSound("../Sounds/kick.mp3");
+  hiHatSound = loadSound("../Sounds/hiHat.mp3");
+  snareSound = loadSound("../Sounds/snare.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
   xmlhttp.onreadystatechange = function() {

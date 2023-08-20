@@ -43,6 +43,14 @@ class HScrollbar {
     else{
       fill(clockColor); // colour of the text
     }
+    
+    if (this.tempo > this.MaxTempo) {
+      this.tempo = this.MaxTempo;
+    }
+    else if (this.tempo < this.MinTempo) {
+      this.tempo = this.MinTempo;
+    }
+
     if (this.spos > this.Width-60){  // if the slider gets too close to the end of the screen it stops moving the text to avoid it going past the screen
       text(this.tempo, this.Width-60, this.ypos-8);
       this.numX = this.Width-60;

@@ -19,7 +19,7 @@ function preload(){ //This function runs before the program is fully loaded.
   };
   xmlhttp.open("GET", "get.php", true);
   xmlhttp.send();
-  KEYPAD_IMAGE = loadImage('keypad.png')
+  KEYPAD_IMAGE = loadImage('keypad.png');
   
 }
 
@@ -34,8 +34,8 @@ function setup() {
   SOUND_BUTTON_WIDTH = 200;
   SOUND_BUTTON_X = 1150;
 
-  ClickedOnCircle = null;
-  CircleOnScreen = false;
+  clickedOnCircle = null;
+  circleOnScreen = false;
 
   RED = color('#d94d4c');
   GREEN = color('#87aa66');
@@ -56,10 +56,10 @@ function setup() {
   clockColor = YELLOW;
 
   CIRCLE_DIAMETER = 20;
-  CircleOnScreen = false;
+  circleOnScreen = false;
   CircleOutline = 0;
 
-  CheckMouseClicked = null;
+  checkMouseClicked = null;
   hs1 = new HScrollbar(0, height-30, width, 30,2,starting);
 
     snare = new Circle(SNARE_SOUND, CIRCLE_DIAMETER, 20, 140, RED);
@@ -166,12 +166,12 @@ function setup() {
     hiHat24 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,350,180, ECLIPSE);
     hiHat25 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,380,180, ECLIPSE);
 
-  Circles = [];
+  circles = [];
 
-  Snares = [snare,snare2,snare3,snare4,snare5,snare6,snare7,snare8,snare9,snare10,snare11,snare12,snare13,snare14,snare15,snare16,snare17,snare18,snare19,snare20,snare21,snare22,snare23,snare24,snare25,];
+  snares = [snare,snare2,snare3,snare4,snare5,snare6,snare7,snare8,snare9,snare10,snare11,snare12,snare13,snare14,snare15,snare16,snare17,snare18,snare19,snare20,snare21,snare22,snare23,snare24,snare25,];
   snareCount = 0;
 
-  Cymbals = [cymbal,cymbal2,cymbal3,cymbal4,cymbal5,cymbal6,cymbal7,cymbal8,cymbal9,cymbal10,cymbal11,cymbal12,cymbal13,cymbal14,cymbal15,cymbal16,cymbal17,cymbal18,cymbal19,cymbal20,cymbal21,cymbal22,cymbal23,cymbal24,cymbal25,];
+  cymbals = [cymbal,cymbal2,cymbal3,cymbal4,cymbal5,cymbal6,cymbal7,cymbal8,cymbal9,cymbal10,cymbal11,cymbal12,cymbal13,cymbal14,cymbal15,cymbal16,cymbal17,cymbal18,cymbal19,cymbal20,cymbal21,cymbal22,cymbal23,cymbal24,cymbal25,];
   cymbalCount = 0;
 
   Kicks = [kick,kick2,kick3,kick4,kick5,kick6,kick7,kick8,kick9,kick10,kick11,kick12,kick13,kick14,kick15,kick16,kick17,kick18,kick19,kick20,kick21,kick22,kick23,kick24,kick25,];
@@ -183,12 +183,12 @@ function setup() {
   saveBtn = new Button(1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
 
-  snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",Snares,snareCount,RED,LIGHT_RED);
+  snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
-  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CYMBAL",Cymbals,cymbalCount,GREEN,LIGHT_GREEN);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CYMBAL",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
   hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
 
-  Options = [snareOp, kickOp, cymbalOp, hiHatOp];
+  options = [snareOp, kickOp, cymbalOp, hiHatOp];
 
   CLOCK_X = width/2;
   CLOCK_Y = height/2-20;
@@ -197,7 +197,7 @@ function setup() {
 
   first = 0;
   secnd = 0;
-  ClickCount = 0;
+  clickCount = 0;
   stop1 = false;
   stop2 = false;
   NUM_BUTTON_DIAMETER = 50;
@@ -212,7 +212,7 @@ function setup() {
   nine = new NumButton(400,400,'9',NUM_BUTTON_DIAMETER);
   zero = new NumButton(300,500,'0',NUM_BUTTON_DIAMETER);
 
-  Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
+  nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
   clockName = "";
   enterBtn = new Button(width/2-BUTTON_WIDTH-10,height/2+150,BUTTON_WIDTH,BUTTON_HEIGHT,"ENTER",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
@@ -229,7 +229,7 @@ function setup() {
         currentCircle.ox = savedCircle.X;
         currentCircle.oy = savedCircle.Y;
         currentCircle.drawCircle();
-        Circles.push(currentCircle);
+        circles.push(currentCircle);
         snareOp.counter ++;
       }
       else if(savedCircle.SoundID == 2){
@@ -237,7 +237,7 @@ function setup() {
         currentCircle.ox = savedCircle.X;
         currentCircle.oy = savedCircle.Y;
         currentCircle.drawCircle();
-        Circles.push(currentCircle);
+        circles.push(currentCircle);
         kickOp.counter ++;
       }
       else if(savedCircle.SoundID == 3){
@@ -245,7 +245,7 @@ function setup() {
         currentCircle.ox = savedCircle.X;
         currentCircle.oy = savedCircle.Y;
         currentCircle.drawCircle();
-        Circles.push(currentCircle);
+        circles.push(currentCircle);
         cymbalOp.counter ++;
       }
       else{
@@ -253,7 +253,7 @@ function setup() {
         currentCircle.ox = savedCircle.X;
         currentCircle.oy = savedCircle.Y;
         currentCircle.drawCircle();
-        Circles.push(currentCircle);
+        circles.push(currentCircle);
         hiHatOp.counter ++;
       }
     }
@@ -266,10 +266,10 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  image(KEYPAD_IMAGE,10,10,50,50)
+  image(KEYPAD_IMAGE,10,10,50,50);
 
-  for(i=0;i<Options.length;i++){
-    Options[i].drawButton();
+  for(i=0;i<options.length;i++){
+    options[i].drawButton();
   }
 
   saveBtn.drawButton();
@@ -319,15 +319,15 @@ function clock() {
 
   
 
-  for (i = 0;i<Circles.length;i++) {
-    Circles[i].drawCircle();
-    Circles[i].onScreen = true;
-    CircleOnScreen = true;
+  for (i = 0;i<circles.length;i++) {
+    circles[i].drawCircle();
+    circles[i].onScreen = true;
+    circleOnScreen = true;
 
-    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, Circles[i].ox, Circles[i].oy, CIRCLE_DIAMETER/2, CircleOnScreen);
+    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
     if (hit){
-        Circles[i].playSound();
+        circles[i].playSound();
     }
   }
 

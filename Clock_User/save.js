@@ -35,22 +35,22 @@ function naming(){
 
 function saving(){
   var circs = [];
-  for(i = 0;i < Circles.length;i++){
+  for(i = 0;i < circles.length;i++){
     circs[i] = [];
-    if (Circles[i].sound == SNARE_SOUND){
+    if (circles[i].sound == SNARE_SOUND){
       circs[i][0] = 1;
     }
-    else if (Circles[i].sound == KICK_SOUND){
+    else if (circles[i].sound == KICK_SOUND){
       circs[i][0] = 2;
     }
-    else if (Circles[i].sound == CYMBAL_SOUND){
+    else if (circles[i].sound == CYMBAL_SOUND){
       circs[i][0] = 3;
     }
     else{
       circs[i][0] = 4;
     }
-    circs[i][1] = Circles[i].ox;
-    circs[i][2] = Circles[i].oy;
+    circs[i][1] = circles[i].ox;
+    circs[i][2] = circles[i].oy;
   }
   var xmlhttp = new XMLHttpRequest();
 

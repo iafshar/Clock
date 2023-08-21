@@ -1,9 +1,9 @@
 // functions related to user interactions
 function mouseReleased() {
   mouseButton = 0;
-  if(ClickedOnCircle != null){
-    ClickedOnCircle.outline = 0;
-    ClickedOnCircle = null;
+  if(clickedOnCircle != null){
+    clickedOnCircle.outline = 0;
+    clickedOnCircle = null;
   }
 }
 
@@ -13,11 +13,11 @@ function mousePressed() {
   }
   if (screen == 0){
   if (mouseY < hs1.ypos) {
-    for(Op = 0;Op < Options.length;Op ++){
-      if(Options[Op].overButton()){
-        if(Options[Op].counter < Options[Op].sounds.length && !Circles.includes(Options[Op].sounds[Options[Op].counter])){
-          Circles.push(Options[Op].sounds[Options[Op].counter]);
-          Options[Op].counter ++;
+    for(Op = 0;Op < options.length;Op ++){
+      if(options[Op].overButton()){
+        if(options[Op].counter < options[Op].sounds.length && !circles.includes(options[Op].sounds[options[Op].counter])){
+          circles.push(options[Op].sounds[options[Op].counter]);
+          options[Op].counter ++;
         }
       }
     }
@@ -25,22 +25,22 @@ function mousePressed() {
         shared = 0;
         if(edited){
           var circs = [];
-          for(i = 0;i < Circles.length;i++){
+          for(i = 0;i < circles.length;i++){
             circs[i] = [];
-            if (Circles[i].sound == SNARE_SOUND){
+            if (circles[i].sound == SNARE_SOUND){
               circs[i][0] = 1;
             }
-            else if (Circles[i].sound == KICK_SOUND){
+            else if (circles[i].sound == KICK_SOUND){
               circs[i][0] = 2;
             }
-            else if (Circles[i].sound == CYMBAL_SOUND){
+            else if (circles[i].sound == CYMBAL_SOUND){
               circs[i][0] = 3;
             }
             else{
               circs[i][0] = 4;
             }
-            circs[i][1] = Circles[i].ox;
-            circs[i][2] = Circles[i].oy;
+            circs[i][1] = circles[i].ox;
+            circs[i][2] = circles[i].oy;
           }
           var xmlhttp = new XMLHttpRequest();
 
@@ -58,22 +58,22 @@ function mousePressed() {
         if(edited){
           if(edited){
             var circs = [];
-            for(i = 0;i < Circles.length;i++){
+            for(i = 0;i < circles.length;i++){
               circs[i] = [];
-              if (Circles[i].sound == SNARE_SOUND){
+              if (circles[i].sound == SNARE_SOUND){
                 circs[i][0] = 1;
               }
-              else if (Circles[i].sound == KICK_SOUND){
+              else if (circles[i].sound == KICK_SOUND){
                 circs[i][0] = 2;
               }
-              else if (Circles[i].sound == CYMBAL_SOUND){
+              else if (circles[i].sound == CYMBAL_SOUND){
                 circs[i][0] = 3;
               }
               else{
                 circs[i][0] = 4;
               }
-              circs[i][1] = Circles[i].ox;
-              circs[i][2] = Circles[i].oy;
+              circs[i][1] = circles[i].ox;
+              circs[i][2] = circles[i].oy;
             }
             var xmlhttp = new XMLHttpRequest();
 
@@ -86,13 +86,13 @@ function mousePressed() {
           screen = 2;
         }
     }
-    for (i = 0;i<Circles.length;i++){
-      if (CircleOnScreen && pointCircle(Circles[i].ox, Circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
-        ClickedOnCircle = Circles[i];
-        Circles[i].outline = 2;
+    for (i = 0;i<circles.length;i++){
+      if (circleOnScreen && pointCircle(circles[i].ox, circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
+        clickedOnCircle = circles[i];
+        circles[i].outline = 2;
       }
       else{
-        Circles[i].outline = 0;
+        circles[i].outline = 0;
       }
     }
   }
@@ -102,12 +102,12 @@ function mousePressed() {
   }
   else if (screen == 1) {
       if (mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
-      if (ClickCount==2||ClickCount==0){ //clicked as a condition
-        ClickCount = 1;
+      if (clickCount==2||clickCount==0){ //clicked as a condition
+        clickCount = 1;
         stop1 = false;
       }
       else{
-        ClickCount++;
+        clickCount++;
         stop2 = false;
       }
     }
@@ -127,9 +127,9 @@ function mousePressed() {
       secnd = 0;
     }
     else {
-      for (i=0;i<Nums.length;i++){
-        if (dist(mouseX,mouseY,Nums[i].x,Nums[i].y)<Nums[i].diameter/2){
-           hs1.tempo += Nums[i].text;
+      for (i=0;i<nums.length;i++){
+        if (dist(mouseX,mouseY,nums[i].x,nums[i].y)<nums[i].diameter/2){
+           hs1.tempo += nums[i].text;
            hs1.tempo = int(hs1.tempo);
         }
       }
@@ -159,7 +159,7 @@ function mouseDragged() { // Move Circle
     if (mouseX>10 && mouseX<60 && mouseY>10 && mouseY<60){
       buttonCheck = true;
     }
-    if (CircleOnScreen && ClickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
+    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
       for(i = 50;i < 251;i += 50){
         if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){
@@ -167,12 +167,12 @@ function mouseDragged() { // Move Circle
         }
       }
       if(check == 0){
-        ClickedOnCircle.ox = mouseX;
-        ClickedOnCircle.oy = mouseY;
+        clickedOnCircle.ox = mouseX;
+        clickedOnCircle.oy = mouseY;
       }
     }
     else if (mouseY > hs1.ypos - CIRCLE_DIAMETER){
-      ClickedOnCircle = null;
+      clickedOnCircle = null;
       CircleOutline = 0;
     }
 }

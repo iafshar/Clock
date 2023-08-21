@@ -12,8 +12,8 @@ function pointCircle(lx, ly, ox, oy, RADIUS){
   return false;
 }
 
-function lineCircle(x1,y1,x2,y2,cx,cy,r,CircleOnScreen) {
-  if(CircleOnScreen){
+function lineCircle(x1,y1,x2,y2,cx,cy,r,circleOnScreen) {
+  if(circleOnScreen){
     inside1 = pointCircle(x1,y1,cx,cy,r);
     inside2 = pointCircle(x2,y2, cx,cy,r);
     if (inside1 || inside2) {return true;}

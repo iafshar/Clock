@@ -1,10 +1,10 @@
 // code for the tempo screen
 function click() {
-  if (ClickCount == 1 && !stop1){
+  if (clickCount == 1 && !stop1){
       first = millis(); //millis() is a function in processing that returns the number
       stop1 = true;     //of millisecnds that have passed since the start of the program.
   }
-  else if (ClickCount == 2 && !stop2){
+  else if (clickCount == 2 && !stop2){
      secnd = millis();
      stop2 = true;
   }
@@ -49,8 +49,8 @@ function keypad(){
   }
   text("Enter", 400, 500);
 
-  for(i=0;i<Nums.length;i++){
-    Nums[i].drawButton();
+  for(i=0;i<nums.length;i++){
+    nums[i].drawButton();
   }
 
   click();

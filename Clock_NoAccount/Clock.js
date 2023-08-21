@@ -15,8 +15,8 @@ function setup() {
   SOUND_BUTTON_WIDTH = 200;
   SOUND_BUTTON_X = 1150;
 
-  ClickedOnCircle = null;
-  CircleOnScreen = false;
+  clickedOnCircle = null;
+  circleOnScreen = false;
 
   createCanvas(windowWidth,windowHeight);
   RED = color('#d94d4c');
@@ -39,10 +39,10 @@ function setup() {
   buttonColor = YELLOW;
 
   CIRCLE_DIAMETER = 20;
-  CircleOnScreen = false;
+  circleOnScreen = false;
   CircleOutline = 0;
 
-  CheckMouseClicked = null;
+  checkMouseClicked = null;
 
 
   Width = width;
@@ -154,12 +154,12 @@ function setup() {
     hiHat24 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,350,180, ECLIPSE);
     hiHat25 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,380,180, ECLIPSE);
 
-  Circles = [];
+  circles = [];
 
-  Snares = [snare,snare2,snare3,snare4,snare5,snare6,snare7,snare8,snare9,snare10,snare11,snare12,snare13,snare14,snare15,snare16,snare17,snare18,snare19,snare20,snare21,snare22,snare23,snare24,snare25,];
+  snares = [snare,snare2,snare3,snare4,snare5,snare6,snare7,snare8,snare9,snare10,snare11,snare12,snare13,snare14,snare15,snare16,snare17,snare18,snare19,snare20,snare21,snare22,snare23,snare24,snare25,];
   snareCount = 0;
 
-  Cymbals = [cymbal,cymbal2,cymbal3,cymbal4,cymbal5,cymbal6,cymbal7,cymbal8,cymbal9,cymbal10,cymbal11,cymbal12,cymbal13,cymbal14,cymbal15,cymbal16,cymbal17,cymbal18,cymbal19,cymbal20,cymbal21,cymbal22,cymbal23,cymbal24,cymbal25,];
+  cymbals = [cymbal,cymbal2,cymbal3,cymbal4,cymbal5,cymbal6,cymbal7,cymbal8,cymbal9,cymbal10,cymbal11,cymbal12,cymbal13,cymbal14,cymbal15,cymbal16,cymbal17,cymbal18,cymbal19,cymbal20,cymbal21,cymbal22,cymbal23,cymbal24,cymbal25,];
   cymbalCount = 0;
 
   Kicks = [kick,kick2,kick3,kick4,kick5,kick6,kick7,kick8,kick9,kick10,kick11,kick12,kick13,kick14,kick15,kick16,kick17,kick18,kick19,kick20,kick21,kick22,kick23,kick24,kick25,];
@@ -235,15 +235,15 @@ function clock() {
 
   hit = false;
 
-  for (i = 0;i<Circles.length;i++) {
-    Circles[i].drawCircle();
-    Circles[i].onScreen = true;
-    CircleOnScreen = true;
+  for (i = 0;i<circles.length;i++) {
+    circles[i].drawCircle();
+    circles[i].onScreen = true;
+    circleOnScreen = true;
 
-    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, Circles[i].ox, Circles[i].oy, CIRCLE_DIAMETER/2, CircleOnScreen);
+    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
     if (hit){
-        Circles[i].playSound();
+        circles[i].playSound();
     }
   }
 

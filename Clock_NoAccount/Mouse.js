@@ -1,7 +1,7 @@
 
 function mouseReleased() {
   mouseButton = 0;
-  ClickedOnCircle = null;
+  clickedOnCircle = null;
 }
 
 function mousePressed() {
@@ -11,43 +11,43 @@ function mousePressed() {
   if (clockScreen){
   if (mouseY < hs1.ypos) {
     if (snareOp.overButton()){
-      if(snareCount < Snares.length && !Circles.includes(Snares[snareCount])){
-        Circles.push(Snares[snareCount]);
+      if(snareCount < snares.length && !circles.includes(snares[snareCount])){
+        circles.push(snares[snareCount]);
         snareCount ++;
       }
-      CheckMouseClicked = snare;
+      checkMouseClicked = snare;
     }
     else if (kickOp.overButton()){
-      if(kickCount < Kicks.length && !Circles.includes(Kicks[kickCount])){
-        Circles.push(Kicks[kickCount]);
+      if(kickCount < Kicks.length && !circles.includes(Kicks[kickCount])){
+        circles.push(Kicks[kickCount]);
         kickCount ++;
       }
-      CheckMouseClicked = kick;
+      checkMouseClicked = kick;
     }
     else if (cymbalOp.overButton()){
-      if(cymbalCount < Cymbals.length && !Circles.includes(Cymbals[cymbalCount])){
-        Circles.push(Cymbals[cymbalCount]);
+      if(cymbalCount < cymbals.length && !circles.includes(cymbals[cymbalCount])){
+        circles.push(cymbals[cymbalCount]);
         cymbalCount ++;
       }
-      CheckMouseClicked = cymbal;
+      checkMouseClicked = cymbal;
     }
     else if (hiHatOp.overButton()){
-      if(hiHatCount < hiHats.length && !Circles.includes(hiHats[hiHatCount])){
-        Circles.push(hiHats[hiHatCount]);
+      if(hiHatCount < hiHats.length && !circles.includes(hiHats[hiHatCount])){
+        circles.push(hiHats[hiHatCount]);
         hiHatCount ++;
       }
-      CheckMouseClicked = hiHat;
+      checkMouseClicked = hiHat;
     }
     else if (signUp.overButton()){
       window.open("http://localhost:8080/Clock/choose.html", "_self")
     }
-    for (i = 0;i<Circles.length;i++){
-      if (CircleOnScreen && pointCircle(Circles[i].ox, Circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
-        ClickedOnCircle = Circles[i];
-        Circles[i].outline = 2;
+    for (i = 0;i<circles.length;i++){
+      if (circleOnScreen && pointCircle(circles[i].ox, circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
+        clickedOnCircle = circles[i];
+        circles[i].outline = 2;
       }
       else{
-        Circles[i].outline = 0;
+        circles[i].outline = 0;
       }
     }
   }
@@ -57,12 +57,12 @@ function mousePressed() {
   }
   else{
       if (mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
-      if (ClickCount==2||ClickCount==0){ //clicked as a condition
-        ClickCount = 1;
+      if (clickCount==2||clickCount==0){ //clicked as a condition
+        clickCount = 1;
         stop1 = false;
       }
       else{
-        ClickCount++;
+        clickCount++;
         stop2 = false;
       }
     }
@@ -82,9 +82,9 @@ function mousePressed() {
       secnd = 0;
     }
     else {
-      for (i=0;i<Nums.length;i++){
-        if (dist(mouseX,mouseY,Nums[i].x,Nums[i].y)<Nums[i].diameter/2){
-           hs1.tempo += Nums[i].num;
+      for (i=0;i<nums.length;i++){
+        if (dist(mouseX,mouseY,nums[i].x,nums[i].y)<nums[i].diameter/2){
+           hs1.tempo += nums[i].num;
            hs1.tempo = int(hs1.tempo);
         }
       }
@@ -96,7 +96,7 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    if (CircleOnScreen && ClickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !(mouseX>SOUND_BUTTON_X-CIRCLE_DIAMETER/2 && mouseY<230+optionHeight+CIRCLE_DIAMETER/2)){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
+    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !(mouseX>SOUND_BUTTON_X-CIRCLE_DIAMETER/2 && mouseY<230+optionHeight+CIRCLE_DIAMETER/2)){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
       for(i = 50;i < 251;i += 50){
         if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){
@@ -104,12 +104,12 @@ function mouseDragged() { // Move Circle
         }
       }
       if(check == 0){
-        ClickedOnCircle.ox = mouseX;
-        ClickedOnCircle.oy = mouseY;
+        clickedOnCircle.ox = mouseX;
+        clickedOnCircle.oy = mouseY;
       }
     }
     else if (mouseY > hs1.ypos - CIRCLE_DIAMETER){
-      ClickedOnCircle = null;
+      clickedOnCircle = null;
       CircleOutline = 0;
     }
 }

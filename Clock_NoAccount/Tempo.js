@@ -1,6 +1,6 @@
 first = 0;
 secnd = 0;
-ClickCount = 0;
+clickCount = 0;
 stop1 = false;
 stop2 = false;
 NUM_BUTTON_DIAMETER = 50;
@@ -18,14 +18,14 @@ eight = new NumButton('8',300,400,NUM_BUTTON_DIAMETER);
 nine = new NumButton('9',400,400,NUM_BUTTON_DIAMETER);
 zero = new NumButton('0',300,500,NUM_BUTTON_DIAMETER);
 
-Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
+nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 
 function click() {
-  if (ClickCount == 1 && !stop1){
+  if (clickCount == 1 && !stop1){
       first = millis(); //millis() is a function in processing that returns the number
       stop1 = true;     //of milliseconds that have passed since the start of the program.
   }
-  else if (ClickCount == 2 && !stop2){
+  else if (clickCount == 2 && !stop2){
      secnd = millis();
      stop2 = true;
   }

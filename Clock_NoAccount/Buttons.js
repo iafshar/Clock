@@ -19,7 +19,7 @@ class Button{
     }
   }
   drawButton() {
-    if (this.overButton() && ClickedOnCircle == null){
+    if (this.overButton() && clickedOnCircle == null){
       var realColor = this.hoverColor;
     }
     else{

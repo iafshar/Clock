@@ -1,12 +1,12 @@
 // functions related to collision detection
-function pointCircle(lx, ly, ox, oy, radius){
+function pointCircle(lx, ly, ox, oy, RADIUS){
   distX = lx - ox;
   distY = ly - oy;
   distance = sqrt((distX*distX) + (distY*distY));
 
   // if the distance is less than the circle's
-  // radius the point is inside!
-  if (distance <= radius) {
+  // RADIUS the point is inside!
+  if (distance <= RADIUS) {
     return true;
   }
   return false;

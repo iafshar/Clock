@@ -22,9 +22,6 @@ function preload(){
 function setup() {
   clockScreen = true;
 
-  optionWidth = 200;
-  optionX = 1150;
-
   ClickedOnCircle = null;
   CircleOnScreen = false;
 
@@ -48,7 +45,7 @@ function setup() {
   bgColor = WHITE;
   clockColor = YELLOW;
 
-  CircleDiameter = 20;
+  CIRCLE_DIAMETER = 20;
   CircleOnScreen = false;
   CircleOutline = 0;
 
@@ -60,109 +57,109 @@ function setup() {
 
   hs1 = new HScrollbar(0, height-30, width, 30,2,starting);
 
-    snare = new Circle(SNARE_SOUND, CircleDiameter, 20, 140, RED);
-    snare2 = new Circle(SNARE_SOUND, CircleDiameter,50,140, RED);
-    snare3 = new Circle(SNARE_SOUND, CircleDiameter,80,140, RED);
-    snare4 = new Circle(SNARE_SOUND, CircleDiameter,110,140, RED);
-    snare5 = new Circle(SNARE_SOUND, CircleDiameter,140,140, RED);
-    snare6 = new Circle(SNARE_SOUND, CircleDiameter,20,100, RED);
-    snare7 = new Circle(SNARE_SOUND, CircleDiameter,50,100, RED);
-    snare8 = new Circle(SNARE_SOUND, CircleDiameter,80,100, RED);
-    snare9 = new Circle(SNARE_SOUND, CircleDiameter,110,100, RED);
-    snare10 = new Circle(SNARE_SOUND, CircleDiameter,140,100, RED);
-    snare11 = new Circle(SNARE_SOUND, CircleDiameter, 170, 140, RED);
-    snare12 = new Circle(SNARE_SOUND, CircleDiameter,200,140, RED);
-    snare13 = new Circle(SNARE_SOUND, CircleDiameter,230,140, RED);
-    snare14 = new Circle(SNARE_SOUND, CircleDiameter,260,140, RED);
-    snare15 = new Circle(SNARE_SOUND, CircleDiameter,290,140, RED);
-    snare16 = new Circle(SNARE_SOUND, CircleDiameter,170,100, RED);
-    snare17 = new Circle(SNARE_SOUND, CircleDiameter,200,100, RED);
-    snare18 = new Circle(SNARE_SOUND, CircleDiameter,230,100, RED);
-    snare19 = new Circle(SNARE_SOUND, CircleDiameter,260,100, RED);
-    snare20 = new Circle(SNARE_SOUND, CircleDiameter,290,100, RED);
-    snare21 = new Circle(SNARE_SOUND, CircleDiameter, 320, 140, RED);
-    snare22 = new Circle(SNARE_SOUND, CircleDiameter,350,140, RED);
-    snare23 = new Circle(SNARE_SOUND, CircleDiameter,380,140, RED);
-    snare24 = new Circle(SNARE_SOUND, CircleDiameter,320,100, RED);
-    snare25 = new Circle(SNARE_SOUND, CircleDiameter,350,100, RED);
+    snare = new Circle(SNARE_SOUND, CIRCLE_DIAMETER, 20, 140, RED);
+    snare2 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,50,140, RED);
+    snare3 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,80,140, RED);
+    snare4 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,110,140, RED);
+    snare5 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,140,140, RED);
+    snare6 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,20,100, RED);
+    snare7 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,50,100, RED);
+    snare8 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,80,100, RED);
+    snare9 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,110,100, RED);
+    snare10 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,140,100, RED);
+    snare11 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER, 170, 140, RED);
+    snare12 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,200,140, RED);
+    snare13 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,230,140, RED);
+    snare14 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,260,140, RED);
+    snare15 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,290,140, RED);
+    snare16 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,170,100, RED);
+    snare17 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,200,100, RED);
+    snare18 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,230,100, RED);
+    snare19 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,260,100, RED);
+    snare20 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,290,100, RED);
+    snare21 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER, 320, 140, RED);
+    snare22 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,350,140, RED);
+    snare23 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,380,140, RED);
+    snare24 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,320,100, RED);
+    snare25 = new Circle(SNARE_SOUND, CIRCLE_DIAMETER,350,100, RED);
 
-    cymbal = new Circle(CYMBAL_SOUND, CircleDiameter,20,20, GREEN);
-    cymbal2 = new Circle(CYMBAL_SOUND, CircleDiameter,50,20, GREEN);
-    cymbal3 = new Circle(CYMBAL_SOUND, CircleDiameter,80,20, GREEN);
-    cymbal4 = new Circle(CYMBAL_SOUND, CircleDiameter,110,20, GREEN);
-    cymbal5 = new Circle(CYMBAL_SOUND, CircleDiameter,140,20, GREEN);
-    cymbal6 = new Circle(CYMBAL_SOUND, CircleDiameter,20,60, GREEN);
-    cymbal7 = new Circle(CYMBAL_SOUND, CircleDiameter,50,60, GREEN);
-    cymbal8 = new Circle(CYMBAL_SOUND, CircleDiameter,80,60, GREEN);
-    cymbal9 = new Circle(CYMBAL_SOUND, CircleDiameter,110,60, GREEN);
-    cymbal10 = new Circle(CYMBAL_SOUND, CircleDiameter,140,60, GREEN);
-    cymbal11 = new Circle(CYMBAL_SOUND, CircleDiameter,170,20, GREEN);
-    cymbal12 = new Circle(CYMBAL_SOUND, CircleDiameter,200,20, GREEN);
-    cymbal13 = new Circle(CYMBAL_SOUND, CircleDiameter,230,20, GREEN);
-    cymbal14 = new Circle(CYMBAL_SOUND, CircleDiameter,260,20, GREEN);
-    cymbal15 = new Circle(CYMBAL_SOUND, CircleDiameter,290,20, GREEN);
-    cymbal16 = new Circle(CYMBAL_SOUND, CircleDiameter,170,60, GREEN);
-    cymbal17 = new Circle(CYMBAL_SOUND, CircleDiameter,200,60, GREEN);
-    cymbal18 = new Circle(CYMBAL_SOUND, CircleDiameter,230,60, GREEN);
-    cymbal19 = new Circle(CYMBAL_SOUND, CircleDiameter,260,60, GREEN);
-    cymbal20 = new Circle(CYMBAL_SOUND, CircleDiameter,290,60, GREEN);
-    cymbal21 = new Circle(CYMBAL_SOUND, CircleDiameter,320,20, GREEN);
-    cymbal22 = new Circle(CYMBAL_SOUND, CircleDiameter,350,20, GREEN);
-    cymbal23 = new Circle(CYMBAL_SOUND, CircleDiameter,380,20, GREEN);
-    cymbal24 = new Circle(CYMBAL_SOUND, CircleDiameter,320,60, GREEN);
-    cymbal25 = new Circle(CYMBAL_SOUND, CircleDiameter,350,60, GREEN);
+    cymbal = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,20,20, GREEN);
+    cymbal2 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,50,20, GREEN);
+    cymbal3 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,80,20, GREEN);
+    cymbal4 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,110,20, GREEN);
+    cymbal5 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,140,20, GREEN);
+    cymbal6 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,20,60, GREEN);
+    cymbal7 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,50,60, GREEN);
+    cymbal8 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,80,60, GREEN);
+    cymbal9 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,110,60, GREEN);
+    cymbal10 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,140,60, GREEN);
+    cymbal11 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,170,20, GREEN);
+    cymbal12 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,200,20, GREEN);
+    cymbal13 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,230,20, GREEN);
+    cymbal14 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,260,20, GREEN);
+    cymbal15 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,290,20, GREEN);
+    cymbal16 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,170,60, GREEN);
+    cymbal17 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,200,60, GREEN);
+    cymbal18 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,230,60, GREEN);
+    cymbal19 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,260,60, GREEN);
+    cymbal20 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,290,60, GREEN);
+    cymbal21 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,320,20, GREEN);
+    cymbal22 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,350,20, GREEN);
+    cymbal23 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,380,20, GREEN);
+    cymbal24 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,320,60, GREEN);
+    cymbal25 = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER,350,60, GREEN);
 
-    kick = new Circle(KICK_SOUND, CircleDiameter,170,300, PINK);
-    kick2 = new Circle(KICK_SOUND, CircleDiameter,200,300, PINK);
-    kick3 = new Circle(KICK_SOUND, CircleDiameter,230,300, PINK);
-    kick4 = new Circle(KICK_SOUND, CircleDiameter,260,300, PINK);
-    kick5 = new Circle(KICK_SOUND, CircleDiameter,290,300, PINK);
-    kick6 = new Circle(KICK_SOUND, CircleDiameter,170,260, PINK);
-    kick7 = new Circle(KICK_SOUND, CircleDiameter,200,260, PINK);
-    kick8 = new Circle(KICK_SOUND, CircleDiameter,230,260, PINK);
-    kick9 = new Circle(KICK_SOUND, CircleDiameter,260,260, PINK);
-    kick10 = new Circle(KICK_SOUND, CircleDiameter,290,260, PINK);
-    kick11 = new Circle(KICK_SOUND, CircleDiameter,20,300, PINK);
-    kick12 = new Circle(KICK_SOUND, CircleDiameter,50,300, PINK);
-    kick13 = new Circle(KICK_SOUND, CircleDiameter,80,300, PINK);
-    kick14 = new Circle(KICK_SOUND, CircleDiameter,110,300, PINK);
-    kick15 = new Circle(KICK_SOUND, CircleDiameter,140,300, PINK);
-    kick16 = new Circle(KICK_SOUND, CircleDiameter,20,260, PINK);
-    kick17 = new Circle(KICK_SOUND, CircleDiameter,50,260, PINK);
-    kick18 = new Circle(KICK_SOUND, CircleDiameter,80,260, PINK);
-    kick19 = new Circle(KICK_SOUND, CircleDiameter,110,260, PINK);
-    kick20 = new Circle(KICK_SOUND, CircleDiameter,140,260, PINK);
-    kick21 = new Circle(KICK_SOUND, CircleDiameter,320,300, PINK);
-    kick22 = new Circle(KICK_SOUND, CircleDiameter,350,300, PINK);
-    kick23 = new Circle(KICK_SOUND, CircleDiameter,380,300, PINK);
-    kick24 = new Circle(KICK_SOUND, CircleDiameter,320,260, PINK);
-    kick25 = new Circle(KICK_SOUND, CircleDiameter,350,260, PINK);
+    kick = new Circle(KICK_SOUND, CIRCLE_DIAMETER,170,300, PINK);
+    kick2 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,200,300, PINK);
+    kick3 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,230,300, PINK);
+    kick4 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,260,300, PINK);
+    kick5 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,290,300, PINK);
+    kick6 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,170,260, PINK);
+    kick7 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,200,260, PINK);
+    kick8 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,230,260, PINK);
+    kick9 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,260,260, PINK);
+    kick10 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,290,260, PINK);
+    kick11 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,20,300, PINK);
+    kick12 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,50,300, PINK);
+    kick13 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,80,300, PINK);
+    kick14 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,110,300, PINK);
+    kick15 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,140,300, PINK);
+    kick16 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,20,260, PINK);
+    kick17 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,50,260, PINK);
+    kick18 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,80,260, PINK);
+    kick19 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,110,260, PINK);
+    kick20 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,140,260, PINK);
+    kick21 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,320,300, PINK);
+    kick22 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,350,300, PINK);
+    kick23 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,380,300, PINK);
+    kick24 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,320,260, PINK);
+    kick25 = new Circle(KICK_SOUND, CIRCLE_DIAMETER,350,260, PINK);
 
-    hiHat = new Circle(HIHAT_SOUND, CircleDiameter,20,180, ECLIPSE);
-    hiHat2 = new Circle(HIHAT_SOUND, CircleDiameter,50,180, ECLIPSE);
-    hiHat3 = new Circle(HIHAT_SOUND, CircleDiameter,80,180, ECLIPSE);
-    hiHat4 = new Circle(HIHAT_SOUND, CircleDiameter,110,180, ECLIPSE);
-    hiHat5 = new Circle(HIHAT_SOUND, CircleDiameter,140,180, ECLIPSE);
-    hiHat6 = new Circle(HIHAT_SOUND, CircleDiameter,170,180, ECLIPSE);
-    hiHat7 = new Circle(HIHAT_SOUND, CircleDiameter,200,180, ECLIPSE);
-    hiHat8 = new Circle(HIHAT_SOUND, CircleDiameter,230,180, ECLIPSE);
-    hiHat9 = new Circle(HIHAT_SOUND, CircleDiameter,260,180, ECLIPSE);
-    hiHat10 = new Circle(HIHAT_SOUND, CircleDiameter,290,180, ECLIPSE);
-    hiHat11 = new Circle(HIHAT_SOUND, CircleDiameter,20,220, ECLIPSE);
-    hiHat12 = new Circle(HIHAT_SOUND, CircleDiameter,50,220, ECLIPSE);
-    hiHat13 = new Circle(HIHAT_SOUND, CircleDiameter,80,220, ECLIPSE);
-    hiHat14 = new Circle(HIHAT_SOUND, CircleDiameter,110,220, ECLIPSE);
-    hiHat15 = new Circle(HIHAT_SOUND, CircleDiameter,140,220, ECLIPSE);
-    hiHat16 = new Circle(HIHAT_SOUND, CircleDiameter,170,220, ECLIPSE);
-    hiHat17 = new Circle(HIHAT_SOUND, CircleDiameter,200,220, ECLIPSE);
-    hiHat18 = new Circle(HIHAT_SOUND, CircleDiameter,230,220, ECLIPSE);
-    hiHat19 = new Circle(HIHAT_SOUND, CircleDiameter,260,220, ECLIPSE);
-    hiHat20 = new Circle(HIHAT_SOUND, CircleDiameter,290,220, ECLIPSE);
-    hiHat21 = new Circle(HIHAT_SOUND, CircleDiameter,320,220, ECLIPSE);
-    hiHat22 = new Circle(HIHAT_SOUND, CircleDiameter,350,220, ECLIPSE);
-    hiHat23 = new Circle(HIHAT_SOUND, CircleDiameter,320,180, ECLIPSE);
-    hiHat24 = new Circle(HIHAT_SOUND, CircleDiameter,350,180, ECLIPSE);
-    hiHat25 = new Circle(HIHAT_SOUND, CircleDiameter,380,180, ECLIPSE);
+    hiHat = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,20,180, ECLIPSE);
+    hiHat2 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,50,180, ECLIPSE);
+    hiHat3 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,80,180, ECLIPSE);
+    hiHat4 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,110,180, ECLIPSE);
+    hiHat5 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,140,180, ECLIPSE);
+    hiHat6 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,170,180, ECLIPSE);
+    hiHat7 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,200,180, ECLIPSE);
+    hiHat8 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,230,180, ECLIPSE);
+    hiHat9 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,260,180, ECLIPSE);
+    hiHat10 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,290,180, ECLIPSE);
+    hiHat11 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,20,220, ECLIPSE);
+    hiHat12 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,50,220, ECLIPSE);
+    hiHat13 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,80,220, ECLIPSE);
+    hiHat14 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,110,220, ECLIPSE);
+    hiHat15 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,140,220, ECLIPSE);
+    hiHat16 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,170,220, ECLIPSE);
+    hiHat17 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,200,220, ECLIPSE);
+    hiHat18 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,230,220, ECLIPSE);
+    hiHat19 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,260,220, ECLIPSE);
+    hiHat20 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,290,220, ECLIPSE);
+    hiHat21 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,320,220, ECLIPSE);
+    hiHat22 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,350,220, ECLIPSE);
+    hiHat23 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,320,180, ECLIPSE);
+    hiHat24 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,350,180, ECLIPSE);
+    hiHat25 = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER,380,180, ECLIPSE);
 
   Circles = [];
 
@@ -178,9 +175,9 @@ function setup() {
   hiHats = [hiHat,hiHat2,hiHat3,hiHat4,hiHat5,hiHat6,hiHat7,hiHat8,hiHat9,hiHat10,hiHat11,hiHat12,hiHat13,hiHat14,hiHat15,hiHat16,hiHat17,hiHat18,hiHat19,hiHat20,hiHat21,hiHat22,hiHat23,hiHat24,hiHat25,];
   hiHatCount = 0;
 
-  clockX = width/2;
-  clockY = height/2-20;
-  radius = 250;
+  CLOCK_X = width/2;
+  CLOCK_Y = height/2-20;
+  RADIUS = 250;
   angle = 270;
 
   if(typeof savedCircles !== 'undefined'){
@@ -226,45 +223,45 @@ function clock() {
   background(bgColor);
   strokeWeight(1);
   fill(clockColor); //colours the ellipse yellow
-  ellipse(clockX, clockY, radius*2, radius*2);
+  ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
   drawSlider(hs1);
   tempo = hs1.tempo/40;
 
-  lx = clockX + cos(radians(angle))*(radius);
-  ly = clockY + sin(radians(angle))*(radius);
+  lx = CLOCK_X + cos(radians(angle))*(RADIUS);
+  ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
   strokeWeight(1);
   fill(clockColor);
 
 
   for(i = 50;i < 251;i += 50){
-    ellipse(clockX, clockY, radius*2-i, radius*2-i);
+    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
   }
 
-  side = (sqrt(2)/2)*radius;
+  side = (sqrt(2)/2)*RADIUS;
 
   fill(bgColor);
   stroke(bgColor);
 
-  ellipse(clockX-70,clockY+60,50,40);
-  ellipse(clockX+60,clockY+30,50,40);
+  ellipse(CLOCK_X-70,CLOCK_Y+60,50,40);
+  ellipse(CLOCK_X+60,CLOCK_Y+30,50,40);
 
   strokeWeight(5);
-  line(clockX-48,clockY+60,clockX-80,clockY-80);
-  line(clockX+82,clockY+28,clockX+50,clockY-90);
-  line(clockX-80,clockY-80,clockX+50,clockY-90);
+  line(CLOCK_X-48,CLOCK_Y+60,CLOCK_X-80,CLOCK_Y-80);
+  line(CLOCK_X+82,CLOCK_Y+28,CLOCK_X+50,CLOCK_Y-90);
+  line(CLOCK_X-80,CLOCK_Y-80,CLOCK_X+50,CLOCK_Y-90);
 
   stroke(BLACK);
 
-  line(clockX,clockY-radius,clockX,clockY-radius-10);
-  line(clockX+radius,clockY,clockX+radius+10,clockY);
-  line(clockX,clockY+radius,clockX,clockY+radius+10);
-  line(clockX-radius,clockY,clockX-radius-10,clockY);
-  line(clockX-side,clockY-side,clockX-side-10,clockY-side-10);
-  line(clockX+side,clockY-side,clockX+side+10,clockY-side-10);
-  line(clockX+side,clockY+side,clockX+side+10,clockY+side+10);
-  line(clockX-side,clockY+side,clockX-side-10,clockY+side+10);
-  line(clockX, clockY, lx, ly);
+  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10);
+  line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
+  line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
+  line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
+  line(CLOCK_X-side,CLOCK_Y-side,CLOCK_X-side-10,CLOCK_Y-side-10);
+  line(CLOCK_X+side,CLOCK_Y-side,CLOCK_X+side+10,CLOCK_Y-side-10);
+  line(CLOCK_X+side,CLOCK_Y+side,CLOCK_X+side+10,CLOCK_Y+side+10);
+  line(CLOCK_X-side,CLOCK_Y+side,CLOCK_X-side-10,CLOCK_Y+side+10);
+  line(CLOCK_X, CLOCK_Y, lx, ly);
 
   hit = false;
 
@@ -273,7 +270,7 @@ function clock() {
     Circles[i].onScreen = true;
     CircleOnScreen = true;
 
-    hit = lineCircle(clockX, clockY, lx, ly, Circles[i].ox, Circles[i].oy, CircleDiameter/2, CircleOnScreen);
+    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, Circles[i].ox, Circles[i].oy, CIRCLE_DIAMETER/2, CircleOnScreen);
 
     if (hit){
         Circles[i].playSound();

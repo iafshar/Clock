@@ -3,20 +3,20 @@ secnd = 0;
 ClickCount = 0;
 stop1 = false;
 stop2 = false;
-NumButtonDiameter = 50;
+NUM_BUTTON_DIAMETER = 50;
 
 
 
-one = new NumButton('1',200,200,NumButtonDiameter);
-two = new NumButton('2',300,200,NumButtonDiameter);
-three = new NumButton('3',400,200,NumButtonDiameter);
-four = new NumButton('4',200,300,NumButtonDiameter);
-five = new NumButton('5',300,300,NumButtonDiameter);
-six = new NumButton('6',400,300,NumButtonDiameter);
-seven = new NumButton('7',200,400,NumButtonDiameter);
-eight = new NumButton('8',300,400,NumButtonDiameter);
-nine = new NumButton('9',400,400,NumButtonDiameter);
-zero = new NumButton('0',300,500,NumButtonDiameter);
+one = new NumButton('1',200,200,NUM_BUTTON_DIAMETER);
+two = new NumButton('2',300,200,NUM_BUTTON_DIAMETER);
+three = new NumButton('3',400,200,NUM_BUTTON_DIAMETER);
+four = new NumButton('4',200,300,NUM_BUTTON_DIAMETER);
+five = new NumButton('5',300,300,NUM_BUTTON_DIAMETER);
+six = new NumButton('6',400,300,NUM_BUTTON_DIAMETER);
+seven = new NumButton('7',200,400,NUM_BUTTON_DIAMETER);
+eight = new NumButton('8',300,400,NUM_BUTTON_DIAMETER);
+nine = new NumButton('9',400,400,NUM_BUTTON_DIAMETER);
+zero = new NumButton('0',300,500,NUM_BUTTON_DIAMETER);
 
 Nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 

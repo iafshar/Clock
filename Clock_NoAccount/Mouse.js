@@ -42,7 +42,7 @@ function mousePressed() {
       window.open("http://localhost:8080/Clock/choose.html", "_self")
     }
     for (i = 0;i<Circles.length;i++){
-      if (CircleOnScreen && pointCircle(Circles[i].ox, Circles[i].oy, mouseX, mouseY, CircleDiameter/2)){
+      if (CircleOnScreen && pointCircle(Circles[i].ox, Circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
         ClickedOnCircle = Circles[i];
         Circles[i].outline = 2;
       }
@@ -96,10 +96,10 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    if (CircleOnScreen && ClickedOnCircle != null && mouseY < hs1.ypos - CircleDiameter/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, clockX, clockY,radius*2-365) && !(mouseX>optionX-CircleDiameter/2 && mouseY<230+optionHeight+CircleDiameter/2)){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
+    if (CircleOnScreen && ClickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !(mouseX>SOUND_BUTTON_X-CIRCLE_DIAMETER/2 && mouseY<230+optionHeight+CIRCLE_DIAMETER/2)){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
       for(i = 50;i < 251;i += 50){
-        if(!(layer(clockX,clockY,mouseX,mouseY,(radius*2-i)/2,10))){
+        if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){
           check++;
         }
       }
@@ -108,7 +108,7 @@ function mouseDragged() { // Move Circle
         ClickedOnCircle.oy = mouseY;
       }
     }
-    else if (mouseY > hs1.ypos - CircleDiameter){
+    else if (mouseY > hs1.ypos - CIRCLE_DIAMETER){
       ClickedOnCircle = null;
       CircleOutline = 0;
     }

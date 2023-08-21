@@ -27,13 +27,13 @@ function mousePressed() {
           var circs = [];
           for(i = 0;i < Circles.length;i++){
             circs[i] = [];
-            if (Circles[i].sound == snareSound){
+            if (Circles[i].sound == SNARE_SOUND){
               circs[i][0] = 1;
             }
-            else if (Circles[i].sound == kickSound){
+            else if (Circles[i].sound == KICK_SOUND){
               circs[i][0] = 2;
             }
-            else if (Circles[i].sound == cymbalSound){
+            else if (Circles[i].sound == CYMBAL_SOUND){
               circs[i][0] = 3;
             }
             else{
@@ -60,13 +60,13 @@ function mousePressed() {
             var circs = [];
             for(i = 0;i < Circles.length;i++){
               circs[i] = [];
-              if (Circles[i].sound == snareSound){
+              if (Circles[i].sound == SNARE_SOUND){
                 circs[i][0] = 1;
               }
-              else if (Circles[i].sound == kickSound){
+              else if (Circles[i].sound == KICK_SOUND){
                 circs[i][0] = 2;
               }
-              else if (Circles[i].sound == cymbalSound){
+              else if (Circles[i].sound == CYMBAL_SOUND){
                 circs[i][0] = 3;
               }
               else{

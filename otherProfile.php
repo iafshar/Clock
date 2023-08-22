@@ -41,7 +41,7 @@
 
        var name=currentRow.find("td:eq(0)").text();
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=1&clockName="+name, true);
+       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
        xmlhttp.send();
        window.open('like.php','_self');
       });
@@ -52,7 +52,7 @@
 
        var name=currentRow.find("td:eq(0)").text();
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=1&clockName="+name, true);
+       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
        xmlhttp.send();
        window.open('dislike.php','_self');
       });
@@ -62,7 +62,7 @@
        var currentRow=$(this).closest("tr");
        var name=currentRow.find("td:eq(0)").text();
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=1&clockName="+name, true);
+       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
        xmlhttp.send();
        window.open('stats.html','_self');
       });
@@ -74,7 +74,7 @@
        var name=currentRow.find("td:eq(0)").text();
        var tempo=currentRow.find("td:eq(1)").text();
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=7&clockName="+name+"&tempo="+tempo, true);
+       xmlhttp.open("GET", "getClockID.php?choose=7&clockName="+name+"&tempo="+tempo, true);
        xmlhttp.send();
        window.open('Clock_ReadOnly/index.html','_self');
       });
@@ -89,11 +89,11 @@
       echo $followButton; ?></button>
     </form>
     <div class="topnav">
-      <a href="Feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
-      <a href="Discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
+      <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
+      <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
-      <a href="MyClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="Search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
+      <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
       <a href="start.php" class="logoutBtn">Logout</a>
     </div>
   </body>

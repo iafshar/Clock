@@ -4,7 +4,7 @@
  * Following code will list all the records on the table
  */
 session_start();
-include '/get_UserID.php';
+include '/getUserID.php';
 
 $_SESSION["tempo"] = 0;
 $_SESSION["Error"] = "";
@@ -12,7 +12,7 @@ $_SESSION["Error"] = "";
 $response = array();
 
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();

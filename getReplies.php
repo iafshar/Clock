@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
@@ -33,5 +33,5 @@ if ($result->num_rows > 0) {
     $_SESSION["Replies"] = $response;
 
 }
-header("Location:Replies.html");
+header("Location:replies.html");
 ?>

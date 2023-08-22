@@ -46,7 +46,7 @@ function mousePressed() {
 
           xmlhttp.open("GET", "edit.php?tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
           xmlhttp.send();
-          window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
+          window.open("http://localhost:8080/Clock/myClocks.php", '_self');
         }
         else{
           screen = 2;
@@ -79,7 +79,7 @@ function mousePressed() {
 
             xmlhttp.open("GET", "edit.php?tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
             xmlhttp.send();
-            window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
+            window.open("http://localhost:8080/Clock/myClocks.php", '_self');
           }
         }
         else{

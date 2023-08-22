@@ -4,7 +4,7 @@ session_start();
 $MyUserID = $_SESSION['UserID'];
 $response = array();
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 $Username = NULL;
 

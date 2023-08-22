@@ -2,7 +2,7 @@
 // <!-- Adds the premium account to the DB that has signed up -->
 session_start();
 $_SESSION["Error"] = "";
-require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/dbConfig.php';
 // Create connection
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 // Check connection
@@ -95,7 +95,7 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
       }
   else{
      if (mysqli_query($conn, $Insert)) {
-          header("Location:http://localhost:8080/Clock/MyClocks.php");
+          header("Location:http://localhost:8080/Clock/myClocks.php");
       } else {
           echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
       }

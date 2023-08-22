@@ -43,7 +43,7 @@
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
        var xmlhttp = new XMLHttpRequest();
 
-       xmlhttp.open("GET", "search_all_Users.php?RecentUsername=" + Username, true);
+       xmlhttp.open("GET", "searchAllUsers.php?RecentUsername=" + Username, true);
        xmlhttp.send();
        window.open("searchResults.html","_self");
       });
@@ -53,13 +53,13 @@
   </head>
   <body>
     <div class="topnav">
-      <a href="Feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
-      <a href="Discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
+      <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
+      <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
-      <a href="MyClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a class="active" href="Search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
+      <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
-    <form action="search_all_Users.php" method="post">
+    <form action="searchAllUsers.php" method="post">
       <input type="text" name="search" placeholder="Search" required>
       <input type="submit" value="🔍">
     </form>

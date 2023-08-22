@@ -2,7 +2,7 @@
 // <!-- gets the clocks in the right order to display in "discover.html" -->
 
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 require_once __DIR__ . '/mergeSort.php';
 
 // connecting to db

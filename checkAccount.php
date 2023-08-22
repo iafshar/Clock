@@ -1,7 +1,7 @@
 <?php
 // Checks that the credentials that the user entered on the login page are valid
 session_start();
-require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/dbConfig.php';
 
 // Connect to the DB
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
@@ -21,7 +21,7 @@ if (isset($_POST['Username']) and isset($_POST['Password'])){
   $_SESSION["Username"] = $Username;
   $_SESSION["Password"] = $Password;
   if ($count == 1) {
-       header("Location:http://localhost:8080/Clock/MyClocks.php");
+       header("Location:http://localhost:8080/Clock/myClocks.php");
    } else {
        $_SESSION["Error"] = "Invalid credentials";
        header("Location:http://localhost:8080/Clock/login.php");

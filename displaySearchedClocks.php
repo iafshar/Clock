@@ -8,7 +8,7 @@ $SearchedUserID = $_SESSION["SearchedUserID"];
 $response = array();
 
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();

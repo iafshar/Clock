@@ -1,7 +1,7 @@
 <?php
 // adds a reply to the DB
 session_start();
-require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/dbConfig.php';
 // Create connection
 $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 // Check connection
@@ -22,7 +22,7 @@ if(isset($_POST['reply'])){
   }
   else{
     $_SESSION["Error"] = "You need to upgrade to premium to be able to reply to comments.";
-    header("Location:MyClocks.php");
+    header("Location:myClocks.php");
   }
 }
 ?>

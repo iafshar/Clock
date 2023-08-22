@@ -56,5 +56,5 @@ function saving(){
 
   xmlhttp.open("GET", "send.php?clockName=" + clockName + "&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
   xmlhttp.send();
-  window.open("http://localhost:8080/Clock/MyClocks.php", '_self');
+  window.open("http://localhost:8080/Clock/myClocks.php", '_self');
 }

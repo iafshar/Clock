@@ -2,7 +2,7 @@
 <?php
 // <!-- the profile page of the user -->
 session_start();
-require_once __DIR__ . '/get_UserID.php';
+require_once __DIR__ . '/getUserID.php';
 echo $_SESSION["Error"]; 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ echo $_SESSION["Error"];
         }
     };
 
-    xmlhttp.open("GET", "get_my_clocks.php", true);
+    xmlhttp.open("GET", "getMyClocks.php", true);
     xmlhttp.send();
 
 
@@ -54,7 +54,7 @@ echo $_SESSION["Error"];
        var ensure = confirm("Are you sure you want to delete "+name);
        if(ensure){
          var xmlhttp = new XMLHttpRequest();
-         xmlhttp.open("GET", "GetClockID.php?choose=0&clockName="+name, true);
+         xmlhttp.open("GET", "getClockID.php?choose=0&clockName="+name, true);
          xmlhttp.send();
          window.open('delete.php','_self');
        }
@@ -72,7 +72,7 @@ echo $_SESSION["Error"];
        var name=currentRow.find("td:eq(0)").text();
        var tempo=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=4&clockName="+name+"&tempo="+tempo, true);
+       xmlhttp.open("GET", "getClockID.php?choose=4&clockName="+name+"&tempo="+tempo, true);
        xmlhttp.send();
        window.open('Clock_User/index.html','_self');
       });
@@ -89,7 +89,7 @@ echo $_SESSION["Error"];
        var name=currentRow.find("td:eq(0)").text();
 
        var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "GetClockID.php?choose=5&clockName="+name, true);
+       xmlhttp.open("GET", "getClockID.php?choose=5&clockName="+name, true);
        xmlhttp.send();
        window.open('stats.html','_self');
       });
@@ -98,11 +98,11 @@ echo $_SESSION["Error"];
   </head>
   <body>
     <div class="topnav">
-      <a href="Feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
-      <a href="Discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
+      <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
+      <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
-      <a class="active" href="MyClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="Search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
+      <a class="active" href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
       <a href="start.php" class="logoutBtn">Logout</a>
     <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
       if($_SESSION["Premium"] == 0){

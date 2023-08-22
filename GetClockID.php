@@ -4,14 +4,14 @@
 session_start();
 
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
 
 if($_GET["choose"]==0 || $_GET["choose"]==5){
   $UserID = $_SESSION["UserID"];
-  $_SESSION["Location"] = "MyClocks.php";
+  $_SESSION["Location"] = "myClocks.php";
 }
 else if($_GET["choose"]==1){
   $UserID = $_SESSION["SearchedUserID"];
@@ -28,9 +28,9 @@ else if ($_GET["choose"]==4){
   $_SESSION["tempo"] = $tempo;
 }
 else{
-  if($_GET["choose"]==2){$_SESSION["Location"] = "Discover.html";}
+  if($_GET["choose"]==2){$_SESSION["Location"] = "discover.html";}
   else{
-    $_SESSION["Location"] = "Feed.html";
+    $_SESSION["Location"] = "feed.html";
     if($_GET["choose"]==6){
       $tempo = $_GET["tempo"];
       $_SESSION["tempo"] = $tempo;

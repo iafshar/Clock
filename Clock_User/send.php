@@ -1,7 +1,7 @@
 <?php
 session_start();
 // <!-- code adding a clock that has been saved for the first time to the DB -->
-include '../get_UserID.php';
+include '../getUserID.php';
 $response = array();
 
 $conn = mysqli_connect('localhost', 'root', '', 'ClockDB');
@@ -97,7 +97,7 @@ if (mysqli_query($conn, $Insert)) {
      VALUES ('$ClockID','$SoundID','$X','$Y')";
     mysqli_query($conn, $CircInsert);
   }
-  //header("Location:http://localhost:8080/Clock/MyClocks.php");
+  //header("Location:http://localhost:8080/Clock/myClocks.php");
   $response["success"] = 1;
   
 } else {

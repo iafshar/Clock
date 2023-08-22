@@ -3,7 +3,7 @@
 // <!-- gets all the comments related to the desired clock  -->
 session_start();
 
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();

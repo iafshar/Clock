@@ -66,7 +66,7 @@ if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
      VALUES ('$ClockID','$SoundID','$X','$Y')";
     mysqli_query($conn, $CircInsert);
   }
- header("Location:http://localhost:8080/Clock/MyClocks.php");
+ header("Location:http://localhost:8080/Clock/myClocks.php");
 
  } else {
      echo "Error: " . $Insert . "<br>" . mysqli_error($conn);

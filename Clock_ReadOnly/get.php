@@ -7,7 +7,7 @@ $response = array();
 
 $response["tempo"] = $_SESSION["tempo"];
 
-require_once '../db_connect.php';
+require_once '../dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();

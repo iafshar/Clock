@@ -1,5 +1,5 @@
 <?php
-// <!-- gets the clocks of all the other users that the user follows so that they can be accessed in "Feed.html" -->
+// <!-- gets the clocks of all the other users that the user follows so that they can be accessed in "feed.html" -->
 session_start();
 $check = FALSE;
 $MyUserID = $_SESSION["UserID"];
@@ -7,7 +7,7 @@ $MyUserID = $_SESSION["UserID"];
 $response = array();
 
 // include db connect class
-require_once __DIR__ . '/db_connect.php';
+require_once __DIR__ . '/dbConnect.php';
 require_once __DIR__ . '/mergeSort.php';
 
 // connecting to db

@@ -1,6 +1,6 @@
 
 <?php
-// <!-- intermediate code to echo the list of recent searches so that they can be displayed in "Search.php" -->
+// <!-- intermediate code to echo the list of recent searches so that they can be displayed in "search.php" -->
 session_start();
 
 

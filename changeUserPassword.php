@@ -11,6 +11,7 @@ if (!$conn) {
 }
 
 if (isset($_POST['Password1'])) {
+
     $Email = $_SESSION["Email"];
 
     $Password1 = $_POST['Password1'];
@@ -34,7 +35,7 @@ if (isset($_POST['Password1'])) {
         }
 
         if ($Password == $Password1 || $Password == $Password2) {
-            $_SESSION["ErrorReset"] .= "Please choose a password you have not used before <br>";
+            $_SESSION["ErrorReset"] .= "Please choose a different password from your last password <br>";
             header("Location:http://localhost:8080/Clock/updatePassword.php");
         }
 
@@ -82,9 +83,11 @@ if (isset($_POST['Password1'])) {
                     SET Password = '$Password1'
                     WHERE UserID = '$UserID'";
                 if (mysqli_query($conn, $updatePassword)) {
-                     header("Location:http://localhost:8080/Clock/myClocks.php");
+                    $deleteHash = $_SESSION['deleteHash'];
+                    mysqli_query($conn, $deleteHash);
+                    header("Location:http://localhost:8080/Clock/myClocks.php");
                 } else {
-                     echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
+                    echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
                 }
             }
         }

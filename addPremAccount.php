@@ -21,9 +21,7 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   $_SESSION["Premium"] = $Premium;
   $_SESSION["Username"] = $Username;
   $_SESSION["Password"] = $Password;
-
-  $Insert = "INSERT INTO Users (Username,Password,Email,Premium)
-   VALUES ('$Username', '$Password', '$Email', '$Premium')";
+  $_SESSION["Email"] = $Email;
 
   $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'";
   $resultUser = mysqli_query($conn, $ExistingUser) or die(mysqli_error($conn));
@@ -92,14 +90,10 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   }
   if($invalid) {
      header("Location:http://localhost:8080/Clock/premSignUp.php");
-      }
-  else{
-     if (mysqli_query($conn, $Insert)) {
-          header("Location:http://localhost:8080/Clock/myClocks.php");
-      } else {
-          echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
-      }
-    }
+  }
+  else {
+    header("Location:http://localhost:8080/Clock/sendEmail.php");
+  }
 }
 
 mysqli_close($conn);

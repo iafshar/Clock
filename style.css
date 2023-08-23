@@ -134,6 +134,21 @@ body {
   	padding: 0 15px;
     transform: translate(-50%, 0%);
 }
+.login form input[type="email"] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 27px;
+  font-weight: bold;
+  background-color: #f39faa;
+  color: #faf39f;
+  width: 310px;
+  height: 50px;
+  border: 3px solid #faf39f;
+  padding: 0 15px;
+  transform: translate(-50%, 0%);
+}
+
 ::placeholder {
   font-weight: bold;
   color: #faf39f;

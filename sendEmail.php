@@ -27,8 +27,8 @@ if (isset($_POST['EmailForgot'])) {
     $result = mysqli_query($conn, $CheckEmail);
 
     if ($result->num_rows == 0) {
-        $_SESSION["Error"] = "This email is not associated with an account";
-        header("Location:http://localhost:8080/Clock/forgotPassword.html");
+        $_SESSION["ErrorEmail"] = "This email is not associated with an account";
+        header("Location:http://localhost:8080/Clock/forgotPassword.php");
     } 
     else {
         $expirationFormat = mktime(
@@ -43,18 +43,17 @@ if (isset($_POST['EmailForgot'])) {
             $Username = $row["Username"];
             
         }
+        $InsertHash = "INSERT INTO Hashes (Email,Username,Hash,ExpirationDate,Reset)
+        VALUES ('$Email', '$Username','$hash', '$expirationDate', 1)";
 
-        // $InsertHash = "INSERT INTO Hashes (Email,Username,Hash,ExpirationDate,Reset)
-        // VALUES ('$Email', '$Username','$hash', '$expirationDate', 1)";
-
-        // mysqli_query($conn, $InsertHash);
+        mysqli_query($conn, $InsertHash);
 
         
 
         $message = '<p>Dear '.$Username.',</p>';
         $message .= '<p>Please click on the following link to reset your password.</p>';
-        $message .='<p><a href="http://localhost:8080/Clock/resetPassword.php?key='.$hash.'&email='.$Email.'&action=reset" target="_blank">
-        http://localhost:8080/Clock/resetPassword.php?key='.$hash.'&email='.$Email.'&action=reset</a></p>';
+        $message .='<p><a href="http://localhost:8080/Clock/resetPassword.php?hash='.$hash.'&email='.$Email.'&action=reset" target="_blank">
+        http://localhost:8080/Clock/resetPassword.php?hash='.$hash.'&email='.$Email.'&action=reset</a></p>';
 
         // this will probably have to change once this gets publicly hosted
         // had to set up a new email called iafsharclock@gmail.com the password for which is (Hint: usual mki)

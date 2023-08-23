@@ -18,7 +18,7 @@ echo $_SESSION["Error"] ?>
 				<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 				<input type="password" name="Password" placeholder="Password" id="password" autocomplete="current-password" required>
 				<input type="submit" value="Login">
-				<a href="forgotPassword.html" class="already">Forgot your password?</a>
+				<a href="forgotPassword.php" class="already">Forgot your password?</a>
 			</form>
 		</div>
 	</body>

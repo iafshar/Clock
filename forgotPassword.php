@@ -1,3 +1,8 @@
+
+<?php
+session_start();
+echo $_SESSION["ErrorEmail"]; 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +13,8 @@
 	</head>
 	<body>
 		<div class="login">
-			<form action="sendEmail.php" method="post">
+			<form action="sendEmail.php" <?php $_SESSION["ErrorEmail"]=NULL;?> method="post">
+			
 				<input type="email" name="EmailForgot" placeholder="Email" id="email" autocomplete="email" required>
 				<input type="submit" value="Reset">
 			</form>

@@ -24,7 +24,6 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
     }
     else {
         while ($row = $result->fetch_assoc()) {
-            $hashID = $row["HashID"];
             $expirationDate = $row["ExpirationDate"];
         }
         $_SESSION['deleteHash'] = "DELETE FROM Hashes WHERE Hash='$hash' AND Email='$email' AND Reset=1";

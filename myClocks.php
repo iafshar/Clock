@@ -22,6 +22,7 @@ echo $_SESSION["Error"];
         if (this.readyState == 4 && this.status == 200) {
             var myRecords = JSON.parse(this.responseText);
             var rows = "";
+            console.log(myRecords);
             if (myRecords.success != 0){
               for (i=0;i<myRecords.Clocks.length;i++) {
                 var myRecord = myRecords.Clocks[i];

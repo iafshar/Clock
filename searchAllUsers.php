@@ -18,17 +18,13 @@ else if (isset($_POST['search'])){
 // connecting to db
 
 $db = new DB_CONNECT();
+
+$addSearch = "INSERT INTO `Searches` (UserID, Search)
+  VALUES ('$MyUserID','$Username')";
+
 if ($Username != NULL){
-  for ($i = 0; $i < count($_SESSION["Searches"]); $i++) {
-    if ($_SESSION["Searches"][$i] == $Username) {
-      unset($_SESSION["Searches"][$i]);
-      break;
-    }
-  }
-  array_unshift($_SESSION["Searches"],$Username);
-  if(sizeof($_SESSION["Searches"]) > 5){
-    array_pop($_SESSION["Searches"]);
-  }
+  $db->get_con()->query($addSearch);
+  
   $sql = ("SELECT * FROM `Users` WHERE UserID != '$MyUserID' AND Username LIKE '%$Username%'");
   $result = $db->get_con()->query($sql);
   if ($result->num_rows > 0) {

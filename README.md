@@ -32,7 +32,7 @@ After a user logs in or signs up, until they exit the page or log out, there are
 
 <img width="1440" alt="Screenshot 2023-08-24 at 4 49 51 PM" src="https://github.com/iafshar/Clock/assets/102998427/5546f53d-d609-4c28-9a2a-a6b12ad812b8">
 
-From left to right, these link the users to their Feed, Discover page, creating a new clock page which is the first image, Home page, and their search. I will explain these pages below.
+From left to right, these link the users to their Feed, Discover page, creating a new clock page which is the first image, Home page, and their search. The icon corresponding to the page you are on becomes highlighted. I will explain these pages below.
 
 ## Home Page
 

@@ -63,4 +63,5 @@ The following is how clocks are displayed on a user's Home page. If they click o
 <img width="1440" alt="Screenshot 2023-08-24 at 4 35 35 PM" src="https://github.com/iafshar/Clock/assets/102998427/6d25fa72-c58e-49ec-a8c5-35b2c34648ad">
 
 
-This uses a MySQL database and currently only runs on localhost for now. I have plans on publicly hosting this after I feel it is ready.
+
+This uses a MySQL database and currently only runs on localhost for now. I have plans on publicly hosting this after I implement enough features for it to be ready.

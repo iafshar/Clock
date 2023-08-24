@@ -30,7 +30,7 @@ If they choose to log in, they need to enter their account's username and passwo
 
 After a user logs in or signs up, until they exit the page or log out, there are 5 icons constantly present at the top left of the screen shown below.
 
-<img width="1440" alt="Screenshot 2023-08-24 at 4 40 44 PM" src="https://github.com/iafshar/Clock/assets/102998427/9ce1eb65-3583-493e-b19d-fbf2ff77786e">
+<img width="1440" alt="Screenshot 2023-08-24 at 4 49 51 PM" src="https://github.com/iafshar/Clock/assets/102998427/5546f53d-d609-4c28-9a2a-a6b12ad812b8">
 
 From left to right, these link the users to their Feed, Discover page, creating a new clock page which is the first image, Home page, and their search. I will explain these pages below.
 

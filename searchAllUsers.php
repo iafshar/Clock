@@ -18,6 +18,11 @@ else if (isset($_POST['search'])){
 // connecting to db
 
 $db = new DB_CONNECT();
+
+$addSearch = "INSERT INTO `Searches` (UserID, Search)
+  VALUES ('$MyUserID','$Username')";
+$db->get_con()->query($addSearch);
+
 if ($Username != NULL){
   for ($i = 0; $i < count($_SESSION["Searches"]); $i++) {
     if ($_SESSION["Searches"][$i] == $Username) {

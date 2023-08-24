@@ -58,9 +58,11 @@ At any point a clock is displayed to a user that is not their own clock (on thei
 
 If a user clicks on "View Clock" they will be taken to a page like the first image but with the information saved from the last time the creator of the clock shared it.
 
-The following is how clocks are displayed on a user's Home page. If they click on "Edit" they will be taken to a page like the first image but with the information saved from the last time they saved or shared it.
+The following is how clocks are displayed on a user's Home page. 
 
 <img width="1440" alt="Screenshot 2023-08-24 at 4 35 35 PM" src="https://github.com/iafshar/Clock/assets/102998427/6d25fa72-c58e-49ec-a8c5-35b2c34648ad">
+
+If they click on "Edit" they will be taken to a page like the first image but with the information saved from the last time they saved or shared it. The icon to the left of the "Edit" allows them to delete the clock.
 
 
 

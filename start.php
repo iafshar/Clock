@@ -1,5 +1,4 @@
 <?php session_start();
-$_SESSION["Searches"] = array(); // This will contain the user's 5 most recent searches
 $_SESSION["Error"] = NULL; // This will be a string containing all the errors the user has made when trying to login or sign-up
 ?>
 <!DOCTYPE html>

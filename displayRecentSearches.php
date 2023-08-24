@@ -24,8 +24,6 @@ if ($result->num_rows > 0) {
 
 $uniqueSearches = array_values(array_unique($Searches));
 
-
-// echo json_encode($uniqueSearches);
 echo json_encode($uniqueSearches);
 
 ?>

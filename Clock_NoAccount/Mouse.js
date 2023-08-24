@@ -100,6 +100,13 @@ function mouseDragged() { // Move Circle
       check = 0;
       for(i = 50;i < 251;i += 50){
         if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){
+          vX = mouseX - CLOCK_X;
+          vY = mouseY - CLOCK_Y;
+          magV = sqrt(vX*vX + vY*vY);
+          aX = CLOCK_X + vX / magV * (((RADIUS*2-i)/2) + CIRCLE_DIAMETER/2);
+          aY = CLOCK_Y + vY / magV * (((RADIUS*2-i)/2) + CIRCLE_DIAMETER/2);
+          clickedOnCircle.ox = aX;
+          clickedOnCircle.oy = aY;
           check++;
         }
       }

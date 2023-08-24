@@ -1,5 +1,7 @@
 # Clock
 
+## Creating a Clock
+
 A clock is a unique way of visualizing music. It uses a metronome that continuously spins around a circle with one point being fixed in the center. You can then add percussive sounds anywhere in the circle and when the metronome hits them, the sounds are played. The image below demonstrates how it looks. A red mini circle would represent the sound of a snare, a pink one would represent the sound of a kick, and a dark grey one would represent the sound of a hi hat.
 
 <img width="1440" alt="Screenshot 2023-08-24 at 3 51 42 PM" src="https://github.com/iafshar/Clock/assets/102998427/c6929aa2-ca96-45df-88f3-a0f4b464c0cb">
@@ -16,6 +18,8 @@ Saving and sharing are features only accessible by account holders. Saving a clo
 
 This is a social media site built around clocks. It allows you to create different types of accounts, create clocks, and share them with other accounts. In the same vein as Instagram, it allows you to like and comment on other clocks, and follow other accounts, and it also offers a page designed specifically for you to see the most popular clocks.
 
+## Logging in/Signing up
+
 It starts by giving the user 3 options: to log in to their account, to sign up for a new account, or to continue without an account. 
 
 If they choose to continue without an account, they are taken to a clock page similar to the first image but it will not have the "save" or "share" buttons as these are features only available for users with an account. 
@@ -30,14 +34,23 @@ After a user logs in or signs up, until they exit the page or log out, there are
 
 From left to right, these link the users to their Feed, Discover page, creating a new clock page which is the first image, Home page, and their search. I will explain these pages below.
 
+## Home Page
 
 After a user logs in or signs up, they are taken to their Home page which will contain all the clocks they have saved or shared. A user who has previously saved or shared clocks is able to edit any of them on this page where they are taken to the page in the first image with all mini circles in the same positions as they were in the last time the clock was saved or shared. The tempo is also retained. A user can also delete a clock on their Home page.
 
+## Searching
+
 A user can also search for the usernames of other users by clicking the search icon at the top of the screen. Once they click on this, they are presented with their history of searches and they can click on any of them to search for it again. They can also type into a search bar and will be presented with usernames that either completely or partially match it. They can then click on any of the results and be taken to the profile page of that user. On that page, they can see the shared clocks of that user and choose to follow that user.
+
+## Feed
 
 A user also has a Feed on which they can see all the shared clocks of the users they follow.
 
+## Discover
+
 A user also has a Discover page, which contains the most popular shared clocks and is the same for every user. For a clock to reach the Discover page, its sum of likes and dislikes should be a minimum of 5 and it is ordered by the ratio of its dislikes to likes. 
+
+## How clocks are displayed
 
 At any point a clock is displayed to a user that is not their own clock (on their Feed, Discover page, or on the profile pages of other users), they can choose to like or dislike it by clicking on a thumbs up or thumbs down icon respectively. They can also choose to leave a comment on the clock. Users can also view all the comments on a clock and when they do, they can reply to any of the comments. Users can also view all the replies to a comment. The number of likes and dislikes a clock has and the ability to view the comments of a clock is present every time a user sees a clock (on their Feed, Home page, Discover page, or on the profile pages of other users). The following image shows how clocks are displayed on a Feed. This is similar to how they are displayed on a Discover page and on the profile pages of other users.
 

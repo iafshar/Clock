@@ -65,5 +65,4 @@ The following is how clocks are displayed on a user's Home page.
 If they click on "Edit" they will be taken to a page like the first image but with the information saved from the last time they saved or shared it. The icon to the left of "Edit" allows them to delete the clock.
 
 
-
 This uses a MySQL database and currently only runs on localhost for now. I have plans on publicly hosting this after I implement enough features for it to be ready.

@@ -10,29 +10,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              var rows = "";
+              for (i=0;i<myRecords.length;i++) {
+                   var myRecord = myRecords[i];
+                   var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+                   rows = rows+newRow;
+              }
+              document.getElementById("resultRows").innerHTML = rows;
+          }
+      };
+      xmlhttp.open("GET", "displayRecentSearches.php", true);
+      xmlhttp.send();
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            var rows = "";
-            for (i=0;i<myRecords.length;i++) {
-                 var myRecord = myRecords[i];
-                 var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
-                 rows = rows+newRow
-            }
-            document.getElementById("resultRows").innerHTML = rows;
-        }
-    };
-
-    xmlhttp.open("GET", "displayRecentSearches.php", true);
-    xmlhttp.send();
 
 
     </script>
     <script>
-
-
     $(document).ready(function(){
 
   // code to read selected table row cell data (values).
@@ -59,20 +56,92 @@
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
-    <form action="searchAllUsers.php" method="post">
-      <input type="text" name="search" placeholder="Search" required>
+    <form autocomplete="off" action="searchAllUsers.php" method="post">
+      <input id="userSearch" type="text" name="search" placeholder="Search" required>
       <input type="submit" value="🔍">
     </form>
     <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
+  <div class="searchTable">
+    <table class="table" id="clockTable">
+      <thead class="thead-light">
+        <tr>
+          <th id="searchHeading">Recents</th>
+        </tr>
+      </thead>
+      <tbody id="resultRows">
+      </tbody>
+    </table>
+    </div>
+  
+  <script>
+
+  inp = document.getElementById("userSearch");
+  var ogRows = document.getElementById("resultRows").innerHTML
+  if (inp) {
+    inp.addEventListener("input", function(e) {
+      var val = this.value;
+      if (val.length > 0) {
+        document.getElementById("searchHeading").innerHTML = "Username";
+        // document.querySelectorAll('th')[1].innerHTML = "Username";
+        autocomplete(val);
+        $(document).ready(function(){
+
+          // code to read selected table row cell data (values).
+          $("#clockTable").on('click','.table-row',function(){
+          // get the current row
+          var currentRow=$(this).closest("tr");
+
+          var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+          xmlhttp.send();
+          window.open("otherProfile.php","_self");
+          });
+        });
+      }
+      else {
+        document.getElementById("searchHeading").innerHTML = "Recents";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myRecords = JSON.parse(this.responseText);
+                var rows = "";
+                for (i=0;i<myRecords.length;i++) {
+                    var myRecord = myRecords[i];
+                    var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+                    rows = rows+newRow;
+                }
+                document.getElementById("resultRows").innerHTML = rows;
+            }
+        };
+        xmlhttp.open("GET", "displayRecentSearches.php", true);
+        xmlhttp.send();
+      }
+    });
+  }
+
+  function autocomplete(val) {
+    var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myRecords = JSON.parse(this.responseText);
+          var rows = "";
+          for (i=0;i<myRecords.length;i++) {
+            if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              var myRecord = myRecords[i];
+              var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+              rows = rows+newRow;
+            }
+          }
+          document.getElementById("resultRows").innerHTML = rows;
+        }
+      };
+      xmlhttp.open("GET", "getAllUsers.php", true);
+      xmlhttp.send();
+  }
+
+</script>
   </body>
-<table class="table" id="clockTable">
-    <thead class="thead-light">
-      <tr>
-        <th>Recents</th>
-      </tr>
-    </thead>
-    <tbody id="resultRows">
-    </tbody>
-  </table>
 </html>

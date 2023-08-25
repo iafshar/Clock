@@ -192,6 +192,8 @@ body {
 }
 
 .choose-premium {
+  position: absolute;
+  left: 10%;
   width: 40%;
   height: 60vh;
   box-sizing: border-box;
@@ -205,7 +207,7 @@ body {
   color: #faf39f;
   font-weight: bold;
   position: absolute;
-  left: 20%;
+  left: 50%;
   top: 20%;
   transform: translate(-50%, 0%);
   text-align: center;
@@ -214,7 +216,7 @@ body {
 .choose-premium input {
   font-size: 27px;
   position: absolute;
-  left: 1.7%;
+  left: 30%;
   top: 45vh;
   width: 37%;
   height: 10vh;
@@ -229,6 +231,8 @@ body {
 }
 
 .choose-basic {
+  position: absolute;
+  left: 50%;
   width: 40%;
   height: 60vh;
   box-sizing: border-box;
@@ -242,7 +246,7 @@ body {
   color: #faf39f;
   font-weight: bold;
   position: absolute;
-  left: 80%;
+  left: 50%;
   top: 20%;
   transform: translate(-50%, 0%);
   text-align: center;
@@ -251,7 +255,7 @@ body {
 .choose-basic input {
   font-size: 27px;
   position: absolute;
-  left: 61%;
+  left: 30%;
   top: 45vh;
   width: 37%;
   height: 10vh;
@@ -319,7 +323,7 @@ h1.premium-heading {
   position: absolute;
   color: #faf39f;
   top: 4%;
-  left: 20%;
+  left: 50%;
   transform: translate(-50%, 0%);
   text-align: center;
 }
@@ -332,7 +336,7 @@ h1.basic-heading {
   position: absolute;
   color: #faf39f;
   top: 4%;
-  left: 80%;
+  left: 50%;
   transform: translate(-50%, 0%);
   text-align: center;
 }

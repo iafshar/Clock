@@ -9,17 +9,21 @@
 	</head>
 	<body>
 		<div class="choose">
-			<form action="addAccount.php"> <!-- file doesnt exist -->
-				<a href="premSignUp.php" class="premiumBtn">
-					<span class="premiumAcc">Premium Account</span>
-					<span class="premiumInfo">Can save and share up to 20 clocks, can comment, can reply.</span>
-				</a>
-				<a href="basSignUp.php" class="basicBtn">
-					<span class="basicAcc">Basic Account</span>
-					<span class="basicInfo">Can save and share up to 5 clocks.</span>
-				</a>
+				<div class="choose-premium">
+					<h1 class="premium-heading">
+						Premium Account
+					</h1>
+					<p> - Save and share up to 20 clocks <br><br><br> - Comment on clocks <br><br><br> - Reply to comments on clocks</p>
+					<input onclick="window.location.href = 'premSignUp.php';" type="submit" value="Get Started">
+				</div>
+				<div class="choose-basic">
+					<h1 class="basic-heading">
+						Basic Account
+					</h1>
+					<p> - Save and share up to 5 clocks. </p>
+					<input onclick="window.location.href = 'basSignUp.php';" type="submit" value="Get Started">
+				</div>
 				<a href="login.php" class="already">Already have an account?</a>
-			</form>
 		</div>
 	</body>
 </html>

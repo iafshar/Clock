@@ -186,6 +186,85 @@ body {
   height: 100%;
   width: 100%;
 }
+.choose {
+  display: flex;
+  justify-content: space-between;
+}
+
+.choose-premium {
+  width: 40%;
+  height: 60vh;
+  box-sizing: border-box;
+  border: 2px solid #faf39f;
+}
+
+.choose-premium p {
+  height: 20px;
+  width: max-content;
+  font-size: 20px;
+  color: #faf39f;
+  font-weight: bold;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+}
+
+.choose-premium input {
+  font-size: 27px;
+  position: absolute;
+  left: 1.7%;
+  top: 45vh;
+  width: 37%;
+  height: 10vh;
+  padding: 15px;
+ 	margin-top: 20px;
+  background-color: #faf39f;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #f39faa;
+  transition: background-color 0.2s;
+}
+
+.choose-basic {
+  width: 40%;
+  height: 60vh;
+  box-sizing: border-box;
+  border: 2px solid #faf39f;
+}
+
+.choose-basic p {
+  height: 20px;
+  width: max-content;
+  font-size: 20px;
+  color: #faf39f;
+  font-weight: bold;
+  position: absolute;
+  left: 80%;
+  top: 20%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+}
+
+.choose-basic input {
+  font-size: 27px;
+  position: absolute;
+  left: 61%;
+  top: 45vh;
+  width: 37%;
+  height: 10vh;
+  padding: 15px;
+ 	margin-top: 20px;
+  background-color: #faf39f;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #f39faa;
+  transition: background-color 0.2s;
+
+}
 
 a {
   width: max-content;
@@ -232,21 +311,32 @@ a.noAccountBtn {
   text-align: center;
 }
 
-a.premiumBtn {
-  width: 120px;
-  font-size: 20px;
+h1.premium-heading {
+  margin: 0;
+  line-height: 1;
+  width: max-content;
+  font-size: 40px;
   position: absolute;
-  left: 35%;
+  color: #faf39f;
+  top: 4%;
+  left: 20%;
   transform: translate(-50%, 0%);
   text-align: center;
 }
-a.basicBtn {
-  width: 120px;
+
+h1.basic-heading {
+  margin: 0;
+  line-height: 1;
+  width: max-content;
+  font-size: 40px;
   position: absolute;
-  left: 65%;
+  color: #faf39f;
+  top: 4%;
+  left: 80%;
   transform: translate(-50%, 0%);
   text-align: center;
 }
+
 
 a.already {
   position: absolute;
@@ -256,17 +346,3 @@ a.already {
   text-align: center;
 }
 
-a .premiumInfo { display: none; }
-a:hover .premiumAcc { display: none; }
-
-a:hover .premiumInfo { 
-  display: inline; 
-  width: max-content;
-}
-
-a .basicInfo { display: none; }
-a:hover .basicAcc { display: none; }
-
-a:hover .basicInfo { 
-  display: inline;
-  width: max-content; }

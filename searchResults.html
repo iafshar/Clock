@@ -45,7 +45,7 @@
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
        var xmlhttp = new XMLHttpRequest();
 
-       xmlhttp.open("GET", "check.php?Username=" + Username, true);
+       xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
        xmlhttp.send();
        window.open("otherProfile.php","_self");
       });

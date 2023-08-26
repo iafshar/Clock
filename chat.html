@@ -1,4 +1,3 @@
-<!-- presents the user with the comments related to their chosen clock -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -10,25 +9,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
               var rows = "";
-              for (i=0;i<myRecords.Comments.length;i++) {
-                  var myRecord = myRecords.Comments[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
-                  rows = rows+newRow
+              for (i=0;i<myRecords.length;i++) {
+                   var myRecord = myRecords[i];
+                   console.log(myRecord);
+                   var newRow = "<tr class='table-row'><td>"+myRecord.Content+"</td></tr>";
+                   rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
-            }
-        }
-    };
+          }
+      };
+      xmlhttp.open("GET", "intermediateMessages.php", true);
+      xmlhttp.send();
 
-    xmlhttp.open("GET", "getComments.php", true);
-    xmlhttp.send();
 
 
     </script>
@@ -39,20 +36,20 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a class="active" href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
-      <a href="start.php" class="logoutBtn">Logout</a>
+    <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
-  </body>
-  <table class="table" id="clockTable">
+  <div class="messageTable">
+    <table class="table" id="messageTable">
       <thead class="thead-light">
         <tr>
-          <th>Comment</th>
-          <th></th>
-          <th></th>
+          <th id="messageHeading">Messages</th>
         </tr>
       </thead>
       <tbody id="resultRows">
       </tbody>
     </table>
+    </div>
+  </body>
 </html>

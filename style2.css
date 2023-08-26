@@ -56,6 +56,14 @@ button.followBtn {
   top: 9.5%;
   background-color: #faf39f;
 }
+
+button.messageBtn {
+  position: absolute;
+  top: 9.5%;
+  left: 10%;
+  background-color: #faf39f;
+}
+
 table.table[id="otherProfileTable"] {
   position: absolute;
   top: 14%;

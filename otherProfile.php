@@ -88,11 +88,13 @@
       require_once __DIR__ . '/followButton.php';
       echo $followButton; ?></button>
     </form>
+      <button onclick = "window.location.href='sendingMessage.php';" type="submit" class="messageBtn">Message</button>
     <div class="topnav">
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
       <a href="start.php" class="logoutBtn">Logout</a>
     </div>

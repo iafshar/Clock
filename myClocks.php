@@ -103,6 +103,7 @@ echo $_SESSION["Error"];
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a class="active" href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
       <a href="start.php" class="logoutBtn">Logout</a>
     <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium

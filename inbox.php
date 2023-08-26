@@ -1,4 +1,3 @@
-<!-- presents the user with the results of their searches -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -10,44 +9,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
               var rows = "";
-              for (i=0;i<myRecords.Users.length;i++) {
-                  var myRecord = myRecords.Users[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Username+"</td></tr>";
-                  rows = rows+newRow
+              for (i=0;i<myRecords.length;i++) {
+                   var myRecord = myRecords[i];
+                   var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+                   rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
-            }
-        }
-    };
+          }
+      };
+      xmlhttp.open("GET", "getMessageHeaders.php", true);
+      xmlhttp.send();
 
-    xmlhttp.open("GET", "intermediateSearch.php", true);
-    xmlhttp.send();
 
 
     </script>
     <script>
-
-
     $(document).ready(function(){
 
   // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.table-row',function(){
+      $("#messageTable").on('click','.table-row',function(){
        // get the current row
        var currentRow=$(this).closest("tr");
 
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+       console.log(Username);
        var xmlhttp = new XMLHttpRequest();
 
-       xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+       xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
        xmlhttp.send();
-       window.open("otherProfile.php","_self");
+       window.open("chat.html","_self");
       });
     });
 
@@ -59,18 +54,20 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a class="active" href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
-      <a href="start.php" class="logoutBtn">Logout</a>
+    <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
+  <div class="messageTable">
+    <table class="table" id="messageTable">
+      <thead class="thead-light">
+        <tr>
+          <th id="searchHeading">Usernames</th>
+        </tr>
+      </thead>
+      <tbody id="resultRows">
+      </tbody>
+    </table>
+    </div>
   </body>
-<table class="table" id="clockTable">
-    <thead class="thead-light">
-      <tr>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody id="resultRows">
-    </tbody>
-  </table>
 </html>

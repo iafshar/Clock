@@ -1,4 +1,6 @@
-<!-- presents the user with the comments related to their chosen clock -->
+<?php 
+session_start();?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -9,29 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
-              var rows = "";
-              for (i=0;i<myRecords.Comments.length;i++) {
-                  var myRecord = myRecords.Comments[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
-                  rows = rows+newRow
-              }
-              document.getElementById("resultRows").innerHTML = rows;
-            }
-        }
-    };
-
-    xmlhttp.open("GET", "getComments.php", true);
-    xmlhttp.send();
-
-
-    </script>
   </head>
   <body>
     <div class="topnav">
@@ -47,12 +26,20 @@
   <table class="table" id="clockTable">
       <thead class="thead-light">
         <tr>
-          <th>Comment</th>
+          <th><?php
+            echo $_SESSION["SearchedUsername"]; ?></th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody id="resultRows">
+        <td>
+            <form action="sendMessage.php" method='post'>
+                <textarea rows='2' cols='100' name='message' placeholder='Message'></textarea>
+                <input type='submit' value='Enter'>
+            </form>
+        </td>
+        
       </tbody>
     </table>
 </html>

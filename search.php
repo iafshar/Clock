@@ -54,6 +54,7 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
     <form autocomplete="off" action="searchAllUsers.php" method="post">

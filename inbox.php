@@ -14,9 +14,11 @@
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
-              for (i=0;i<myRecords.length;i++) {
-                   var myRecord = myRecords[i];
-                   var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+              console.log(myRecords);
+              for (i=0;i<myRecords.Usernames.length;i++) {
+                   var Username = myRecords.Usernames[i];
+                   var Date = myRecords.Dates[i];
+                   var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -37,12 +39,12 @@
        var currentRow=$(this).closest("tr");
 
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-       console.log(Username);
+    //    document.getElementById("searchHeading").innerHTML = Username;
+    //    document.getElementById("dateHeading").innerHTML = "";
        var xmlhttp = new XMLHttpRequest();
-
        xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
        xmlhttp.send();
-       window.open("chat.html","_self");
+       window.open('chat.php','_self');
       });
     });
 
@@ -63,6 +65,7 @@
       <thead class="thead-light">
         <tr>
           <th id="searchHeading">Usernames</th>
+          <th id="dateHeading">Date Sent</th>
         </tr>
       </thead>
       <tbody id="resultRows">

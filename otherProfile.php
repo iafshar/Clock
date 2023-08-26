@@ -88,7 +88,20 @@
       require_once __DIR__ . '/followButton.php';
       echo $followButton; ?></button>
     </form>
-      <button onclick = "window.location.href='sendingMessage.php';" type="submit" class="messageBtn">Message</button>
+    <form action="sendMessageInbox.php" method="post">
+      <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
+      <input type='hidden' id="sender" name='Sender' value=<?php session_start();
+                                                     echo $_SESSION["SearchedUsername"];?>>
+    </form>
+    <script>
+      function getMessages() {
+        var Username = document.getElementById("sender").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
+        xmlhttp.send();
+        window.open('chat.php','_self');
+      }
+    </script>
     <div class="topnav">
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>

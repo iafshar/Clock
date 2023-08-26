@@ -4,13 +4,13 @@ require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 
 session_start();
-$MyUsername = $_SESSION['Username'];
+$myUsername = $_SESSION['Username'];
 $response = array();
 
 $otherUsername = $_GET["sender"];
 
-$getMessages = "SELECT * FROM `Messages` WHERE (ToUsername='$MyUsername' AND FromUsername='$otherUsername') OR
-    ToUsername='$otherUsername' AND FromUsername='$myUsername'
+$getMessages = "SELECT * FROM `Messages`
+ WHERE ToUsername IN ('$myUsername','$otherUsername') AND FromUsername IN ('$otherUsername','$myUsername')
     ORDER BY DateSent DESC";
 
 $result = $db->get_con()->query($getMessages);
@@ -22,11 +22,13 @@ if ($result->num_rows > 0) {
         $record = array();
         $record["Content"] = $row["Content"];
         $record["DateSent"] = $row["DateSent"];
-        if ($row["ToUsername"] == $MyUsername) {
+        if ($row["ToUsername"] == $myUsername) {
             $record["Color"] = "#ffffff";
+            $record["sentByMe"] = 0; 
         }
         else {
-            $record["Color"] = "#0000ff";
+            $record["Color"] = "#03c6fc";
+            $record["sentByMe"] = 1;
         }
         
 
@@ -34,10 +36,16 @@ if ($result->num_rows > 0) {
 
     }
     $response["success"] = 1;
+
+}
+else {
+    $response["success"] = 0;
 }
 
-$_SESSION['responseMessages'] = $response["Messages"];
 
-header("Location:http://localhost:8080/Clock/chat.html");
+$response["otherUsername"] = $otherUsername;
+$_SESSION['responseMessages'] = $response;
+// // echo json_encode($response["Messages"]);
+// echo json_encode($response["Messages"]);
 
 ?>

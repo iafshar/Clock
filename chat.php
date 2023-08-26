@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -11,18 +12,26 @@
     <script>
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              var myRecords = JSON.parse(this.responseText);
-              var rows = "";
-              for (i=0;i<myRecords.length;i++) {
-                   var myRecord = myRecords[i];
-                   console.log(myRecord);
-                   var newRow = "<tr class='table-row'><td>"+myRecord.Content+"</td></tr>";
-                   rows = rows+newRow;
-              }
-              document.getElementById("resultRows").innerHTML = rows;
-          }
-      };
+            if (this.readyState == 4 && this.status == 200) {
+                var myRecords = JSON.parse(this.responseText);
+                document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
+                console.log(myRecords);
+                var rows = "<td><form action='sendMessageInbox.php' method='post'><textarea rows='2' cols='100' name='message' placeholder='Message'></textarea><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' value='Enter'></form></td>";
+                if (myRecords.Messages) {
+                    for (i=0;i<myRecords.Messages.length;i++) {
+                        var myRecord = myRecords.Messages[i];
+                        if (myRecord.sentByMe == 0) {
+                            var newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"</td><td>"+myRecord.Content+"</td></tr>";
+                        }
+                        else {
+                            var newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td>"+myRecord.DateSent+"</td></tr>";
+                        }
+                        rows = rows+newRow;
+                    }
+                }
+                document.getElementById("resultRows").innerHTML = rows;
+            }
+        };
       xmlhttp.open("GET", "intermediateMessages.php", true);
       xmlhttp.send();
 
@@ -44,7 +53,8 @@
     <table class="table" id="messageTable">
       <thead class="thead-light">
         <tr>
-          <th id="messageHeading">Messages</th>
+          <th id="messageHeading">Username</th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="resultRows">

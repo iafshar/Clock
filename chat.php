@@ -41,6 +41,7 @@
   </head>
   <body>
     <div class="topnav">
+      <input type="button" value="Go back!" onclick="history.back()">
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>

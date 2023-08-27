@@ -18,5 +18,10 @@ $_SESSION["Error"] = NULL; // This will be a string containing all the errors th
 				<a href="login.php" class="loginBtn">Login</a>
 			</form>
 		</div>
+		<script>
+			localStorage.removeItem("loginUsername");
+			localStorage.removeItem("signUpUsername");
+    		localStorage.removeItem("signUpEmail");
+		</script>
 	</body>
 </html>

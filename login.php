@@ -17,9 +17,19 @@ echo $_SESSION["Error"] ?>
 			method="post">
 				<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 				<input type="password" name="Password" placeholder="Password" id="password" autocomplete="current-password" required>
-				<input type="submit" value="Login">
+				<input type="submit" value="Login" onclick="save()">
 				<a href="forgotPassword.php" class="already">Forgot your password?</a>
 			</form>
+			<script>
+				function save() {
+					var loginUsername = document.getElementById("username").value;
+					localStorage.setItem("loginUsername", loginUsername); 
+				}
+	
+			</script>
+			<script>
+				document.getElementById("username").value = localStorage.getItem('loginUsername');
+			</script>
 		</div>
 	</body>
 </html>

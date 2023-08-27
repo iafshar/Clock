@@ -96,6 +96,11 @@ echo $_SESSION["Error"];
       });
     });
     </script>
+    <script>
+      localStorage.removeItem("loginUsername");
+      localStorage.removeItem("signUpUsername");
+      localStorage.removeItem("signUpEmail");
+    </script>
   </head>
   <body>
     <div class="topnav">

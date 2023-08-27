@@ -20,9 +20,23 @@ echo $_SESSION["Error"]; ?>
 					<input type="password" name="Password1" placeholder="Password" id="password" autocomplete="new-password" required>
 					<input type="password" name="Password2" placeholder="Confirm Password" id="confirm-password" autocomplete="new-password" required>
 					<input type="email" name="Email" placeholder="Email" id="email" autocomplete="email" required>
-					<input type="submit" value="Sign-Up">
+					<input type="submit" value="Sign-Up" onclick="save()">
 				</div>
 			</form>
+			<script>
+				function save() {
+					var signUpUsername = document.getElementById("username").value;
+					localStorage.setItem("signUpUsername", signUpUsername); 
+
+					var signUpEmail = document.getElementById("email").value;
+					localStorage.setItem("signUpEmail", signUpEmail); 
+				}
+	
+			</script>
+			<script>
+				document.getElementById("username").value = localStorage.getItem('signUpUsername');
+				document.getElementById("email").value = localStorage.getItem('signUpEmail');
+			</script>
 		</div>
 	</body>
 </html>

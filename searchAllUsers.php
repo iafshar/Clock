@@ -14,7 +14,9 @@ if (array_key_exists("RecentUsername" , $_GET )){
 
 else if (isset($_POST['search'])){
   $Username = $_POST['search'];
+
 }
+
 // connecting to db
 
 $db = new DB_CONNECT();
@@ -24,7 +26,6 @@ $addSearch = "INSERT INTO `Searches` (UserID, Search)
 
 if ($Username != NULL){
   $db->get_con()->query($addSearch);
-  
   $sql = ("SELECT * FROM `Users` WHERE UserID != '$MyUserID' AND Username LIKE '%$Username%'");
   $result = $db->get_con()->query($sql);
   if ($result->num_rows > 0) {

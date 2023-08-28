@@ -35,6 +35,7 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
             // temp user array
             $record = array();
             $record["Content"] = $row["Content"];
+            $record["Type"] = $row["Type"];
             $record["DateSent"] = $row["DateSent"];
             if ($row["ToUsername"] == $fromUsername) {
                 $record["Color"] = "#ffffff";
@@ -61,6 +62,63 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
     $_SESSION['responseMessages'] = $response;
     
     
+}
+else if (isset($_GET['sendingUsername'])) {
+    $toUsername = $_GET['sendingUsername'];
+    $clockID = $_SESSION['ClockID'];
+
+
+    $content = $clockID;
+    $dateSent = date('Y-m-d H:i:s');
+
+
+
+    $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent)
+        VALUES('$fromUsername','$toUsername',1,'$content','$dateSent')";
+
+
+    $result = $db->get_con()->query($addMessage);
+
+
+    $getMessages = "SELECT * FROM `Messages`
+    WHERE ToUsername IN ('$fromUsername','$toUsername') AND FromUsername IN ('$toUsername','$fromUsername')
+        ORDER BY DateSent DESC";
+
+    $result = $db->get_con()->query($getMessages);
+
+    if ($result->num_rows > 0) {
+        $response["Messages"] = array();
+        while ($row = $result->fetch_assoc()) {
+            // temp user array
+            $record = array();
+            $record["Content"] = $row["Content"];
+            $record["Type"] = $row["Type"];
+            $record["DateSent"] = $row["DateSent"];
+            if ($row["ToUsername"] == $fromUsername) {
+                $record["Color"] = "#ffffff";
+                $record["sentByMe"] = 0; 
+            }
+            else {
+                $record["Color"] = "#03c6fc";
+                $record["sentByMe"] = 1;
+            }
+            
+
+            array_push($response["Messages"], $record);
+
+        }
+        $response["success"] = 1;
+
+    }
+    else {
+        $response["success"] = 0;
+    }
+
+
+    $response["otherUsername"] = $toUsername;
+    $_SESSION['responseMessages'] = $response;
+
+    # code...
 }
 header("Location:http://localhost:8080/Clock/chat.php");
 

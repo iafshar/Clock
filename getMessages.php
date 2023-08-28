@@ -22,6 +22,7 @@ if ($result->num_rows > 0) {
         $record = array();
         $record["Content"] = $row["Content"];
         $record["DateSent"] = $row["DateSent"];
+        $record["Type"] = $row["Type"];
         if ($row["ToUsername"] == $myUsername) {
             $record["Color"] = "#ffffff";
             $record["sentByMe"] = 0; 

@@ -17,6 +17,13 @@ else if (isset($_POST['search'])){
 
 }
 
+if (isset($_POST['message'])) {
+  $_SESSION["message"] = 1;
+}
+else {
+  $_SESSION["message"] = 0;
+}
+
 // connecting to db
 
 $db = new DB_CONNECT();
@@ -25,7 +32,9 @@ $addSearch = "INSERT INTO `Searches` (UserID, Search)
   VALUES ('$MyUserID','$Username')";
 
 if ($Username != NULL){
-  $db->get_con()->query($addSearch);
+  if ($_SESSION["message"] == 0) {
+    $db->get_con()->query($addSearch);
+  }
   $sql = ("SELECT * FROM `Users` WHERE UserID != '$MyUserID' AND Username LIKE '%$Username%'");
   $result = $db->get_con()->query($sql);
   if ($result->num_rows > 0) {
@@ -49,7 +58,7 @@ else {
     // // echo no users JSON
 }
 $_SESSION['response'] = $response;
-header("Location:http://localhost:8080/Clock/searchResults.html");
+header("Location:http://localhost:8080/Clock/searchResults.php");
 }
 
 ?>

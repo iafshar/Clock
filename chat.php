@@ -14,33 +14,34 @@
       xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
-                console.log(myRecords);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
                 document.getElementById("messageBody").innerHTML = "<td><form action='sendMessageInbox.php' method='post'><textarea rows='4' cols='120' name='message' placeholder='Message'></textarea><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' value='Enter'></form></td>";
                 var rows = "";
-                if (myRecords.Messages) {
-                    for (i=0;i<myRecords.Messages.length;i++) {
-                        var myRecord = myRecords.Messages[i];
-                        console.log(myRecord);
-                        var newRow = "";
-                        if (myRecord.sentByMe == 0) {
-                          if (myRecord.Type == 1) {
-                            newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
+                if (myRecords) {
+                  if (myRecords.Messages) {
+                      for (i=0;i<myRecords.Messages.length;i++) {
+                          var myRecord = myRecords.Messages[i];
+                          console.log(myRecord);
+                          var newRow = "";
+                          if (myRecord.sentByMe == 0) {
+                            if (myRecord.Type == 1) {
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
+                            }
+                            else {
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.Content+"</td></tr>";
+                            }
                           }
                           else {
-                            newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.Content+"</td></tr>";
-                          }
-                        }
-                        else {
-                          if (myRecord.Type == 1) {
-                            newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
-                          }
-                          else {
-                            newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
-                          }              
-                        }                    
-                        rows = rows+newRow;
-                    }
+                            if (myRecord.Type == 1) {
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
+                            }
+                            else {
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
+                            }              
+                          }                    
+                          rows = rows+newRow;
+                      }
+                  }
                 }
                 document.getElementById("resultRows").innerHTML = rows;
             }
@@ -106,11 +107,28 @@
         var clockID = currentRow.find('input[name=clockID]').val();
         var Name = currentRow.find('input[name=clockName]').val();
         var tempo = currentRow.find('td[name=tempo]').text().substring(5);
-        console.log(tempo);
-        // var xmlhttp = new XMLHttpRequest();
-        // xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
-        // xmlhttp.send();
         window.open('Clock_ReadOnly/get.php?clockID='+clockID+'&Name='+Name+'&tempo='+tempo,'_self');
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+
+// code to read selected table row cell data (values).
+        $("#messageTable").on('click','.sendClock',function(){
+        // get the current row
+          var currentRow=$(this).closest("tr");
+
+          var name = currentRow.find('input[name=clockName]').val();
+          var tempo = currentRow.find('td[name=tempo]').text().substring(5);
+          var username = currentRow.find('input[name=Maker]').val();
+
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
+          xmlhttp.send();
+          window.open('chooseReceiver.php','_self');
+
         });
       });
     </script>

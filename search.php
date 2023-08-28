@@ -42,7 +42,7 @@
 
        xmlhttp.open("GET", "searchAllUsers.php?RecentUsername=" + Username, true);
        xmlhttp.send();
-       window.open("searchResults.html","_self");
+       window.open("searchResults.php","_self");
       });
     });
 

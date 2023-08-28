@@ -18,7 +18,8 @@
               var rows = "";
               for (i=0;i<myRecords.Clocks.length;i++) {
                   var myRecord = myRecords.Clocks[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=otherProfile.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td></tr>";
+                  console.log(myRecord);
+                  var newRow = "<tr class='table-row'><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=otherProfile.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -78,6 +79,7 @@
        xmlhttp.send();
        window.open('Clock_ReadOnly/index.html','_self');
       });
+
     });
     </script>
 
@@ -96,11 +98,38 @@
     <script>
       function getMessages() {
         var Username = document.getElementById("sender").value;
+        console.log(Username);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
         xmlhttp.send();
         window.open('chat.php','_self');
       }
+    </script>
+    <script>
+      $(document).ready(function(){
+
+// code to read selected table row cell data (values).
+        $("#otherProfileTable").on('click','.sendClock',function(){
+        // get the current row
+          var currentRow=$(this).closest("tr");
+
+          var username = document.getElementById("sender").value;
+          var name=currentRow.find("td:eq(0)").text();
+          var tempo=currentRow.find("td:eq(1)").text();
+          console.log(username);
+          console.log(name);
+        // var xmlhttp = new XMLHttpRequest();
+        // xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
+        // xmlhttp.send();
+        // window.open('chooseReceiver.php','_self');
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
+          xmlhttp.send();
+          window.open('chooseReceiver.php','_self');
+
+        });
+      });
     </script>
     <div class="topnav">
       <input type="button" value="Go back!" onclick="history.back()">
@@ -121,6 +150,7 @@
           <th>Date Shared</th>
           <th>Likes</th>
           <th>Dislikes</th>
+          <th></th>
           <th></th>
           <th></th>
           <th></th>

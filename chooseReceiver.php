@@ -61,6 +61,7 @@
 
     <form autocomplete="off" action="searchAllUsers.php" method="post">
       <input id="userSearch" type="text" name="search" placeholder="Search" required>
+      <input type='hidden' name='message' value="1">
       <input type="submit" value="🔍">
     </form>
     <a href="start.php" class="searchLogoutBtn">Logout</a>
@@ -99,7 +100,7 @@
           var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
           var xmlhttp = new XMLHttpRequest();
 
-          xmlhttp.open("GET", "sendClock.php?Username=" + Username, true);
+          xmlhttp.open("GET", "sendClock.php?Username=" + Username, true); // no sendClock file
           xmlhttp.send();
           window.open("chat.php","_self");
           });

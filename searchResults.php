@@ -43,11 +43,29 @@
        var currentRow=$(this).closest("tr");
 
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-       var xmlhttp = new XMLHttpRequest();
+       var message = (
+        <?php
+          session_start();
+          echo json_encode($_SESSION["message"]);
+        ?>
+        );
+        console.log(message);
 
-       xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
-       xmlhttp.send();
-       window.open("otherProfile.php","_self");
+        if (message == 0) {
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+          xmlhttp.send();
+          window.open("otherProfile.php","_self");
+        }
+        else {
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username, true);
+          xmlhttp.send();
+          window.open("chat.php","_self");
+        }
+        
       });
     });
 

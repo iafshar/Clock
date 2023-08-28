@@ -3,6 +3,13 @@
 // <!-- gets the data required for the user to edit a clock with -->
 session_start();
 
+if (isset($_GET["clockID"]) && isset($_GET["Name"]) && isset($_GET["tempo"])) {
+  $_SESSION["ClockID"] = $_GET["clockID"];
+  $_SESSION["clockName"] = $_GET["Name"];
+  $_SESSION["tempo"] = $_GET["tempo"];
+  header("Location:http://localhost:8080/Clock/Clock_ReadOnly/index.html");
+  
+}
 $response = array();
 
 $response["tempo"] = $_SESSION["tempo"];

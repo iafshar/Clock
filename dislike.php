@@ -10,6 +10,12 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+if (isset($_GET["clockID"]) && isset($_GET["Name"]) && isset($_GET["location"])) {
+  $_SESSION["ClockID"] = $_GET["clockID"];
+  $_SESSION["clockName"] = $_GET["Name"];
+  $_SESSION["Location"] = $_GET["location"];
+}
+
 $ClockID = $_SESSION["ClockID"];
 $Name = $_SESSION["clockName"];
 $UserID = $_SESSION["UserID"];

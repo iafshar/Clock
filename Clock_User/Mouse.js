@@ -8,7 +8,7 @@ function mouseReleased() {
 }
 
 function mousePressed() {
-  if (mouseX>10 && mouseX<60 && mouseY>10 && mouseY<60){
+  if (mouseX>width-60 && mouseX<width-10 && mouseY>height-120 && mouseY<height-70){ //keypad
     screen = 1;
   }
   if (screen == 0){
@@ -149,14 +149,14 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, saveBtn, share];
+    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp, saveBtn, share];
     buttonCheck = false;
     for(var i = 0;i < Buttons.length;i++){
       if(Buttons[i].overButton()){
         buttonCheck = true;
       }
     }
-    if (mouseX>10 && mouseX<60 && mouseY>10 && mouseY<60){
+    if (mouseX>width-60 && mouseX<width-10 && mouseY>height-120 && mouseY<height-70){ // keypad
       buttonCheck = true;
     }
     if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it

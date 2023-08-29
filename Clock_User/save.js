@@ -32,7 +32,10 @@ function naming(){
   enterBtn.drawButton();
   clearBtn.drawButton();
 }
-
+// HITOM_SOUND = loadSound("../Sounds/hiTom.mp3");
+//   MIDTOM_SOUND = loadSound("../Sounds/midTom.mp3");
+//   OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
+//   CRASH_SOUND
 function saving(){
   var circs = [];
   for(i = 0;i < circles.length;i++){
@@ -46,9 +49,23 @@ function saving(){
     else if (circles[i].sound == CYMBAL_SOUND){
       circs[i][0] = 3;
     }
-    else{
+    else if (circles[i].sound == HIHAT_SOUND){
       circs[i][0] = 4;
     }
+    else if (circles[i].sound == OPENHIHAT_SOUND) {
+      console.log("yes");
+      circs[i][0] = 5;
+    }
+    else if (circles[i].sound == HITOM_SOUND) {
+      circs[i][0] = 6;
+    }
+    else if (circles[i].sound == MIDTOM_SOUND) {
+      circs[i][0] = 7;
+    }
+    else {
+      circs[i][0] = 8;
+    }
+
     circs[i][1] = circles[i].ox;
     circs[i][2] = circles[i].oy;
   }

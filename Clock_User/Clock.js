@@ -4,6 +4,10 @@ function preload(){ //This function runs before the program is fully loaded.
   KICK_SOUND = loadSound("../Sounds/kick.mp3");
   HIHAT_SOUND = loadSound("../Sounds/hiHat.mp3");
   SNARE_SOUND = loadSound("../Sounds/snare.mp3");
+  HITOM_SOUND = loadSound("../Sounds/hiTom.mp3");
+  MIDTOM_SOUND = loadSound("../Sounds/midTom.mp3");
+  OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
+  CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
   edited = false;
@@ -32,7 +36,7 @@ function setup() {
   BUTTON_WIDTH = 110;
   MAX_CIRCLES = 24;
 
-  SOUND_BUTTON_WIDTH = 200;
+  SOUND_BUTTON_WIDTH = 240;
   SOUND_BUTTON_X = 1150;
 
   clickedOnCircle = null;
@@ -52,6 +56,14 @@ function setup() {
   LIGHT_RED = color('#fb7f7f');
   LIGHT_GREEN = color('#a9cc88');
   LIGHT_ECLIPSE = color('#999999');
+  BLUE = color('#6495ED');
+  LIGHT_BLUE = color('#87CEEB');
+  BROWN = color('#7b3f00');
+  LIGHT_BROWN = color('#d2b48c');
+  PURPLE = color('#8A2BE2');
+  LIGHT_PURPLE = color('#E0B0FF');
+  TEAL = color('#008B8B');
+  LIGHT_TEAL = color('#20B2AA');
 
   bgColor = WHITE;
   clockColor = YELLOW;
@@ -67,21 +79,33 @@ function setup() {
   Kicks = [];
   cymbals = [];
   hiHats = [];
+  openHiHats = [];
+  hiToms = [];
+  midToms = [];
+  crashes = [];
 
   STARTING_CIRCLE_X = 20;
   circleX = STARTING_CIRCLE_X;
 
-  snareY = 100;
-  kickY = 180;
-  cymbalY = 260;
-  hiHatY = 340;
+  snareY = 20;
+  kickY = 100;
+  cymbalY = 180;
+  hiHatY = 260;
+  openHiHatY = 340;
+  hiTomY = 420;
+  midTomY = 500;
+  crashY = 580;
 
   for (let i = 0; i < MAX_CIRCLES; i++) {
     if (i == MAX_CIRCLES/2) {
-      snareY += 40
-      kickY += 40
-      cymbalY += 40
-      hiHatY += 40
+      snareY += 40;
+      kickY += 40;
+      cymbalY += 40;
+      hiHatY += 40;
+      openHiHatY += 40;
+      hiTomY += 40;
+      midTomY += 40;
+      crashY += 40;
 
       circleX = STARTING_CIRCLE_X;
     }
@@ -89,13 +113,21 @@ function setup() {
     kick = new Circle(KICK_SOUND, CIRCLE_DIAMETER, circleX, kickY, PINK);
     cymbal = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER, circleX, cymbalY, GREEN);
     hiHat = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER, circleX, hiHatY, ECLIPSE);
-
-    circleX += 30;
+    openHiHat = new Circle(OPENHIHAT_SOUND, CIRCLE_DIAMETER, circleX, openHiHatY, BLUE);
+    hiTom = new Circle(HITOM_SOUND, CIRCLE_DIAMETER, circleX, hiTomY, BROWN);
+    midTom = new Circle(MIDTOM_SOUND, CIRCLE_DIAMETER, circleX, midTomY, PURPLE);
+    crash = new Circle(CRASH_SOUND, CIRCLE_DIAMETER, circleX, crashY, TEAL);
 
     snares.push(snare);
     Kicks.push(kick);
     cymbals.push(cymbal);
     hiHats.push(hiHat);
+    openHiHats.push(openHiHat);
+    hiToms.push(hiTom);
+    midToms.push(midTom);
+    crashes.push(crash);
+
+    circleX += 30;
   }
 
   circles = [];
@@ -104,16 +136,24 @@ function setup() {
   cymbalCount = 0;
   kickCount = 0;
   hiHatCount = 0;
+  openHiHatCount = 0;
+  hiTomCount = 0;
+  midTomCount = 0;
+  crashCount = 0
 
   saveBtn = new Button(1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
-  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CYMBAL",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
-  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
+  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
+  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHats,openHiHatCount,BLUE,LIGHT_BLUE);
+  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
+  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
+  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
 
-  options = [snareOp, kickOp, cymbalOp, hiHatOp];
+  options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
 
   CLOCK_X = width/2;
   CLOCK_Y = height/2-20;
@@ -145,7 +185,7 @@ function setup() {
   
   deleteNameDelay = 100; // used to delay deleting characters from clock name so that clicking backspace once doesnt remove a bunch of chars
 
-
+  console.log(savedCircles);
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
@@ -173,13 +213,45 @@ function setup() {
         circles.push(currentCircle);
         cymbalOp.counter ++;
       }
-      else{
+      else if(savedCircle.SoundID == 4){
         currentCircle = hiHatOp.sounds[hiHatOp.counter];
         currentCircle.ox = savedCircle.X;
         currentCircle.oy = savedCircle.Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiHatOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 5){
+        currentCircle = openHiHatOp.sounds[openHiHatOp.counter];
+        currentCircle.ox = savedCircle.X;
+        currentCircle.oy = savedCircle.Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        openHiHatOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 6){
+        currentCircle = hiTomOp.sounds[hiTomOp.counter];
+        currentCircle.ox = savedCircle.X;
+        currentCircle.oy = savedCircle.Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        hiTomOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 7){
+        currentCircle = midTomOp.sounds[midTomOp.counter];
+        currentCircle.ox = savedCircle.X;
+        currentCircle.oy = savedCircle.Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        midTomOp.counter ++;
+      }
+      else{
+        currentCircle = crashOp.sounds[crashOp.counter];
+        currentCircle.ox = savedCircle.X;
+        currentCircle.oy = savedCircle.Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        crashOp.counter ++;
       }
     }
   }
@@ -191,7 +263,7 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  image(KEYPAD_IMAGE,10,10,50,50);
+  image(KEYPAD_IMAGE,width-60,height-120,50,50);
 
   for(i=0;i<options.length;i++){
     options[i].drawButton();

@@ -210,6 +210,9 @@ function keyPressed(){
     if(((keyCode>=65 && keyCode<=90) || (keyCode>=48 && keyCode<=57) || (keyCode == 190 || keyCode == 189)) && clockName.length <= 40){
       clockName += key;
     }
+    else if (keyCode == 32) {
+      clockName += "_";
+    }
     else if(keyCode == 13 && clockName.length > 0){ // enter
       saving();
     }

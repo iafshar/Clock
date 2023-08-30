@@ -12,9 +12,7 @@ session_start();
 	</head>
 	<body>
 		<div class="signUp">
-			<form action="addBasAccount.php"
-			<?php $_SESSION["Error"]=NULL;?>
-			method="post"> <!--Makes sure that the same errors are not presented if the user goes to a different page-->
+			<form action="addBasAccount.php" method="post"> <!--Makes sure that the same errors are not presented if the user goes to a different page-->
 				<div>
 					<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 					<input type="password" name="Password1" placeholder="Password" id="password" autocomplete="new-password" required>

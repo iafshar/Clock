@@ -1,5 +1,5 @@
 <?php
-// <!-- Adds the premium account to the DB that has signed up -->
+// <!-- Adds the basic account to the DB -->
 session_start();
 $_SESSION["Error"] = "";
 require_once __DIR__ . '/dbConfig.php';
@@ -49,7 +49,10 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   $invalid = FALSE;
   if (strlen($Password) < 6){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "Password must be at least six characters long <br>";
+    $_SESSION["lengthClass"] = "invalid";
+  }
+  else {
+    $_SESSION["lengthClass"] = "valid";
   }
   if ($countUser != 0){
     $invalid = TRUE;
@@ -66,32 +69,53 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
       }
     }
 
-    $_SESSION["Error"] .= "Username is Already taken. Try $Suggestion <br>";
+    $_SESSION["usernameClass"] = "invalid";
+    $_SESSION["usernameSuggestion"] = $Suggestion;
+  }
+  else {
+    $_SESSION['usernameSuggestion'] = NULL;
+    $_SESSION["usernameClass"] = "valid";
   }
   if ($countEmail != 0){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "Email is Already taken <br>";
+    $_SESSION["emailClass"] = "invalid";
+  }
+  else {
+    $_SESSION["emailClass"] = "valid";
   }
   if ($num == 0){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "Password must have at least one number in it <br>";
+    $_SESSION["numberClass"] = "invalid";
+  }
+  else {
+    $_SESSION["numberClass"] = "valid";
   }
   if ($alpha == 0){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "Password must have at least one letter in it <br>";
+    $_SESSION["letterClass"] = "invalid";
+  }
+  else {
+    $_SESSION["letterClass"] = "valid";
   }
   if ($special == 0){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "Password must have at least one special character in it <br>";
+    $_SESSION["specialClass"] = "invalid";
+  }
+  else {
+    $_SESSION["specialClass"] = "valid";
   }
   if ($Password != $Password2){
     $invalid = TRUE;
-    $_SESSION["Error"] .= "The two passwords do not match <br>";
-  }
-  if($invalid) {
-     header("Location:http://localhost:8080/Clock/premSignUp.php");
+    $_SESSION["matchClass"] = "invalid";
   }
   else {
+    $_SESSION["matchClass"] = "valid";
+  }
+  if($invalid) {
+     $_SESSION["messageDisplay"] = "block";
+     header("Location:http://localhost:8080/Clock/PremSignUp.php");
+  }
+  else{
     header("Location:http://localhost:8080/Clock/sendEmail.php");
   }
 }

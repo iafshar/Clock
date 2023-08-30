@@ -69,6 +69,32 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
             $response['removeEmailClass'] = "invalid";
         }
     }
+    else if (isset($_GET['password'])) { // reset password
+        $Email = $_SESSION["Email"];
+        $Password1 = $_GET['password'];
+
+        $findUser = "SELECT * FROM `Users` WHERE Email='$Email'";
+
+        $result = mysqli_query($conn, $findUser);
+
+        while ($row = $result->fetch_assoc()) {
+            $_SESSION['UserID'] = $row["UserID"];
+            $_SESSION['Username'] = $row["Username"];
+            $Password = $row["Password"];
+                
+        }
+
+        $response = array();
+        
+        if ($Password == $Password1) {
+            $response["removeDifferentClass"] = "valid";
+            $response["addDifferentClass"] = "invalid";
+        }
+        else {
+            $response["removeDifferentClass"] = "invalid";
+            $response["addDifferentClass"] = "valid";
+        }
+    }
 
     echo json_encode($response);
 }

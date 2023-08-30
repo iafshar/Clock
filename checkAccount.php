@@ -10,7 +10,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 //If the form is submitted
-if (isset($_POST['Username']) and isset($_POST['Password'])){
+if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['checkbox'])){
 //Assigning posted values to variables.
   $Username = $_POST['Username'];
   $Password = $_POST['Password'];
@@ -26,6 +26,51 @@ if (isset($_POST['Username']) and isset($_POST['Password'])){
        $_SESSION["Error"] = "Invalid credentials";
        header("Location:http://localhost:8080/Clock/login.php");
    }
+}
+else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
+    if(isset($_GET['username'])) {
+        $response = array();
+        $Username = $_GET['username'];
+        $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'";
+        $resultUser = mysqli_query($conn, $ExistingUser) or die(mysqli_error($conn));
+        $countUser = mysqli_num_rows($resultUser);
+        $response['numUsers'] = $countUser;
+
+        if ($countUser != 0){
+            $Suggest = "SELECT * FROM `Users` WHERE Username LIKE '%$Username%'";
+            $resultSuggest = mysqli_query($conn, $Suggest) or die(mysqli_error($conn));
+            $countSuggest = mysqli_num_rows($resultSuggest);
+            for ($i = 0;$i < $countSuggest;$i ++){
+            $Suggestion = $Username . "$i";
+            $ExistingSuggestion = "SELECT * FROM `Users` WHERE Username='$Suggestion'";
+            $resultSuggestion = mysqli_query($conn, $ExistingSuggestion) or die(mysqli_error($conn));
+            $countSuggestion = mysqli_num_rows($resultSuggestion);
+            if($countSuggestion == 0){
+                break;
+            }
+            }
+        
+            $response['suggestion'] = $Suggestion;
+        }
+    }
+    else if (isset($_GET['email'])) {
+        $response = array();
+        $Email = $_GET['email'];
+        $ExistingEmail = "SELECT * FROM `Users` WHERE Email='$Email'";
+        $resultEmail = mysqli_query($conn, $ExistingEmail) or die(mysqli_error($conn));
+        $countEmail = mysqli_num_rows($resultEmail);
+
+        if ($countEmail != 0) {
+            $response['addEmailClass'] = "invalid";
+            $response['removeEmailClass'] = "valid";
+        }
+        else {
+            $response['addEmailClass'] = "valid";
+            $response['removeEmailClass'] = "invalid";
+        }
+    }
+
+    echo json_encode($response);
 }
 mysqli_close($conn);
 ?>

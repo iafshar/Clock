@@ -100,6 +100,8 @@ echo $_SESSION["Error"];
       localStorage.removeItem("loginUsername");
       localStorage.removeItem("signUpUsername");
       localStorage.removeItem("signUpEmail");
+      localStorage.removeItem("signUpPassword");
+      localStorage.removeItem("signUpPassword2");
     </script>
   </head>
   <body>

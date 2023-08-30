@@ -1,5 +1,6 @@
 <?php session_start();
 $_SESSION["Error"] = NULL; // This will be a string containing all the errors the user has made when trying to login or sign-up
+session_unset();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,8 @@ $_SESSION["Error"] = NULL; // This will be a string containing all the errors th
 			localStorage.removeItem("loginUsername");
 			localStorage.removeItem("signUpUsername");
     		localStorage.removeItem("signUpEmail");
+			localStorage.removeItem("signUpPassword");
+			localStorage.removeItem("signUpPassword2");
 		</script>
 	</body>
 </html>

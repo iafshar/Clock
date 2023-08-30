@@ -139,7 +139,7 @@ function setup() {
   openHiHatCount = 0;
   hiTomCount = 0;
   midTomCount = 0;
-  crashCount = 0
+  crashCount = 0;
 
   saveBtn = new Button(1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
@@ -185,7 +185,6 @@ function setup() {
   
   deleteNameDelay = 100; // used to delay deleting characters from clock name so that clicking backspace once doesnt remove a bunch of chars
 
-  console.log(savedCircles);
   if(edited && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];

@@ -38,6 +38,34 @@ function mousePressed() {
       }
       checkMouseClicked = hiHat;
     }
+    else if (openHiHatOp.overButton()){
+      if(openHiHatCount < openHiHats.length && !circles.includes(openHiHats[openHiHatCount])){
+        circles.push(openHiHats[openHiHatCount]);
+        openHiHatCount ++;
+      }
+      checkMouseClicked = hiHat;
+    }
+    else if (hiTomOp.overButton()){
+      if(hiTomCount < hiToms.length && !circles.includes(hiToms[hiTomCount])){
+        circles.push(hiToms[hiTomCount]);
+        hiTomCount ++;
+      }
+      checkMouseClicked = hiHat;
+    }
+    else if (midTomOp.overButton()){
+      if(midTomCount < midToms.length && !circles.includes(midToms[midTomCount])){
+        circles.push(midToms[midTomCount]);
+        midTomCount ++;
+      }
+      checkMouseClicked = hiHat;
+    }
+    else if (crashOp.overButton()){
+      if(crashCount < crashes.length && !circles.includes(crashes[crashCount])){
+        circles.push(crashes[crashCount]);
+        crashCount ++;
+      }
+      checkMouseClicked = cymbal;
+    }
     else if (signUp.overButton()){
       window.open("http://localhost:8080/Clock/choose.html", "_self")
     }

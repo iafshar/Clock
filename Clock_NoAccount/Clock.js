@@ -1,8 +1,12 @@
 function preload(){
-  CYMBAL_SOUND = loadSound("../Sounds/cymbal.mp3");
+  CYMBAL_SOUND = loadSound("../Sounds/cymbal.mp3");  //It makes sense to load the sounds here so that there are no time delays
   KICK_SOUND = loadSound("../Sounds/kick.mp3");
   HIHAT_SOUND = loadSound("../Sounds/hiHat.mp3");
   SNARE_SOUND = loadSound("../Sounds/snare.mp3");
+  HITOM_SOUND = loadSound("../Sounds/hiTom.mp3");
+  MIDTOM_SOUND = loadSound("../Sounds/midTom.mp3");
+  OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
+  CRASH_SOUND = loadSound("../Sounds/crash.mp3");
 }
 
 function setup() {
@@ -12,7 +16,7 @@ function setup() {
   BUTTON_HEIGHT = 50;
   BUTTON_WIDTH = 140;
 
-  SOUND_BUTTON_WIDTH = 200;
+  SOUND_BUTTON_WIDTH = 240;
   SOUND_BUTTON_X = 1150;
   MAX_CIRCLES = 24;
 
@@ -34,6 +38,14 @@ function setup() {
   LIGHT_RED = color('#fb7f7f');
   LIGHT_GREEN = color('#a9cc88');
   LIGHT_ECLIPSE = color('#999999');
+  BLUE = color('#6495ED');
+  LIGHT_BLUE = color('#87CEEB');
+  BROWN = color('#7b3f00');
+  LIGHT_BROWN = color('#d2b48c');
+  PURPLE = color('#8A2BE2');
+  LIGHT_PURPLE = color('#E0B0FF');
+  TEAL = color('#008B8B');
+  LIGHT_TEAL = color('#20B2AA');
 
   bgColor = WHITE;
   clockColor = YELLOW;
@@ -55,21 +67,33 @@ function setup() {
   Kicks = [];
   cymbals = [];
   hiHats = [];
+  openHiHats = [];
+  hiToms = [];
+  midToms = [];
+  crashes = [];
 
   STARTING_CIRCLE_X = 20;
   circleX = STARTING_CIRCLE_X;
 
-  snareY = 100;
-  kickY = 180;
-  cymbalY = 260;
-  hiHatY = 340;
+  snareY = 20;
+  kickY = 100;
+  cymbalY = 180;
+  hiHatY = 260;
+  openHiHatY = 340;
+  hiTomY = 420;
+  midTomY = 500;
+  crashY = 580;
 
   for (let i = 0; i < MAX_CIRCLES; i++) {
     if (i == MAX_CIRCLES/2) {
-      snareY += 40
-      kickY += 40
-      cymbalY += 40
-      hiHatY += 40
+      snareY += 40;
+      kickY += 40;
+      cymbalY += 40;
+      hiHatY += 40;
+      openHiHatY += 40;
+      hiTomY += 40;
+      midTomY += 40;
+      crashY += 40;
 
       circleX = STARTING_CIRCLE_X;
     }
@@ -77,13 +101,21 @@ function setup() {
     kick = new Circle(KICK_SOUND, CIRCLE_DIAMETER, circleX, kickY, PINK);
     cymbal = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER, circleX, cymbalY, GREEN);
     hiHat = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER, circleX, hiHatY, ECLIPSE);
-
-    circleX += 30;
+    openHiHat = new Circle(OPENHIHAT_SOUND, CIRCLE_DIAMETER, circleX, openHiHatY, BLUE);
+    hiTom = new Circle(HITOM_SOUND, CIRCLE_DIAMETER, circleX, hiTomY, BROWN);
+    midTom = new Circle(MIDTOM_SOUND, CIRCLE_DIAMETER, circleX, midTomY, PURPLE);
+    crash = new Circle(CRASH_SOUND, CIRCLE_DIAMETER, circleX, crashY, TEAL);
 
     snares.push(snare);
     Kicks.push(kick);
     cymbals.push(cymbal);
     hiHats.push(hiHat);
+    openHiHats.push(openHiHat);
+    hiToms.push(hiTom);
+    midToms.push(midTom);
+    crashes.push(crash);
+
+    circleX += 30;
   }
 
   circles = [];
@@ -92,13 +124,21 @@ function setup() {
   cymbalCount = 0;
   kickCount = 0;
   hiHatCount = 0;
+  openHiHatCount = 0;
+  hiTomCount = 0;
+  midTomCount = 0;
+  crashCount = 0;
 
   signUp = new Button(980,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SIGN-UP",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snare,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",kick,PINK,LIGHT_PINK);
-  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CYMBAL",cymbal,GREEN,LIGHT_GREEN);
-  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-HAT",kick,ECLIPSE,LIGHT_ECLIPSE);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbal,GREEN,LIGHT_GREEN);
+  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHat,ECLIPSE,LIGHT_ECLIPSE);
+  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHat,BLUE,LIGHT_BLUE);
+  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiTom,BROWN,LIGHT_BROWN);
+  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midTom,PURPLE,LIGHT_PURPLE);
+  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crash,TEAL,LIGHT_TEAL);
 
   CLOCK_X = width/2;
   CLOCK_Y = height/2-20;
@@ -117,6 +157,10 @@ function clock() {
   kickOp.drawButton();
   cymbalOp.drawButton();
   hiHatOp.drawButton();
+  openHiHatOp.drawButton();
+  hiTomOp.drawButton();
+  midTomOp.drawButton();
+  crashOp.drawButton();
 
   signUp.drawButton();
 

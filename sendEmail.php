@@ -7,9 +7,9 @@ session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'libraries/PHPMailer/src/Exception.php';
+require 'libraries/PHPMailer/src/PHPMailer.php';
+require 'libraries/PHPMailer/src/SMTP.php';
 
 // include db connect class
 require_once __DIR__ . '/dbConfig.php';

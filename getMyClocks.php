@@ -17,7 +17,6 @@ require_once __DIR__ . '/dbConnect.php';
 // connecting to db
 $db = new DB_CONNECT();
 $UserID = $_SESSION["UserID"];
-//echo '<script>console.log("here")</script>';
 // get all clocks from clocks table
 $sql = ("SELECT * FROM Clocks WHERE UserID='$UserID'");
 $result = $db->get_con()->query($sql);

@@ -14,7 +14,6 @@
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
-              console.log(myRecords);
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var Date = myRecords.Dates[i];
@@ -113,7 +112,6 @@
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
-              console.log(myRecords);
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var Date = myRecords.Dates[i];

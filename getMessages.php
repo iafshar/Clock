@@ -46,7 +46,6 @@ else {
 
 $response["otherUsername"] = $otherUsername;
 $_SESSION['responseMessages'] = $response;
-// // echo json_encode($response["Messages"]);
-// echo json_encode($response["Messages"]);
+
 
 ?>

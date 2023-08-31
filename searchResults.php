@@ -49,7 +49,6 @@
           echo json_encode($_SESSION["message"]);
         ?>
         );
-        console.log(message);
 
         if (message == 0) {
           var xmlhttp = new XMLHttpRequest();

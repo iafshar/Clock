@@ -21,7 +21,6 @@
                   if (myRecords.Messages) {
                       for (i=0;i<myRecords.Messages.length;i++) {
                           var myRecord = myRecords.Messages[i];
-                          console.log(myRecord);
                           var newRow = "";
                           if (myRecord.sentByMe == 0) {
                             if (myRecord.Type == 1) {

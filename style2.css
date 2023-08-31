@@ -68,3 +68,7 @@ table.table[id="otherProfileTable"] {
   position: absolute;
   top: 14%;
 }
+
+.table-row:hover{
+  background-color: #faf39f;
+}

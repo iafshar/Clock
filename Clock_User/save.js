@@ -53,7 +53,6 @@ function saving(){
       circs[i][0] = 4;
     }
     else if (circles[i].sound == OPENHIHAT_SOUND) {
-      console.log("yes");
       circs[i][0] = 5;
     }
     else if (circles[i].sound == HITOM_SOUND) {

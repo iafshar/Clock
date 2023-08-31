@@ -54,7 +54,6 @@ else {
     // no products found
     $response["success"] = 0;
     $response["message"] = "No records found";
-    //
     // // echo no users JSON
 }
 $_SESSION['response'] = $response;

@@ -72,3 +72,7 @@ table.table[id="otherProfileTable"] {
 .table-row:hover{
   background-color: #faf39f;
 }
+
+.autocomplete-table-row:hover{
+  background-color: #faf39f;
+}

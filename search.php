@@ -17,7 +17,7 @@
               var rows = "";
               for (i=0;i<myRecords.length;i++) {
                    var myRecord = myRecords[i];
-                   var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+                   var newRow = "<tr class='table-row'><td class='search-username'>"+myRecord+"</td><td><input type='button' value='X' item="+myRecord+" onclick=deleteHistoryItem(this)></td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -33,7 +33,7 @@
     $(document).ready(function(){
 
   // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.table-row',function(){
+      $("#clockTable").on('click','.search-username',function(){
        // get the current row
        var currentRow=$(this).closest("tr");
 
@@ -69,6 +69,10 @@
       <thead class="thead-light">
         <tr>
           <th id="searchHeading">Recents</th>
+          <th id="clearButton">
+            <form action=""></form>
+            <input type="button" value="Clear" onclick="clearHistory()">
+          </th>
         </tr>
       </thead>
       <tbody id="resultRows">
@@ -85,26 +89,29 @@
       var val = this.value;
       if (val.length > 0) {
         document.getElementById("searchHeading").innerHTML = "Username";
+        document.getElementById("clearButton").innerHTML = "";
         // document.querySelectorAll('th')[1].innerHTML = "Username";
         autocomplete(val);
         $(document).ready(function(){
 
-          // code to read selected table row cell data (values).
-          $("#clockTable").on('click','.table-row',function(){
-          // get the current row
-          var currentRow=$(this).closest("tr");
+            
+            // code to read selected table row cell data (values).
+          $("#clockTable").on('click','.autocomplete-table-row',function(){
+            // get the current row
+            var currentRow=$(this).closest("tr");
 
-          var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-          var xmlhttp = new XMLHttpRequest();
+            var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+            var xmlhttp = new XMLHttpRequest();
 
-          xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
-          xmlhttp.send();
-          window.open("otherProfile.php","_self");
+            xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+            xmlhttp.send();
+            window.open("otherProfile.php","_self");
           });
         });
       }
       else {
         document.getElementById("searchHeading").innerHTML = "Recents";
+        document.getElementById("clearButton").innerHTML = "<input type='button' value='Clear' onclick='clearHistory()'>";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -112,7 +119,7 @@
                 var rows = "";
                 for (i=0;i<myRecords.length;i++) {
                     var myRecord = myRecords[i];
-                    var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+                    var newRow = "<tr class='table-row'><td class='search-username'>"+myRecord+"</td><td><input type='button' value='X' item="+myRecord+" onclick=deleteHistoryItem(this)></td></tr>";
                     rows = rows+newRow;
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -133,7 +140,7 @@
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+              var newRow = "<tr class='autocomplete-table-row'><td>"+myRecord+"</td><td></td></tr>";
               rows = rows+newRow;
             }
           }
@@ -144,6 +151,28 @@
       xmlhttp.send();
   }
 
+</script>
+<script>
+  function clearHistory() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("GET", "clearHistory.php", true);
+    xmlhttp.send();
+    location.reload();
+  }
+</script>
+<script>
+  function deleteHistoryItem(element) {
+    
+    item = element.getAttribute('item')
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("GET", "deleteHistoryItem.php?item="+item, true);
+    xmlhttp.send();
+    location.reload();
+
+  }
 </script>
   </body>
 </html>

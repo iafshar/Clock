@@ -14,8 +14,9 @@ if(isset($_POST['reply'])){
     $Reply = $_POST['reply'];
 
     if(strlen($Reply) != 0){
-        $AddReply = "INSERT INTO Replies (CommentID,Reply)
-          VALUES ('$CommentID','$Reply')";
+        $Date = date("Y-m-d H:i:s");
+        $AddReply = "INSERT INTO Replies (CommentID,Reply,Date)
+          VALUES ('$CommentID','$Reply','$Date')";
       }
       mysqli_query($conn, $AddReply);
       header("Location:stats.html");

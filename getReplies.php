@@ -19,6 +19,7 @@ if ($result->num_rows > 0) {
 
         $record["ReplyID"] = $row["ReplyID"];
         $record["Reply"] = $row["Reply"];
+        $record["Date"] = $row["Date"];
 
         // push single record into final response array
         array_push($response["Replies"], $record);

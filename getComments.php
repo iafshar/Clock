@@ -29,6 +29,7 @@ if ($result->num_rows > 0) {
     $record = array();
     $record["CommentID"] = $row["CommentID"];
     $record["Comment"] = $row["Comment"];
+    $record["Date"] = $row["Date"];
 
     array_push($response["Comments"], $record);
   }

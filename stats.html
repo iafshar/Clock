@@ -19,7 +19,7 @@
               var rows = "";
               for (i=0;i<myRecords.Comments.length;i++) {
                   var myRecord = myRecords.Comments[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
+                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td>"+myRecord.Date+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -49,6 +49,7 @@
       <thead class="thead-light">
         <tr>
           <th>Comment</th>
+          <th>Date</th>
           <th></th>
           <th></th>
         </tr>

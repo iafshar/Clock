@@ -18,7 +18,7 @@
               var rows = "";
               for (i=0;i<myRecords.Replies.length;i++) {
                   var myRecord = myRecords.Replies[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Reply+"</td></tr>";
+                  var newRow = "<tr class='table-row'><td>"+myRecord.Reply+"</td><td>"+myRecord.Date+"</td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -47,6 +47,7 @@
       <thead class="thead-light">
         <tr>
           <th>Reply</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody id="resultRows">

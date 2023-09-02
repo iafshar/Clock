@@ -31,9 +31,9 @@ function setup() {
   clickedOnCircle = null;
   circleOnScreen = false;
 
-  RADIUS = 250;
+  RADIUS = 250/4;
 
-  createCanvas(RADIUS*2,RADIUS*2);
+  createCanvas(400,200);
 
   RED = color('#d94d4c');
   GREEN = color('#87aa66');
@@ -61,7 +61,7 @@ function setup() {
   bgColor = WHITE;
   clockColor = YELLOW;
 
-  CIRCLE_DIAMETER = 20;
+  CIRCLE_DIAMETER = 20/4;
   circleOnScreen = false;
   CircleOutline = 0;
   MAX_CIRCLES = 24;
@@ -82,28 +82,28 @@ function setup() {
   midToms = [];
   crashes = [];
 
-  STARTING_CIRCLE_X = 20;
+  STARTING_CIRCLE_X = 20/4;
   circleX = STARTING_CIRCLE_X;
 
-  snareY = 20;
-  kickY = 100;
-  cymbalY = 180;
-  hiHatY = 260;
-  openHiHatY = 340;
-  hiTomY = 420;
-  midTomY = 500;
-  crashY = 580;
+  snareY = 20/4;
+  kickY = 100/4;
+  cymbalY = 180/4;
+  hiHatY = 260/4;
+  openHiHatY = 340/4;
+  hiTomY = 420/4;
+  midTomY = 500/4;
+  crashY = 580/4;
 
   for (let i = 0; i < MAX_CIRCLES; i++) {
     if (i == MAX_CIRCLES/2) {
-      snareY += 40;
-      kickY += 40;
-      cymbalY += 40;
-      hiHatY += 40;
-      openHiHatY += 40;
-      hiTomY += 40;
-      midTomY += 40;
-      crashY += 40;
+      snareY += 40/4;
+      kickY += 40/4;
+      cymbalY += 40/4;
+      hiHatY += 40/4;
+      openHiHatY += 40/4;
+      hiTomY += 40/4;
+      midTomY += 40/4;
+      crashY += 40/4;
 
       circleX = STARTING_CIRCLE_X;
     }
@@ -125,7 +125,7 @@ function setup() {
     midToms.push(midTom);
     crashes.push(crash);
 
-    circleX += 30;
+    circleX += 30/4;
   }
 
   circles = [];
@@ -139,8 +139,8 @@ function setup() {
   midTomCount = 0;
   crashCount = 0;
 
-  CLOCK_X = width/2;
-  CLOCK_Y = height/2;
+  CLOCK_X = 1440/8;
+  CLOCK_Y = (734/2-20)/4;
   angle = 270;
 
   if(typeof savedCircles !== 'undefined'){
@@ -148,64 +148,64 @@ function setup() {
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
         currentCircle = snares[snareCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         snareCount ++;
       }
       else if(savedCircle.SoundID == 2){
         currentCircle = Kicks[kickCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         kickCount ++;
       }
       else if(savedCircle.SoundID == 3){
         currentCircle = cymbals[cymbalCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         cymbalCount ++;
       }
       else if(savedCircle.SoundID == 4){
         currentCircle = hiHats[hiHatCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiHatCount ++;
       }
       else if(savedCircle.SoundID == 5){
         currentCircle = openHiHats[openHiHatCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         openHiHatCount ++;
       }
       else if(savedCircle.SoundID == 6){
         currentCircle = hiToms[hiTomCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiTomCount ++;
       }
       else if(savedCircle.SoundID == 7){
         currentCircle = midToms[midTomCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         midTomCount ++;
       }
       else{
         currentCircle = crashes[crashCount];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = savedCircle.X/4;
+        currentCircle.oy = savedCircle.Y/4;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         crashCount ++;
@@ -215,6 +215,11 @@ function setup() {
 }
 
 function clock() {
+  console.log(windowWidth);
+  console.log(windowHeight);
+  console.log(width);
+  console.log(height);
+  console.log("split");
   background(bgColor);
   strokeWeight(1);
   fill(clockColor); //colours the ellipse yellow
@@ -228,33 +233,19 @@ function clock() {
   fill(clockColor);
 
 
-  for(i = 50;i < 251;i += 50){
+  for(i = 50/4;i < 251/4;i += 50/4){
     ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
   }
 
   side = (sqrt(2)/2)*RADIUS;
 
-  fill(bgColor);
-  stroke(bgColor);
+  fill(BLUE);
+  stroke(BLUE);
 
-  ellipse(CLOCK_X-70,CLOCK_Y+60,50,40);
-  ellipse(CLOCK_X+60,CLOCK_Y+30,50,40);
-
-  strokeWeight(5);
-  line(CLOCK_X-48,CLOCK_Y+60,CLOCK_X-80,CLOCK_Y-80);
-  line(CLOCK_X+82,CLOCK_Y+28,CLOCK_X+50,CLOCK_Y-90);
-  line(CLOCK_X-80,CLOCK_Y-80,CLOCK_X+50,CLOCK_Y-90);
 
   stroke(BLACK);
 
-  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10);
-  line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
-  line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
-  line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
-  line(CLOCK_X-side,CLOCK_Y-side,CLOCK_X-side-10,CLOCK_Y-side-10);
-  line(CLOCK_X+side,CLOCK_Y-side,CLOCK_X+side+10,CLOCK_Y-side-10);
-  line(CLOCK_X+side,CLOCK_Y+side,CLOCK_X+side+10,CLOCK_Y+side+10);
-  line(CLOCK_X-side,CLOCK_Y+side,CLOCK_X-side-10,CLOCK_Y+side+10);
+
   line(CLOCK_X, CLOCK_Y, lx, ly);
 
   hit = false;

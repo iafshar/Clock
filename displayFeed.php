@@ -44,6 +44,7 @@ if ($Followings->num_rows > 0){
         while ($row2 = $UsernameResult->fetch_assoc()){
           $record["Username"] = $row2["Username"];
         }
+        $record["ClockID"] = $ClockID;
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
         $record["Shared"] = $row["Shared"];

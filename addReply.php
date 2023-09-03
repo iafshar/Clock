@@ -8,10 +8,14 @@ $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+$ClockID = "";
 if(isset($_POST['reply'])){
   if($_SESSION["Premium"] == 1){
     $CommentID = $_POST['CommentID'];
     $Reply = $_POST['reply'];
+    if (isset($_POST['ClockID'])) {
+      $ClockID = $_POST['ClockID'];
+    }
 
     if(strlen($Reply) != 0){
         $Date = date("Y-m-d H:i:s");
@@ -19,7 +23,7 @@ if(isset($_POST['reply'])){
           VALUES ('$CommentID','$Reply','$Date')";
       }
       mysqli_query($conn, $AddReply);
-      header("Location:stats.html");
+      header("Location:stats.html?".$ClockID);
   }
   else{
     $_SESSION["Error"] = "You need to upgrade to premium to be able to reply to comments.";

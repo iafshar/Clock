@@ -10,7 +10,6 @@ $db = new DB_CONNECT();
 
 if (isset($_GET["clockID"])) {
   $_SESSION["ClockID"] = $_GET["clockID"];
-  header("Location:http://localhost:8080/Clock/stats.html");
   
 }
 
@@ -27,7 +26,9 @@ if ($result->num_rows > 0) {
 
   while ($row = $result->fetch_assoc()) {
     $record = array();
+    
     $record["CommentID"] = $row["CommentID"];
+    $record["ClockID"] = $row["ClockID"];
     $record["Comment"] = $row["Comment"];
     $record["Date"] = $row["Date"];
 

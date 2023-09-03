@@ -10,25 +10,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
+      var clockID = window.location.search.substring(1);
+      var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
-              var rows = "";
-              for (i=0;i<myRecords.Comments.length;i++) {
-                  var myRecord = myRecords.Comments[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td>"+myRecord.Date+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='Enter'></form></td></tr>";
-                  rows = rows+newRow
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              if(myRecords.success == 1) {
+                var rows = "";
+                for (i=0;i<myRecords.Comments.length;i++) {
+                    var myRecord = myRecords.Comments[i];
+                    var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td>"+myRecord.Date+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"><input type='submit' value='Enter'></form></td></tr>";
+                    rows = rows+newRow
+                }
+                document.getElementById("resultRows").innerHTML = rows;
               }
-              document.getElementById("resultRows").innerHTML = rows;
-            }
-        }
-    };
+          }
+      };
 
-    xmlhttp.open("GET", "getComments.php", true);
-    xmlhttp.send();
+      xmlhttp.open("GET", "getComments.php?clockID="+clockID, true);
+      xmlhttp.send();
 
 
     </script>

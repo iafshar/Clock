@@ -6,7 +6,6 @@
   <input type='hidden' name='clockName' value="+myRecord.Name+">
   <input type='hidden' name='location' value=feed.html>
   <input type='submit' value='Enter'>
-  <button class='viewComments'>View Comments</button>
 </form>
 -->
 <!DOCTYPE html>
@@ -20,27 +19,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
+      var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
-              var rows = "";
-              for (i=0;i<myRecords.ClocksUnsorted.length;i++) {
-                  var myRecord = myRecords.ClocksUnsorted[i];
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              if(myRecords.success == 1) {
+                var rows = "";
+                for (i=0;i<myRecords.ClocksUnsorted.length;i++) {
+                    var myRecord = myRecords.ClocksUnsorted[i];
 
-                  var newRow = "<tr class='table-row'><td><table><tr><td><b>"+myRecord.Username+"</b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='20' height='20'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/volume.png' width='20' height='20'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='20' height='20'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=feed.html><input type='submit' value='Enter'></form></td></tr>";
-                  rows = rows+newRow
+                    var newRow = "<tr class='table-row'><td><table><tr><td><b>"+myRecord.Username+"</b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='20' height='20'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/volume.png' width='20' height='20'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='20' height='20'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><button class='viewComments' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=feed.html><input type='submit' value='Enter'></form></td></tr>";
+                    rows = rows+newRow
+
+                }
+                document.getElementById("resultRows").innerHTML = rows;
               }
-              document.getElementById("resultRows").innerHTML = rows;
-            }
-        }
-    };
+          }
+      };
 
 
-    xmlhttp.open("GET", "displayFeed.php", true);
-    xmlhttp.send();
+      xmlhttp.open("GET", "displayFeed.php", true);
+      xmlhttp.send();
 
 
     </script>
@@ -71,30 +71,19 @@
 
       }
 
+      function openComments(clockID) {
+        window.open('stats.html?'+clockID,'_self');
+      }
+
       function sendClock(clockID) {
         console.log(clockID);
       }
     </script>
     <script>
-    $(document).ready(function(){
-
-  // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.viewComments',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var username=currentRow.find("td:eq(0)").text();
-       var name=currentRow.find("td:eq(1)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=3&clockName="+name+"&discoverUsername="+username, true);
-       xmlhttp.send();
-       window.open('stats.html','_self');
-      });
-    });
-    </script>
-    <script>
       //edited ReadOnly/clock.js, ReadOnly/get.php, ReadOnly/index.html
-      //need to pass clockID to all view clocks in tables.
+      //need to pass clockID to all view clocks in tables because they might now work now
+
+      //removed header("Location:http://localhost:8080/Clock/stats.html"); on line 13 in getComments.php - will affect chat.php
     </script>
 
     <script>

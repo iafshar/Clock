@@ -9,12 +9,14 @@ function preload(){
   CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
+  clockName = "";
   
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
         savedCircles = data.Circles;
         starting = data.tempo;
+        clockName = data.name;
       }
   };
 
@@ -215,17 +217,18 @@ function setup() {
 }
 
 function clock() {
-  console.log(windowWidth);
-  console.log(windowHeight);
-  console.log(width);
-  console.log(height);
-  console.log("split");
   background(bgColor);
   strokeWeight(1);
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
   tempo = starting/40;
+
+  strokeWeight(0);
+  fill(0);
+  
+  text(starting,370,185);
+  text(clockName,5,185);
 
   lx = CLOCK_X + cos(radians(angle))*(RADIUS);
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
@@ -238,9 +241,6 @@ function clock() {
   }
 
   side = (sqrt(2)/2)*RADIUS;
-
-  fill(BLUE);
-  stroke(BLUE);
 
 
   stroke(BLACK);

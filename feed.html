@@ -21,7 +21,7 @@
                   var myRecord = myRecords.ClocksUnsorted[i];
 
                   // width and height of iframe is clock diameter
-                  var newRow = "<tr class='table-row'><td><iframe src='Clock_ReadOnlySmall/index.html?"+myRecord.ClockID+"' width=410 height=205 ></iframe></td><td>"+myRecord.Username+"</td><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=feed.html><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
+                  var newRow = "<tr class='table-row'><td><table><tr><td><iframe src='Clock_ReadOnlySmall/index.html?"+myRecord.ClockID+"' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr></table></td><td>"+myRecord.Username+"</td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='20' height='20'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td></tr></table></td><td><table><tr><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td></tr><tr><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=feed.html><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -35,21 +35,26 @@
 
     </script>
     <script>
-    $(document).ready(function(){
+      function like(clockID,name) {
+        window.open('like.php?clockID='+clockID+'&Name='+name+'&location=feed.html','_self');
 
-  // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.likeButton',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
+      }
+  //   $(document).ready(function(){
 
-       var username=currentRow.find("td:eq(0)").text();
-       var name=currentRow.find("td:eq(1)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=3&clockName="+name+"&discoverUsername="+username, true);
-       xmlhttp.send();
-       window.open('like.php','_self');
-      });
-    });
+  // // code to read selected table row cell data (values).
+  //     $("#clockTable").on('click','.likeButton',function(){
+  //      // get the current row
+  //      var currentRow=$(this).closest("tr");
+
+  //     // var username=currentRow.find("td:eq(0)").text();
+  //     // var Name = currentRow.find('input[name=clockName]').val();
+  //     console.log(currentRow);
+  //     //  var xmlhttp = new XMLHttpRequest();
+  //     //  xmlhttp.open("GET", "getClockID.php?choose=3&clockName="+name+"&discoverUsername="+username, true);
+  //     //  xmlhttp.send();
+  //     //  window.open('like.php','_self');
+  //     });
+  //   });
     </script>
     <script>
     $(document).ready(function(){
@@ -139,12 +144,8 @@
   <table class="table" id="clockTable">
       <thead class="thead-light">
         <tr>
+          <th></th>
           <th>Username</th>
-          <th>Name</th>
-          <th>Tempo</th>
-          <th>Date Shared</th>
-          <th>Likes</th>
-          <th>Dislikes</th>
           <th></th>
           <th></th>
           <th></th>

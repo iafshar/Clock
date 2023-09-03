@@ -19,7 +19,7 @@ function preload(){
       }
   };
 
-  xmlhttp.open("GET", "get.php", true);
+  xmlhttp.open("GET", "get.php?ClockID="+clockID, true);
   xmlhttp.send();
 }
 

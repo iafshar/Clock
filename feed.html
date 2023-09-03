@@ -54,7 +54,7 @@
       }
       
       function openClock(clockID) {
-        console.log(clockID);
+        window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
       }
 
       function changeSound(clockID) {
@@ -93,22 +93,8 @@
     });
     </script>
     <script>
-  //   $(document).ready(function(){
-
-  // // code to read selected table row cell data (values).
-  //     $("#clockTable").on('click','.viewClock',function(){
-  //      // get the current row
-  //      var currentRow=$(this).closest("tr");
-
-  //      var username=currentRow.find("td:eq(0)").text();
-  //      var name=currentRow.find("td:eq(1)").text();
-  //      var tempo=currentRow.find("td:eq(2)").text();
-  //      var xmlhttp = new XMLHttpRequest();
-  //      xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
-  //      xmlhttp.send();
-  //      window.open('Clock_ReadOnly/index.html','_self');
-  //     });
-  //   });
+      //edited ReadOnly/clock.js, ReadOnly/get.php, ReadOnly/index.html
+      //need to pass clockID to all view clocks in tables.
     </script>
 
     <script>
@@ -131,6 +117,7 @@
     //     window.open('chooseReceiver.php','_self');
     //     });
     //   });
+    
       </script>
 
   </head>

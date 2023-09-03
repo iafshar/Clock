@@ -1,23 +1,26 @@
+
 <?php
 // <!-- gets the data required for the user to edit a clock with -->
 session_start();
 
+if (isset($_GET["clockID"]) && isset($_GET["Name"]) && isset($_GET["tempo"])) {
+  $_SESSION["ClockID"] = $_GET["clockID"];
+  $_SESSION["clockName"] = $_GET["Name"];
+  $_SESSION["tempo"] = $_GET["tempo"];
+  header("Location:http://localhost:8080/Clock/Clock_ReadOnly/index.html");
+  
+}
 $response = array();
 
+$response["tempo"] = $_SESSION["tempo"];
 
 require_once '../dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
 
-$ClockID = $_GET["ClockID"];
-
-$GetClock = "SELECT * FROM Clocks WHERE ClockID='$ClockID'";
-$result = $db->get_con()->query($GetClock);
-while ($row = $result->fetch_assoc()){
-  $response["name"] = $row["Name"];
-  $response["tempo"] = $row["Tempo"];
-}
+$ClockID = $_SESSION["ClockID"];
+$Name = $_SESSION["clockName"];
 
 $GetCircles = "SELECT * FROM Circles WHERE ClockID='$ClockID'";
 $result = $db->get_con()->query($GetCircles);

@@ -9,14 +9,12 @@ function preload(){
   CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
-  clockName = "";
   
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
         savedCircles = data.Circles;
         starting = data.tempo;
-        clockName = data.name;
       }
   };
 
@@ -228,7 +226,6 @@ function clock() {
   fill(0);
   
   text(starting,370,185);
-  text(clockName,5,185);
 
   lx = CLOCK_X + cos(radians(angle))*(RADIUS);
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);

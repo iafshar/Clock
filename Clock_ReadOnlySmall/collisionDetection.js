@@ -1,11 +1,11 @@
-function pointCircle(lx, ly, ox, oy, RADIUS){
+function pointCircle(lx, ly, ox, oy, r){
   distX = lx - ox;
   distY = ly - oy;
   distance = sqrt((distX*distX) + (distY*distY));
 
   // if the distance is less than the circle's
   // RADIUS the point is inside!
-  if (distance <= RADIUS) {
+  if (distance <= r) {
     return true;
   }
   return false;
@@ -32,6 +32,16 @@ function lineCircle(x1,y1,x2,y2,cx,cy,r,circleOnScreen) {
     distX = closestX - cx;
     distY = closestY - cy;
     distance = sqrt( (distX*distX) + (distY*distY) );
+
+    if (starting > 105 && distance <= r+5) {
+      return true;
+    }
+    else if (starting > 65 && distance <= r/3) {
+      return true;
+    }
+    else if (starting > 0 && distance <= r/4) {
+      return true;
+    }
 
   }
   return false;

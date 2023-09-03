@@ -9,7 +9,7 @@ function preload(){
   CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
-  
+
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
@@ -254,7 +254,7 @@ function clock() {
 
     hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
-    if (hit){
+    if (hit && mute == 0){
         circles[i].playSound();
     }
   }

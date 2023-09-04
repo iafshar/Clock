@@ -85,17 +85,6 @@
       if (val.length > 0) {
         document.getElementById("searchHeading").innerHTML = "Username";
         autocomplete(val);
-        $(document).ready(function(){
-
-          // code to read selected table row cell data (values).
-          $("#clockTable").on('click','.table-row',function(){
-          // get the current row
-          var currentRow=$(this).closest("tr");
-
-          var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-          sendToUser(Username,clockID);
-          });
-        });
       }
       else {
         document.getElementById("searchHeading").innerHTML = "Chats";
@@ -107,7 +96,7 @@
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -128,7 +117,7 @@
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='table-row'><td>"+myRecord+"</td></tr>";
+              var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td></tr>";
               rows = rows+newRow;
             }
           }

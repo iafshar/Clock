@@ -43,6 +43,10 @@ if ($result->num_rows > 0) {
 $DeleteComments = "DELETE FROM Comments WHERE ClockID='$ClockID'";
 mysqli_query($conn, $DeleteComments);
 
+$DeleteMessages = "DELETE FROM Messages WHERE Type=1 AND Content='$ClockID'";
+
+mysqli_query($conn, $DeleteMessages);
+
 $DeleteClock = "DELETE FROM Clocks WHERE ClockID='$ClockID'";
 
 mysqli_query($conn, $DeleteClock);

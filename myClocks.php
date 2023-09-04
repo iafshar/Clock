@@ -71,12 +71,19 @@ echo $_SESSION["Error"];
       }
 
       function deleteClock(clockID,name) {
-        console.log(clockID);
         var ensure = confirm("Are you sure you want to delete "+name);
         if(ensure){
           window.open('delete.php?ClockID='+clockID,'_self');
         }
       }
+
+      function deleteAccount() {
+        var ensure = confirm("Are you sure you want to deactivate your account? Your clocks will be permanently deleted.");
+        if (ensure) {
+          window.open('deleteAccount.php','_self');
+        }
+      }
+
     </script>
     <script>
       localStorage.removeItem("loginUsername");
@@ -89,6 +96,7 @@ echo $_SESSION["Error"];
   <body>
     <div class="topnav">
       <input type="button" value="Go back!" onclick="history.back()">
+      <button type='submit' onclick=deleteAccount()>Deactivate Account</button>
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
@@ -113,4 +121,5 @@ echo $_SESSION["Error"];
       <tbody id="resultRows">
       </tbody>
     </table>
+    
 </html>

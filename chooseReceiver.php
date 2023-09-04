@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
+      var clockID = window.location.search.substring(1);
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -17,7 +18,7 @@
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -30,21 +31,16 @@
 
     </script>
     <script>
-    $(document).ready(function(){
+      function sendToUser(Username, clockID) {
+        var xmlhttp = new XMLHttpRequest();
 
-  // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.table-row',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
+        xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID, true);
+        xmlhttp.send();
+        window.open("chat.php","_self");
 
-       var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-       var xmlhttp = new XMLHttpRequest();
-
-       xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username, true);
-       xmlhttp.send();
-       window.open("chat.php","_self");
-      });
-    });
+      }
+    </script>
+    <script>
 
     </script>
   </head>
@@ -84,10 +80,10 @@
   var ogRows = document.getElementById("resultRows").innerHTML
   if (inp) {
     inp.addEventListener("input", function(e) {
+      console.log(clockID);
       var val = this.value;
       if (val.length > 0) {
         document.getElementById("searchHeading").innerHTML = "Username";
-        // document.querySelectorAll('th')[1].innerHTML = "Username";
         autocomplete(val);
         $(document).ready(function(){
 
@@ -97,11 +93,7 @@
           var currentRow=$(this).closest("tr");
 
           var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-          var xmlhttp = new XMLHttpRequest();
-
-          xmlhttp.open("GET", "sendClock.php?Username=" + Username, true); // no sendClock file
-          xmlhttp.send();
-          window.open("chat.php","_self");
+          sendToUser(Username,clockID);
           });
         });
       }

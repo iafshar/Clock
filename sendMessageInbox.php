@@ -63,9 +63,9 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
     
     
 }
-else if (isset($_GET['sendingUsername'])) {
+else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
     $toUsername = $_GET['sendingUsername'];
-    $clockID = $_SESSION['ClockID'];
+    $clockID = $_GET['clockID'];
 
 
     $content = $clockID;

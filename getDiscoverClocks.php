@@ -37,6 +37,7 @@ if ($result->num_rows > 0) {
         $UsernameResult = $db->get_con()->query($FindUsername);
         $row3 = $UsernameResult->fetch_assoc();
         $record["Username"] = $row3["Username"];
+        $record["ClockID"] = $row["ClockID"];
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
         $record["Shared"] = $row["Shared"];

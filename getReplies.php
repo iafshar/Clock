@@ -5,7 +5,7 @@ require_once __DIR__ . '/dbConnect.php';
 // connecting to db
 $db = new DB_CONNECT();
 
-$CommentID = $_POST['CommentID'];
+$CommentID = $_GET['CommentID'];
 $GetReplies = "SELECT * FROM Replies WHERE CommentID='$CommentID'";
 $result = $db->get_con()->query($GetReplies);
 

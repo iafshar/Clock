@@ -30,6 +30,7 @@ if ($result->num_rows > 0) {
         // temp user array
         $record = array();
         $ClockID = $row["ClockID"];
+        $record["ClockID"] = $row["ClockID"];
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
         if ($row["Shared"] == 1) {

@@ -9,9 +9,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$UserID = $_SESSION["UserID"];
-$ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["clockName"];
+$ClockID = $_GET["ClockID"];
 $Circles = $_GET["Circles"];
 $Tempo = $_GET["tempo"];
 $Shared = $_GET["shared"];

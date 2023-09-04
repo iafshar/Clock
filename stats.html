@@ -20,7 +20,7 @@
                 var rows = "";
                 for (i=0;i<myRecords.Comments.length;i++) {
                     var myRecord = myRecords.Comments[i];
-                    var newRow = "<tr class='table-row'><td>"+myRecord.Comment+"</td><td>"+myRecord.Date+"</td><td><form action='getReplies.php' method='post'><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='submit' value='View Replies'></form></td><td><form action='addReply.php' method='post'><textarea rows='3' cols='40' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"><input type='submit' value='Enter'></form></td></tr>";
+                    var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><form action='addReply.php' method='post'><table><tr><td><textarea style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter'></form></td></tr></table></td></tr>";
                     rows = rows+newRow
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -32,6 +32,12 @@
       xmlhttp.send();
 
 
+    </script>
+    <script>
+      function getReplies(commentID) {
+        console.log(commentID);
+        window.open('getReplies.php?CommentID='+commentID,'_self');
+      }
     </script>
   </head>
   <body>
@@ -50,8 +56,6 @@
       <thead class="thead-light">
         <tr>
           <th>Comment</th>
-          <th>Date</th>
-          <th></th>
           <th></th>
         </tr>
       </thead>

@@ -25,7 +25,11 @@ echo $_SESSION["Error"];
             if (myRecords.success != 0){
               for (i=0;i<myRecords.Clocks.length;i++) {
                 var myRecord = myRecords.Clocks[i];
-                var newRow = "<tr class='table-row'><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.Shared+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='deletedata'>🗑️</button></td><td><button class='editdata'>Edit</button></td><td><button class='viewComments'>View Comments</button></td></tr>";
+                var shared = ""
+                if (myRecord.Shared == "Yes") {
+                  shared = "Shared";
+                }
+                var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr><tr><td><b>"+shared+"</b></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/volume.png' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')>🗑️</button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
                 rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -40,60 +44,39 @@ echo $_SESSION["Error"];
 
     </script>
     <script>
-    $(document).ready(function(){
+      function openClock(clockID) {
+        window.open('Clock_User/index.html?'+clockID,'_self');
+      }
 
-    // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.deletedata',function(){
+      function changeSound(clockID) {
+        for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
+          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID;
+            break;
+          }
+          else if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID;
+            break;
+          }
+        }
 
-       // get the current row
+      }
 
-       var currentRow=$(this).closest("tr");
+      function openComments(clockID) {
+        window.open('stats.html?'+clockID,'_self');
+      }
 
-       var name=currentRow.find("td:eq(0)").text();
-       var tempo=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-       var ensure = confirm("Are you sure you want to delete "+name);
-       if(ensure){
-         var xmlhttp = new XMLHttpRequest();
-         xmlhttp.open("GET", "getClockID.php?choose=0&clockName="+name, true);
-         xmlhttp.send();
-         window.open('delete.php','_self');
-       }
-      });
-    });
-    </script>
-    <script>
-    $(document).ready(function(){
+      function sendClock(clockID) {
+        window.open('chooseReceiver.php?'+clockID,'_self');
+      }
 
-    // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.editdata',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var name=currentRow.find("td:eq(0)").text();
-       var tempo=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=4&clockName="+name+"&tempo="+tempo, true);
-       xmlhttp.send();
-       window.open('Clock_User/index.html','_self');
-      });
-    });
-    </script>
-    <script>
-    $(document).ready(function(){
-
-    // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.viewComments',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var name=currentRow.find("td:eq(0)").text();
-
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=5&clockName="+name, true);
-       xmlhttp.send();
-       window.open('stats.html','_self');
-      });
-    });
+      function deleteClock(clockID,name) {
+        console.log(clockID);
+        var ensure = confirm("Are you sure you want to delete "+name);
+        if(ensure){
+          window.open('delete.php?ClockID='+clockID,'_self');
+        }
+      }
     </script>
     <script>
       localStorage.removeItem("loginUsername");
@@ -123,13 +106,6 @@ echo $_SESSION["Error"];
       <thead class="thead-light">
         <tr>
           <!-- headings of the table -->
-          <th>Name</th>
-          <th>Tempo</th>
-          <th>Shared</th>
-          <th>Date Shared</th>
-          <th>Likes</th>
-          <th>Dislikes</th>
-          <th></th>
           <th></th>
           <th></th>
         </tr>

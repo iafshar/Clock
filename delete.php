@@ -14,9 +14,7 @@ require_once __DIR__ . '/dbConnect.php';
 // connecting to db
 $db = new DB_CONNECT();
 
-$ClockID = $_SESSION["ClockID"];
-$Name = $_SESSION["clockName"];
-$UserID = $_SESSION["UserID"];
+$ClockID = $_GET["ClockID"];
 
 $DeleteCircles = "DELETE FROM Circles Where ClockID='$ClockID'";
 
@@ -45,9 +43,9 @@ if ($result->num_rows > 0) {
 $DeleteComments = "DELETE FROM Comments WHERE ClockID='$ClockID'";
 mysqli_query($conn, $DeleteComments);
 
-$DeleteClock = "DELETE FROM Clocks WHERE UserID='$UserID' AND Name='$Name'";
+$DeleteClock = "DELETE FROM Clocks WHERE ClockID='$ClockID'";
 
 mysqli_query($conn, $DeleteClock);
 
-header("Location:".$_SESSION["Location"]);
+header("Location:http://localhost:8080/Clock/myClocks.php");
 ?>

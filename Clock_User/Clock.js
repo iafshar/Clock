@@ -14,14 +14,19 @@ function preload(){ //This function runs before the program is fully loaded.
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
-        savedCircles = data.Circles;
-        if(data.tempo != null && data.tempo != 0){
+        if (data.new == 0) {
           edited = true;
-          starting = data.tempo;
+          savedCircles = data.Circles;
+          if (data.tempo != null && data.tempo != 0) {
+            starting = data.tempo;
+          }
+        }
+        else {
+          savedCircles = [];
         }
       }
   };
-  xmlhttp.open("GET", "get.php", true);
+  xmlhttp.open("GET", "get.php?ClockID="+clockID, true);
   xmlhttp.send();
   KEYPAD_IMAGE = loadImage('keypad.png');
   

@@ -15,7 +15,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
-                document.getElementById("messageBody").innerHTML = "<td><form action='sendMessageInbox.php' method='post'><textarea rows='4' cols='120' name='message' placeholder='Message'></textarea><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' value='Enter'></form></td>";
+                document.getElementById("messageBody").innerHTML = "<td><form action='sendMessageInbox.php' method='post'><table><tr><textarea style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' style='width:1400px;height:45px;' value='Enter'></tr></table></form></td>";
                 var rows = "";
                 if (myRecords) {
                   if (myRecords.Messages) {

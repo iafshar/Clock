@@ -44,7 +44,6 @@ if ($result->num_rows > 0) {
     // success
     $response["success"] = 1;
 
-    $response["session"] = $_SESSION;
     // echoing JSON response(prints it)
     echo json_encode($response);
 } else {

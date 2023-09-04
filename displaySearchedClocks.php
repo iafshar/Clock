@@ -27,6 +27,7 @@ if ($result->num_rows > 0) {
         $record = array();
         $ClockID = $row["ClockID"];
         $record["UserID"] = $row["UserID"];
+        $record["ClockID"] = $ClockID;
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
         $record["DateShared"] = $row["DateShared"];
@@ -43,6 +44,7 @@ if ($result->num_rows > 0) {
     // success
     $response["success"] = 1;
 
+    $response["session"] = $_SESSION;
     // echoing JSON response(prints it)
     echo json_encode($response);
 } else {

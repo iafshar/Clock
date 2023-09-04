@@ -52,7 +52,6 @@
 
         if (message == 0) {
           var xmlhttp = new XMLHttpRequest();
-
           xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
           xmlhttp.send();
           window.open("otherProfile.php","_self");

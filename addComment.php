@@ -13,20 +13,22 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if(isset($_POST['location'])){
-  
   if($_SESSION["Premium"] == 1){
     if(isset($_POST['Maker'])){
+      
       $Maker = $_POST['Maker'];
       $GetUserID = "SELECT * FROM Users Where Username='$Maker'";
       $resultUser = $db->get_con()->query($GetUserID);
-
       if ($resultUser->num_rows > 0) {
           while ($row = $resultUser->fetch_assoc()) {
               $UserID = $row["UserID"];
           }
       }
     }
-    else{
+    elseif (isset($_POST['MakerID'])) {
+      $UserID = $_POST['MakerID'];
+    }
+    else {
       $UserID = $_SESSION["SearchedUserID"];
     }
     if(isset($_POST['clockName']) && strlen($_POST['comment']) > 0){

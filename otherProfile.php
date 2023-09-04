@@ -7,79 +7,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="style2.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <script>
-    var xmlhttp = new XMLHttpRequest();
+      function like(clockID,name) {
+        window.open('like.php?clockID='+clockID+'&Name='+name+'&location=otherProfile.php','_self');
+      }
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            if(myRecords.success == 1) {
-              var rows = "";
-              for (i=0;i<myRecords.Clocks.length;i++) {
-                  var myRecord = myRecords.Clocks[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Name+"</td><td>"+myRecord.Tempo+"</td><td>"+myRecord.DateShared+"</td><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='40' name='comment' placeholder='Comment'></textarea><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=otherProfile.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
-                  rows = rows+newRow
-              }
-              document.getElementById("resultRows").innerHTML = rows;
-            }
+      function dislike(clockID,name) {
+        window.open('dislike.php?clockID='+clockID+'&Name='+name+'&location=otherProfile.php','_self');
+      }
+      
+      function openClock(clockID) {
+        window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
+      }
+
+      function changeSound(clockID) {
+        for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
+          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID;
+            break;
+          }
+          else if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID;
+            break;
+          }
         }
-    };
 
-    xmlhttp.open("GET", "displaySearchedClocks.php", true);
-    xmlhttp.send();
+      }
 
+      function openComments(clockID) {
+        window.open('stats.html?'+clockID,'_self');
+      }
 
-    </script>
-    <script>
-    $(document).ready(function(){
-
-  // code to read selected table row cell data (values).
-      $("#otherProfileTable").on('click','.likeButton',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var name=currentRow.find("td:eq(0)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
-       xmlhttp.send();
-       window.open('like.php','_self');
-      });
-
-      $("#otherProfileTable").on('click','.dislikeButton',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var name=currentRow.find("td:eq(0)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
-       xmlhttp.send();
-       window.open('dislike.php','_self');
-      });
-
-      $("#otherProfileTable").on('click','.viewComments',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-       var name=currentRow.find("td:eq(0)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=1&clockName="+name, true);
-       xmlhttp.send();
-       window.open('stats.html','_self');
-      });
-
-      $("#otherProfileTable").on('click','.viewClock',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var name=currentRow.find("td:eq(0)").text();
-       var tempo=currentRow.find("td:eq(1)").text();
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getClockID.php?choose=7&clockName="+name+"&tempo="+tempo, true);
-       xmlhttp.send();
-       window.open('Clock_ReadOnly/index.html','_self');
-      });
-
-    });
+      function sendClock(clockID) {
+        window.open('chooseReceiver.php?'+clockID,'_self');
+      }
     </script>
 
   </head>
@@ -87,6 +48,7 @@
     <form action="follow.php" method="post">
       <button type="submit" class="followBtn"><?php
       require_once __DIR__ . '/followButton.php';
+      session_start();
       echo $followButton; ?></button>
     </form>
     <form action="sendMessageInbox.php" method="post">
@@ -95,6 +57,30 @@
                                                      echo $_SESSION["SearchedUsername"];?>>
     </form>
     <script>
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              if(myRecords.success == 1) {
+                var rows = "";
+                console.log(myRecords.session);
+                for (i=0;i<myRecords.Clocks.length;i++) {
+                    var myRecord = myRecords.Clocks[i];
+                    var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/volume.png' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ClockID+",'"+myRecord.Name+"')><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addComment.php' method='post'><table><tr><td height=70></td></tr><tr><td><textarea style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><input type='hidden' name='MakerID' value="+myRecord.UserID+"><input type='hidden' name='clockName' value="+myRecord.Name+"><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View All</button><input type='hidden' name='location' value=otherProfile.php><input type='submit' style='width:200px;height:45px;' value='Enter'></td></tr></table></form></td></tr>";
+                    rows = rows+newRow;
+                }
+                document.getElementById("resultRows").innerHTML = rows;
+              }
+          }
+      };
+
+      xmlhttp.open("GET", "displaySearchedClocks.php", true);
+      xmlhttp.send();
+
+
+    </script>
+    <script>
       function getMessages() {
         var Username = document.getElementById("sender").value;
         var xmlhttp = new XMLHttpRequest();
@@ -102,26 +88,6 @@
         xmlhttp.send();
         window.open('chat.php','_self');
       }
-    </script>
-    <script>
-      $(document).ready(function(){
-
-// code to read selected table row cell data (values).
-        $("#otherProfileTable").on('click','.sendClock',function(){
-        // get the current row
-          var currentRow=$(this).closest("tr");
-
-          var username = document.getElementById("sender").value;
-          var name=currentRow.find("td:eq(0)").text();
-          var tempo=currentRow.find("td:eq(1)").text();
-          var xmlhttp = new XMLHttpRequest();
-
-          xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
-          xmlhttp.send();
-          window.open('chooseReceiver.php','_self');
-
-        });
-      });
     </script>
     <div class="topnav">
       <input type="button" value="Go back!" onclick="history.back()">
@@ -137,14 +103,6 @@
   <table class="table" id="otherProfileTable">
       <thead class="thead-light">
         <tr>
-          <th>Name</th>
-          <th>Tempo</th>
-          <th>Date Shared</th>
-          <th>Likes</th>
-          <th>Dislikes</th>
-          <th></th>
-          <th></th>
-          <th></th>
           <th></th>
           <th></th>
           <th></th>

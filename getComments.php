@@ -10,7 +10,6 @@ $db = new DB_CONNECT();
 
 if (isset($_GET["clockID"])) {
   $_SESSION["ClockID"] = $_GET["clockID"];
-  
 }
 
 $ClockID = $_SESSION["ClockID"];
@@ -49,4 +48,4 @@ if ($result->num_rows > 0) {
 
 }
 
- ?>
+?>

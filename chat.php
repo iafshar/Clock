@@ -24,18 +24,18 @@
                           var newRow = "";
                           if (myRecord.sentByMe == 0) {
                             if (myRecord.Type == 1) {
-                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td></tr>";
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b>"+myRecord.Username+"</b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.Content+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content+"')><img border='0' src='Icons/volume.png' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.Content+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.Content+",'"+myRecord.Name+"')><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addComment.php' method='post'><table><tr><td height=70></td></tr><tr><td><textarea style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content+"')>View All</button><input type='hidden' name='location' value=chat.php><input type='submit' style='width:200px;height:45px;' value='Enter'></td></tr></table></form></td></tr>";
                             }
                             else {
-                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.Content+"</td></tr>";
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td><td></td><td>"+myRecord.Content+"</td></tr>";
                             }
                           }
                           else {
                             if (myRecord.Type == 1) {
-                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><strong>Username</strong><br>"+myRecord.Username+"</td><td><strong>Name</strong><br>"+myRecord.Name+"</td><td name='tempo'><strong>Tempo</strong><br>"+myRecord.Tempo+"</td><td><strong>Date Shared</strong><br>"+myRecord.DateShared+"</td><td><strong>Likes</strong><br>"+myRecord.NumOfLikes+"</td><td><strong>Dislikes</strong><br>"+myRecord.NumOfDislikes+"</td><td><button class='likeButton'><img border='0' src='Icons/like.png' width='20' height='20'></button></td><td><button class='dislikeButton'><img border='0' src='Icons/dislike.png' width='20' height='20'></button></td><td><button class='viewComments'>View Comments</button></td><td><form action='addComment.php' method='post'><textarea rows='3' cols='20' name='comment' placeholder='Comment'></textarea><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockID' value="+myRecord.Content+"><input type='hidden' name='clockName' value="+myRecord.Name+"><input type='hidden' name='location' value=chat.php><input type='submit' value='Enter'></form></td><td><button class='viewClock'>View Clock</button></td><td><button class='sendClock'>Send Clock</button></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b>"+myRecord.Username+"</b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.Content+"' id='miniClock' width=410 height=205 ></iframe></td></tr><tr><td><i>"+myRecord.DateShared+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content+"')><img border='0' src='Icons/volume.png' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.Content+",'"+myRecord.Name+"')><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.Content+",'"+myRecord.Name+"')><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addComment.php' method='post'><table><tr><td height=70></td></tr><tr><td><textarea style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><input type='hidden' name='Maker' value="+myRecord.Username+"><input type='hidden' name='clockName' value="+myRecord.Name+"><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content+"')>View All</button><input type='hidden' name='location' value=chat.php><input type='submit' style='width:200px;height:45px;' value='Enter'></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></form></td></tr>";
                             }
                             else {
-                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
+                              newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td>"+myRecord.DateSent+"<br><strong>Sent</strong></td></tr>";
                             }              
                           }                    
                           rows = rows+newRow;
@@ -52,84 +52,38 @@
 
     </script>
     <script>
-    $(document).ready(function(){
+      function like(clockID,name) {
+        window.open('like.php?clockID='+clockID+'&Name='+name+'&location=chat.php','_self');
+      }
 
-  // code to read selected table row cell data (values).
-      $("#messageTable").on('click','.likeButton',function(){
-       // get the current row
-        var currentRow=$(this).closest("tr");
+      function dislike(clockID,name) {
+        window.open('dislike.php?clockID='+clockID+'&Name='+name+'&location=chat.php','_self');
+      }
 
-        var clockID = currentRow.find('input[name=clockID]').val();
-        var Name = currentRow.find('input[name=clockName]').val();
+      function openClock(clockID) {
+        window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
+      }
 
-        window.open('like.php?clockID='+clockID+'&Name='+Name+'&location=http://localhost:8080/Clock/chat.php','_self');
-      });
-    });
-    </script>
-    <script>
-    $(document).ready(function(){
+      function changeSound(clockID) {
+        for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
+          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID;
+            break;
+          }
+          else if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID) {
+            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID;
+            break;
+          }
+        }
+      }
 
-  // code to read selected table row cell data (values).
-      $("#messageTable").on('click','.dislikeButton',function(){
-       // get the current row
-        var currentRow=$(this).closest("tr");
+      function openComments(clockID) {
+        window.open('stats.html?'+clockID,'_self');
+      }
 
-        var clockID = currentRow.find('input[name=clockID]').val();
-        var Name = currentRow.find('input[name=clockName]').val();
-
-        window.open('dislike.php?clockID='+clockID+'&Name='+Name+'&location=http://localhost:8080/Clock/chat.php','_self');
-      });
-    });
-    </script>
-    <script>
-    $(document).ready(function(){
-
-  // code to read selected table row cell data (values).
-      $("#messageTable").on('click','.viewComments',function(){
-       // get the current row
-        var currentRow=$(this).closest("tr");
-
-        var clockID = currentRow.find('input[name=clockID]').val();
-        var Name = currentRow.find('input[name=clockName]').val();
-        window.open('getComments.php?clockID='+clockID,'_self');
-      });
-    });
-    </script>
-    <script>
-      $(document).ready(function(){
-
-    // code to read selected table row cell data (values).
-        $("#messageTable").on('click','.viewClock',function(){
-        // get the current row
-        var currentRow=$(this).closest("tr");
-
-        var clockID = currentRow.find('input[name=clockID]').val();
-        var Name = currentRow.find('input[name=clockName]').val();
-        var tempo = currentRow.find('td[name=tempo]').text().substring(5);
-        window.open('Clock_ReadOnly/get.php?clockID='+clockID+'&Name='+Name+'&tempo='+tempo,'_self');
-        });
-      });
-    </script>
-    <script>
-      $(document).ready(function(){
-
-// code to read selected table row cell data (values).
-        $("#messageTable").on('click','.sendClock',function(){
-        // get the current row
-          var currentRow=$(this).closest("tr");
-
-          var name = currentRow.find('input[name=clockName]').val();
-          var tempo = currentRow.find('td[name=tempo]').text().substring(5);
-          var username = currentRow.find('input[name=Maker]').val();
-
-          var xmlhttp = new XMLHttpRequest();
-
-          xmlhttp.open("GET", "getClockID.php?choose=6&clockName="+name+"&discoverUsername="+username+"&tempo="+tempo, true);
-          xmlhttp.send();
-          window.open('chooseReceiver.php','_self');
-
-        });
-      });
+      function sendClock(clockID) {
+        window.open('chooseReceiver.php?'+clockID,'_self');
+      }
     </script>
   </head>
   <body>
@@ -157,16 +111,6 @@
     <table class="table" id="messageTable">
       <thead>
         <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
           <th></th>
           <th></th>
           <th></th>

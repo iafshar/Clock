@@ -10,10 +10,9 @@ require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 
 $Username = $_SESSION["Username"];
-$Password = $_SESSION["Password"];
 
 // get all products from products table
-$query = "SELECT * FROM `Users` WHERE Username='$Username' and Password='$Password'";
+$query = "SELECT * FROM `Users` WHERE Username='$Username'";
 $result = $db->get_con()->query($query);
 
 $UserID = NULL;

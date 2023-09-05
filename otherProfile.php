@@ -46,22 +46,24 @@
   </head>
   <body>
     <form action="follow.php" method="post">
-      <button type="submit" class="followBtn"><?php
-      require_once __DIR__ . '/followButton.php';
-      session_start();
-      echo $followButton; ?></button>
+      <button type="submit" class="followBtn" id="followBtn">Follow</button>
     </form>
     <form action="sendMessageInbox.php" method="post">
       <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
-      <input type='hidden' id="sender" name='Sender' value=<?php session_start();
-                                                     echo $_SESSION["SearchedUsername"];?>>
+      <input type='hidden' id="sender" name='Sender' value="">
     </form>
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const clickedUserID = urlParams.get('clickedUserID');
+
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
+              document.getElementById("profileHeader").innerHTML = myRecords.Username;
+              document.getElementById("sender").value = myRecords.Username;
+              document.getElementById("followBtn").innerHTML = myRecords.Following;
               if(myRecords.success == 1) {
                 var rows = "";
                 for (i=0;i<myRecords.Clocks.length;i++) {
@@ -73,8 +75,12 @@
               }
           }
       };
-
-      xmlhttp.open("GET", "displaySearchedClocks.php", true);
+      if (urlParams.size == 0) {
+        xmlhttp.open("GET", "displaySearchedClocks.php", true);
+      }
+      else if (clickedUserID != null) {
+        xmlhttp.open("GET", "displaySearchedClocks.php?UserID="+clickedUserID, true);
+      }
       xmlhttp.send();
 
 
@@ -102,12 +108,7 @@
   <table class="table" id="otherProfileTable">
       <thead class="thead-light">
         <tr>
-          <th>
-            <?php
-            session_start();
-            echo $_SESSION["SearchedUsername"];
-            ?>
-          </th>
+          <th id='profileHeader'></th>
           <th></th>
           <th></th>
         </tr>

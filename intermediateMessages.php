@@ -38,7 +38,7 @@ if (array_key_exists("Messages", $response)) {
                             $record["Username"] = $row2["Username"];
                         }
                     }
-
+                    $record["UserID"] = $UserID;
                     $record["Name"] = $row["Name"];
                     $record["Tempo"] = $row["Tempo"];
                     $record["Shared"] = $row["Shared"];

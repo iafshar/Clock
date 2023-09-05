@@ -70,15 +70,6 @@
         window.open('chooseReceiver.php?'+clockID,'_self');
       }
     </script>
-    <script>
-      //edited ReadOnly/clock.js, ReadOnly/get.php, ReadOnly/index.html
-      //need to pass clockID to all view clocks in tables because they might now work now
-
-      //removed header("Location:http://localhost:8080/Clock/stats.html"); on line 13 in getComments.php - will affect chat.php
-
-      // edited sendMessageInbox - added check for $_GET[clockID] in condition
-      // edited choose receiver to require clockID in search in URL
-    </script>
 
   </head>
   <body>

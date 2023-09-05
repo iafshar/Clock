@@ -13,8 +13,10 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
     $content = $_POST['message'];
 
     $dateSent = date('Y-m-d H:i:s');
-
-
+    
+    $content = str_replace("\\","\\\\",$content);
+    $content = str_replace("'","\'",$content);
+    
 
     $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent)
         VALUES('$fromUsername','$toUsername',0,'$content','$dateSent')";

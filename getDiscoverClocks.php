@@ -1,6 +1,6 @@
 <?php
 // <!-- gets the clocks in the right order to display in "discover.html" -->
-
+session_start();
 // include db connect class
 require_once __DIR__ . '/dbConnect.php';
 require_once __DIR__ . '/mergeSort.php';
@@ -10,6 +10,7 @@ $db = new DB_CONNECT();
 
 $response = array(); // This is the array that will contain
 										 // the details of the results from all queries
+$response["myUserID"] = $_SESSION["UserID"];
 $sql = ("SELECT * FROM Clocks WHERE Shared = 1");
 $result = $db->get_con()->query($sql); // Gets the result of the above query
 // check for empty result

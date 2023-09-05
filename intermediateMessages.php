@@ -5,6 +5,7 @@ require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 
 $response = $_SESSION['responseMessages'];
+$response["myUserID"] = $_SESSION['UserID'];
 
 if (array_key_exists("Messages", $response)) {
     $messages = $response["Messages"];

@@ -328,7 +328,7 @@ function clock() {
     hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
     if (hit){
-        circles[i].playSound();
+      circles[i].playSound();
     }
   }
 

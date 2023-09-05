@@ -7,6 +7,7 @@ class Circle {
     this.colour = colour;
     this.outline = 0;
     this.onScreen = false;
+    this.lastPlayed = -401;
   }
   drawCircle(){
     fill(this.colour);
@@ -15,6 +16,9 @@ class Circle {
     ellipse(this.ox, this.oy, this.diameter, this.diameter);
   }
   playSound(){
-    this.sound.play();
+    if (millis()-this.lastPlayed > 400) {
+      this.sound.play();
+      this.lastPlayed = millis();
+    }
   }
 }

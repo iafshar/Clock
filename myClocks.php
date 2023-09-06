@@ -86,6 +86,13 @@ echo $_SESSION["Error"];
 
     </script>
     <script>
+      function checkBack() {
+        if (document.referrer == "http://localhost:8080/Clock/login.php") {
+          history.back();
+        }
+      }
+    </script>
+    <script>
       localStorage.removeItem("loginUsername");
       localStorage.removeItem("signUpUsername");
       localStorage.removeItem("signUpEmail");
@@ -97,7 +104,7 @@ echo $_SESSION["Error"];
   </head>
   <body>
     <div class="topnav">
-      <input type="button" value="Go back!" onclick="history.back()">
+      <input type="button" value="Go back!" id="backBtn" onclick=checkBack()>
       <button type='submit' onclick=deleteAccount()>Deactivate Account</button>
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>

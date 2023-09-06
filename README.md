@@ -12,7 +12,7 @@ You can also change the tempo of your clock which would affect the speed at whic
 
 Here you can manually set the tempo by clicking on the number keys on the screen or by using the number keys on your keyboard. You can also, periodically click on the button saying "click" and the tempo will be set to the tempo at which you are clicking.
 
-Saving and sharing are features only accessible by account holders. Saving a clock allows only the creator of the clock to view it while sharing a clock allows other people account holders to view it. If you click on the "Save" or "Share" buttons, you are taken to a page where you are prompted to give the clock a name before it will be added to the database and your account. This page is shown below.
+Saving and sharing are features only accessible by account holders. Saving a clock allows only the creator of the clock to view it while sharing a clock allows other account holders to view it. If you click on the "Save" or "Share" buttons, you are taken to a page where you are prompted to give the clock a name before it will be added to the database and your account. This page is shown below.
 
 <img width="1440" alt="Screenshot 2023-08-24 at 4 38 16 PM" src="https://github.com/iafshar/Clock/assets/102998427/812adfac-a8fa-4cfc-b566-6ec822eb6547">
 

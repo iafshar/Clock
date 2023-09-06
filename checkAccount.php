@@ -1,14 +1,11 @@
 <?php
 // Checks that the credentials that the user entered on the login page are valid
 session_start();
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/dbConnect.php';
+$db = new DB_CONNECT();
+// Create connection
+$conn = $db->get_con();
 
-// Connect to the DB
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 //If the form is submitted
 if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['checkbox'])){
 //Assigning posted values to variables.

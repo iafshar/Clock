@@ -2,13 +2,11 @@
 <?php
 // <!-- adds a vote that is a like to the database -->
 session_start();
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/dbConnect.php';
+$db = new DB_CONNECT();
 // Create connection
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = $db->get_con();
+
 
 if (isset($_GET["clockID"]) && isset($_GET["Name"]) && isset($_GET["location"])) {
     $_SESSION["ClockID"] = $_GET["clockID"];

@@ -4,21 +4,16 @@
 session_start();
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
-
-require_once __DIR__ . '/dbConfig.php';
 // Create connection
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = $db->get_con();
+
 if(isset($_POST['location'])){
   if($_SESSION["Premium"] == 1){
     if(isset($_POST['Maker'])){
       
       $Maker = $_POST['Maker'];
       $GetUserID = "SELECT * FROM Users Where Username='$Maker'";
-      $resultUser = $db->get_con()->query($GetUserID);
+      $resultUser = mysqli_query($conn, $GetUserID);
       if ($resultUser->num_rows > 0) {
           while ($row = $resultUser->fetch_assoc()) {
               $UserID = $row["UserID"];
@@ -36,7 +31,7 @@ if(isset($_POST['location'])){
 
       $clockName = $_POST['clockName'];
       $GetClockID = "SELECT * FROM Clocks WHERE UserID='$UserID' AND Name='$clockName'";
-      $resultClock = $db->get_con()->query($GetClockID);
+      $resultClock = mysqli_query($conn, $GetClockID);
       if ($resultClock->num_rows > 0) {
           while ($row = $resultClock->fetch_assoc()) {
               $ClockID = $row["ClockID"];

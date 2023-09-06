@@ -2,13 +2,11 @@
 session_start();
 $_SESSION["ErrorEmail"] = "";
 // include db connect class
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/dbConnect.php';
+$db = new DB_CONNECT();
 // Create connection
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = $db->get_con();
+
 
 if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"]=="reset") && !isset($_POST["action"])){
     $hash = $_GET["hash"];

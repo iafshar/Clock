@@ -2,14 +2,10 @@
 <?php
 // <!-- Checks that the user has not reached their clock limit -->
 session_start();
-require_once __DIR__ . '/dbConfig.php';
-
-
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once __DIR__ . '/dbConnect.php';
+$db = new DB_CONNECT();
+// Create connection
+$conn = $db->get_con();
 
 $UserID = $_SESSION['UserID'];
 $Premium = $_SESSION['Premium'];

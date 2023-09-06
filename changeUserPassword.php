@@ -2,13 +2,11 @@
 // <!-- Adds the basic account to the DB -->
 session_start();
 $_SESSION["ErrorReset"] = "";
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/dbConnect.php';
+$db = new DB_CONNECT();
 // Create connection
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = $db->get_con();
+
 
 if (isset($_POST['Password1'])){
   $invalid = FALSE;

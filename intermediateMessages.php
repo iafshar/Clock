@@ -16,12 +16,16 @@ if (array_key_exists("Messages", $response)) {
 
             
             $record["Color"] = $messages[$i]["Color"];
-            $record["Content"] = $messages[$i]["Content"];
             $record["DateSent"] = $messages[$i]["DateSent"];
             $record["Type"] = $messages[$i]["Type"];
             $record["sentByMe"] = $messages[$i]["sentByMe"];
 
-            $clockID = $messages[$i]["Content"];
+            $contents = explode(",",$messages[$i]["Content"]);
+            array_push($contents,""); // prevents needing to check for length of array in java,
+                                    // if the length is now 2, it will add an empty string before the iframe which wont make a difference.
+                                    // if the length is now 3, the third element will never be used so it doesn't matter
+            $record["Content"] = $contents;
+            $clockID = $contents[0];
 
             $getClock = "SELECT * FROM `Clocks` WHERE ClockID='$clockID'";
 

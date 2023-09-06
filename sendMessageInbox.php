@@ -71,6 +71,11 @@ else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
 
 
     $content = $clockID;
+
+    if (isset($_GET['addMessage'])) {
+        $content = $content . "," . $_GET['addMessage'];
+    }
+    
     $dateSent = date('Y-m-d H:i:s');
 
 

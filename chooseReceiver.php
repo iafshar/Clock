@@ -9,39 +9,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-      var clockID = window.location.search.substring(1);
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              var myRecords = JSON.parse(this.responseText);
-              var rows = "";
-              for (i=0;i<myRecords.Usernames.length;i++) {
-                   var Username = myRecords.Usernames[i];
-                   var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
-                   rows = rows+newRow;
-              }
-              document.getElementById("resultRows").innerHTML = rows;
-          }
-      };
-      xmlhttp.open("GET", "getMessageHeaders.php", true);
-      xmlhttp.send();
-
-
-
-    </script>
-    <script>
       function sendToUser(Username, clockID) {
+        message = document.getElementById('addMessage').value;
         var xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID, true);
+        if (message.length > 0) {
+          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+message, true);
+        }
+        else {
+          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID, true);
+        }
         xmlhttp.send();
         window.open("chat.php","_self");
+        
 
       }
-    </script>
-    <script>
-
     </script>
   </head>
   <body>
@@ -72,8 +54,44 @@
       <tbody id="resultRows">
       </tbody>
     </table>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <iframe src='' id='miniClock' width=410 height=205 ></iframe>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input id="addMessage" type="text" name="message" placeholder="Add a message" value="">
+          </td>
+        </tr>
+      </tbody>
+    </table>
     </div>
-  
+    <script>
+      var clockID = window.location.search.substring(1);
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              var rows = "";
+              for (i=0;i<myRecords.Usernames.length;i++) {
+                   var Username = myRecords.Usernames[i];
+                   var Date = myRecords.Dates[i];
+                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   rows = rows+newRow;
+              }
+              document.getElementById("resultRows").innerHTML = rows;
+          }
+      };
+      xmlhttp.open("GET", "getMessageHeaders.php", true);
+      xmlhttp.send();
+
+    </script>
+  <script>
+    document.getElementById('miniClock').src = 'http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1'+clockID;
+  </script>
   <script>
 
   inp = document.getElementById("userSearch");

@@ -28,10 +28,16 @@ else {
 
 $db = new DB_CONNECT();
 
+$Username = str_replace("\\","\\\\",$Username);
+$Username = str_replace("'","",$Username);
+$Username = str_replace("\"","",$Username);
+$Username = str_replace(">","",$Username);
+$Username = str_replace("<","",$Username);
+
 $addSearch = "INSERT INTO `Searches` (UserID, Search)
   VALUES ('$MyUserID','$Username')";
 
-if ($Username != NULL){
+if ($Username != NULL && strlen($Username) > 0){
   if ($_SESSION["message"] == 0) {
     $db->get_con()->query($addSearch);
   }
@@ -58,6 +64,9 @@ else {
 }
 $_SESSION['response'] = $response;
 header("Location:http://localhost:8080/Clock/searchResults.php");
+}
+else if (strlen($Username) == 0) {
+  header("Location:http://localhost:8080/Clock/search.php");
 }
 
 ?>

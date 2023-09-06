@@ -16,6 +16,9 @@ $Searches = array();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $search = $row["Search"];
+        // if (strpos($search,"\"") !== false) {
+        //     $search = $search . '''"''';
+        // }
         array_unshift($Searches,$search);
     }
 

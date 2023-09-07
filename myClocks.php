@@ -87,7 +87,7 @@ echo $_SESSION["Error"];
     </script>
     <script>
       function checkBack() {
-        if (document.referrer == "http://localhost:8080/Clock/login.php") {
+        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
           history.back();
         }
       }
@@ -104,7 +104,7 @@ echo $_SESSION["Error"];
   </head>
   <body>
     <div class="topnav">
-      <input type="button" value="Go back!" id="backBtn" onclick=checkBack()>
+      <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="Icons/back.png" width="30" height="30"></a>
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>

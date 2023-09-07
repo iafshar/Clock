@@ -31,7 +31,7 @@
 
 <body>
   <div class="topnav">
-    <input type="button" value="Go back!" onclick="history.back()">
+    <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="http://localhost:8080/Clock/Icons/back.png" width="30" height="30"></a>
   <a href="http://localhost:8080/Clock/feed.html"><img border="0" src="http://localhost:8080/Clock/Icons/house.png" width="30" height="30"></a>
   <a href="http://localhost:8080/Clock/discover.html"><img border="0" src="http://localhost:8080/Clock/Icons/compass.png" width="30" height="30"></a>
   <a href="http://localhost:8080/Clock/checkClockLimit.php"><img border="0" src="http://localhost:8080/Clock/Icons/music.png" width="30" height="30"></a>
@@ -54,5 +54,10 @@
   xmlhttp.open("GET", "http://localhost:8080/Clock/countUnreadMessages.php", true);
   xmlhttp.send();
 
+  function checkBack() {
+        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
+          history.back();
+        }
+  }
 </script>
 </html>

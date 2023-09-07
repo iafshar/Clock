@@ -35,22 +35,6 @@ body {
   background-color: #faf39f;
   color: white;
 }
-/* 
-.topnav a.logoutBtn {
-  position: absolute;
-  left: 93%;
-  height: 58px;
-  color: #faf39f;
-  font-weight: bold;
-}
-.topnav a.searchLogoutBtn {
-  position: absolute;
-  left: 93%;
-  top: 0%;
-  height: 58px;
-  color: #faf39f;
-  font-weight: bold;
-} */
 
 button.followBtn {
   position: absolute;

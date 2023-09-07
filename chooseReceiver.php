@@ -33,7 +33,7 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
     <form autocomplete="off" action="searchAllUsers.php" method="post">
@@ -43,6 +43,21 @@
     </form>
     <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
+      }
+      
+    };
+
+    
+    xmlhttp.open("GET", "countUnreadMessages.php", true);
+    xmlhttp.send();
+
+  </script>
   <div class="searchTable">
     <table class="table" id="clockTable">
       <thead class="thead-light">

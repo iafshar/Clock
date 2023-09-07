@@ -18,7 +18,6 @@
                 document.getElementById("messageBody").innerHTML = "<td><form action='sendMessageInbox.php' method='post'><table><tr><textarea style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' style='width:1400px;height:45px;' value='Enter'></tr></table></form></td>";
                 var rows = "";
                 if (myRecords) {
-                  console.log(myRecords);
                   if (myRecords.Messages) {
                       myUserID = myRecords.myUserID;
                       for (i=0;i<myRecords.Messages.length;i++) {
@@ -56,7 +55,6 @@
                   }
                 }
                 document.getElementById("resultRows").innerHTML = rows;
-                console.log(document.getElementById("resultRows"));
             }
         };
       xmlhttp.open("GET", "intermediateMessages.php", true);
@@ -107,10 +105,25 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a class="active" href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a class="active" href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
     <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
+      }
+      
+    };
+
+    
+    xmlhttp.open("GET", "countUnreadMessages.php", true);
+    xmlhttp.send();
+
+  </script>
   <div class="messageTable">
     <table class="table" id="messageBox">
     <thead class="thead-light">

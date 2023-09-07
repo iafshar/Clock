@@ -9,6 +9,9 @@ $response = array();
 
 $otherUsername = $_GET["sender"];
 
+$viewMessages = "UPDATE Messages SET Viewed=1 WHERE ToUsername='$myUsername' AND FromUsername='$otherUsername'";
+$db->get_con()->query($viewMessages);
+
 $getMessages = "SELECT * FROM `Messages`
  WHERE ToUsername IN ('$myUsername','$otherUsername') AND FromUsername IN ('$otherUsername','$myUsername')
     ORDER BY DateSent DESC";

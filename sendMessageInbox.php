@@ -18,8 +18,8 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
     $content = str_replace("'","\'",$content);
     
 
-    $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent)
-        VALUES('$fromUsername','$toUsername',0,'$content','$dateSent')";
+    $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent,Viewed)
+        VALUES('$fromUsername','$toUsername',0,'$content','$dateSent',0)";
 
 
     $result = $db->get_con()->query($addMessage);
@@ -80,8 +80,8 @@ else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
 
 
 
-    $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent)
-        VALUES('$fromUsername','$toUsername',1,'$content','$dateSent')";
+    $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent,Viewed)
+        VALUES('$fromUsername','$toUsername',1,'$content','$dateSent',0)";
 
 
     $result = $db->get_con()->query($addMessage);

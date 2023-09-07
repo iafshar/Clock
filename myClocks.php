@@ -109,8 +109,8 @@ echo $_SESSION["Error"];
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
-      <a class="active" href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a class="active" href="myClocks.php" ><img border="0" src="Icons/user.png" width="30" height="30"></a>
+      <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
       <a href="start.php" class="logoutBtn">Logout</a>
     <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
@@ -119,6 +119,21 @@ echo $_SESSION["Error"];
       } ?>
   </div>
   </body>
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
+      }
+      
+    };
+
+    
+    xmlhttp.open("GET", "countUnreadMessages.php", true);
+    xmlhttp.send();
+
+  </script>
   <table class="table" id="clockTable">
       <thead class="thead-light">
         <tr>

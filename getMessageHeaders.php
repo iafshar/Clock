@@ -22,6 +22,9 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if ($row["FromUsername"] != $MyUsername) {
             array_push($Usernames,$row["FromUsername"]);
+            if ($row["Viewed"] == 0) {
+                # code...
+            }
         }
 
         else {
@@ -32,8 +35,18 @@ if ($result->num_rows > 0) {
     }
     $uniqueUsernames = array();
     $uniqueDates = array();
+    $bolds = array();
     for ($i=0; $i < count($Usernames); $i++) { 
         if (!in_array($Usernames[$i],$uniqueUsernames)) {
+            $curr = $Usernames[$i];
+            $getUnreadMessages = "SELECT * FROM `Messages` WHERE ToUsername='$MyUsername' AND FromUsername='$curr' AND Viewed=0";
+            $result2 = $db->get_con()->query($getUnreadMessages);
+            if ($result2->num_rows > 0) {
+                array_push($bolds,1);
+            }
+            else {
+                array_push($bolds,0);
+            }
             array_push($uniqueUsernames,$Usernames[$i]);
             array_push($uniqueDates,$Dates[$i]);
         }
@@ -44,6 +57,7 @@ if ($result->num_rows > 0) {
 
 $response["Usernames"] = $Usernames;
 $response["Dates"] = $Dates;
+$response["Bolds"] = $bolds;
 echo json_encode($response);
 
 ?>

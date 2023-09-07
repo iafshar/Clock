@@ -17,7 +17,14 @@
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   var Bold = myRecords.Bolds[i];
+                   if (Bold == 0) {
+                    var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   }
+                   else {
+                    var newRow = "<tr class='table-row'><td><strong>"+Username+"</strong></td><td><strong>"+Date+"</strong></td></tr>";
+                   }
+                   
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -56,10 +63,25 @@
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
-      <a class="active" href="inbox.php"><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
+      <a class="active" href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
     <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
+      }
+      
+    };
+
+    
+    xmlhttp.open("GET", "countUnreadMessages.php", true);
+    xmlhttp.send();
+
+  </script>
   <div class="messageTable">
     <table class="table" id="messageTable">
       <thead class="thead-light">

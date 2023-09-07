@@ -10,7 +10,8 @@ body {
 }
 .topnav {
   background-color: #f39faa;
-  overflow: hidden;
+  overflow: visible;
+  height: 60px;
 }
 
 /* Style the links inside the navigation bar */
@@ -34,7 +35,7 @@ body {
   background-color: #faf39f;
   color: white;
 }
-
+/* 
 .topnav a.logoutBtn {
   position: absolute;
   left: 93%;
@@ -49,7 +50,7 @@ body {
   height: 58px;
   color: #faf39f;
   font-weight: bold;
-}
+} */
 
 button.followBtn {
   position: absolute;
@@ -75,4 +76,41 @@ table.table[id="otherProfileTable"] {
 
 .autocomplete-table-row:hover{
   background-color: #faf39f;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  left: 61%;
+  color: #faf39f;
+  font-weight: bold;
+}
+.dropdown a {
+  height: 60px;
+  
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 0px;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  background-color: #f39faa;
+}
+.dropdown-content a {
+  display: block;
+  color: #faf39f;
+  padding: 5px;
+  width: 200px;
+  height: 45px;
+  text-decoration: none;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  color: #faf39f;
+  background-color: #f5bfcc;
 }

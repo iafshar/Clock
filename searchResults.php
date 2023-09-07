@@ -78,7 +78,6 @@
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
-      <a href="start.php" class="logoutBtn">Logout</a>
   </div>
   </body>
   <script>

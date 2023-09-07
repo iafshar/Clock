@@ -62,7 +62,6 @@
       <input id="userSearch" type="text" name="search" placeholder="Search" required>
       <input type="submit" value="🔍">
     </form>
-    <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
   <script>
     var xmlhttp = new XMLHttpRequest();

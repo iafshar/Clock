@@ -105,18 +105,28 @@ echo $_SESSION["Error"];
   <body>
     <div class="topnav">
       <input type="button" value="Go back!" id="backBtn" onclick=checkBack()>
-      <button type='submit' onclick=deleteAccount()>Deactivate Account</button>
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
       <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a class="active" href="myClocks.php" ><img border="0" src="Icons/user.png" width="30" height="30"></a>
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
-      <a href="start.php" class="logoutBtn">Logout</a>
-    <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
-      if($_SESSION["Premium"] == 0){
-        echo "<form action='updateAccount.php' method='post'><button type='submit'>Upgrade To Premium</button></form>";
-      } ?>
+    <div class="dropdown">
+      <a>Account</a>
+      <div class="dropdown-content">
+          <a href="updateAccount.php">
+            <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
+            if($_SESSION["Premium"] == 0){
+              echo "Upgrade To Premium";
+            } 
+            else {
+              echo "Downgrade To Basic";
+            }?>
+          </a>
+          <a href='#' onclick=deleteAccount()>Deactivate Account</a>
+          <a href="start.php">Logout</a>
+      </div>
+    </div>
   </div>
   </body>
   <script>
@@ -134,6 +144,7 @@ echo $_SESSION["Error"];
     xmlhttp.send();
 
   </script>
+
   <table class="table" id="clockTable">
       <thead class="thead-light">
         <tr>
@@ -145,5 +156,4 @@ echo $_SESSION["Error"];
       <tbody id="resultRows">
       </tbody>
     </table>
-    
 </html>

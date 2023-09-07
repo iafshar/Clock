@@ -7,14 +7,19 @@ $conn = $db->get_con();
 
 
 $UserID = $_SESSION["UserID"];
-
+if ($_SESSION["Premium"] == 1) {
+    $Premium = 0;
+}
+else {
+    $Premium = 1;
+}
 $Update = "UPDATE Users
-    SET Premium = 1
+    SET Premium = '$Premium'
     WHERE UserID = '$UserID'";
 
 mysqli_query($conn, $Update);
 
-$_SESSION["Premium"] = 1;
+$_SESSION["Premium"] = $Premium;
 header("Location: myClocks.php");
 
 ?>

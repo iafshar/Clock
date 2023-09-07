@@ -41,7 +41,6 @@
       <input type='hidden' name='message' value="1">
       <input type="submit" value="🔍">
     </form>
-    <a href="start.php" class="searchLogoutBtn">Logout</a>
   </div>
   <script>
     var xmlhttp = new XMLHttpRequest();

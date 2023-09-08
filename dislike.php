@@ -9,9 +9,9 @@ $conn = $db->get_con();
 
 
 if (isset($_GET["clockID"]) && isset($_GET["Name"]) && isset($_GET["location"])) {
-  $_SESSION["ClockID"] = $_GET["clockID"];
-  $_SESSION["clockName"] = $_GET["Name"];
-  $_SESSION["Location"] = $_GET["location"];
+    $_SESSION["ClockID"] = $_GET["clockID"];
+    $_SESSION["clockName"] = $_GET["Name"];
+    $_SESSION["Location"] = $_GET["location"];
 }
 
 $ClockID = $_SESSION["ClockID"];
@@ -26,27 +26,15 @@ $Unlike = "DELETE FROM Votes WHERE UserID='$UserID' AND ClockID='$ClockID' AND D
 $VoteInsert = "INSERT INTO Votes (UserID, ClockID, Dislike)
   VALUES ('$UserID','$ClockID',1)";
 
-
-$Increase = "UPDATE Clocks
-  SET NumOfDislikes = NumOfDislikes + 1
-  WHERE ClockID='$ClockID'";
-
-$Decrease = "UPDATE Clocks
-  SET NumOfDislikes = NumOfDislikes - 1
-  WHERE ClockID='$ClockID'";
-
 if ($CheckCount != 0){
-  mysqli_query($conn, $Unlike);
-  mysqli_query($conn, $Decrease);
-  header("Location:".$_SESSION["Location"]);
+    mysqli_query($conn, $Unlike);
+    header("Location:".$_SESSION["Location"]);
 }
 else if (mysqli_query($conn, $VoteInsert)) {
-  mysqli_query($conn, $Increase);
-  header("Location:".$_SESSION["Location"]);
+    header("Location:".$_SESSION["Location"]);
 }
 else {
-  echo "Error: " . $VoteInsert . "<br>" . mysqli_error($conn);
+    echo "Error: " . $VoteInsert . "<br>" . mysqli_error($conn);
 }
-
 
  ?>

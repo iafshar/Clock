@@ -130,6 +130,7 @@ function setup() {
   crashCount = 0;
 
   signUp = new Button(980,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SIGN-UP",YELLOW,LIGHT_YELLOW);
+  login = new Button(980-BUTTON_WIDTH-10,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"LOGIN",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snare,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",kick,PINK,LIGHT_PINK);
@@ -163,6 +164,7 @@ function clock() {
   crashOp.drawButton();
 
   signUp.drawButton();
+  login.drawButton();
 
   drawSlider(hs1);
   tempo = hs1.tempo/40;

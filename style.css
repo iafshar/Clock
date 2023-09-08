@@ -21,7 +21,7 @@ body {
     text-align: center;
     position: absolute;
     left: 50%;
-    top: 70%;
+    top: 65%;
   	width: 200px;
     height: 60px;
   	padding: 15px;
@@ -345,6 +345,24 @@ h1.basic-heading {
 a.already {
   position: absolute;
   left: 50%;
+  top: 80%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+}
+
+a.create {
+  display: inline-block;
+  position: absolute;
+  left: 59%;
+  top: 80%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+}
+
+a.forgot {
+  display: inline-block;
+  position: absolute;
+  left: 41%;
   top: 80%;
   transform: translate(-50%, 0%);
   text-align: center;

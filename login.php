@@ -17,8 +17,9 @@ echo $_SESSION["Error"] ?>
 			method="post">
 				<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 				<input type="password" name="Password" placeholder="Password" id="password" autocomplete="current-password" required>
+				<a href="forgotPassword.php" class="forgot">Forgot your password?</a>
 				<input type="submit" value="Login" onclick="save()">
-				<a href="forgotPassword.php" class="already">Forgot your password?</a>
+				<a href="choose.html" class="create">Create an account</a>
 			</form>
 			<script>
 				function save() {

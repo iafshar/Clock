@@ -19,6 +19,7 @@ session_start();
 					<input type="password" name="Password2" placeholder="Confirm Password" id="confirm-password" autocomplete="new-password" required>
 					<input type="email" name="Email" placeholder="Email" id="email" autocomplete="email" required>
 					<input type="submit" value="Sign-Up" onclick="save()">
+					<a href="login.php" class="already">Already have an account?</a>
 				</div>
 			</form>
 			<div id="message" style=

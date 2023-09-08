@@ -64,11 +64,11 @@
     </script>
     <script>
       function like(clockID,name) {
-        window.open('like.php?clockID='+clockID+'&Name='+name+'&location=chat.php','_self');
+        window.open('addVote.php?clockID='+clockID+'&location=chat.php&dislike=0','_self');
       }
 
       function dislike(clockID,name) {
-        window.open('dislike.php?clockID='+clockID+'&Name='+name+'&location=chat.php','_self');
+        window.open('addVote.php?clockID='+clockID+'&location=chat.php&dislike=1','_self');
       }
 
       function openClock(clockID) {

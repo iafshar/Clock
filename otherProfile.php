@@ -9,11 +9,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
       function like(clockID,name) {
-        window.open('like.php?clockID='+clockID+'&Name='+name+'&location=otherProfile.php','_self');
+        window.open('addVote.php?clockID='+clockID+'&location=otherProfile.php&dislike=0','_self');
       }
 
       function dislike(clockID,name) {
-        window.open('dislike.php?clockID='+clockID+'&Name='+name+'&location=otherProfile.php','_self');
+        window.open('addVote.php?clockID='+clockID+'&location=otherProfile.php&dislike=1','_self');
       }
       
       function openClock(clockID) {

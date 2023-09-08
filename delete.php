@@ -35,7 +35,8 @@ if ($result->num_rows > 0) {
 $DeleteComments = "DELETE FROM Comments WHERE ClockID='$ClockID'";
 mysqli_query($conn, $DeleteComments);
 
-$DeleteMessages = "DELETE FROM Messages WHERE Type=1 AND Content='$ClockID'";
+$DeleteMessages = "DELETE FROM Messages WHERE Type=1 AND Content=$ClockID"; 
+// dont put clockID in quotes because it will only delete content that ONLY has clockID and not comma with message
 
 mysqli_query($conn, $DeleteMessages);
 

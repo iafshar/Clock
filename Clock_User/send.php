@@ -26,8 +26,7 @@ else{
 }
 
 
-$Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,DateShared,NumOfLikes,NumOfDislikes)
- VALUES ('$UserID','$Name', '$Tempo', '$Shared', '$DateShared', 0, 0)";
+
 
 $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 $result = mysqli_query($conn, $Select) or die(mysqli_error($conn));
@@ -48,8 +47,8 @@ if ($count != 0 && $count != NULL){
   }
 }
 
-$Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,DateShared,NumOfLikes,NumOfDislikes)
- VALUES ('$UserID','$Name', '$Tempo', '$Shared', '$DateShared', 0, 0)";
+$Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,DateShared)
+ VALUES ('$UserID','$Name', '$Tempo', '$Shared', '$DateShared')";
 
 $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 

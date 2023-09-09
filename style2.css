@@ -12,6 +12,9 @@ body {
   background-color: #f39faa;
   overflow: visible;
   height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 }
 
 /* Style the links inside the navigation bar */
@@ -37,21 +40,21 @@ body {
 }
 
 button.followBtn {
-  position: absolute;
-  top: 9.5%;
+  position: relative;
+  top: 120px;
   background-color: #faf39f;
 }
 
 button.messageBtn {
-  position: absolute;
-  top: 9.5%;
+  position: relative;
+  top: 90px;
   left: 10%;
   background-color: #faf39f;
 }
 
 table.table[id="otherProfileTable"] {
-  position: absolute;
-  top: 14%;
+  position: relative;
+  top: 30px;
 }
 
 .table-row:hover{

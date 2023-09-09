@@ -45,13 +45,21 @@
 
   </head>
   <body>
-    <form action="follow.php" method="post">
-      <button type="submit" class="followBtn" id="followBtn">Follow</button>
-    </form>
-    <form action="sendMessageInbox.php" method="post">
-      <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
-      <input type='hidden' id="sender" name='Sender' value="">
-    </form>
+    <div class="otherProfile-buttons">
+      <div class="follow">
+        <form action="follow.php" method="post">
+          <button type="submit" class="followBtn" id="followBtn">Follow</button>
+        </form>
+      </div>
+      <div class="message">
+        <form action="sendMessageInbox.php" method="post">
+          <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
+          <input type='hidden' id="sender" name='Sender' value="">
+        </form>
+      </div>
+      
+    </div>
+    
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const clickedUserID = urlParams.get('clickedUserID');

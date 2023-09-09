@@ -20,7 +20,7 @@
                 var rows = "";
                 for (i=0;i<myRecords.Comments.length;i++) {
                     var myRecord = myRecords.Comments[i];
-                    var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><form action='addReply.php' method='post'><table><tr><td><textarea style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter'></form></td></tr></table></td></tr>";
+                    var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+")><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+")><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addReply.php' method='post'><table><tr><td><textarea style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter'></form></td></tr></table></td></tr>";
                     rows = rows+newRow
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -34,9 +34,16 @@
 
     </script>
     <script>
+      function like(commentID) {
+        window.open('addVote.php?commentID='+commentID+'&location='+window.location.href+'&dislike=0','_self');
+      }
+
+      function dislike(commentID) {
+        window.open('addVote.php?commentID='+commentID+'&location='+window.location.href+'&dislike=1','_self');
+      }
+
       function getReplies(commentID) {
-        console.log(commentID);
-        window.open('getReplies.php?CommentID='+commentID,'_self');
+        window.open('replies.html?'+commentID,'_self');
       }
 
       function checkBack() {
@@ -76,6 +83,7 @@
       <thead class="thead-light">
         <tr>
           <th>Comment</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>

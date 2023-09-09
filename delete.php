@@ -12,7 +12,7 @@ $DeleteCircles = "DELETE FROM Circles Where ClockID='$ClockID'";
 
 mysqli_query($conn, $DeleteCircles);
 
-$DeleteVotes = "DELETE FROM Votes WHERE ClockID='$ClockID'";
+$DeleteVotes = "DELETE FROM Votes WHERE ItemID='$ClockID' AND Item=0";
 
 mysqli_query($conn, $DeleteVotes);
 

@@ -48,10 +48,10 @@ if (array_key_exists("Messages", $response)) {
                     $record["Tempo"] = $row["Tempo"];
                     $record["Shared"] = $row["Shared"];
                     $record["DateShared"] = $row["DateShared"];
-                    $GetNumOfLikes = "SELECT * FROM Votes WHERE ClockID='$clockID' AND Dislike=0";
+                    $GetNumOfLikes = "SELECT * FROM Votes WHERE ItemID='$clockID' AND Item=0 AND Dislike=0";
                     $result2 = $db->get_con()->query($GetNumOfLikes);
                     $record["NumOfLikes"] = $result2->num_rows;
-                    $GetNumOfDislikes = "SELECT * FROM Votes WHERE ClockID='$clockID' AND Dislike=1";
+                    $GetNumOfDislikes = "SELECT * FROM Votes WHERE ItemID='$clockID' AND Item=0 AND Dislike=1";
                     $result3 = $db->get_con()->query($GetNumOfDislikes);
                     $record["NumOfDislikes"] = $result3->num_rows;
                 }

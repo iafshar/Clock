@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
       $ClockID = $row["ClockID"];
       $likes = 0;
       $dislikes = 0;
-      $VoteCheck = "SELECT * FROM Votes WHERE ClockID='$ClockID'";
+      $VoteCheck = "SELECT * FROM Votes WHERE ItemID='$ClockID' AND Item=0";
       $VoteResult = $db->get_con()->query($VoteCheck);
       while ($row2 = $VoteResult->fetch_assoc()){
         if($row2["Dislike"] == 1){

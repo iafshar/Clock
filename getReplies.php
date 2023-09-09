@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
@@ -18,6 +17,16 @@ if ($result->num_rows > 0) {
         $record = array();
 
         $record["ReplyID"] = $row["ReplyID"];
+        $replyID = $row["ReplyID"];
+
+        $getLikes = "SELECT * FROM `Votes` WHERE ItemID='$replyID' AND Item=2 AND Dislike=0";
+        $result2 = $db->get_con()->query($getLikes);
+        $record["NumOfLikes"] = $result2->num_rows;
+
+        $getDislikes = "SELECT * FROM `Votes` WHERE ItemID='$replyID' AND Item=2 AND Dislike=1";
+        $result2 = $db->get_con()->query($getDislikes);
+        $record["NumOfDislikes"] = $result2->num_rows;
+
         $record["Reply"] = $row["Reply"];
         $record["Date"] = $row["Date"];
 
@@ -26,13 +35,11 @@ if ($result->num_rows > 0) {
     }
     // success
     $response["success"] = 1;
-    $_SESSION["Replies"] = $response;
 } else {
     // no products found
     $response["success"] = 0;
     $response["message"] = "No records found";
-    $_SESSION["Replies"] = $response;
 
 }
-header("Location:replies.html");
+echo json_encode($response);
 ?>

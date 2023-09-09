@@ -27,6 +27,16 @@ if ($result->num_rows > 0) {
     $record = array();
     
     $record["CommentID"] = $row["CommentID"];
+    $commentID = $row["CommentID"];
+
+    $getLikes = "SELECT * FROM `Votes` WHERE ItemID='$commentID' AND Item=1 AND Dislike=0";
+    $result2 = $db->get_con()->query($getLikes);
+    $record["NumOfLikes"] = $result2->num_rows;
+
+    $getDislikes = "SELECT * FROM `Votes` WHERE ItemID='$commentID' AND Item=1 AND Dislike=1";
+    $result2 = $db->get_con()->query($getDislikes);
+    $record["NumOfDislikes"] = $result2->num_rows;
+
     $record["ClockID"] = $row["ClockID"];
     $record["Comment"] = $row["Comment"];
     $record["Date"] = $row["Date"];

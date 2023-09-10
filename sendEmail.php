@@ -18,30 +18,37 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 
-if (isset($_POST['EmailForgot'])) {
-    $Email = $_POST['EmailForgot'];
+if (isset($_POST['Forgot'])) {
+    $Email = $_POST['Forgot'];
 
     $CheckEmail = "SELECT * FROM `Users` WHERE Email='$Email'";
     $result = mysqli_query($conn, $CheckEmail);
 
     if ($result->num_rows == 0) {
-        $_SESSION["ErrorEmail"] = "This email is not associated with an account";
-        header("Location:http://localhost:8080/Clock/forgotPassword.php");
+        $CheckUsername = "SELECT * FROM `Users` WHERE Username='$Email'";
+        $result = mysqli_query($conn, $CheckUsername);
+        if ($result->num_rows == 0) {
+            $_SESSION["ErrorEmail"] = "This email is not associated with an account";
+            header("Location:http://localhost:8080/Clock/forgotPassword.php");
+        }
     } 
-    else {
+    if ($result->num_rows > 0 ) {
         $expirationFormat = mktime(
             date("H")+3, date("i"), date("s"), date("m") ,date("d"), date("Y")
             );
         $expirationDate = date("Y-m-d H:i:s",$expirationFormat);
+        
+        while ($row = $result->fetch_assoc()) {
+            $Username = $row["Username"];
+            $Password = $row["Password"];
+            $Email = $row["Email"];  
+        }
+
+        
         $pt1 = md5(2418*2 . $Email);
         $pt2 = substr(md5(uniqid(rand(),1)),3,10);
         $hash = $pt1 . $pt2;
 
-        while ($row = $result->fetch_assoc()) {
-            $Username = $row["Username"];
-            $Password = $row["Password"];
-            
-        }
         $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Reset)
         VALUES ('$Email', '$Username','$Password','$hash', '$expirationDate', 1)";
 

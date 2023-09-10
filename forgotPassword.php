@@ -15,7 +15,7 @@ echo $_SESSION["ErrorEmail"];
 		<div class="login">
 			<form action="sendEmail.php" <?php $_SESSION["ErrorEmail"]=NULL;?> method="post">
 			
-				<input type="email" name="EmailForgot" placeholder="Email" id="email" autocomplete="email" required>
+				<input type="text" name="Forgot" placeholder="Email or Username" id="email" autocomplete="email" required>
 				<input type="submit" value="Reset">
 			</form>
 		</div>

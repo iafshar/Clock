@@ -89,7 +89,7 @@
       }
 
       function openComments(clockID) {
-        window.open('stats.html?'+clockID,'_self');
+        window.open('comments.html?'+clockID,'_self');
       }
 
       function sendClock(clockID) {

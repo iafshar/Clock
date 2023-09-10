@@ -14,16 +14,28 @@
 						Premium Account
 					</h1>
 					<p> - Save and share up to 20 clocks <br><br><br> - Comment on clocks <br><br><br> - Reply to comments on clocks</p>
-					<input onclick="window.location.href = 'premSignUp.php';" type="submit" value="Get Started">
+					<input onclick=goPremium() type="submit" value="Get Started">
 				</div>
 				<div class="choose-basic">
 					<h1 class="basic-heading">
 						Basic Account
 					</h1>
 					<p> - Save and share up to 5 clocks. </p>
-					<input onclick="window.location.href = 'basSignUp.php';" type="submit" value="Get Started">
+					<input onclick=goBasic() type="submit" value="Get Started">
 				</div>
 				<a href="login.php" class="already">Already have an account?</a>
 		</div>
 	</body>
+	<script>
+		function goPremium() {
+			localStorage.setItem("signUpPremium", 1); 
+			window.location.href = 'signUp.php';
+		}
+
+		function goBasic() {
+			localStorage.setItem("signUpPremium", 0); 
+			window.location.href = 'signUp.php';
+		}
+		
+	</script>
 </html>

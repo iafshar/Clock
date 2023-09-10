@@ -12,12 +12,13 @@ session_start();
 	</head>
 	<body>
 		<div class="signUp">
-			<form action="addPremAccount.php" method="post"> <!--Makes sure that the same errors are not presented if the user goes to a different page-->
+			<form action="addAccount.php" method="post"> <!--Makes sure that the same errors are not presented if the user goes to a different page-->
 				<div>
 					<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 					<input type="password" name="Password1" placeholder="Password" id="password" autocomplete="new-password" required>
 					<input type="password" name="Password2" placeholder="Confirm Password" id="confirm-password" autocomplete="new-password" required>
 					<input type="email" name="Email" placeholder="Email" id="email" autocomplete="email" required>
+                    <input type='hidden' name='Premium' id="premium" value="">
 					<input type="submit" value="Sign-Up" onclick="save()">
 					<a href="login.php" class="already">Already have an account?</a>
 				</div>
@@ -122,6 +123,7 @@ session_start();
 				document.getElementById("email").value = localStorage.getItem('signUpEmail');
 				document.getElementById("password").value = localStorage.getItem('signUpPassword');
 				document.getElementById("confirm-password").value = localStorage.getItem('signUpPassword2');
+                document.getElementById("premium").value = localStorage.getItem('signUpPremium');
 			</script>
 			<script>
 				var password1 = document.getElementById("password");
@@ -211,6 +213,7 @@ session_start();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
 						var response = JSON.parse(this.responseText);
+                        console.log(response);
 							if (response.numUsers == 0) {
 								usernameCheckbox.classList.remove("invalid");
 								usernameCheckbox.classList.add("valid");

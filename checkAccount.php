@@ -36,7 +36,6 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
         $resultUser = mysqli_query($conn, $ExistingUser) or die(mysqli_error($conn));
         $countUser = mysqli_num_rows($resultUser);
         $response['numUsers'] = $countUser;
-
         if ($countUser != 0){
             $Suggest = "SELECT * FROM `Users` WHERE Username LIKE '%$Username%'";
             $resultSuggest = mysqli_query($conn, $Suggest) or die(mysqli_error($conn));

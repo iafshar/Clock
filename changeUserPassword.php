@@ -109,6 +109,5 @@ if (isset($_POST['Password1'])){
   }
 }
 
-mysqli_close($conn);
 
 ?>

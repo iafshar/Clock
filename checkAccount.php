@@ -98,5 +98,5 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
 
     echo json_encode($response);
 }
-mysqli_close($conn);
+
 ?>

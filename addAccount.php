@@ -119,6 +119,5 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   }
 }
 
-mysqli_close($conn);
 
 ?>

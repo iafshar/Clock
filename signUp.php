@@ -1,5 +1,5 @@
 <?php
-// Sign up page for a premium account
+// Sign up page
 session_start();
 ?>
 <!DOCTYPE html>
@@ -213,7 +213,6 @@ session_start();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
 						var response = JSON.parse(this.responseText);
-                        console.log(response);
 							if (response.numUsers == 0) {
 								usernameCheckbox.classList.remove("invalid");
 								usernameCheckbox.classList.add("valid");

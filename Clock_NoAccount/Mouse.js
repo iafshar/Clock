@@ -10,63 +10,15 @@ function mousePressed() {
   }
   if (clockScreen){
   if (mouseY < hs1.ypos) {
-    if (snareOp.overButton()){
-      if(snareCount < snares.length && !circles.includes(snares[snareCount])){
-        circles.push(snares[snareCount]);
-        snareCount ++;
+    for(Op = 0;Op < options.length;Op ++){
+      if(options[Op].overButton()){
+        if(options[Op].counter < options[Op].sounds.length && !circles.includes(options[Op].sounds[options[Op].counter])){
+          circles.push(options[Op].sounds[options[Op].counter]);
+          options[Op].counter ++;
+        }
       }
-      checkMouseClicked = snare;
     }
-    else if (kickOp.overButton()){
-      if(kickCount < Kicks.length && !circles.includes(Kicks[kickCount])){
-        circles.push(Kicks[kickCount]);
-        kickCount ++;
-      }
-      checkMouseClicked = kick;
-    }
-    else if (cymbalOp.overButton()){
-      if(cymbalCount < cymbals.length && !circles.includes(cymbals[cymbalCount])){
-        circles.push(cymbals[cymbalCount]);
-        cymbalCount ++;
-      }
-      checkMouseClicked = cymbal;
-    }
-    else if (hiHatOp.overButton()){
-      if(hiHatCount < hiHats.length && !circles.includes(hiHats[hiHatCount])){
-        circles.push(hiHats[hiHatCount]);
-        hiHatCount ++;
-      }
-      checkMouseClicked = hiHat;
-    }
-    else if (openHiHatOp.overButton()){
-      if(openHiHatCount < openHiHats.length && !circles.includes(openHiHats[openHiHatCount])){
-        circles.push(openHiHats[openHiHatCount]);
-        openHiHatCount ++;
-      }
-      checkMouseClicked = hiHat;
-    }
-    else if (hiTomOp.overButton()){
-      if(hiTomCount < hiToms.length && !circles.includes(hiToms[hiTomCount])){
-        circles.push(hiToms[hiTomCount]);
-        hiTomCount ++;
-      }
-      checkMouseClicked = hiHat;
-    }
-    else if (midTomOp.overButton()){
-      if(midTomCount < midToms.length && !circles.includes(midToms[midTomCount])){
-        circles.push(midToms[midTomCount]);
-        midTomCount ++;
-      }
-      checkMouseClicked = hiHat;
-    }
-    else if (crashOp.overButton()){
-      if(crashCount < crashes.length && !circles.includes(crashes[crashCount])){
-        circles.push(crashes[crashCount]);
-        crashCount ++;
-      }
-      checkMouseClicked = cymbal;
-    }
-    else if (signUp.overButton()){
+    if (signUp.overButton()){
       window.open("http://localhost:8080/Clock/choose.html", "_self")
     }
     else if (login.overButton()) {
@@ -115,7 +67,7 @@ function mousePressed() {
     else {
       for (i=0;i<nums.length;i++){
         if (dist(mouseX,mouseY,nums[i].x,nums[i].y)<nums[i].diameter/2){
-           hs1.tempo += nums[i].num;
+           hs1.tempo += nums[i].text;
            hs1.tempo = int(hs1.tempo);
         }
       }
@@ -127,7 +79,34 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !(mouseX>SOUND_BUTTON_X-CIRCLE_DIAMETER/2 && mouseY<230+optionHeight+CIRCLE_DIAMETER/2)){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
+    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp, signUp, login];
+    buttonCheck = false;
+    for(var i = 0;i < Buttons.length;i++){
+      if(Buttons[i].overButton() && circleOnScreen && clickedOnCircle != null){
+        leftDist = mouseX - Buttons[i].x;
+        rightDist = (Buttons[i].x+Buttons[i].Width) - mouseX;
+        topDist = mouseY - Buttons[i].y;
+        bottomDist = (Buttons[i].y+Buttons[i].Height) - mouseY;
+        if (min(leftDist,rightDist,topDist,bottomDist) == leftDist) {
+          clickedOnCircle.ox = Buttons[i].x;
+          clickedOnCircle.oy = mouseY;
+        }
+        else if (min(leftDist,rightDist,topDist,bottomDist) == rightDist) {
+          clickedOnCircle.ox = (Buttons[i].x+Buttons[i].Width);
+          clickedOnCircle.oy = mouseY;
+        }
+        else if (min(leftDist,rightDist,topDist,bottomDist) == topDist) {
+          clickedOnCircle.ox = mouseX;
+          clickedOnCircle.oy = Buttons[i].y;
+        }
+        else {
+          clickedOnCircle.ox = mouseX;
+          clickedOnCircle.oy = (Buttons[i].y+Buttons[i].Height);
+        }
+        buttonCheck = true;
+      }
+    }
+    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !(mouseX>SOUND_BUTTON_X-CIRCLE_DIAMETER/2 && mouseY<230+BUTTON_HEIGHT+CIRCLE_DIAMETER/2) && buttonCheck == false){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
       for(i = 50;i < 251;i += 50){
         if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){

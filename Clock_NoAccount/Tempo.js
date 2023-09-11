@@ -1,25 +1,3 @@
-first = 0;
-secnd = 0;
-clickCount = 0;
-stop1 = false;
-stop2 = false;
-NUM_BUTTON_DIAMETER = 50;
-
-
-
-one = new NumButton('1',200,200,NUM_BUTTON_DIAMETER);
-two = new NumButton('2',300,200,NUM_BUTTON_DIAMETER);
-three = new NumButton('3',400,200,NUM_BUTTON_DIAMETER);
-four = new NumButton('4',200,300,NUM_BUTTON_DIAMETER);
-five = new NumButton('5',300,300,NUM_BUTTON_DIAMETER);
-six = new NumButton('6',400,300,NUM_BUTTON_DIAMETER);
-seven = new NumButton('7',200,400,NUM_BUTTON_DIAMETER);
-eight = new NumButton('8',300,400,NUM_BUTTON_DIAMETER);
-nine = new NumButton('9',400,400,NUM_BUTTON_DIAMETER);
-zero = new NumButton('0',300,500,NUM_BUTTON_DIAMETER);
-
-nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
-
 function click() {
   if (clickCount == 1 && !stop1){
       first = millis(); //millis() is a function in processing that returns the number
@@ -44,7 +22,7 @@ function click() {
 function keypad(){
   background(200);
   strokeWeight(1);
-  if(hs1.tempo>999999){
+  if(hs1.tempo>999){
     hs1.tempo = 0;
   }
   text(hs1.tempo,300,100);
@@ -70,46 +48,10 @@ function keypad(){
   }
   text("Enter", 400, 500);
   
-  one.drawCirc();
-  one.drawNum();
-  one.overNum();
-  
-  two.drawCirc();
-  two.drawNum();
-  two.overNum();
-  
-  three.drawCirc();
-  three.drawNum();
-  three.overNum();
-  
-  four.drawCirc();
-  four.drawNum();
-  four.overNum();
-  
-  five.drawCirc();
-  five.drawNum();
-  five.overNum();
-  
-  six.drawCirc();
-  six.drawNum();
-  six.overNum();
-  
-  seven.drawCirc();
-  seven.drawNum();
-  seven.overNum();
-  
-  eight.drawCirc();
-  eight.drawNum();
-  eight.overNum();
-  
-  nine.drawCirc();
-  nine.drawNum();
-  nine.overNum();
-  
-  zero.drawCirc();
-  zero.drawNum();
-  zero.overNum();
-  
+  for(i=0;i<nums.length;i++){
+    nums[i].drawButton();
+  }
+
   click();
   return hs1.tempo;
 }

@@ -132,19 +132,48 @@ function setup() {
   signUp = new Button(980,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SIGN-UP",YELLOW,LIGHT_YELLOW);
   login = new Button(980-BUTTON_WIDTH-10,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"LOGIN",YELLOW,LIGHT_YELLOW);
 
-  snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snare,RED,LIGHT_RED);
-  kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",kick,PINK,LIGHT_PINK);
-  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbal,GREEN,LIGHT_GREEN);
-  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHat,ECLIPSE,LIGHT_ECLIPSE);
-  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHat,BLUE,LIGHT_BLUE);
-  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiTom,BROWN,LIGHT_BROWN);
-  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midTom,PURPLE,LIGHT_PURPLE);
-  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crash,TEAL,LIGHT_TEAL);
+  // snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
+  // kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
+  // cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbal,GREEN,LIGHT_GREEN);
+  // hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHat,ECLIPSE,LIGHT_ECLIPSE);
+  // openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHat,BLUE,LIGHT_BLUE);
+  // hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiTom,BROWN,LIGHT_BROWN);
+  // midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midTom,PURPLE,LIGHT_PURPLE);
+  // crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crash,TEAL,LIGHT_TEAL);
+  snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
+  kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
+  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
+  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHats,openHiHatCount,BLUE,LIGHT_BLUE);
+  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
+  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
+  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
+
+  options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
 
   CLOCK_X = width/2;
   CLOCK_Y = height/2-20;
   RADIUS = 250;
   angle = 270;
+
+  first = 0;
+  secnd = 0;
+  clickCount = 0;
+  stop1 = false;
+  stop2 = false;
+  NUM_BUTTON_DIAMETER = 50;
+  one = new NumButton(200,200,'1',NUM_BUTTON_DIAMETER);
+  two = new NumButton(300,200,'2',NUM_BUTTON_DIAMETER);
+  three = new NumButton(400,200,'3',NUM_BUTTON_DIAMETER);
+  four = new NumButton(200,300,'4',NUM_BUTTON_DIAMETER);
+  five = new NumButton(300,300,'5',NUM_BUTTON_DIAMETER);
+  six = new NumButton(400,300,'6',NUM_BUTTON_DIAMETER);
+  seven = new NumButton(200,400,'7',NUM_BUTTON_DIAMETER);
+  eight = new NumButton(300,400,'8',NUM_BUTTON_DIAMETER);
+  nine = new NumButton(400,400,'9',NUM_BUTTON_DIAMETER);
+  zero = new NumButton(300,500,'0',NUM_BUTTON_DIAMETER);
+
+  nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
 }
 enter = 0;
 
@@ -154,14 +183,17 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  snareOp.drawButton();
-  kickOp.drawButton();
-  cymbalOp.drawButton();
-  hiHatOp.drawButton();
-  openHiHatOp.drawButton();
-  hiTomOp.drawButton();
-  midTomOp.drawButton();
-  crashOp.drawButton();
+  // snareOp.drawButton();
+  // kickOp.drawButton();
+  // cymbalOp.drawButton();
+  // hiHatOp.drawButton();
+  // openHiHatOp.drawButton();
+  // hiTomOp.drawButton();
+  // midTomOp.drawButton();
+  // crashOp.drawButton();
+  for(i=0;i<options.length;i++){
+    options[i].drawButton();
+  }
 
   signUp.drawButton();
   login.drawButton();

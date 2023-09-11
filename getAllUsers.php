@@ -7,7 +7,7 @@ $UserID = $_SESSION["UserID"];
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 
-$getUsers = "SELECT * FROM `Users` WHERE UserID!='$UserID'";
+$getUsers = "SELECT * FROM `Users` WHERE UserID!='$UserID' ORDER BY Username";
 
 $result = $db->get_con()->query($getUsers);
 

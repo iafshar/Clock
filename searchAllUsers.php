@@ -41,7 +41,7 @@ if ($Username != NULL && strlen($Username) > 0){
   if ($_SESSION["message"] == 0) {
     $db->get_con()->query($addSearch);
   }
-  $sql = ("SELECT * FROM `Users` WHERE UserID != '$MyUserID' AND Username LIKE '%$Username%'");
+  $sql = ("SELECT * FROM `Users` WHERE UserID != '$MyUserID' AND Username LIKE '%$Username%' ORDER BY Username");
   $result = $db->get_con()->query($sql);
   if ($result->num_rows > 0) {
     $response["Users"] = array();

@@ -76,6 +76,34 @@ class PauseButton extends Button{
   }
 }
 
+class SeekButton extends Button{
+  constructor(x,y,Width,Height,buttonColor,hoverColor,rewind,pressed) {
+    super(x,y,Width,Height,"",buttonColor,hoverColor);
+    this.rewind = rewind;
+    this.pressed = pressed;
+  }
+
+  drawButton() {
+    if ((this.overButton() && clickedOnCircle == null) || this.pressed){
+      var realColor = this.hoverColor;
+    }
+    else{
+      var realColor = this.buttonColor;
+    }
+    strokeWeight(0);
+    fill(realColor);
+    if (!this.rewind) {
+      triangle(this.x,this.y,this.x,this.y+this.Height,this.x+(this.Width/2),this.y+(this.Height/2));
+      triangle(this.x+(this.Width/2),this.y,this.x+(this.Width/2),this.y+this.Height,this.x+this.Width,this.y+(this.Height/2));
+    }
+    else {
+      triangle(this.x,this.y+(this.Height/2),this.x+(this.Width/2),this.y,this.x+(this.Width/2),this.y+this.Height);
+      triangle(this.x+(this.Width/2),this.y+(this.Height/2),this.x+this.Width,this.y,this.x+this.Width,this.y+this.Height);
+    }
+  }
+}
+
+
 class NumButton extends Button{
   constructor(x,y,text,diameter){
     super(x,y,width,height,text);

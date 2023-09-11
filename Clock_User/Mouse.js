@@ -112,6 +112,24 @@ function mousePressed() {
     }
     else if (pauseBtn.overButton()) {
       pauseBtn.paused = !pauseBtn.paused;
+      fastForwardBtn.pressed = false;
+      rewindBtn.pressed = false;
+    }
+    else if (rewindBtn.overButton()) {
+      if (!rewindBtn.pressed && !fastForwardBtn.pressed) {
+        pauseBtn.paused = !pauseBtn.paused;
+      }
+      rewindBtn.pressed = true;
+      fastForwardBtn.pressed = false;
+      
+    }
+    else if (fastForwardBtn.overButton()) {
+      if (!fastForwardBtn.pressed && !rewindBtn.pressed) {
+        pauseBtn.paused = !pauseBtn.paused;
+      }
+      fastForwardBtn.pressed = true;
+      rewindBtn.pressed = false;
+      
     }
     for (i = 0;i<circles.length;i++){
       if (circleOnScreen && pointCircle(circles[i].ox, circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){

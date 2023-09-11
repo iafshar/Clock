@@ -167,6 +167,8 @@ function setup() {
   angle = 270;
 
   pauseBtn = new PauseButton(CLOCK_X-15,CLOCK_Y-25,30,50,WHITE,VERY_LIGHT_YELLOW,false);
+  rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true,false);
+  fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false,false);
 
   first = 0;
   secnd = 0;
@@ -267,6 +269,7 @@ function setup() {
 function clock() {
   background(bgColor);
   strokeWeight(1);
+  stroke(0);
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
@@ -297,11 +300,7 @@ function clock() {
 
   side = (sqrt(2)/2)*RADIUS;
 
-  // stroke(LIGHT_YELLOW);
-
   strokeWeight(5);
-  // line(CLOCK_X-15,CLOCK_Y+25,CLOCK_X-15,CLOCK_Y-25);
-  // line(CLOCK_X+15,CLOCK_Y+25,CLOCK_X+15,CLOCK_Y-25);
 
   stroke(BLACK);
 
@@ -319,6 +318,8 @@ function clock() {
   hit = false;
 
   pauseBtn.drawButton();
+  rewindBtn.drawButton();
+  fastForwardBtn.drawButton();
 
   for (i = 0;i<circles.length;i++) {
     circles[i].drawCircle();
@@ -332,7 +333,13 @@ function clock() {
     }
   }
 
-  if (!pauseBtn.paused) {
+  if (rewindBtn.pressed) {
+    angle -= 250/40;
+  }
+  else if (fastForwardBtn.pressed) {
+    angle += 250/40;
+  }
+  else if (!pauseBtn.paused) {
     angle += tempo;
   }
 

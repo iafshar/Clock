@@ -103,6 +103,24 @@ class SeekButton extends Button{
   }
 }
 
+class ImageButton extends Button{
+  constructor(x,y,Width,Height,image) {
+    super(x,y,Width,Height);
+    this.image = image;
+  }
+
+  drawButton() {
+    if (this.overButton() && clickedOnCircle == null){
+      tint(0,0,0,100);
+    }
+    else {
+      tint(0,0,0,255);
+    }
+    image(KEYPAD_IMAGE,this.x,this.y,this.Width,this.Height);
+
+  }
+}
+
 
 class NumButton extends Button{
   constructor(x,y,text,diameter){

@@ -170,6 +170,8 @@ function setup() {
   rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true,false);
   fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false,false);
 
+  keypadBtn = new ImageButton(width-60,height-120,50,50,KEYPAD_IMAGE);
+
   first = 0;
   secnd = 0;
   clickCount = 0;
@@ -273,7 +275,7 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  image(KEYPAD_IMAGE,width-60,height-120,50,50);
+  keypadBtn.drawButton();
 
   for(i=0;i<options.length;i++){
     options[i].drawButton();

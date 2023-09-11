@@ -8,7 +8,7 @@ function mouseReleased() {
 }
 
 function mousePressed() {
-  if (mouseX>width-60 && mouseX<width-10 && mouseY>height-120 && mouseY<height-70){ //keypad
+  if (keypadBtn.overButton()){ //keypad
     screen = 1;
   }
   if (screen == 0){
@@ -194,15 +194,32 @@ function mousePressed() {
 
 
 function mouseDragged() { // Move Circle
-    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp, saveBtn, share];
+    Buttons = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp, saveBtn, share, keypadBtn];
     buttonCheck = false;
     for(var i = 0;i < Buttons.length;i++){
-      if(Buttons[i].overButton()){
+      if(Buttons[i].overButton() && circleOnScreen && clickedOnCircle != null){
+        leftDist = mouseX - Buttons[i].x;
+        rightDist = (Buttons[i].x+Buttons[i].Width) - mouseX;
+        topDist = mouseY - Buttons[i].y;
+        bottomDist = (Buttons[i].y+Buttons[i].Height) - mouseY;
+        if (min(leftDist,rightDist,topDist,bottomDist) == leftDist) {
+          clickedOnCircle.ox = Buttons[i].x;
+          clickedOnCircle.oy = mouseY;
+        }
+        else if (min(leftDist,rightDist,topDist,bottomDist) == rightDist) {
+          clickedOnCircle.ox = (Buttons[i].x+Buttons[i].Width);
+          clickedOnCircle.oy = mouseY;
+        }
+        else if (min(leftDist,rightDist,topDist,bottomDist) == topDist) {
+          clickedOnCircle.ox = mouseX;
+          clickedOnCircle.oy = Buttons[i].y;
+        }
+        else {
+          clickedOnCircle.ox = mouseX;
+          clickedOnCircle.oy = (Buttons[i].y+Buttons[i].Height);
+        }
         buttonCheck = true;
       }
-    }
-    if (mouseX>width-60 && mouseX<width-10 && mouseY>height-120 && mouseY<height-70){ // keypad
-      buttonCheck = true;
     }
     if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;

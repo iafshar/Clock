@@ -48,6 +48,34 @@ class Option extends Button{
   }
 }
 
+class PauseButton extends Button{
+  constructor(x,y,Width,Height,buttonColor,hoverColor,paused) {
+    super(x,y,Width,Height,"",buttonColor,hoverColor);
+    this.paused = paused;
+  }
+
+  drawButton() {
+    if (this.overButton() && clickedOnCircle == null){
+      var realColor = this.hoverColor;
+    }
+    else{
+      var realColor = this.buttonColor;
+    }
+    if (!this.paused) {
+      stroke(realColor);
+      
+      line(this.x,this.y,this.x,this.y+this.Height);
+      line(this.x+this.Width,this.y,this.x+this.Width,this.y+this.Height);
+    }
+    else {
+      strokeWeight(0);
+      fill(realColor);
+      triangle(this.x,this.y,this.x,this.y+this.Height,this.x+this.Width,this.y+(this.Height/2));
+    }
+
+  }
+}
+
 class NumButton extends Button{
   constructor(x,y,text,diameter){
     super(x,y,width,height,text);

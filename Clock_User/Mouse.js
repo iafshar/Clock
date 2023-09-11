@@ -110,6 +110,9 @@ function mousePressed() {
           screen = 2;
         }
     }
+    else if (pauseBtn.overButton()) {
+      pauseBtn.paused = !pauseBtn.paused;
+    }
     for (i = 0;i<circles.length;i++){
       if (circleOnScreen && pointCircle(circles[i].ox, circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){
         clickedOnCircle = circles[i];

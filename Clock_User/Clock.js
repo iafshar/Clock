@@ -55,6 +55,7 @@ function setup() {
   YELLOW = color('#eca539');
   GREY = color(102,102,102);
   LIGHT_YELLOW = color('#ffc75b');
+  VERY_LIGHT_YELLOW = color('#faf39f');
   PINK = color('#d24cb3');
   SILVER = 200;
   LIGHT_PINK = color('#f57fe6');
@@ -164,6 +165,8 @@ function setup() {
   CLOCK_Y = height/2-20;
   RADIUS = 250;
   angle = 270;
+
+  pauseBtn = new PauseButton(CLOCK_X-15,CLOCK_Y-25,30,50,WHITE,VERY_LIGHT_YELLOW,false);
 
   first = 0;
   secnd = 0;
@@ -278,7 +281,9 @@ function clock() {
   
 
   drawSlider(hs1);
+
   tempo = hs1.tempo/40;
+  
 
   lx = CLOCK_X + cos(radians(angle))*(RADIUS);
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
@@ -292,16 +297,11 @@ function clock() {
 
   side = (sqrt(2)/2)*RADIUS;
 
-  fill(bgColor);
-  stroke(bgColor);
-
-  ellipse(CLOCK_X-70,CLOCK_Y+60,50,40);
-  ellipse(CLOCK_X+60,CLOCK_Y+30,50,40);
+  // stroke(LIGHT_YELLOW);
 
   strokeWeight(5);
-  line(CLOCK_X-48,CLOCK_Y+60,CLOCK_X-80,CLOCK_Y-80);
-  line(CLOCK_X+82,CLOCK_Y+28,CLOCK_X+50,CLOCK_Y-90);
-  line(CLOCK_X-80,CLOCK_Y-80,CLOCK_X+50,CLOCK_Y-90);
+  // line(CLOCK_X-15,CLOCK_Y+25,CLOCK_X-15,CLOCK_Y-25);
+  // line(CLOCK_X+15,CLOCK_Y+25,CLOCK_X+15,CLOCK_Y-25);
 
   stroke(BLACK);
 
@@ -318,7 +318,7 @@ function clock() {
 
   hit = false;
 
-  
+  pauseBtn.drawButton();
 
   for (i = 0;i<circles.length;i++) {
     circles[i].drawCircle();
@@ -327,12 +327,14 @@ function clock() {
 
     hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
-    if (hit){
+    if (hit && !pauseBtn.paused){
       circles[i].playSound();
     }
   }
 
-  angle += tempo;
+  if (!pauseBtn.paused) {
+    angle += tempo;
+  }
 
 }
 

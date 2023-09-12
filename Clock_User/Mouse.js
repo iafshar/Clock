@@ -187,6 +187,9 @@ function mousePressed() {
     else if (clearBtn.overButton()) {
       clockName = "";
     }
+    else if (backBtn.overButton()) {
+      screen = 0;
+    }
   }
 }
 

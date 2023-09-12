@@ -31,11 +31,10 @@ function naming(){
   }
   enterBtn.drawButton();
   clearBtn.drawButton();
+
+  backBtn.drawButton();
 }
-// HITOM_SOUND = loadSound("../Sounds/hiTom.mp3");
-//   MIDTOM_SOUND = loadSound("../Sounds/midTom.mp3");
-//   OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
-//   CRASH_SOUND
+
 function saving(){
   var circs = [];
   for(i = 0;i < circles.length;i++){

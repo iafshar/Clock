@@ -194,6 +194,7 @@ function setup() {
   clockName = "";
   enterBtn = new Button(width/2-BUTTON_WIDTH-10,height/2+150,BUTTON_WIDTH,BUTTON_HEIGHT,"ENTER",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
   clearBtn = new Button(width/2+10,height/2+150,BUTTON_WIDTH,BUTTON_HEIGHT,"CLEAR",LIGHT_ECLIPSE,LIGHT_ECLIPSE);
+  backBtn = new Button(20,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"BACK",BLACK,GREY);
   
   deleteNameDelay = 100; // used to delay deleting characters from clock name so that clicking backspace once doesnt remove a bunch of chars
 

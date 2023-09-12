@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
         else {
           $record["Shared"] = "No";
         }
-        $record["DateShared"] = $row["DateShared"];
+        $record["Date"] = $row["Date"];
         $GetNumOfLikes = "SELECT * FROM Votes WHERE ItemID='$ClockID' AND Item=0 AND Dislike=0";
         $result2 = $db->get_con()->query($GetNumOfLikes);
         $record["NumOfLikes"] = $result2->num_rows;

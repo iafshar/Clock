@@ -17,16 +17,7 @@ $Shared = $_GET["shared"];
 
 $UserID = $_SESSION["UserID"];
 
-if($Shared == 0){
-  $DateShared = date('0-0-0 0:0:0');
-  
-}
-else{
-  $DateShared = date('Y-m-d H:i:s');
-}
-
-
-
+$Date = date('Y-m-d H:i:s');
 
 $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 $result = mysqli_query($conn, $Select) or die(mysqli_error($conn));
@@ -47,8 +38,8 @@ if ($count != 0 && $count != NULL){
   }
 }
 
-$Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,DateShared)
- VALUES ('$UserID','$Name', '$Tempo', '$Shared', '$DateShared')";
+$Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,Date)
+ VALUES ('$UserID','$Name', '$Tempo', '$Shared', '$Date')";
 
 $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 
@@ -96,7 +87,6 @@ if (mysqli_query($conn, $Insert)) {
      VALUES ('$ClockID','$SoundID','$X','$Y')";
     mysqli_query($conn, $CircInsert);
   }
-  //header("Location:http://localhost:8080/Clock/myClocks.php");
   $response["success"] = 1;
   
 } else {

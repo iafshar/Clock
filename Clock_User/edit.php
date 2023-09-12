@@ -13,17 +13,14 @@ $ClockID = $_GET["ClockID"];
 $Circles = $_GET["Circles"];
 $Tempo = $_GET["tempo"];
 $Shared = $_GET["shared"];
-if($Shared == 1){
-  $DateShared = date('Y-m-d H:i:s');
-}
-else{
-  $DateShared = date('0-0-0 0:0:0');
-}
+
+$Date = date('Y-m-d H:i:s');
+
 
 $Delete = "DELETE FROM Circles Where ClockID='$ClockID'";
 
 $Edit = "UPDATE Clocks
-  SET Tempo='$Tempo', Shared='$Shared', DateShared='$DateShared'
+  SET Tempo='$Tempo', Shared='$Shared', Date='$Date'
   WHERE ClockID='$ClockID'";
 
 if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {

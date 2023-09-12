@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
         $record["Shared"] = $row["Shared"];
-        $record["DateShared"] = $row["DateShared"];
+        $record["Date"] = $row["Date"];
         $record["NumOfLikes"] = $likes;
         $record["NumOfDislikes"] = $dislikes;
         $record["Ratio"] = $dislikes/$likes;

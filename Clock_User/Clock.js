@@ -33,7 +33,7 @@ function preload(){ //This function runs before the program is fully loaded.
 }
 
 function setup() {
-  createCanvas(windowWidth,windowHeight); //Sets the height and width of the sketch to those of the browser's window
+  createCanvas(1440,734); //Sets the height and width of the sketch to those of the chrome browser's window
   enter = 0;
   screen = 0;
   BUTTON_Y = 20;
@@ -275,6 +275,9 @@ function clock() {
   stroke(0);
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
+
+  console.log(width);
+  console.log(height);
 
   keypadBtn.drawButton();
 

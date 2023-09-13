@@ -23,7 +23,7 @@ function setup() {
   clickedOnCircle = null;
   circleOnScreen = false;
 
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(1440,734);
   RED = color('#d94d4c');
   GREEN = color('#87aa66');
   BLACK = color('#000000');

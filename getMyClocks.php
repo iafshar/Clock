@@ -59,8 +59,6 @@ if ($result->num_rows > 0) {
     // no clocks found
     $response["success"] = 0;
     $response["message"] = "No records found";
-    $response["SesUID"] = $_SESSION["UserID"];
-    $response["UID"] = $UserID;
 
     // echo no users JSON
     echo json_encode($response);

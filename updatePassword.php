@@ -85,11 +85,11 @@ session_start();
 			function save() {
 
 				
-					var resetPassword = document.getElementById("password").value;
-					localStorage.setItem("resetPassword", resetPassword); 
+				var resetPassword = document.getElementById("password").value;
+				localStorage.setItem("resetPassword", resetPassword); 
 
-					var resetPassword2 = document.getElementById("confirm-password").value;
-					localStorage.setItem("resetPassword2", resetPassword2); 
+				var resetPassword2 = document.getElementById("confirm-password").value;
+				localStorage.setItem("resetPassword2", resetPassword2); 
 
 			}
 		</script>

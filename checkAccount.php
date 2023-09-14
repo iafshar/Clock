@@ -79,14 +79,17 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
 
         while ($row = $result->fetch_assoc()) {
             $_SESSION['UserID'] = $row["UserID"];
+            $UserID = $_SESSION['UserID'];
             $_SESSION['Username'] = $row["Username"];
             $Password = $row["Password"];
                 
         }
 
+        $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'";
+        $result = mysqli_query($conn, $checkPwds);
         $response = array();
         
-        if ($Password == $Password1) {
+        if ($result->num_rows > 0) {
             $response["removeDifferentClass"] = "valid";
             $response["addDifferentClass"] = "invalid";
         }

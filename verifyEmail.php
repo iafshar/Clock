@@ -43,8 +43,24 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
 
             $Insert = "INSERT INTO Users (Username,Password,Email,Premium)
                 VALUES ('$Username', '$Password', '$email', '$premium')";
+            
+            
             if (mysqli_query($conn, $Insert)) {
-                header("Location:http://localhost:8080/Clock/myClocks.php");
+                $getUserID = "SELECT UserID FROM Users WHERE Username='$Username' AND Email='$email'";
+                $result2 = mysqli_query($conn, $getUserID);
+                while ($row = $result2->fetch_assoc()) {
+                    $UserID = $row["UserID"];
+                    $_SESSION["UserID"] = $UserID;
+                }
+                $addPwd = "INSERT INTO Passwords (UserID,Password)
+                        VALUES ('$UserID','$Password')";
+
+                if (mysqli_query($conn, $addPwd)) {
+                    header("Location:http://localhost:8080/Clock/myClocks.php");
+                }
+                else {
+                    echo "Error: " . $addPwd . "<br>" . mysqli_error($conn);
+                }
             } else {
                 echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
             }

@@ -26,12 +26,15 @@ if (isset($_POST['Password1'])){
 
   while ($row = $result->fetch_assoc()) {
     $_SESSION['UserID'] = $row["UserID"];
-    $_SESSION['Username'] = $row["Username"];
-    $Password = $row["Password"];
-        
+    $UserID = $_SESSION['UserID'];
+    $_SESSION['Username'] = $row["Username"];    
   }
 
-  if ($Password == $Password1) {
+  $exists = FALSE;
+  $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'";
+  $result = mysqli_query($conn, $checkPwds);
+
+  if ($result->num_rows > 0) {
     $invalid = TRUE;
     $_SESSION["differentResetClass"] = "invalid";
   }
@@ -100,11 +103,18 @@ if (isset($_POST['Password1'])){
         SET Password = '$Password1'
         WHERE UserID = '$UserID'";
     if (mysqli_query($conn, $updatePassword)) {
-        $deleteHash = $_SESSION['deleteHash'];
-        mysqli_query($conn, $deleteHash);
-        header("Location:http://localhost:8080/Clock/myClocks.php");
+        $addPwd = "INSERT INTO Passwords (UserID,Password)
+          VALUES ('$UserID','$Password1')";
+        if (mysqli_query($conn, $addPwd)) {
+          $deleteHash = $_SESSION['deleteHash'];
+          mysqli_query($conn, $deleteHash);
+          header("Location:http://localhost:8080/Clock/myClocks.php");
+        }
+        else {
+            echo "Error: " . $addPwd . "<br>" . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . $Insert . "<br>" . mysqli_error($conn);
+        echo "Error: " . $updatePassword . "<br>" . mysqli_error($conn);
     }
   }
 }

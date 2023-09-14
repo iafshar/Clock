@@ -38,7 +38,7 @@ session_start();
 					} 
 					else {
 						echo "invalid";
-					}?>>Password must be <b>different</b> from your last password</p>
+					}?>>Password must be <b>different</b> from previous passwords</p>
 				<p id="letter" class=
 				<?php 
 					if (isset($_SESSION["letterResetClass"])) {

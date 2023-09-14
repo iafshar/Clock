@@ -10,7 +10,8 @@ $db = new DB_CONNECT();
 
 $response = array(); // This is the array that will contain
 										 // the details of the results from all queries
-$response["myUserID"] = $_SESSION["UserID"];
+$MyUserID = $_SESSION["UserID"];
+$response["myUserID"] = $MyUserID;
 $sql = ("SELECT * FROM Clocks WHERE Shared = 1");
 $result = $db->get_con()->query($sql); // Gets the result of the above query
 // check for empty result
@@ -47,6 +48,20 @@ if ($result->num_rows > 0) {
         $record["NumOfLikes"] = $likes;
         $record["NumOfDislikes"] = $dislikes;
         $record["Ratio"] = $dislikes/$likes;
+        $checkLiked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$ClockID' AND Item=0 AND Dislike=0";
+        if ($db->get_con()->query($checkLiked)->num_rows > 0) {
+          $record["LikeColor"] = "#f39faa";
+        }
+        else {
+          $record["LikeColor"] = "#efefef";
+        }
+        $checkDisliked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$ClockID' AND Item=0 AND Dislike=1";
+        if ($db->get_con()->query($checkDisliked)->num_rows > 0) {
+          $record["DislikeColor"] = "#f39faa";
+        }
+        else {
+          $record["DislikeColor"] = "#efefef";
+        }
         array_push($response["ClocksUnsorted"], $record);
 				// Puts each record in the array not sorted by their like:dislike ratio
         $response["discover"] = 1;

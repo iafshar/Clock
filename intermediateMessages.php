@@ -5,7 +5,8 @@ require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 
 $response = $_SESSION['responseMessages'];
-$response["myUserID"] = $_SESSION['UserID'];
+$MyUserID = $_SESSION['UserID'];
+$response["myUserID"] = $MyUserID;
 
 if (array_key_exists("Messages", $response)) {
     $messages = $response["Messages"];
@@ -54,6 +55,20 @@ if (array_key_exists("Messages", $response)) {
                     $GetNumOfDislikes = "SELECT * FROM Votes WHERE ItemID='$clockID' AND Item=0 AND Dislike=1";
                     $result3 = $db->get_con()->query($GetNumOfDislikes);
                     $record["NumOfDislikes"] = $result3->num_rows;
+                    $checkLiked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$clockID' AND Item=0 AND Dislike=0";
+                    if ($db->get_con()->query($checkLiked)->num_rows > 0) {
+                        $record["LikeColor"] = "#f39faa";
+                    }
+                    else {
+                        $record["LikeColor"] = "#efefef";
+                    }
+                    $checkDisliked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$clockID' AND Item=0 AND Dislike=1";
+                    if ($db->get_con()->query($checkDisliked)->num_rows > 0) {
+                        $record["DislikeColor"] = "#f39faa";
+                    }
+                    else {
+                        $record["DislikeColor"] = "#efefef";
+                    }
                 }
                 $messages[$i] = $record;
             }

@@ -1,8 +1,11 @@
 <?php
+session_start();
 require_once __DIR__ . '/dbConnect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
+
+$MyUserID = $_SESSION["UserID"];
 
 $CommentID = $_GET['CommentID'];
 $GetReplies = "SELECT * FROM Replies WHERE CommentID='$CommentID'";
@@ -26,6 +29,21 @@ if ($result->num_rows > 0) {
         $getDislikes = "SELECT * FROM `Votes` WHERE ItemID='$replyID' AND Item=2 AND Dislike=1";
         $result2 = $db->get_con()->query($getDislikes);
         $record["NumOfDislikes"] = $result2->num_rows;
+
+        $checkLiked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$replyID' AND Item=2 AND Dislike=0";
+        if ($db->get_con()->query($checkLiked)->num_rows > 0) {
+            $record["LikeColor"] = "#f39faa";
+        }
+        else {
+            $record["LikeColor"] = "#efefef";
+        }
+        $checkDisliked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$replyID' AND Item=2 AND Dislike=1";
+        if ($db->get_con()->query($checkDisliked)->num_rows > 0) {
+            $record["DislikeColor"] = "#f39faa";
+        }
+        else {
+            $record["DislikeColor"] = "#efefef";
+        }
 
         $record["Reply"] = $row["Reply"];
         $record["Date"] = $row["Date"];

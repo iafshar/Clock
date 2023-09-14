@@ -41,6 +41,20 @@ if ($result->num_rows > 0){
     $GetNumOfDislikes = "SELECT * FROM Votes WHERE ItemID='$ClockID' AND Item=0 AND Dislike=1";
     $result3 = $db->get_con()->query($GetNumOfDislikes);
     $record["NumOfDislikes"] = $result3->num_rows;
+    $checkLiked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$ClockID' AND Item=0 AND Dislike=0";
+    if ($db->get_con()->query($checkLiked)->num_rows > 0) {
+      $record["LikeColor"] = "#f39faa";
+    }
+    else {
+      $record["LikeColor"] = "#efefef";
+    }
+    $checkDisliked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$ClockID' AND Item=0 AND Dislike=1";
+    if ($db->get_con()->query($checkDisliked)->num_rows > 0) {
+      $record["DislikeColor"] = "#f39faa";
+    }
+    else {
+      $record["DislikeColor"] = "#efefef";
+    }
     $record["Premium"] = $_SESSION["Premium"];
     array_push($response["ClocksUnsorted"], $record);
 

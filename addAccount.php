@@ -110,9 +110,9 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
     $_SESSION["matchClass"] = "valid";
   }
   if($invalid) {
-     $_SESSION["messageDisplay"] = "block";
+    $_SESSION["messageDisplay"] = "block";
 
-     header("Location:http://localhost:8080/Clock/signUp.php");
+    header("Location:http://localhost:8080/Clock/signUp.php");
   }
   else{
     header("Location:http://localhost:8080/Clock/sendEmail.php");

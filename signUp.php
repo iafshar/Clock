@@ -23,10 +23,10 @@ session_start();
 					<a href="login.php" class="already">Already have an account?</a>
 				</div>
 			</form>
-			<div id="message" style=
+			<div id="message"
 			<?php
 				if (isset($_SESSION["messageDisplay"])) {
-					echo "display:".$_SESSION["messageDisplay"];
+					echo "style=display:".$_SESSION["messageDisplay"];
 				}
 				
 			?>

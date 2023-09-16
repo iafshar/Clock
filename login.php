@@ -1,7 +1,7 @@
 <?php
 // login page
 session_start();
-echo $_SESSION["Error"] ?>
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +21,23 @@ echo $_SESSION["Error"] ?>
 				<input type="submit" value="Login" onclick="save()">
 				<a href="choose.html" class="create">Create an account</a>
 			</form>
+			<div id="message" style="display:none">
+			<p id="username-checkbox" class="invalid">
+				invalid credentials
+			</p>
+			</div>
 			<script>
 				function save() {
 					var loginUsername = document.getElementById("username").value;
-					localStorage.setItem("loginUsername", loginUsername); 
+					localStorage.setItem("loginUsername", loginUsername);
 				}
-	
+				
+				if (document.referrer == window.location.href) {
+					document.getElementById("message").style.display = "block";
+				}
+				else {
+					document.getElementById("message").style.display = "none";
+				}
 			</script>
 			<script>
 				document.getElementById("username").value = localStorage.getItem('loginUsername');

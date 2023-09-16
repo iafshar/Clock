@@ -22,10 +22,11 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
         $_SESSION['UserID'] = $row["UserID"];
         
     }
+    $_SESSION["loginMessageDisplay"] = "none";
     header("Location:http://localhost:8080/Clock/myClocks.php");
    } else {
-       $_SESSION["Error"] = "Invalid credentials";
-       header("Location:http://localhost:8080/Clock/login.php");
+    $_SESSION["loginMessageDisplay"] = "block";
+    header("Location:http://localhost:8080/Clock/login.php");
    }
 }
 else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {

@@ -1,8 +1,3 @@
-
-<?php
-session_start();
-echo $_SESSION["ErrorEmail"]; 
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,11 +8,23 @@ echo $_SESSION["ErrorEmail"];
 	</head>
 	<body>
 		<div class="login">
-			<form action="sendEmail.php" <?php $_SESSION["ErrorEmail"]=NULL;?> method="post">
-			
+			<form action="sendEmail.php" method="post">
 				<input type="text" name="Forgot" placeholder="Email or Username" id="email" autocomplete="email" required>
 				<input type="submit" value="Reset">
 			</form>
+			<div id="message" style="display:none">
+			<p id="username-checkbox" class="invalid">
+				This email or username is not associated with an account
+			</p>
+			</div>
+			<script>
+				if (document.referrer == window.location.href) {
+					document.getElementById("message").style.display = "block";
+				}
+				else {
+					document.getElementById("message").style.display = "none";
+				}
+			</script>
 		</div>
 	</body>
 </html>

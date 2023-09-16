@@ -1,7 +1,4 @@
-<?php
-// login page
-session_start();
-?>
+<!-- login page -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,7 +10,6 @@ session_start();
 	<body>
 		<div class="login">
 			<form action="checkAccount.php"
-			<?php $_SESSION["Error"]=NULL;?>
 			method="post">
 				<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
 				<input type="password" name="Password" placeholder="Password" id="password" autocomplete="current-password" required>

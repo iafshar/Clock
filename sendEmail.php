@@ -28,7 +28,6 @@ if (isset($_POST['Forgot'])) {
         $CheckUsername = "SELECT * FROM `Users` WHERE Username='$Email'";
         $result = mysqli_query($conn, $CheckUsername);
         if ($result->num_rows == 0) {
-            $_SESSION["ErrorEmail"] = "This email is not associated with an account";
             header("Location:http://localhost:8080/Clock/forgotPassword.php");
         }
     } 

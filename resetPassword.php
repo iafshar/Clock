@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["ErrorEmail"] = "";
 // include db connect class
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();

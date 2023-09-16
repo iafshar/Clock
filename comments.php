@@ -1,4 +1,12 @@
 <!-- presents the user with the comments related to their chosen clock -->
+<?php
+session_start();
+if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
+  echo "<script>alert('".$_SESSION["Error"]."');</script>";
+  $_SESSION["Error"] = "";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

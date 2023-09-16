@@ -3,7 +3,10 @@
 // <!-- the profile page of the user -->
 session_start();
 require_once __DIR__ . '/getUserID.php';
-echo $_SESSION["Error"]; 
+if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
+  echo "<script>alert('".$_SESSION["Error"]."');</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -73,7 +76,7 @@ echo $_SESSION["Error"];
       }
 
       function openComments(clockID) {
-        window.open('comments.html?'+clockID,'_self');
+        window.open('comments.php?'+clockID,'_self');
       }
 
       function sendClock(clockID) {

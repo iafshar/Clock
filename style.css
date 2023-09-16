@@ -382,6 +382,7 @@ a.forgot {
 #message p {
   padding: 10px 35px;
   font-size: 18px;
+  position: relative;
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
@@ -390,8 +391,8 @@ a.forgot {
 }
 
 .valid:before {
-  position: relative;
-  left: -35px;
+  position: absolute;
+  left: 0px;
   content: '\2713';
 }
 
@@ -401,7 +402,7 @@ a.forgot {
 }
 
 .invalid:before {
-  position: relative;
-  left: -35px;
+  position: absolute;
+  left: 0px;
   content: "\2715";
 }

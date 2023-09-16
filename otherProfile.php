@@ -35,8 +35,10 @@
           else {
             var source = document.getElementsByTagName("iframe")[i].src
             var index = source.indexOf("?") + 1;
-            document.getElementsByTagName("iframe")[i].src = source.substring(0,index) + "1" + source.substring(index + 1);
-            document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
+            if (source.charAt(index) == "0") {
+              document.getElementsByTagName("iframe")[i].src = source.substring(0,index) + "1" + source.substring(index + 1);
+              document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
+            }
           }
         }
       }

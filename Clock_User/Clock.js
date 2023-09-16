@@ -276,9 +276,6 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  console.log(width);
-  console.log(height);
-
   keypadBtn.drawButton();
 
   for(i=0;i<options.length;i++){

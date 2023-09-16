@@ -118,7 +118,6 @@
   var ogRows = document.getElementById("resultRows").innerHTML
   if (inp) {
     inp.addEventListener("input", function(e) {
-      console.log(clockID);
       var val = this.value;
       if (val.length > 0) {
         document.getElementById("searchHeading").innerHTML = "Username";

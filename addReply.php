@@ -21,11 +21,12 @@ if(isset($_POST['reply'])){
           VALUES ('$CommentID','$Reply','$Date')";
       }
       mysqli_query($conn, $AddReply);
+      header("Location:comments.html?".$ClockID);
   }
   else{
     $_SESSION["Error"] = "You need to upgrade to premium to be able to reply to comments.";
+    header("Location:myClocks.php");
   }
-  header("Location:comments.php?".$ClockID);
 
 }
 ?>

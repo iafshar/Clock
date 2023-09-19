@@ -15,10 +15,18 @@ function preload(){ //This function runs before the program is fully loaded.
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
         if (data.new == 0) {
-          edited = true;
           savedCircles = data.Circles;
           if (data.tempo != null && data.tempo != 0) {
             starting = data.tempo;
+          }
+          console.log(data.remix);
+          if (data.remix == 1) {
+            edited = false;
+            remixed = true;
+          }
+          else {
+            edited = true;
+            remixed = false;
           }
         }
         else {
@@ -198,7 +206,7 @@ function setup() {
   
   deleteNameDelay = 100; // used to delay deleting characters from clock name so that clicking backspace once doesnt remove a bunch of chars
 
-  if(edited && typeof savedCircles !== 'undefined'){
+  if(( edited || remixed ) && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){

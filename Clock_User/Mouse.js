@@ -68,7 +68,6 @@ function mousePressed() {
     else if (share.overButton()){
         shared = 1;
         if(edited){
-          if(edited){
             var circs = [];
             for(i = 0;i < circles.length;i++){
               circs[i] = [];
@@ -104,7 +103,6 @@ function mousePressed() {
             xmlhttp.open("GET", "edit.php?ClockID="+clockID+"&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
             xmlhttp.send();
             window.open("http://localhost:8080/Clock/myClocks.php", '_self');
-          }
         }
         else{
           screen = 2;

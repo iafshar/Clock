@@ -15,9 +15,17 @@ if ($ClockID >= 0) {
     $GetClock = "SELECT * FROM Clocks WHERE ClockID='$ClockID'";
     $result = $db->get_con()->query($GetClock);
     while ($row = $result->fetch_assoc()){
-    $response["name"] = $row["Name"];
-    $response["tempo"] = $row["Tempo"];
+        $makerID = $row["UserID"];
+        $response["name"] = $row["Name"];
+        $response["tempo"] = $row["Tempo"];
     }
+    if ($makerID != $_SESSION["UserID"]) {
+        $response["remix"] = 1;
+    }
+    else {
+        $response["remix"] = 0;
+    }
+    
     $response["new"] = 0;
     $GetCircles = "SELECT * FROM Circles WHERE ClockID='$ClockID'";
     $result = $db->get_con()->query($GetCircles);

@@ -11,6 +11,7 @@ function preload(){ //This function runs before the program is fully loaded.
   var xmlhttp = new XMLHttpRequest();
   starting = 120;
   edited = false;
+  remixed = false;
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
@@ -19,7 +20,6 @@ function preload(){ //This function runs before the program is fully loaded.
           if (data.tempo != null && data.tempo != 0) {
             starting = data.tempo;
           }
-          console.log(data.remix);
           if (data.remix == 1) {
             edited = false;
             remixed = true;

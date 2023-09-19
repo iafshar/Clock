@@ -20,7 +20,11 @@ if ($count == 5 && $Premium == 0 || $count == 20 && $Premium == 1){
 }
 else {
     $_SESSION["Error"] = "";
-    header("Location:http://localhost:8080/Clock/Clock_User/index.html");
+    $clockID = "";
+    if (isset($_GET["clockID"])) { // only true for remix
+        $clockID .= "?".$_GET["clockID"];
+    }
+    header("Location:http://localhost:8080/Clock/Clock_User/index.html".$clockID);
 }
 
 ?>

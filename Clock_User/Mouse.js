@@ -61,7 +61,18 @@ function mousePressed() {
           window.open("http://localhost:8080/Clock/myClocks.php", '_self');
         }
         else{
-          screen = 2;
+          clockName = prompt("Name your new clock");
+          if (clockName != null) {
+            illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
+            clockName = clockName.replaceAll(" ","_");
+            for (let index = 0; index < illegalChars.length; index++) {
+              clockName = clockName.replaceAll(illegalChars[index],""); 
+            }
+            if (clockName.length > 40 ) {
+              clockName = clockName.substring(0,40);
+            }
+            saving();
+          } 
         }
 
     }
@@ -105,7 +116,18 @@ function mousePressed() {
             window.open("http://localhost:8080/Clock/myClocks.php", '_self');
         }
         else{
-          screen = 2;
+          clockName = prompt("Name your new clock");
+          if (clockName != null) {
+            illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
+            clockName = clockName.replaceAll(" ","_");
+            for (let index = 0; index < illegalChars.length; index++) {
+              clockName = clockName.replaceAll(illegalChars[index],""); 
+            }
+            if (clockName.length > 40 ) {
+              clockName = clockName.substring(0,40);
+            }
+            saving();
+          } 
         }
     }
     else if (pauseBtn.overButton()) {
@@ -176,17 +198,6 @@ function mousePressed() {
            hs1.tempo = int(hs1.tempo);
         }
       }
-    }
-  }
-  else { //if screen == 2
-    if (enterBtn.overButton() && clockName.length > 0) {
-      saving();
-    }
-    else if (clearBtn.overButton()) {
-      clockName = "";
-    }
-    else if (backBtn.overButton()) {
-      screen = 0;
     }
   }
 }
@@ -267,18 +278,5 @@ function keyPressed(){
         enter = hs1.tempo;
         screen = 0;
     }
-  }
-  else if(screen == 2){
-    // 65-90 are letters, 48-57 are numbers, 190 is period, 189 is dash
-    if(((keyCode>=65 && keyCode<=90) || (keyCode>=48 && keyCode<=57) || (keyCode == 190 || keyCode == 189)) && clockName.length <= 40){
-      clockName += key;
-    }
-    else if (keyCode == 32) {
-      clockName += "_";
-    }
-    else if(keyCode == 13 && clockName.length > 0){ // enter
-      saving();
-    }
-        
   }
 }

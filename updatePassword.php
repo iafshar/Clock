@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Password</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="css/landing.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="signUp">

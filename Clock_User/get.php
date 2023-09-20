@@ -56,6 +56,17 @@ if ($ClockID >= 0) {
 }
 else {
     $response["new"] = 1;
+    $UserID = $_SESSION["UserID"];
+
+    $response["Names"] = array();
+    $getNames = "SELECT Name FROM Clocks WHERE UserID='$UserID'";
+    $result = $db->get_con()->query($getNames);
+
+    while ($row = $result->fetch_assoc()){
+        array_push($response["Names"],strtolower($row["Name"]));
+    }
+
+
     $response["success"] = 0;
     $response["message"] = "No records found";
 

@@ -12,9 +12,11 @@ function preload(){ //This function runs before the program is fully loaded.
   starting = 120;
   edited = false;
   remixed = false;
+  names = []; // will contain names of all clocks of the user to check when naming
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
+        
         if (data.new == 0) {
           savedCircles = data.Circles;
           if (data.tempo != null && data.tempo != 0) {
@@ -30,6 +32,7 @@ function preload(){ //This function runs before the program is fully loaded.
           }
         }
         else {
+          names = data.Names;
           savedCircles = [];
         }
       }

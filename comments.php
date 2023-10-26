@@ -1,4 +1,4 @@
-<!-- presents the user with the comments related to their chosen clock -->
+<!-- presents the user with the comments related to their chosen clock. -->
 <?php
 session_start();
 if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {

@@ -39,7 +39,9 @@ function preload(){ //This function runs before the program is fully loaded.
   };
   xmlhttp.open("GET", "get.php?ClockID="+clockID, true);
   xmlhttp.send();
+  TRASH_IMAGE = loadImage('../Icons/trash.png');
   KEYPAD_IMAGE = loadImage('keypad.png');
+  
   
 }
 
@@ -182,6 +184,7 @@ function setup() {
   fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false,false);
 
   keypadBtn = new ImageButton(width-60,height-120,50,50,KEYPAD_IMAGE);
+  trashBtn = new ImageButton(width-120,height-120,50,50,TRASH_IMAGE,true);
 
   first = 0;
   secnd = 0;
@@ -282,6 +285,7 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
+  trashBtn.drawButton();
   keypadBtn.drawButton();
 
   for(i=0;i<options.length;i++){

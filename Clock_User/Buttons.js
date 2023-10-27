@@ -104,19 +104,20 @@ class SeekButton extends Button{
 }
 
 class ImageButton extends Button{
-  constructor(x,y,Width,Height,image) {
+  constructor(x,y,Width,Height,image,dragDrop=false) {
     super(x,y,Width,Height);
     this.image = image;
+    this.dragDrop = dragDrop;
   }
 
   drawButton() {
-    if (this.overButton() && clickedOnCircle == null){
+    if (this.overButton() && (this.dragDrop || clickedOnCircle == null)){
       tint(0,0,0,100);
     }
     else {
       tint(0,0,0,255);
     }
-    image(KEYPAD_IMAGE,this.x,this.y,this.Width,this.Height);
+    image(this.image,this.x,this.y,this.Width,this.Height);
 
   }
 }

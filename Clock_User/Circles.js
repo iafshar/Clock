@@ -9,6 +9,8 @@ class Circle {
     this.outline = 0;
     this.onScreen = false;
     this.lastPlayed = 0;
+    this.startingX = ox;
+    this.startingY = oy;
   }
   drawCircle(){
     fill(this.colour);

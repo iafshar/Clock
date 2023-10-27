@@ -3,7 +3,23 @@ function mouseReleased() {
   mouseButton = 0;
   if(clickedOnCircle != null){
     clickedOnCircle.outline = 0;
+    if (trashBtn.overButton()) {
+      for(Op = 0;Op < options.length;Op ++){
+        if (options[Op].sounds.includes(clickedOnCircle)) {
+          circlesIndex = circles.indexOf(clickedOnCircle);
+          circles.splice(circlesIndex, 1);
+          soundIndex = options[Op].sounds.indexOf(clickedOnCircle);
+          options[Op].sounds.splice(soundIndex, 1);
+          options[Op].sounds.push(clickedOnCircle);
+          options[Op].counter --;
+          clickedOnCircle.ox = clickedOnCircle.startingX;
+          clickedOnCircle.oy = clickedOnCircle.startingY;
+          break;
+        }
+      }
+    }
     clickedOnCircle = null;
+
   }
 }
 

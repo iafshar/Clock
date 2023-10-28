@@ -22,6 +22,7 @@ function click() {
 
 function keypad(){
   background(200);
+  stroke(BLACK);
   strokeWeight(1);
   if(hs1.tempo>999){
     hs1.tempo = 0;

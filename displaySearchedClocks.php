@@ -43,7 +43,8 @@ else {
 
 
 // get all products from products table
-$sql = ("SELECT * FROM Clocks WHERE UserID='$SearchedUserID' AND Shared=1");
+$sql = ("SELECT * FROM Clocks WHERE UserID='$SearchedUserID' AND Shared=1
+        ORDER BY Date DESC");
 $result = $db->get_con()->query($sql);
 $response["Username"] = $SearchedUsername;
 // check for empty result

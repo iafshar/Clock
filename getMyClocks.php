@@ -18,7 +18,8 @@ require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 $UserID = $_SESSION["UserID"];
 // get all clocks from clocks table
-$sql = ("SELECT * FROM Clocks WHERE UserID='$UserID'");
+$sql = ("SELECT * FROM Clocks WHERE UserID='$UserID'
+         ORDER BY Date DESC");
 $result = $db->get_con()->query($sql);
 
 // check for empty result

@@ -237,13 +237,8 @@ function clock() {
   fill(bgColor);
   stroke(bgColor);
 
-  ellipse(CLOCK_X-70,CLOCK_Y+60,50,40);
-  ellipse(CLOCK_X+60,CLOCK_Y+30,50,40);
 
   strokeWeight(5);
-  line(CLOCK_X-48,CLOCK_Y+60,CLOCK_X-80,CLOCK_Y-80);
-  line(CLOCK_X+82,CLOCK_Y+28,CLOCK_X+50,CLOCK_Y-90);
-  line(CLOCK_X-80,CLOCK_Y-80,CLOCK_X+50,CLOCK_Y-90);
 
   stroke(BLACK);
 

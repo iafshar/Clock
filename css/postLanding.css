@@ -108,3 +108,8 @@ table.table[id="otherProfileTable"] {
   color: #faf39f;
   background-color: #f5bfcc;
 }
+
+input#clock-name:not(:focus) {
+  outline: none;
+  border: none;
+}

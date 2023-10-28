@@ -39,29 +39,12 @@ body {
   color: white;
 }
 
-.otherProfile-buttons {
-  position: relative;
-  top: 0px;
-  height: 0px;
-  width: 1000px;
-}
-
 button.followBtn {
-  position: relative;
-  top: 60px;
   background-color: #faf39f;
 }
 
 button.messageBtn {
-  position: relative;
-  top: 30px;
-  left: 10%;
   background-color: #faf39f;
-}
-
-table.table[id="otherProfileTable"] {
-  position: relative;
-  top: 30px;
 }
 
 .table-row:hover{

@@ -77,14 +77,14 @@ class PauseButton extends Button{
 }
 
 class SeekButton extends Button{
-  constructor(x,y,Width,Height,buttonColor,hoverColor,rewind,pressed) {
+  constructor(x,y,Width,Height,buttonColor,hoverColor,rewind) {
     super(x,y,Width,Height,"",buttonColor,hoverColor);
     this.rewind = rewind;
-    this.pressed = pressed;
+    this.timePressed = -1;
   }
 
   drawButton() {
-    if ((this.overButton() && clickedOnCircle == null) || this.pressed){
+    if ((this.overButton() && clickedOnCircle == null) || this.timePressed > 0){
       var realColor = this.hoverColor;
     }
     else{

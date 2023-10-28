@@ -1,5 +1,7 @@
 // functions related to user interactions
 function mouseReleased() {
+  fastForwardBtn.timePressed = -1;
+  rewindBtn.timePressed = -1;
   mouseButton = 0;
   if(clickedOnCircle != null){
     clickedOnCircle.outline = 0;
@@ -163,23 +165,22 @@ function mousePressed() {
     }
     else if (pauseBtn.overButton()) {
       pauseBtn.paused = !pauseBtn.paused;
-      fastForwardBtn.pressed = false;
-      rewindBtn.pressed = false;
     }
     else if (rewindBtn.overButton()) {
-      if (!rewindBtn.pressed && !fastForwardBtn.pressed) {
-        pauseBtn.paused = !pauseBtn.paused;
+      if (angle%45 == 0) {
+        angle -= 45;
       }
-      rewindBtn.pressed = true;
-      fastForwardBtn.pressed = false;
+      else {
+        angle = angle-(angle%45);
+      }
+      rewindBtn.timePressed = millis();
+      pauseBtn.paused = true;
       
     }
     else if (fastForwardBtn.overButton()) {
-      if (!fastForwardBtn.pressed && !rewindBtn.pressed) {
-        pauseBtn.paused = !pauseBtn.paused;
-      }
-      fastForwardBtn.pressed = true;
-      rewindBtn.pressed = false;
+      angle = angle-(angle%45)+45;
+      fastForwardBtn.timePressed = millis();
+      pauseBtn.paused = true;
       
     }
     for (i = 0;i<circles.length;i++){

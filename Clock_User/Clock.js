@@ -180,8 +180,8 @@ function setup() {
   angle = 270;
 
   pauseBtn = new PauseButton(CLOCK_X-15,CLOCK_Y-25,30,50,WHITE,VERY_LIGHT_YELLOW,false);
-  rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true,false);
-  fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false,false);
+  rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true);
+  fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false);
 
   keypadBtn = new ImageButton(width-60,height-120,50,50,KEYPAD_IMAGE);
   trashBtn = new ImageButton(width-120,height-120,50,50,TRASH_IMAGE,true);
@@ -346,16 +346,19 @@ function clock() {
     }
   }
 
-  if (rewindBtn.pressed) {
-    angle -= 250/40;
+  if (rewindBtn.timePressed > 0) {
+    if (millis() - rewindBtn.timePressed >= 500) {
+      angle -= 250/40;
+    }
   }
-  else if (fastForwardBtn.pressed) {
-    angle += 250/40;
+  else if (fastForwardBtn.timePressed > 0) {
+    if (millis() - fastForwardBtn.timePressed >= 500) {
+      angle += 250/40;
+    }
   }
   else if (!pauseBtn.paused) {
     angle += tempo;
   }
-
 }
 
 function draw(){

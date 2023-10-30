@@ -16,7 +16,6 @@
         if (this.readyState == 4 && this.status == 200) {
             var myRecords = JSON.parse(this.responseText);
             var premium = (myRecords.Premium == 1);
-            console.log(premium);
             myUserID = myRecords.myUserID;
             if(myRecords.success == 1 && myRecords.discover == 1) {
               var rows = "";
@@ -88,7 +87,7 @@
       }
 
       function openComments(clockID) {
-        window.open('comments.php?'+clockID,'_self');
+        window.open('comments.html?'+clockID,'_self');
       }
 
       function sendClock(clockID) {

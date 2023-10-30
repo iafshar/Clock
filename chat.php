@@ -103,7 +103,7 @@
       }
 
       function openComments(clockID) {
-        window.open('comments.php?'+clockID,'_self');
+        window.open('comments.html?'+clockID,'_self');
       }
 
       function sendClock(clockID) {

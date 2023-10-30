@@ -78,7 +78,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       }
 
       function openComments(clockID) {
-        window.open('comments.php?'+clockID,'_self');
+        window.open('comments.html?'+clockID,'_self');
       }
 
       function sendClock(clockID) {

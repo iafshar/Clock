@@ -59,6 +59,7 @@ if ($result->num_rows > 0) {
 
     array_push($response["Comments"], $record);
   }
+  $response["Premium"] = $_SESSION["Premium"];
   $response["success"] = 1;
 
   // echoing JSON response(prints it)

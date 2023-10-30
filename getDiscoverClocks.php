@@ -76,6 +76,8 @@ if ($result->num_rows > 0) {
 		// Now a merge sort function which I have created has been applied to the unsorted clocks
 		// and the array now has all the clocks sorted by their like:dislike ratio
 
+    $response["Premium"] = $_SESSION["Premium"];
+
     // echoing JSON response(prints it)
     echo json_encode($response);
 } else {

@@ -60,6 +60,7 @@ if ($result->num_rows > 0){
 
         // push single record into final response array
   }
+  $response["Premium"] = $_SESSION["Premium"];
   $response["success"] = 1;
 
   // echoing JSON response(prints it)

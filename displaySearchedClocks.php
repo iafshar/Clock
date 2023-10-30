@@ -86,6 +86,7 @@ if ($result->num_rows > 0) {
         // push single record into final response array
         array_push($response["Clocks"], $record);
     }
+    $response["Premium"] = $_SESSION["Premium"];
     // success
     $response["success"] = 1;
 

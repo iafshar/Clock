@@ -75,6 +75,7 @@ if (array_key_exists("Messages", $response)) {
         }
     }
 
+    $response["Premium"] = $_SESSION["Premium"];
     $response["Messages"] = $messages;
     echo json_encode($response);
 }

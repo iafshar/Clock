@@ -211,6 +211,12 @@ session_start();
 					illegals = ['\\',"'","\"", ">", "<", "@", " "];
 					if (illegals.includes(event.key)) {
 						event.preventDefault();
+						username.selectionStart = username.selectionEnd = username.value.length;
+        				username.focus();
+					}
+					
+					while (username.value.includes(" ")) {
+						username.value = username.value.replace(" ","");
 					}
 				}, false);
 

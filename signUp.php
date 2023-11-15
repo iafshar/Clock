@@ -207,6 +207,13 @@ session_start();
 				var usernameCheckbox = document.getElementById("username-checkbox");
 				var username = document.getElementById("username");
 
+				username.addEventListener('keydown', function(event) {
+					illegals = ['\\',"'","\"", ">", "<", "@", " "];
+					if (illegals.includes(event.key)) {
+						event.preventDefault();
+					}
+				}, false);
+
 				username.onkeyup = function() {
 					document.getElementById("message").style.display = "block";
 					var xmlhttp = new XMLHttpRequest();

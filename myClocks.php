@@ -29,7 +29,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
               for (i=0;i<myRecords.Clocks.length;i++) {
                 var myRecord = myRecords.Clocks[i];
                 var shared = ""
-                if (myRecord.Shared == "Yes") {
+                if (myRecord.Shared == 1) {
                   shared = "Unshare";
                 }
                 else {

@@ -34,12 +34,7 @@ if ($result->num_rows > 0) {
         $record["ClockID"] = $row["ClockID"];
         $record["Name"] = $row["Name"];
         $record["Tempo"] = $row["Tempo"];
-        if ($row["Shared"] == 1) {
-          $record["Shared"] = "Yes";
-        }
-        else {
-          $record["Shared"] = "No";
-        }
+        $record["Shared"] = $row["Shared"];
         $record["Date"] = $row["Date"];
         $GetNumOfLikes = "SELECT * FROM Votes WHERE ItemID='$ClockID' AND Item=0 AND Dislike=0";
         $result2 = $db->get_con()->query($GetNumOfLikes);

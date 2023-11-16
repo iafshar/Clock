@@ -25,6 +25,28 @@ function mouseReleased() {
   }
 }
 
+function nameClock() {
+  illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
+  promptStr = "Name your new clock";
+  do {
+    clockName = prompt(promptStr);
+    if (clockName != null) {
+      clockName = clockName.replaceAll(" ","_");
+      for (let index = 0; index < illegalChars.length; index++) {
+        clockName = clockName.replaceAll(illegalChars[index],""); 
+      }
+      if (clockName.length > 40 ) {
+        clockName = clockName.substring(0,40);
+      }
+      promptStr = "You have already used that name. Please choose another one."
+    }
+  } while (clockName != null && names.includes(clockName.toLowerCase()));
+
+  if (clockName != null && clockName.length > 0) {
+    saving();
+  } 
+}
+
 function mousePressed() {
   if (keypadBtn.overButton()){ //keypad
     screen = 1;
@@ -79,26 +101,7 @@ function mousePressed() {
           window.open("http://localhost:8080/Clock/myClocks.php", '_self');
         }
         else{
-
-          illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-          promptStr = "Name your new clock";
-          do {
-            clockName = prompt(promptStr);
-            if (clockName != null) {
-              clockName = clockName.replaceAll(" ","_");
-              for (let index = 0; index < illegalChars.length; index++) {
-                clockName = clockName.replaceAll(illegalChars[index],""); 
-              }
-              if (clockName.length > 40 ) {
-                clockName = clockName.substring(0,40);
-              }
-              promptStr = "You have already used that name. Please choose another one."
-            }
-          } while (clockName != null && names.includes(clockName.toLowerCase()));
-
-          if (clockName != null && clockName.length > 0) {
-            saving();
-          } 
+          nameClock(); 
         }
 
     }
@@ -142,25 +145,7 @@ function mousePressed() {
             window.open("http://localhost:8080/Clock/myClocks.php", '_self');
         }
         else{
-          illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-          promptStr = "Name your new clock";
-          do {
-            clockName = prompt(promptStr);
-            if (clockName != null) {
-              clockName = clockName.replaceAll(" ","_");
-              for (let index = 0; index < illegalChars.length; index++) {
-                clockName = clockName.replaceAll(illegalChars[index],""); 
-              }
-              if (clockName.length > 40 ) {
-                clockName = clockName.substring(0,40);
-              }
-              promptStr = "You have already used that name. Please choose another one."
-            }
-          } while (clockName != null && names.includes(clockName.toLowerCase()));
-
-          if (clockName != null && clockName.length > 0) {
-            saving();
-          } 
+          nameClock();
         }
     }
     else if (pauseBtn.overButton()) {

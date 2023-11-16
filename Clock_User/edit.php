@@ -3,11 +3,11 @@
 // <!-- updates the data of the clock in the database after the user has editted an existing clock -->
 session_start();
 
-$conn = mysqli_connect('localhost', 'root', '', 'ClockDB');
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once '../dbConnect.php';
+
+$db = new DB_CONNECT();
+// Create connection
+$conn = $db->get_con();
 
 $ClockID = $_GET["ClockID"];
 $Circles = $_GET["Circles"];

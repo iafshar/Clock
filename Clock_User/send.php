@@ -4,11 +4,11 @@ session_start();
 include '../getUserID.php';
 $response = array();
 
-$conn = mysqli_connect('localhost', 'root', '', 'ClockDB');
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once '../dbConnect.php';
+
+$db = new DB_CONNECT();
+// Create connection
+$conn = $db->get_con();
 
 $Circles = $_GET["Circles"];
 $Tempo = $_GET["tempo"];

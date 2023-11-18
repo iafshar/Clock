@@ -102,7 +102,7 @@
   <script>
 
   inp = document.getElementById("userSearch");
-  var ogRows = document.getElementById("resultRows").innerHTML
+  var ogRows = document.getElementById("resultRows").innerHTML;
   if (inp) {
     inp.addEventListener("input", function(e) {
       var val = this.value;

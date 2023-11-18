@@ -19,38 +19,6 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myRecords = JSON.parse(this.responseText);
-            var rows = "";
-            if (myRecords.success != 0){
-              for (i=0;i<myRecords.Clocks.length;i++) {
-                var myRecord = myRecords.Clocks[i];
-                var shared = ""
-                if (myRecord.Shared == 1) {
-                  shared = "Unshare";
-                }
-                else {
-                  shared = "Share";
-                }
-                
-                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"')>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
-                rows = rows+newRow
-              }
-              document.getElementById("resultRows").innerHTML = rows;
-            }
-            
-        }
-    };
-
-    xmlhttp.open("GET", "getMyClocks.php", true);
-    xmlhttp.send();
-
-
-    </script>
-    <script>
       function openClock(clockID) {
         window.open('Clock_User/index.html?'+clockID,'_self');
       }
@@ -202,11 +170,90 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       <thead class="thead-light">
         <tr>
           <!-- headings of the table -->
-          <th></th>
+          <th><img src="Icons/magnifying-glass.png" width="30" height="30"><input id="clockSearch" type="text" name="search" placeholder="Search" required></th>
           <th></th>
         </tr>
       </thead>
       <tbody id="resultRows">
       </tbody>
     </table>
+
+  <script>
+    // $newName = str_replace(' ','_',$newName);
+    inp = document.getElementById("clockSearch");
+    if (inp) {
+      inp.addEventListener("input", function(e) {
+        var val = this.value;
+        autocomplete(val);
+      });
+    }
+
+    function autocomplete(val) {
+      illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
+      for (let i = 0; i < illegalChars.length; i++) {
+        val = val.replaceAll(illegalChars[i],"");
+      }
+      val = val.replaceAll(" ","_");
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myRecords = JSON.parse(this.responseText);
+          var rows = "";
+          if (myRecords.success != 0){
+            for (i=0;i<myRecords.Clocks.length;i++) {
+              var myRecord = myRecords.Clocks[i];
+              if (myRecord.Name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                var shared = ""
+                if (myRecord.Shared == 1) {
+                  shared = "Unshare";
+                }
+                else {
+                  shared = "Share";
+                }
+                  
+                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"')>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                rows = rows+newRow
+              }
+            }
+            document.getElementById("resultRows").innerHTML = rows;
+          }  
+        }
+      };
+
+      xmlhttp.open("GET", "getMyClocks.php", true);
+      xmlhttp.send();
+    }
+  
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myRecords = JSON.parse(this.responseText);
+            var rows = "";
+            if (myRecords.success != 0){
+              for (i=0;i<myRecords.Clocks.length;i++) {
+                var myRecord = myRecords.Clocks[i];
+                var shared = ""
+                if (myRecord.Shared == 1) {
+                  shared = "Unshare";
+                }
+                else {
+                  shared = "Share";
+                }
+                
+                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"')>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                rows = rows+newRow
+              }
+              document.getElementById("resultRows").innerHTML = rows;
+            }
+            
+        }
+    };
+
+    xmlhttp.open("GET", "getMyClocks.php", true);
+    xmlhttp.send();
+
+
+  </script>
 </html>

@@ -157,7 +157,7 @@
   <table class="table" id="otherProfileTable">
       <thead class="thead-light">
         <tr>
-          <th id='profileHeader'></th>
+          <th><table><td id='profileHeader'></td><td><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required style='margin-left: 20px;'><img src='Icons/magnifying-glass.png' width='30' height='30'></td></table></th>
           <th>
             <div class="follow">
               <form action="follow.php" method="post">
@@ -177,5 +177,58 @@
       </thead>
       <tbody id="resultRows">
       </tbody>
-    </table>
+  </table>
+  <script>
+    inp = document.getElementById("clockSearch");
+    console.log(inp);
+    if (inp) {
+      inp.addEventListener("input", function(e) {
+        var val = this.value;
+        autocomplete(val);
+      });
+    }
+
+    function autocomplete(val) {
+      illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
+      for (let i = 0; i < illegalChars.length; i++) {
+        val = val.replaceAll(illegalChars[i],"");
+      }
+      val = val.replaceAll(" ","_");
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var myRecords = JSON.parse(this.responseText);
+              var premium = (myRecords.Premium == 1);
+              document.getElementById("profileHeader").innerHTML = myRecords.Username;
+              document.getElementById("sender").value = myRecords.Username;
+              document.getElementById("followBtn").innerHTML = myRecords.Following;
+              if(myRecords.success == 1) {
+                var rows = "";
+                for (i=0;i<myRecords.Clocks.length;i++) {
+                    var myRecord = myRecords.Clocks[i];
+                    if (myRecord.Name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                      if (premium) {
+                        var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.ClockID+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"') style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ClockID+",'"+myRecord.Name+"') style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addComment.php' method='post'><table><tr><td height=70></td></tr><tr><td><textarea style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><input type='hidden' name='MakerID' value="+myRecord.UserID+"><input type='hidden' name='clockName' value="+myRecord.Name+"><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View All</button><input type='hidden' name='location' value=otherProfile.php><input type='submit' style='width:200px;height:45px;' value='Enter'></td></tr></table></form></td></tr>";
+                      } 
+                      else {
+                        var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.ClockID+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton' onclick=like("+myRecord.ClockID+",'"+myRecord.Name+"') style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ClockID+",'"+myRecord.Name+"') style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td></tr></table></td></tr>";
+                      }
+                      rows = rows+newRow;
+                    }
+                }
+                document.getElementById("resultRows").innerHTML = rows;
+              }
+          }
+      };
+      if (urlParams.size == 0) {
+        xmlhttp.open("GET", "displaySearchedClocks.php", true);
+      }
+      else if (clickedUserID != null) {
+        xmlhttp.open("GET", "displaySearchedClocks.php?UserID="+clickedUserID, true); // if user reaches profile by clicking on their username rather than searching
+      }
+      xmlhttp.send();
+    }
+
+  </script>
 </html>

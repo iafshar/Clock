@@ -170,7 +170,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       <thead class="thead-light">
         <tr>
           <!-- headings of the table -->
-          <th><img src="Icons/magnifying-glass.png" width="30" height="30"><input id="clockSearch" type="text" name="search" placeholder="Search" required></th>
+          <th><input id="clockSearch" type="text" name="search" placeholder="Search" autocomplete="off" required><img src="Icons/magnifying-glass.png" width="30" height="30"></th>
           <th></th>
         </tr>
       </thead>
@@ -179,7 +179,6 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     </table>
 
   <script>
-    // $newName = str_replace(' ','_',$newName);
     inp = document.getElementById("clockSearch");
     if (inp) {
       inp.addEventListener("input", function(e) {

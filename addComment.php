@@ -39,7 +39,7 @@ if(isset($_POST['location'])){
       }
 
       $Date = date("Y-m-d H:i:s");
-      $Comment = $_POST['comment'];
+      $Comment = mysqli_real_escape_string($conn, $_POST['comment']);
       $AddComment = "INSERT INTO Comments (ClockID, Comment, Date)
         VALUES ('$ClockID','$Comment', '$Date')";
 

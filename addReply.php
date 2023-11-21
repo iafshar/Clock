@@ -13,7 +13,7 @@ if (isset($_POST['ClockID'])) {
 if(isset($_POST['reply'])){
   if($_SESSION["Premium"] == 1){
     $CommentID = $_POST['CommentID'];
-    $Reply = $_POST['reply'];
+    $Reply = mysqli_real_escape_string($conn, $_POST['reply']);
 
     if(strlen($Reply) != 0){
         $Date = date("Y-m-d H:i:s");

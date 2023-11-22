@@ -13,8 +13,9 @@
         message = document.getElementById('addMessage').value;
         var xmlhttp = new XMLHttpRequest();
 
+        console.log(decodeURI(encodeURI(message)));
         if (message.length > 0) {
-          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+message, true);
+          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+encodeURIComponent(message), true);
         }
         else {
           xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID, true);

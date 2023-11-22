@@ -10,12 +10,10 @@ $fromUsername = $_SESSION["Username"];
 if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Sender'])){
 
     $toUsername = $_POST['Sender'];
-    $content = $_POST['message'];
+    $content = mysqli_real_escape_string($db->get_con(), $_POST['message']);
 
     $dateSent = date('Y-m-d H:i:s');
     
-    $content = str_replace("\\","\\\\",$content);
-    $content = str_replace("'","\'",$content);
     
 
     $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent,Viewed)
@@ -78,8 +76,7 @@ else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
     
     $dateSent = date('Y-m-d H:i:s');
 
-
-
+    $content = mysqli_real_escape_string($db->get_con(), $content);
     $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent,Viewed)
         VALUES('$fromUsername','$toUsername',1,'$content','$dateSent',0)";
 

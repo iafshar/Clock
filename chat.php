@@ -25,6 +25,10 @@
                       for (i=0;i<myRecords.Messages.length;i++) {
                           var myRecord = myRecords.Messages[i];
                           var newRow = "";
+                          myRecord.Date = new Date(myRecord.Date);
+                          myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                          myRecord.DateSent = new Date(myRecord.DateSent);
+                          myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                           if (myRecord.sentByMe == 0) {
                             if (myRecord.Type == 1) { 
                               if (myUserID != myRecord.UserID) { // prevents user from being linked to their own profile page but from another perspective

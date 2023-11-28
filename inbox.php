@@ -16,13 +16,15 @@
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
-                   var Date = myRecords.Dates[i];
+                   var date = myRecords.Dates[i];
+                   date = new Date(date);
+                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                    var Bold = myRecords.Bolds[i];
                    if (Bold == 0) {
-                    var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                    var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+date+"</td></tr>";
                    }
                    else {
-                    var newRow = "<tr class='table-row'><td><strong>"+Username+"</strong></td><td><strong>"+Date+"</strong></td></tr>";
+                    var newRow = "<tr class='table-row'><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
                    }
                    
                    rows = rows+newRow;

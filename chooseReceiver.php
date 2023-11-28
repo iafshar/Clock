@@ -99,8 +99,10 @@
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
-                   var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   var date = myRecords.Dates[i];
+                   date = new Date(date);
+                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -133,8 +135,10 @@
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
-                   var Date = myRecords.Dates[i];
-                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+Date+"</td></tr>";
+                   var date = myRecords.Dates[i];
+                   date = new Date(date);
+                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;

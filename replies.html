@@ -19,6 +19,8 @@
               var rows = "";
               for (i=0;i<myRecords.Replies.length;i++) {
                   var myRecord = myRecords.Replies[i];
+                  myRecord.Date = new Date(myRecord.Date);
+                  myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                   var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Reply+"</td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.ReplyID+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ReplyID+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
                   rows = rows+newRow
               }

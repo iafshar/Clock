@@ -8,9 +8,9 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 
-if (isset($_GET["location"]) && isset($_GET["dislike"])) {
-    if (isset($_GET["clockID"])) {
-        $ItemID = $_GET["clockID"];
+if (isset($_POST["location"]) && isset($_POST["dislike"])) {
+    if (isset($_POST["clockID"])) {
+        $ItemID = $_POST["clockID"];
         $item = 0;
     }
     else if (isset($_GET["commentID"])) {
@@ -21,8 +21,8 @@ if (isset($_GET["location"]) && isset($_GET["dislike"])) {
         $ItemID = $_GET["replyID"];
         $item = 2;
     }
-    $location = $_GET["location"];
-    $dislike = $_GET["dislike"];
+    $location = $_POST["location"];
+    $dislike = $_POST["dislike"];
 }
 
 $UserID = $_SESSION["UserID"];
@@ -37,10 +37,12 @@ $VoteInsert = "INSERT INTO Votes (UserID, ItemID, Item, Dislike)
 
 if ($CheckCount != 0){
     mysqli_query($conn, $Unlike);
-    header("Location:".$location);
+    echo 0;
+    // header("Location:".$location);
 }
 else if (mysqli_query($conn, $VoteInsert)) {
-    header("Location:".$location);
+    echo 1;
+    // header("Location:".$location);
 }
 else {
     echo "Error: " . $VoteInsert . "<br>" . mysqli_error($conn);

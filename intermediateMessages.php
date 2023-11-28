@@ -21,7 +21,7 @@ if (array_key_exists("Messages", $response)) {
             $record["Type"] = $messages[$i]["Type"];
             $record["sentByMe"] = $messages[$i]["sentByMe"];
 
-            $contents = explode(",",$messages[$i]["Content"]);
+            $contents = explode(",",$messages[$i]["Content"],2);
             array_push($contents,""); // prevents needing to check for length of array in javascript,
                                     // if the length is now 2, it will add an empty string before the iframe which wont make a difference.
                                     // if the length is now 3, the third element will never be used so it doesn't matter

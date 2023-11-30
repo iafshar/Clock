@@ -21,7 +21,7 @@
                   var myRecord = myRecords.Replies[i];
                   myRecord.Date = new Date(myRecord.Date);
                   myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                  var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Reply+"</td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.ReplyID+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ReplyID+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                  var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Reply+"</td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.ReplyID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ReplyID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.ReplyID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.ReplyID+">"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -39,12 +39,52 @@
       }
     </script>
     <script>
-      function like(replyID) {
-        window.open('addVote.php?replyID='+replyID+'&location='+window.location.href+'&dislike=0','_self');
+      function like(replyID,elem) {
+        numLikes = document.getElementById("numLikes-"+replyID);
+        $.ajax({
+          type: 'post',
+          url: 'addVote.php',
+          data: {
+            location:window.location.href,
+            replyID:replyID,
+            dislike:0
+          },
+          success: function (response) {
+            if (response == 0) {
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1;
+              elem.style.backgroundColor = "#efefef";
+            }
+            else {
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1;
+              elem.style.backgroundColor = "#f39faa";
+            }
+            
+          }
+        });
       }
 
-      function dislike(replyID) {
-        window.open('addVote.php?replyID='+replyID+'&location='+window.location.href+'&dislike=1','_self');
+      function dislike(replyID,elem) {
+        numDislikes = document.getElementById("numDislikes-"+replyID);
+        $.ajax({
+          type: 'post',
+          url: 'addVote.php',
+          data: {
+            location:window.location.href,
+            replyID:replyID,
+            dislike:1
+          },
+          success: function (response) {
+            if (response == 0) {
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1;
+              elem.style.backgroundColor = "#efefef";
+            }
+            else {
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1;
+              elem.style.backgroundColor = "#f39faa";
+            }
+            
+          }
+        });
       }
     </script>
   </head>

@@ -13,12 +13,12 @@ if (isset($_POST["location"]) && isset($_POST["dislike"])) {
         $ItemID = $_POST["clockID"];
         $item = 0;
     }
-    else if (isset($_GET["commentID"])) {
-        $ItemID = $_GET["commentID"];
+    else if (isset($_POST["commentID"])) {
+        $ItemID = $_POST["commentID"];
         $item = 1;
     }
-    else if (isset($_GET["replyID"])) {
-        $ItemID = $_GET["replyID"];
+    else if (isset($_POST["replyID"])) {
+        $ItemID = $_POST["replyID"];
         $item = 2;
     }
     $location = $_POST["location"];

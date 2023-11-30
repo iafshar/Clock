@@ -17,7 +17,6 @@
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
               var premium = (myRecords.Premium == 1);
-              console.log(premium);
               if(myRecords.success == 1) {
                 var rows = "";
                 for (i=0;i<myRecords.Comments.length;i++) {
@@ -25,10 +24,10 @@
                     myRecord.Date = new Date(myRecord.Date);
                     myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                     if (premium) {
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addReply.php' method='post'><table><tr><td><textarea style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter'></form></td></tr></table></td></tr>";
+                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><form action='addReply.php' method='post'><table><tr><td><textarea style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea><input type='hidden' name='CommentID' value="+myRecord.CommentID+"><input type='hidden' name='ClockID' value="+myRecord.ClockID+"></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter'></form></td></tr></table></td></tr>";
                     }
                     else {
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><input type='button' style='width:200px;height:45px;' value='View Replies' onclick=getReplies("+myRecord.CommentID+")></td></tr></table></td></tr>";
+                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><input type='button' style='width:200px;height:45px;' value='View Replies' onclick=getReplies("+myRecord.CommentID+")></td></tr></table></td></tr>";
                     }
                     rows = rows+newRow
                 }
@@ -43,12 +42,53 @@
 
     </script>
     <script>
-      function like(commentID) {
-        window.open('addVote.php?commentID='+commentID+'&location='+window.location.href+'&dislike=0','_self');
+      function like(commentID,elem) {
+        numLikes = document.getElementById("numLikes-"+commentID);
+        $.ajax({
+          type: 'post',
+          url: 'addVote.php',
+          data: {
+            location:window.location.href,
+            commentID:commentID,
+            dislike:0
+          },
+          success: function (response) {
+            if (response == 0) {
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1;
+              elem.style.backgroundColor = "#efefef";
+            }
+            else {
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1;
+              elem.style.backgroundColor = "#f39faa";
+            }
+            
+          }
+        });
       }
 
-      function dislike(commentID) {
-        window.open('addVote.php?commentID='+commentID+'&location='+window.location.href+'&dislike=1','_self');
+      function dislike(commentID,elem) {
+        numDislikes = document.getElementById("numDislikes-"+commentID);
+        $.ajax({
+          type: 'post',
+          url: 'addVote.php',
+          data: {
+            location:window.location.href,
+            commentID:commentID,
+            dislike:1
+          },
+          success: function (response) {
+            if (response == 0) {
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1;
+              elem.style.backgroundColor = "#efefef";
+            }
+            else {
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1;
+              elem.style.backgroundColor = "#f39faa";
+            }
+            
+          }
+        });
+        // window.open('addVote.php?commentID='+commentID+'&location='+window.location.href+'&dislike=1','_self');
       }
 
       function getReplies(commentID) {

@@ -16,5 +16,5 @@ if(isset($_POST['clockID']) && isset($_POST['comment']) && $_SESSION["Premium"] 
 
   mysqli_query($conn, $AddComment);
 }
-echo 1;
+echo $_SESSION["Premium"]
 ?>

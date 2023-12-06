@@ -229,6 +229,8 @@
           success: function (response) {
             var myRecords = JSON.parse(response);
             myRecord = myRecords.Messages[0];
+            myRecord.DateSent = new Date(myRecord.DateSent);
+            myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
             newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"</td></tr>";
             rows = newRow + document.getElementById("resultRows").innerHTML;
             document.getElementById("resultRows").innerHTML = rows;

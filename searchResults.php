@@ -43,13 +43,14 @@
        var currentRow=$(this).closest("tr");
 
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+       console.log(Username);
        var message = (
         <?php
           session_start();
           echo json_encode($_SESSION["message"]);
         ?>
         );
-
+        console.log(message);
         if (message == 0) {
           var xmlhttp = new XMLHttpRequest();
           xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);

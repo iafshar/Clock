@@ -13,7 +13,6 @@
         message = document.getElementById('addMessage').value;
         var xmlhttp = new XMLHttpRequest();
 
-        console.log(decodeURI(encodeURI(message)));
         if (message.length > 0) {
           xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+encodeURIComponent(message), true);
         }
@@ -43,11 +42,8 @@
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
-    <form autocomplete="off" action="searchAllUsers.php" method="post">
-      <input id="userSearch" type="text" name="search" placeholder="Search" required>
-      <input type='hidden' name='message' value="1">
-      <input type="submit" value="🔍">
-    </form>
+    <input id="userSearch" type="text" name="search" placeholder="Search" value="">
+    <input type='hidden' name='message' value="1">
   </div>
   <script>
     var xmlhttp = new XMLHttpRequest();

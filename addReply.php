@@ -6,27 +6,16 @@ $db = new DB_CONNECT();
 // Create connection
 $conn = $db->get_con();
 
-$ClockID = "";
-if (isset($_POST['ClockID'])) {
-  $ClockID = $_POST['ClockID'];
-}
-if(isset($_POST['reply'])){
-  if($_SESSION["Premium"] == 1){
-    $CommentID = $_POST['CommentID'];
-    $Reply = mysqli_real_escape_string($conn, $_POST['reply']);
+if(isset($_POST['reply']) && isset($_POST['CommentID']) && $_SESSION["Premium"] == 1 && strlen($_POST['reply']) > 0){
 
-    if(strlen($Reply) != 0){
-        $Date = date("Y-m-d H:i:s");
-        $AddReply = "INSERT INTO Replies (CommentID,Reply,Date)
-          VALUES ('$CommentID','$Reply','$Date')";
-      }
-      mysqli_query($conn, $AddReply);
-      header("Location:comments.html?".$ClockID);
-  }
-  else{
-    $_SESSION["Error"] = "You need to upgrade to premium to be able to reply to comments.";
-    header("Location:myClocks.php");
-  }
+  $CommentID = $_POST['CommentID'];
+  $Reply = mysqli_real_escape_string($conn, $_POST['reply']);
+
+  $Date = date("Y-m-d H:i:s");
+  $AddReply = "INSERT INTO Replies (CommentID,Reply,Date)
+      VALUES ('$CommentID','$Reply','$Date')";
+      
+  mysqli_query($conn, $AddReply);
 
 }
 ?>

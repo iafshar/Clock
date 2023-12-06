@@ -42,7 +42,7 @@
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
-    <input id="userSearch" type="text" name="search" placeholder="Search" value="">
+    <input id="userSearch" type="text" name="search" placeholder="Search" autocomplete="off">
     <input type='hidden' name='message' value="1">
   </div>
   <script>

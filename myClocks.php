@@ -83,7 +83,6 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
             }
           }
         });
-        // window.open('changeShared.php?ClockID='+clockID,'_self');
       }
 
       function checkEnter(elem) {

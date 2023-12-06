@@ -109,6 +109,16 @@
           }
         });
       }
+
+      function changeFollow(elem) {
+        $.ajax({
+          type: 'post',
+          url: 'follow.php',
+          success: function (response) {
+            document.getElementById("followBtn").innerHTML = JSON.parse(response);
+          }
+        });
+      }
     </script>
 
   </head>
@@ -217,9 +227,7 @@
           <th><table><td id='profileHeader'></td><td><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required style='margin-left: 20px;'><img src='Icons/magnifying-glass.png' width='30' height='30'></td></table></th>
           <th>
             <div class="follow">
-              <form action="follow.php" method="post">
-                <button type="submit" class="followBtn" id="followBtn">Follow</button>
-              </form>
+              <button type="submit" class="followBtn" id="followBtn" onclick=changeFollow(this)>Follow</button>
             </div>
           </th>
           <th>

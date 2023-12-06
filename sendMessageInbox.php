@@ -8,7 +8,7 @@ $db = new DB_CONNECT();
 $fromUsername = $_SESSION["Username"];
 
 if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Sender'])){
-
+    
     $toUsername = $_POST['Sender'];
     $content = mysqli_real_escape_string($db->get_con(), $_POST['message']);
 
@@ -60,7 +60,8 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
 
     $response["otherUsername"] = $toUsername;
     $_SESSION['responseMessages'] = $response;
-    
+
+    echo json_encode($response);
     
 }
 else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
@@ -123,7 +124,8 @@ else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
     $_SESSION['responseMessages'] = $response;
 
     # code...
+    
 }
-header("Location:http://localhost:8080/Clock/chat.php");
 
+header("Location:http://localhost:8080/Clock/chat.php");
 ?>

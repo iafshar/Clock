@@ -15,7 +15,7 @@
                 var myRecords = JSON.parse(this.responseText);
                 var premium = (myRecords.Premium == 1);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
-                document.getElementById("messageBody").innerHTML = "<td><form action='sendMessageInbox.php' method='post'><table><tr><textarea style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='hidden' name='Sender' value="+myRecords.otherUsername+"><input type='submit' style='width:1400px;height:45px;' value='Enter'></tr></table></form></td>";
+                document.getElementById("messageBody").innerHTML = "<td><table><tr><textarea id='messageText' style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='submit' style='width:1400px;height:45px;' value='Enter' onclick=sendMessage('"+myRecords.otherUsername+"')></tr></table></td>";
                 var rows = "";
                 if (myRecords) {
                   if (myRecords.Messages) {
@@ -213,6 +213,26 @@
           },
           success: function () {
             comment.value = "";
+          }
+        });
+      }
+
+      function sendMessage(sender) {
+        message = document.getElementById("messageText");
+        $.ajax({
+          type: 'post',
+          url: 'sendMessageInbox.php',
+          data: {
+            Sender:sender,
+            message:message.value
+          },
+          success: function (response) {
+            var myRecords = JSON.parse(response);
+            myRecord = myRecords.Messages[0];
+            newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"</td></tr>";
+            rows = newRow + document.getElementById("resultRows").innerHTML;
+            document.getElementById("resultRows").innerHTML = rows;
+            message.value = "";
           }
         });
       }

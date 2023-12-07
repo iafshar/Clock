@@ -5,7 +5,7 @@ class HScrollbar {
     this.swidth = swidth;
     this.sheight = sheight;
     this.ypos = ypos
-    this.loose = 2;
+    this.loose = loose;
     this.starting = starting;
     this.TempoRange = 205;
     this.IncreaseTempo = this.swidth/this.TempoRange;

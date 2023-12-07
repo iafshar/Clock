@@ -46,7 +46,15 @@ function preload(){ //This function runs before the program is fully loaded.
 }
 
 function setup() {
-  // createCanvas(1440,734); //Sets the height and width of the sketch to those of the chrome browser's window
+  // 720 was the original CLOCK_X (width/2)
+  // 348.8910081743869 was the original CLOCK_Y
+  // 250 was the original RADIUS
+  // (OGX-720)/250 = x
+  // (250*x) + 720
+  // (OGY-348.8910081743869)/250 = y
+  // (250*OGY) + 348.8910081743869
+  // console.log((70-348.8910081743869)/250);
+  // createCanvas(1440,734); //For chrome
   createCanvas(windowWidth,windowHeight); //Sets the height and width of the sketch to those of the chrome browser's window
   
   CLOCK_X = width/2;
@@ -113,8 +121,7 @@ function setup() {
 
   STARTING_CIRCLE_X = windowWidth/72;
   circleX = STARTING_CIRCLE_X;
-
-  snareY = windowHeight/36.7;
+  snareY = (-1.3155640326975477 * RADIUS) + CLOCK_Y;
   kickY = snareY + (4*CIRCLE_DIAMETER);
   cymbalY = kickY + (4*CIRCLE_DIAMETER);
   hiHatY = cymbalY + (4*CIRCLE_DIAMETER);
@@ -167,7 +174,8 @@ function setup() {
   hiTomCount = 0;
   midTomCount = 0;
   crashCount = 0;
-
+  // 1020
+  // 890
   saveBtn = new Button(windowWidth/1.4118,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(windowWidth/1.61798,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
 
@@ -279,7 +287,6 @@ function setup() {
       }
     }
   }
-  console.log(savedCircles);
 }
 
 function clock() {

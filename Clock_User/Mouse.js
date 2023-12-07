@@ -91,8 +91,8 @@ function mousePressed() {
             else {
               circs[i][0] = 8;
             }
-            circs[i][1] = circles[i].ox;
-            circs[i][2] = circles[i].oy;
+            circs[i][1] = (circles[i].ox - CLOCK_X)/RADIUS;
+            circs[i][2] = (circles[i].oy - CLOCK_Y)/RADIUS;
           }
           var xmlhttp = new XMLHttpRequest();
 
@@ -135,8 +135,8 @@ function mousePressed() {
               else {
                 circs[i][0] = 8;
               }
-              circs[i][1] = circles[i].ox;
-              circs[i][2] = circles[i].oy;
+              circs[i][1] = (circles[i].ox - CLOCK_X)/RADIUS;
+              circs[i][2] = (circles[i].oy - CLOCK_Y)/RADIUS;
             }
             var xmlhttp = new XMLHttpRequest();
 
@@ -203,7 +203,7 @@ function mousePressed() {
       enter = hs1.tempo;
       screen = 0;
     }
-    else if (mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){
+    else if (mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){ //clear button
       hs1.tempo = 0;
       first = 0;
       secnd = 0;
@@ -252,8 +252,8 @@ function mouseDragged() { // Move Circle
     }
     if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
-      for(i = 50;i < 251;i += 50){
-        if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,10))){
+      for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
+        if(!(layer(CLOCK_X,CLOCK_Y,mouseX,mouseY,(RADIUS*2-i)/2,CIRCLE_DIAMETER/2))){
           vX = mouseX - CLOCK_X;
           vY = mouseY - CLOCK_Y;
           magV = sqrt(vX*vX + vY*vY);

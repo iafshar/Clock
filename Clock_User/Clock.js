@@ -46,16 +46,24 @@ function preload(){ //This function runs before the program is fully loaded.
 }
 
 function setup() {
-  createCanvas(1440,734); //Sets the height and width of the sketch to those of the chrome browser's window
+  // createCanvas(1440,734); //Sets the height and width of the sketch to those of the chrome browser's window
+  createCanvas(windowWidth,windowHeight); //Sets the height and width of the sketch to those of the chrome browser's window
+  
+  CLOCK_X = width/2;
+  CLOCK_Y = height/2-(windowHeight/36.7);
+  RADIUS = windowWidth/5.76;
+  angle = 270;
   enter = 0;
   screen = 0;
-  BUTTON_Y = 20;
-  BUTTON_HEIGHT = 50;
-  BUTTON_WIDTH = 110;
+
+  BUTTON_Y = (-1.3155640326975477*RADIUS) + CLOCK_Y;
+  BUTTON_END = (-1.1155640326975476*RADIUS) + CLOCK_Y;
+  BUTTON_HEIGHT = BUTTON_END - BUTTON_Y; //50
+  BUTTON_WIDTH = windowWidth/13.09;
   MAX_CIRCLES = 24;
 
-  SOUND_BUTTON_WIDTH = 240;
-  SOUND_BUTTON_X = 1150;
+  SOUND_BUTTON_WIDTH = windowWidth/6;
+  SOUND_BUTTON_X = windowWidth/1.2522;
 
   clickedOnCircle = null;
   circleOnScreen = false;
@@ -87,12 +95,12 @@ function setup() {
   bgColor = WHITE;
   clockColor = YELLOW;
 
-  CIRCLE_DIAMETER = 20;
+  CIRCLE_DIAMETER = windowWidth/72;
   circleOnScreen = false;
   CircleOutline = 0;
 
   checkMouseClicked = null;
-  hs1 = new HScrollbar(0, height-30, width, 30,2,starting);
+  hs1 = new HScrollbar(0, height-30, width, windowHeight/24.4667,2,starting);
 
   snares = [];
   Kicks = [];
@@ -103,28 +111,28 @@ function setup() {
   midToms = [];
   crashes = [];
 
-  STARTING_CIRCLE_X = 20;
+  STARTING_CIRCLE_X = windowWidth/72;
   circleX = STARTING_CIRCLE_X;
 
-  snareY = 20;
-  kickY = 100;
-  cymbalY = 180;
-  hiHatY = 260;
-  openHiHatY = 340;
-  hiTomY = 420;
-  midTomY = 500;
-  crashY = 580;
+  snareY = windowHeight/36.7;
+  kickY = snareY + (4*CIRCLE_DIAMETER);
+  cymbalY = kickY + (4*CIRCLE_DIAMETER);
+  hiHatY = cymbalY + (4*CIRCLE_DIAMETER);
+  openHiHatY = hiHatY + (4*CIRCLE_DIAMETER);
+  hiTomY = openHiHatY + (4*CIRCLE_DIAMETER);
+  midTomY = hiTomY + (4*CIRCLE_DIAMETER);
+  crashY = midTomY + (4*CIRCLE_DIAMETER);
 
   for (let i = 0; i < MAX_CIRCLES; i++) {
     if (i == MAX_CIRCLES/2) {
-      snareY += 40;
-      kickY += 40;
-      cymbalY += 40;
-      hiHatY += 40;
-      openHiHatY += 40;
-      hiTomY += 40;
-      midTomY += 40;
-      crashY += 40;
+      snareY += (2*CIRCLE_DIAMETER);
+      kickY += (2*CIRCLE_DIAMETER);
+      cymbalY += (2*CIRCLE_DIAMETER);
+      hiHatY += (2*CIRCLE_DIAMETER);
+      openHiHatY += (2*CIRCLE_DIAMETER);
+      hiTomY += (2*CIRCLE_DIAMETER);
+      midTomY += (2*CIRCLE_DIAMETER);
+      crashY += (2*CIRCLE_DIAMETER);
 
       circleX = STARTING_CIRCLE_X;
     }
@@ -146,7 +154,7 @@ function setup() {
     midToms.push(midTom);
     crashes.push(crash);
 
-    circleX += 30;
+    circleX += (1.5 * CIRCLE_DIAMETER);
   }
 
   circles = [];
@@ -160,24 +168,19 @@ function setup() {
   midTomCount = 0;
   crashCount = 0;
 
-  saveBtn = new Button(1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
-  share = new Button(890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
+  saveBtn = new Button(windowWidth/1.4118,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
+  share = new Button(windowWidth/1.61798,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
-  kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
-  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
-  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
-  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHats,openHiHatCount,BLUE,LIGHT_BLUE);
-  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
-  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
-  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
+  kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(BUTTON_HEIGHT+CIRCLE_DIAMETER),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(2*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
+  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(3*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
+  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(4*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHats,openHiHatCount,BLUE,LIGHT_BLUE);
+  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(5*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
+  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(6*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
+  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(7*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
 
   options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
-
-  CLOCK_X = width/2;
-  CLOCK_Y = height/2-20;
-  RADIUS = 250;
-  angle = 270;
 
   pauseBtn = new PauseButton(CLOCK_X-15,CLOCK_Y-25,30,50,WHITE,VERY_LIGHT_YELLOW,false);
   rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true);
@@ -212,70 +215,71 @@ function setup() {
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
         currentCircle = snareOp.sounds[snareOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         snareOp.counter ++;
       }
       else if(savedCircle.SoundID == 2){
         currentCircle = kickOp.sounds[kickOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         kickOp.counter ++;
       }
       else if(savedCircle.SoundID == 3){
         currentCircle = cymbalOp.sounds[cymbalOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         cymbalOp.counter ++;
       }
       else if(savedCircle.SoundID == 4){
         currentCircle = hiHatOp.sounds[hiHatOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiHatOp.counter ++;
       }
       else if(savedCircle.SoundID == 5){
         currentCircle = openHiHatOp.sounds[openHiHatOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         openHiHatOp.counter ++;
       }
       else if(savedCircle.SoundID == 6){
         currentCircle = hiTomOp.sounds[hiTomOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiTomOp.counter ++;
       }
       else if(savedCircle.SoundID == 7){
         currentCircle = midTomOp.sounds[midTomOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         midTomOp.counter ++;
       }
       else{
         currentCircle = crashOp.sounds[crashOp.counter];
-        currentCircle.ox = savedCircle.X;
-        currentCircle.oy = savedCircle.Y;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         crashOp.counter ++;
       }
     }
   }
+  console.log(savedCircles);
 }
 
 function clock() {
@@ -307,7 +311,7 @@ function clock() {
   fill(clockColor);
 
 
-  for(i = 50;i < 251;i += 50){
+  for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
     ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
   }
 

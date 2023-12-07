@@ -27,8 +27,8 @@ function saving(){
       circs[i][0] = 8;
     }
 
-    circs[i][1] = circles[i].ox;
-    circs[i][2] = circles[i].oy;
+    circs[i][1] = (circles[i].ox - CLOCK_X)/RADIUS;
+    circs[i][2] = (circles[i].oy - CLOCK_Y)/RADIUS;
   }
   var xmlhttp = new XMLHttpRequest();
 

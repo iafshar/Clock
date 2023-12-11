@@ -55,6 +55,11 @@ function setup() {
   // (250*OGY) + 348.8910081743869
   // console.log((70-348.8910081743869)/250);
   // createCanvas(1440,734); //For chrome
+  // Try below - maybe for things like radius or squares do whichever is smaller for the sizes
+  // NewPosition.x = (NewScreenWidth/OldScreenWidth) * CurrentPosition.x;
+  // NewPosition.y = (NewScreenYHeight/OldScreenHeight) * CurrentPosition.y;
+  // NewSize.x = (NewScreenWidth/OldScreenWidth) * OldSize.x;
+  // NewSize.y = (NewScreenHeight/OldScreenHeight) * OldSize.y;
   createCanvas(windowWidth,windowHeight); //Sets the height and width of the sketch to those of the chrome browser's window
   
   CLOCK_X = width/2;

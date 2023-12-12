@@ -30,9 +30,7 @@ class Button{
     strokeWeight(2.8);
     fill(bgColor);
     rect(this.x, this.y, this.Width, this.Height);
-    console.log(this.Width);
-    console.log(this.Height);
-    textSize(this.Height/1.666666666667);
+    textSize(TEXT_SIZE);
     strokeWeight(1);
     fill(realColor);
     textAlign(CENTER);

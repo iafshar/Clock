@@ -27,28 +27,28 @@ function keypad(){
   if(hs1.tempo>999){
     hs1.tempo = 0;
   }
-  text(hs1.tempo,300,100);
-  if(mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){
+  text(hs1.tempo,NUM_BUTTON_X + (2*NUM_BUTTON_DIAMETER),nhRatio*100);
+  if(mouseX >= CLEAR_X - (CLEAR_WIDTH/2) && mouseX <= CLEAR_X + (CLEAR_WIDTH/2) && mouseY >= CLEAR_Y-nhRatio*20 && mouseY <= CLEAR_Y+nhRatio*20){
     fill(WHITE);
   }
   else{
     fill(BLACK);
   }
-  text("Clear",400,100);
-  if(mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
+  text("Clear",CLEAR_X,CLEAR_Y);
+  if(mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
     fill(WHITE);
   }
   else{
     fill(BLACK);
   }
-  text("Click", 200, 500);
-  if(mouseX >= 360 && mouseX <= 435 && mouseY >= 480 && mouseY <= 520){
+  text("Click", CLICK_X, CLICK_Y);
+  if(mouseX >= ENTER_X - (ENTER_WIDTH/2) && mouseX <= ENTER_X + (ENTER_WIDTH/2) && mouseY >= ENTER_Y-nhRatio*20 && mouseY <= ENTER_Y+nhRatio*20){
     fill(WHITE);
   }
   else{
     fill(BLACK);
   }
-  text("Enter", 400, 500);
+  text("Enter", ENTER_X, ENTER_Y);
 
   for(i=0;i<nums.length;i++){
     nums[i].drawButton();

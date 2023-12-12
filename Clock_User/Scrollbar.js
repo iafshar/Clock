@@ -35,7 +35,7 @@ class HScrollbar {
     rect(this.spos, this.ypos, this.sheight, this.sheight); // creates the slider
 
     this.tempo = round(this.spos/this.IncreaseTempo) + this.MinTempo;
-    textSize(30);
+    textSize(TEXT_SIZE);
 
     fill(clockColor); // colour of the text
     if (this.tempo > this.MaxTempo) {
@@ -45,9 +45,9 @@ class HScrollbar {
       this.tempo = this.MinTempo;
     }
 
-    if (this.spos > this.swidth-60){  // if the slider gets too close to the end of the screen it stops moving the text to avoid it going past the screen
-      text(this.tempo, this.swidth-60, this.ypos-8);
-      this.numX = this.swidth-60;
+    if (this.spos > this.swidth-(TEXT_SIZE*2)){  // if the slider gets too close to the end of the screen it stops moving the text to avoid it going past the screen
+      text(this.tempo, this.swidth-(TEXT_SIZE*2), this.ypos-8);
+      this.numX = this.swidth-(TEXT_SIZE*2);
       this.numY = this.ypos-8;
     }
     else{

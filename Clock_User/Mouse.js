@@ -183,7 +183,7 @@ function mousePressed() {
   }
   }
   else if (screen == 1) {
-      if (mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
+      if (mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
       if (clickCount==2||clickCount==0){ //clicked as a condition
         clickCount = 1;
         stop1 = false;
@@ -193,7 +193,7 @@ function mousePressed() {
         stop2 = false;
       }
     }
-    else if (mouseX >= 360 && mouseX <= 435 && mouseY >= 480 && mouseY <= 520){
+    else if (mouseX >= ENTER_X - (ENTER_WIDTH/2) && mouseX <= ENTER_X + (ENTER_WIDTH/2) && mouseY >= ENTER_Y-nhRatio*20 && mouseY <= ENTER_Y+nhRatio*20){
       if (hs1.tempo < 25){
         hs1.tempo = 25;
       }
@@ -203,7 +203,7 @@ function mousePressed() {
       enter = hs1.tempo;
       screen = 0;
     }
-    else if (mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){ //clear button
+    else if (mouseX >= CLEAR_X - (CLEAR_WIDTH/2) && mouseX <= CLEAR_X + (CLEAR_WIDTH/2) && mouseY >= CLEAR_Y-nhRatio*20 && mouseY <= CLEAR_Y+nhRatio*20){ //clear button
       hs1.tempo = 0;
       first = 0;
       secnd = 0;

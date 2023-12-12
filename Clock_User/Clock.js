@@ -47,7 +47,7 @@ function preload(){ //This function runs before the program is fully loaded.
 
 function setup() {
   // 720 was the original CLOCK_X (width/2)
-  // 348.8910081743869 was the original CLOCK_Y
+  // 347 was the original CLOCK_Y
   // 250 was the original RADIUS
   // (OGX-720)/250 = x
   // (250*x) + 720
@@ -62,21 +62,39 @@ function setup() {
   // NewSize.y = (NewScreenHeight/OldScreenHeight) * OldSize.y;
   createCanvas(windowWidth,windowHeight); //Sets the height and width of the sketch to those of the chrome browser's window
   
-  CLOCK_X = width/2;
-  CLOCK_Y = height/2-(windowHeight/36.7);
-  RADIUS = windowWidth/5.76;
+  wRatio = width/1440;
+  hRatio = height/734;
+
+  if (width >= 445 && height >= 533) // checks the dimensions are good enough for the keypad screen
+  {
+    nwRatio = 1;
+    nhRatio = 1;
+  }
+  else
+  {
+    nwRatio = wRatio;
+    nhRatio = hRatio;
+  }
+
+  wRatio = width/1440;
+  hRatio = height/734;
+  CLOCK_X = wRatio * 720;
+  CLOCK_Y = hRatio * 347
+
+  RADIUS = Math.min((wRatio*250),(hRatio*250));
+
   angle = 270;
   enter = 0;
   screen = 0;
 
-  BUTTON_Y = (-1.3155640326975477*RADIUS) + CLOCK_Y;
-  BUTTON_END = (-1.1155640326975476*RADIUS) + CLOCK_Y;
-  BUTTON_HEIGHT = BUTTON_END - BUTTON_Y; //50
-  BUTTON_WIDTH = windowWidth/13.09;
+  BUTTON_Y = hRatio * 20;
+  // BUTTON_END = (-1.1155640326975476*RADIUS) + CLOCK_Y;
+  BUTTON_HEIGHT = hRatio * 50; //50
+  BUTTON_WIDTH = wRatio * 110;
   MAX_CIRCLES = 24;
 
-  SOUND_BUTTON_WIDTH = windowWidth/6;
-  SOUND_BUTTON_X = windowWidth/1.2522;
+  SOUND_BUTTON_WIDTH = wRatio * 240;
+  SOUND_BUTTON_X = wRatio * 1150;
 
   clickedOnCircle = null;
   circleOnScreen = false;
@@ -108,12 +126,15 @@ function setup() {
   bgColor = WHITE;
   clockColor = YELLOW;
 
-  CIRCLE_DIAMETER = windowWidth/72;
+  TEXT_SIZE = Math.min((wRatio*30),(hRatio*30));
+
+  CIRCLE_DIAMETER = Math.min((wRatio*20),(hRatio*20))
   circleOnScreen = false;
   CircleOutline = 0;
 
   checkMouseClicked = null;
-  hs1 = new HScrollbar(0, height-30, width, windowHeight/24.4667,2,starting);
+  SCROLLBAR_HEIGHT = hRatio*30;
+  hs1 = new HScrollbar(0, height-SCROLLBAR_HEIGHT, width, SCROLLBAR_HEIGHT,2,starting);
 
   snares = [];
   Kicks = [];
@@ -124,9 +145,9 @@ function setup() {
   midToms = [];
   crashes = [];
 
-  STARTING_CIRCLE_X = windowWidth/72;
+  STARTING_CIRCLE_X = wRatio*20;
   circleX = STARTING_CIRCLE_X;
-  snareY = (-1.3155640326975477 * RADIUS) + CLOCK_Y;
+  snareY = hRatio * 20;
   kickY = snareY + (4*CIRCLE_DIAMETER);
   cymbalY = kickY + (4*CIRCLE_DIAMETER);
   hiHatY = cymbalY + (4*CIRCLE_DIAMETER);
@@ -181,8 +202,8 @@ function setup() {
   crashCount = 0;
   // 1020
   // 890
-  saveBtn = new Button(windowWidth/1.4118,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
-  share = new Button(windowWidth/1.61798,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
+  saveBtn = new Button(wRatio*1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
+  share = new Button(wRatio*890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(BUTTON_HEIGHT+CIRCLE_DIAMETER),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
@@ -195,37 +216,63 @@ function setup() {
 
   options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
 
-  pauseBtn = new PauseButton(CLOCK_X-15,CLOCK_Y-25,30,50,WHITE,VERY_LIGHT_YELLOW,false);
-  rewindBtn = new SeekButton(CLOCK_X-105,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,true);
-  fastForwardBtn = new SeekButton(CLOCK_X+45,CLOCK_Y-25,60,50,WHITE,VERY_LIGHT_YELLOW,false);
+  PAUSE_WIDTH = Math.min((wRatio*30),(0.6*hRatio*50));
+  PAUSE_HEIGHT = Math.min((5/3)*(wRatio*30),(hRatio*50));
+  PAUSE_Y = CLOCK_Y-(PAUSE_HEIGHT/2);
 
-  keypadBtn = new ImageButton(width-60,height-120,50,50,KEYPAD_IMAGE);
-  trashBtn = new ImageButton(width-120,height-120,50,50,TRASH_IMAGE,true);
+  pauseBtn = new PauseButton(CLOCK_X-(PAUSE_WIDTH/2),PAUSE_Y,PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,false);
+  rewindBtn = new SeekButton(CLOCK_X-(3.5*PAUSE_WIDTH),PAUSE_Y,2*PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,true);
+  fastForwardBtn = new SeekButton(CLOCK_X+(1.5*PAUSE_WIDTH),PAUSE_Y,2*PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,false);
+
+  IMAGE_WIDTH = Math.min((wRatio*50),(hRatio*50));
+
+  keypadBtn = new ImageButton(wRatio*1380,hRatio*614,IMAGE_WIDTH,IMAGE_WIDTH,KEYPAD_IMAGE);
+  trashBtn = new ImageButton(wRatio*1380 - 1.2*(IMAGE_WIDTH),hRatio*614,IMAGE_WIDTH,IMAGE_WIDTH,TRASH_IMAGE,true);
 
   first = 0;
   secnd = 0;
   clickCount = 0;
   stop1 = false;
   stop2 = false;
-  NUM_BUTTON_DIAMETER = 50;
-  one = new NumButton(200,200,'1',NUM_BUTTON_DIAMETER);
-  two = new NumButton(300,200,'2',NUM_BUTTON_DIAMETER);
-  three = new NumButton(400,200,'3',NUM_BUTTON_DIAMETER);
-  four = new NumButton(200,300,'4',NUM_BUTTON_DIAMETER);
-  five = new NumButton(300,300,'5',NUM_BUTTON_DIAMETER);
-  six = new NumButton(400,300,'6',NUM_BUTTON_DIAMETER);
-  seven = new NumButton(200,400,'7',NUM_BUTTON_DIAMETER);
-  eight = new NumButton(300,400,'8',NUM_BUTTON_DIAMETER);
-  nine = new NumButton(400,400,'9',NUM_BUTTON_DIAMETER);
-  zero = new NumButton(300,500,'0',NUM_BUTTON_DIAMETER);
+
+  NUM_BUTTON_DIAMETER = Math.min((nwRatio*50),(nhRatio*50));
+  NUM_BUTTON_X = nwRatio * 200;
+  NUM_BUTTON_Y = nhRatio * 200;
+
+  
+  one = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y,'1',NUM_BUTTON_DIAMETER);
+  two = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y,'2',NUM_BUTTON_DIAMETER);
+  three = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y,'3',NUM_BUTTON_DIAMETER);
+  four = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'4',NUM_BUTTON_DIAMETER);
+  five = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'5',NUM_BUTTON_DIAMETER);
+  six = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'6',NUM_BUTTON_DIAMETER);
+  seven = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'7',NUM_BUTTON_DIAMETER);
+  eight = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'8',NUM_BUTTON_DIAMETER);
+  nine = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'9',NUM_BUTTON_DIAMETER);
+  zero = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(6*NUM_BUTTON_DIAMETER),'0',NUM_BUTTON_DIAMETER);
 
   nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
+
+  CLEAR_X = NUM_BUTTON_X + (4*NUM_BUTTON_DIAMETER);
+  CLEAR_WIDTH = textWidth("Clear") * (8/6);
+  CLEAR_Y = nhRatio*100;
+
+
+  CLICK_X = NUM_BUTTON_X;
+  CLICK_WIDTH = textWidth("Click") * (8/6);
+  CLICK_Y = nhRatio*500;
+
+  ENTER_X = NUM_BUTTON_X + (4*NUM_BUTTON_DIAMETER);
+  ENTER_WIDTH = textWidth("Enter") * (8/6);
+  ENTER_Y = CLICK_Y;
 
   clockName = "";
     
   if(( edited || remixed ) && typeof savedCircles !== 'undefined'){
     for(i=0;i<savedCircles.length;i++){
+      
       savedCircle = savedCircles[i];
+    
       if(savedCircle.SoundID == 1){
         currentCircle = snareOp.sounds[snareOp.counter];
         currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;

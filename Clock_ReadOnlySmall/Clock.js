@@ -148,64 +148,64 @@ function setup() {
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
         currentCircle = snares[snareCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         snareCount ++;
       }
       else if(savedCircle.SoundID == 2){
         currentCircle = Kicks[kickCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         kickCount ++;
       }
       else if(savedCircle.SoundID == 3){
         currentCircle = cymbals[cymbalCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         cymbalCount ++;
       }
       else if(savedCircle.SoundID == 4){
         currentCircle = hiHats[hiHatCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiHatCount ++;
       }
       else if(savedCircle.SoundID == 5){
         currentCircle = openHiHats[openHiHatCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         openHiHatCount ++;
       }
       else if(savedCircle.SoundID == 6){
         currentCircle = hiToms[hiTomCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         hiTomCount ++;
       }
       else if(savedCircle.SoundID == 7){
         currentCircle = midToms[midTomCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         midTomCount ++;
       }
       else{
         currentCircle = crashes[crashCount];
-        currentCircle.ox = savedCircle.X/4;
-        currentCircle.oy = savedCircle.Y/4;
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
         currentCircle.drawCircle();
         circles.push(currentCircle);
         crashCount ++;

@@ -76,8 +76,6 @@ function setup() {
     nhRatio = hRatio;
   }
 
-  wRatio = width/1440;
-  hRatio = height/734;
   CLOCK_X = wRatio * 720;
   CLOCK_Y = hRatio * 347
 
@@ -88,7 +86,6 @@ function setup() {
   screen = 0;
 
   BUTTON_Y = hRatio * 20;
-  // BUTTON_END = (-1.1155640326975476*RADIUS) + CLOCK_Y;
   BUTTON_HEIGHT = hRatio * 50; //50
   BUTTON_WIDTH = wRatio * 110;
   MAX_CIRCLES = 24;

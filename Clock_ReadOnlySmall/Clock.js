@@ -215,6 +215,14 @@ function setup() {
 }
 
 function clock() {
+  
+  if (localStorage.getItem("mute"+clockID)) {
+    mute = 0;
+  }
+  else {
+    mute = 1;
+  }
+
   background(bgColor);
   strokeWeight(1);
   fill(clockColor); //colours the ellipse yellow

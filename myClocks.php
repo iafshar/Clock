@@ -26,21 +26,22 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       function changeSound(clockID) {
         for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
           if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID) {
-            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID;
-            document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
-          }
-          else if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?0"+clockID) {
-            document.getElementsByTagName("iframe")[i].src = "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID;
-            document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-            break;
+            if (localStorage.getItem("mute"+clockID)) {
+              localStorage.removeItem("mute"+clockID);
+              document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
+              break;
+            }
+            else {
+              localStorage.setItem("mute"+clockID,0);
+              document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
+            }
           }
           else {
             var source = document.getElementsByTagName("iframe")[i].src
             var index = source.indexOf("?") + 1;
-            if (source.charAt(index) == "0") {
-              document.getElementsByTagName("iframe")[i].src = source.substring(0,index) + "1" + source.substring(index + 1);
-              document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-            }
+            var newClockID = source.substring(index + 1);
+            localStorage.removeItem("mute"+newClockID);
+            document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
           }
         }
       }

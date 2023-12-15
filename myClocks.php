@@ -23,24 +23,26 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
         window.open('Clock_User/index.html?'+clockID,'_self');
       }
 
-      function changeSound(clockID) {
+      function changeSound(clockID,rowID) {
         for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
-          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1"+clockID) {
-            if (localStorage.getItem("mute"+clockID)) {
-              localStorage.removeItem("mute"+clockID);
+          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) {
+            if (localStorage.getItem("muteRow"+rowID)) {
+              localStorage.removeItem("muteRow"+rowID);
               document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
               break;
             }
             else {
-              localStorage.setItem("mute"+clockID,0);
+              localStorage.setItem("muteRow"+rowID,0);
               document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
             }
           }
           else {
             var source = document.getElementsByTagName("iframe")[i].src
-            var index = source.indexOf("?") + 1;
-            var newClockID = source.substring(index + 1);
-            localStorage.removeItem("mute"+newClockID);
+            var rowIDIndex = source.indexOf("rowID=");
+            rowIDIndex += 6;
+            var clockIDIndex = source.indexOf("clockID="); 
+            var newRowID = source.substring(rowIDIndex,clockIDIndex);
+            localStorage.removeItem("muteRow"+newRowID);
             document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
           }
         }
@@ -122,7 +124,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
         for (let i = 0; i < iframes.length; i++) {
           iframes[i].contentWindow.document.body.onclick = function() {
             var source = iframes[i].src;
-            var index = source.indexOf("?") + 2;
+            var index = source.indexOf("clockID=") + 8;
             openClock(source.substring(index));
           }
         }
@@ -227,7 +229,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
                 }
                 myRecord.Date = new Date(myRecord.Date);
                 myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"',this)>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"',this)>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
                 rows = rows+newRow
               }
             }
@@ -258,8 +260,9 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
                 }
                 myRecord.Date = new Date(myRecord.Date);
                 myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?1"+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"',this)>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"')><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
-                rows = rows+newRow
+                var newRow = "<tr class='table-row'><td><table><tr><td><input type='text' name='clockName' value="+myRecord.Name+" id='clock-name' onfocus=checkEnter(this) onblur=changeName(this,'"+myRecord.ClockID+"') required></td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.ClockID+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick()></iframe></td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><button class='share' onclick=changeShared('"+myRecord.ClockID+"',this)>"+shared+"</button></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.ClockID+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.ClockID+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.ClockID+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='deletedata' onClick=deleteClock('"+myRecord.ClockID+"','"+myRecord.Name+"')><img border='0' src='Icons/trash.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><img border='0' src='Icons/like.png' width='40' height='40'></td><td><img border='0' src='Icons/dislike.png' width='40' height='40'></td><td><button type='button' class='viewComments' style='width:140px;height:45px;' onclick=openComments('"+myRecord.ClockID+"')>View Comments</button></td><tr><td>"+myRecord.NumOfLikes+"</td><td>"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                rows = rows+newRow;
+                localStorage.removeItem("muteRow"+i);
               }
               document.getElementById("resultRows").innerHTML = rows;
             }

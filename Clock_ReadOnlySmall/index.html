@@ -5,10 +5,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="http://localhost:8080/Clock/css/postLanding.css" rel="stylesheet" type="text/css">
   <script>
-    
-    var clockID = window.location.search.substring(2);
-    localStorage.removeItem("mute"+clockID);
-    var mute = window.location.search.substring(1,2);
+    var rowIDIndex = window.location.search.indexOf("rowID=");
+    rowIDIndex += 6;
+    var clockIDIndex = window.location.search.indexOf("clockID="); 
+    var rowID = window.location.search.substring(rowIDIndex,clockIDIndex);
+    clockIDIndex += 8;
+    var clockID = window.location.search.substring(clockIDIndex);
+    localStorage.removeItem("muteRow"+rowID);
+    var mute = 1;
   </script>
   <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.15/p5.js'></script> -->
   <!-- <script src=

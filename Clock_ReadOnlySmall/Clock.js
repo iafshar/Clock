@@ -216,7 +216,7 @@ function setup() {
 
 function clock() {
   
-  if (localStorage.getItem("mute"+clockID)) {
+  if (localStorage.getItem("muteRow"+rowID)) {
     mute = 0;
   }
   else {

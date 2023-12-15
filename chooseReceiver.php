@@ -109,7 +109,7 @@
 
     </script>
   <script>
-    document.getElementById('miniClock').src = 'http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?1'+clockID;
+    document.getElementById('miniClock').src = 'http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID=-1clockID='+clockID;
   </script>
   <script>
 

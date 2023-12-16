@@ -105,10 +105,8 @@
       
       function openClock(clockID,mine=false) {
         if (mine) {
-          console.log('yes');
           window.open('Clock_User/index.html?'+clockID,'_self');
         } else {
-          console.log('no');
           window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
         }
         
@@ -173,11 +171,11 @@
       }
     </script>
     <script>
-      function iframeclick(elem,mine=false) {
+      function iframeclick(elem) {
         elem.contentWindow.document.body.onclick = function() {
           var source = elem.src;
           var index = source.indexOf("clockID=") + 8;
-          openClock(source.substring(index),mine);
+          openClock(source.substring(index));
         }
       }
     </script>

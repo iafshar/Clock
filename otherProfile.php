@@ -7,111 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="css/postLanding.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="functions.js"></script>
     <script>
-      function like(clockID,elem) {
-        numLikes = document.getElementById("numLikes-"+clockID);
-        $.ajax({
-          type: 'post',
-          url: 'addVote.php',
-          data: {
-            location:'otherProfile.php',
-            clockID:clockID,
-            dislike:0
-          },
-          success: function (response) {
-            if (response == 0) {
-              numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1;
-              elem.style.backgroundColor = "#efefef";
-            }
-            else {
-              numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1;
-              elem.style.backgroundColor = "#f39faa";
-            }
-            
-          }
-        });
-      }
-
-      function dislike(clockID,elem) {
-        numDislikes = document.getElementById("numDislikes-"+clockID);
-        $.ajax({
-          type: 'post',
-          url: 'addVote.php',
-          data: {
-            location:'otherProfile.php',
-            clockID:clockID,
-            dislike:1
-          },
-          success: function (response) {
-            if (response == 0) {
-              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1;
-              elem.style.backgroundColor = "#efefef";
-            }
-            else {
-              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1;
-              elem.style.backgroundColor = "#f39faa";
-            }
-            
-          }
-        });
-      }
       
-      function openClock(clockID) {
-        window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
-      }
-
-
-      function changeSound(clockID,rowID) {
-        for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
-          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) {
-            if (localStorage.getItem("muteRow"+rowID)) {
-              localStorage.removeItem("muteRow"+rowID);
-              document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-              break;
-            }
-            else {
-              localStorage.setItem("muteRow"+rowID,0);
-              document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
-            }
-          }
-          else {
-            var source = document.getElementsByTagName("iframe")[i].src
-            var rowIDIndex = source.indexOf("rowID=");
-            rowIDIndex += 6;
-            var clockIDIndex = source.indexOf("clockID="); 
-            var newRowID = source.substring(rowIDIndex,clockIDIndex);
-            localStorage.removeItem("muteRow"+newRowID);
-            document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-          }
-        }
-      }
-
-      function openComments(clockID) {
-        window.open('comments.html?'+clockID,'_self');
-      }
-
-      function sendClock(clockID) {
-        window.open('chooseReceiver.php?'+clockID,'_self');
-      }
-
-      function remixClock(clockID) {
-        window.open('checkClockLimit.php?clockID='+clockID,'_self');
-      }
-
-      function addComment(clockID) {
-        comment = document.getElementById("commentBox-"+clockID);
-        $.ajax({
-          type: 'post',
-          url: 'addComment.php',
-          data: {
-            clockID:clockID,
-            comment:comment.value
-          },
-          success: function () {
-            comment.value = "";
-          }
-        });
-      }
 
       function changeFollow(elem) {
         $.ajax({
@@ -182,21 +80,9 @@
         window.open('chat.php','_self');
       }
 
-      function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-      }
+      
     </script>
-    <script>
-      function iframeclick(elem) {
-        elem.contentWindow.document.body.onclick = function() {
-          var source = elem.src;
-          var index = source.indexOf("clockID=") + 8;
-          openClock(source.substring(index));
-        }
-      }
-    </script>
+    
     <div class="topnav">
       <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="Icons/back.png" width="30" height="30"></a>
       <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
@@ -208,18 +94,7 @@
     </div>
   </body>
   <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-      }
-      
-    };
-
-    
-    xmlhttp.open("GET", "countUnreadMessages.php", true);
-    xmlhttp.send();
+    setUnreadCount();
 
   </script>
   <table class="table" id="otherProfileTable">

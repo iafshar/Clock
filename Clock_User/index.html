@@ -49,24 +49,9 @@
   <a href="http://localhost:8080/Clock/search.php"><img border="0" src="http://localhost:8080/Clock/Icons/magnifying-glass.png" width="30" height="30"></a>
 </div>
 </body>
+<script src="../functions.js"></script>
 <script>
-  var xmlhttp = new XMLHttpRequest();
+  setUnreadCount();
 
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-    }
-    
-  };
-
-  
-  xmlhttp.open("GET", "http://localhost:8080/Clock/countUnreadMessages.php", true);
-  xmlhttp.send();
-
-  function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-  }
 </script>
 </html>

@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="functions.js"></script>
     <script>
       var clockID = window.location.search.substring(1);
       var xmlhttp = new XMLHttpRequest();
@@ -24,10 +25,10 @@
                     myRecord.Date = new Date(myRecord.Date);
                     myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                     if (premium) {
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><textarea id=replyBox-"+myRecord.CommentID+" style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addReply('"+myRecord.CommentID+"')></td></tr></table></td></tr>";
+                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><textarea id=replyBox-"+myRecord.CommentID+" style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addReply('"+myRecord.CommentID+"')></td></tr></table></td></tr>";
                     }
                     else {
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><input type='button' style='width:200px;height:45px;' value='View Replies' onclick=getReplies("+myRecord.CommentID+")></td></tr></table></td></tr>";
+                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><input type='button' style='width:200px;height:45px;' value='View Replies' onclick=getReplies("+myRecord.CommentID+")></td></tr></table></td></tr>";
                     }
                     rows = rows+newRow
                 }
@@ -42,7 +43,7 @@
 
     </script>
     <script>
-      function like(commentID,elem) {
+      function likeComment(commentID,elem) {
         numLikes = document.getElementById("numLikes-"+commentID);
         $.ajax({
           type: 'post',
@@ -66,7 +67,7 @@
         });
       }
 
-      function dislike(commentID,elem) {
+      function dislikeComment(commentID,elem) {
         numDislikes = document.getElementById("numDislikes-"+commentID);
         $.ajax({
           type: 'post',
@@ -94,11 +95,7 @@
         window.open('replies.html?'+commentID,'_self');
       }
 
-      function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-      }
+      
 
       function addReply(commentID) {
         reply = document.getElementById("replyBox-"+commentID);
@@ -129,18 +126,7 @@
   </div>
   </body>
   <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-      }
-      
-    };
-
-    
-    xmlhttp.open("GET", "countUnreadMessages.php", true);
-    xmlhttp.send();
+    setUnreadCount();
 
   </script>
   <table class="table" id="clockTable">

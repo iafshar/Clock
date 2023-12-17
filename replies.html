@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="functions.js"></script>
     <script>
     var commentID = window.location.search.substring(1);
     var xmlhttp = new XMLHttpRequest();
@@ -21,7 +22,7 @@
                   var myRecord = myRecords.Replies[i];
                   myRecord.Date = new Date(myRecord.Date);
                   myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                  var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Reply+"</td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=like("+myRecord.ReplyID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislike("+myRecord.ReplyID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.ReplyID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.ReplyID+">"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
+                  var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Reply+"</td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeReply("+myRecord.ReplyID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeReply("+myRecord.ReplyID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.ReplyID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.ReplyID+">"+myRecord.NumOfDislikes+"</td></tr></table></td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -32,14 +33,10 @@
     xmlhttp.open("GET", "getReplies.php?CommentID="+commentID, true);
     xmlhttp.send();
 
-    function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-      }
+    
     </script>
     <script>
-      function like(replyID,elem) {
+      function likeReply(replyID,elem) {
         numLikes = document.getElementById("numLikes-"+replyID);
         $.ajax({
           type: 'post',
@@ -63,7 +60,7 @@
         });
       }
 
-      function dislike(replyID,elem) {
+      function dislikeReply(replyID,elem) {
         numDislikes = document.getElementById("numDislikes-"+replyID);
         $.ajax({
           type: 'post',
@@ -100,18 +97,7 @@
   </div>
   </body>
   <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-      }
-      
-    };
-
-    
-    xmlhttp.open("GET", "countUnreadMessages.php", true);
-    xmlhttp.send();
+    setUnreadCount();
 
   </script>
   <table class="table" id="clockTable">

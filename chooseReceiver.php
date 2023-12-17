@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="functions.js"></script>
     <script>
       function sendToUser(Username, clockID) {
         message = document.getElementById('addMessage').value;
@@ -25,11 +26,7 @@
 
       }
 
-      function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-      }
+      
     </script>
   </head>
   <body>
@@ -46,18 +43,7 @@
     <input type='hidden' name='message' value="1">
   </div>
   <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-      }
-      
-    };
-
-    
-    xmlhttp.open("GET", "countUnreadMessages.php", true);
-    xmlhttp.send();
+    setUnreadCount();
 
   </script>
   <div class="searchTable">

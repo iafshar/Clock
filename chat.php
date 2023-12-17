@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="functions.js"></script>
     <script>
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
@@ -33,18 +34,18 @@
                               if (myUserID != myRecord.UserID) { // prevents user from being linked to their own profile page but from another perspective
                                 if (myRecord.Shared == 1) {
                                   if (premium) {
-                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr></table></td></tr>";
+                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr></table></td></tr>";
                                   }
                                   else {
-                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr></table></td></tr>";
+                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr></table></td></tr>";
                                   }
                                 }
                                 else {
                                   if (premium) {
-                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr></table></td></tr>";
+                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr></table></td></tr>";
                                   }
                                   else {
-                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr></table></td></tr>";
+                                    newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr></table></td></tr>";
                                   }
                                 }
                               }
@@ -67,10 +68,10 @@
                               
                               if (myUserID != myRecord.UserID) {
                                 if (premium) {
-                                  newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td></tr>";
+                                  newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><textarea id=commentBox-"+i+" style='height:195px;width:400px;font-size:30px;' name='comment' placeholder='Comment'></textarea></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View All</button><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addComment('"+myRecord.Content[0]+"','"+i+"')></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td></tr>";
                                 } 
                                 else {
-                                  newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=like("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislike("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td></tr>";
+                                  newRow = "<tr class='table-row' style='background-color:"+myRecord.Color+"'><td><table><tr><td><b><a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a></b></td></tr><tr><td>"+myRecord.Name+"</td></tr><tr><td><iframe src='Clock_ReadOnlySmall/index.html?rowID="+i+"clockID="+myRecord.Content[0]+"' loading='lazy' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe><br>"+myRecord.Content[1]+"</td></tr><tr><td><i>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='viewClock' onclick=openClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/expand.png' width='40' height='40'></button></td><td><button class='changeSound' onclick=changeSound('"+myRecord.Content[0]+"',"+i+")><img border='0' src='Icons/mute.png' class='sound-icon' width='40' height='40'></button></td><td><button class='sendClock' onclick=sendClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/inbox.png' width='40' height='40'></button></td><td><button class='remixClock' onclick=remixClock('"+myRecord.Content[0]+"')><img border='0' src='Icons/music.png' width='40' height='40'></button></td></tr><tr><td height=225></td></tr><tr><td><button class='likeButton-"+myRecord.Content[0]+"' onclick=likeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton-"+myRecord.Content[0]+"' onclick=dislikeChat("+myRecord.Content[0]+") style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td><tr><td class=numLikes-"+myRecord.Content[0]+">"+myRecord.NumOfLikes+"</td><td class=numDislikes-"+myRecord.Content[0]+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td height=70></td></tr><tr><td><button type='button' class='viewComments' style='width:200px;height:45px;' onclick=openComments('"+myRecord.Content[0]+"')>View Comments</button></td></tr><tr><td><strong>Sent</strong><br><i>"+myRecord.DateSent+"</i></td></tr></table></td></tr>";
                                 }
                               }
                               else {
@@ -103,7 +104,7 @@
 
     </script>
     <script>
-      function like(clockID) {
+      function likeChat(clockID) {
         $.ajax({
           type: 'post',
           url: 'addVote.php',
@@ -131,7 +132,7 @@
         });
       }
 
-      function dislike(clockID) {
+      function dislikeChat(clockID) {
         $.ajax({
           type: 'post',
           url: 'addVote.php',
@@ -159,75 +160,6 @@
         });
       }
 
-      function openClock(clockID,mine=false) {
-        if (mine) {
-          console.log('yes');
-          window.open('Clock_User/index.html?'+clockID,'_self');
-        } else {
-          console.log('no');
-          window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
-        }
-      }
-
-      function changeSound(clockID,rowID) {
-        for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
-          if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) {
-            if (localStorage.getItem("muteRow"+rowID)) {
-              localStorage.removeItem("muteRow"+rowID);
-              document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-              break;
-            }
-            else {
-              localStorage.setItem("muteRow"+rowID,0);
-              document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
-            }
-          }
-          else {
-            
-            var source = document.getElementsByTagName("iframe")[i].src
-            var rowIDIndex = source.indexOf("rowID=");
-            rowIDIndex += 6;
-            var clockIDIndex = source.indexOf("clockID="); 
-            var newRowID = source.substring(rowIDIndex,clockIDIndex);
-            localStorage.removeItem("muteRow"+newRowID);
-            document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
-          }
-        }
-      }
-
-      function openComments(clockID) {
-        window.open('comments.html?'+clockID,'_self');
-      }
-
-      function sendClock(clockID) {
-        window.open('chooseReceiver.php?'+clockID,'_self');
-      }
-
-      function remixClock(clockID) {
-        window.open('checkClockLimit.php?clockID='+clockID,'_self');
-      }
-
-      function checkBack() {
-        if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
-          history.back();
-        }
-      }
-
-      function addComment(clockID,rowID) {
-        comment = document.getElementById("commentBox-"+rowID);
-        $.ajax({
-          type: 'post',
-          url: 'addComment.php',
-          data: {
-            clockID:clockID,
-            comment:comment.value
-          },
-          success: function () {
-            comment.value = "";
-          }
-        });
-      }
-
       function sendMessage(sender) {
         message = document.getElementById("messageText");
         $.ajax({
@@ -250,15 +182,6 @@
         });
       }
     </script>
-    <script>
-      function iframeclick(elem,mine=false) {
-        elem.contentWindow.document.body.onclick = function() {
-          var source = elem.src;
-          var index = source.indexOf("clockID=") + 8;
-          openClock(source.substring(index),mine);
-        }
-      }
-    </script>
   </head>
   <body>
     <div class="topnav">
@@ -271,18 +194,7 @@
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
   </div>
   <script>
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chats").innerHTML += JSON.parse(this.responseText);
-      }
-      
-    };
-
-    
-    xmlhttp.open("GET", "countUnreadMessages.php", true);
-    xmlhttp.send();
+    setUnreadCount()
 
   </script>
   <div class="messageTable">

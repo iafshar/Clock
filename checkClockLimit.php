@@ -8,7 +8,7 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 $UserID = $_SESSION['UserID'];
-$Premium = $_SESSION['Premium'];
+$Premium = $_SESSION["Premium"];
 
 $ClockSearch = "SELECT * FROM `Clocks` WHERE UserID='$UserID'";
 $result = mysqli_query($conn, $ClockSearch) or die(mysqli_error($conn));

@@ -1,4 +1,7 @@
 <!-- presents the user with the comments related to their chosen clock -->
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -92,7 +95,7 @@
       }
 
       function getReplies(commentID) {
-        window.open('replies.html?'+commentID,'_self');
+        window.open('replies.php?'+commentID,'_self');
       }
 
       
@@ -117,12 +120,28 @@
   <body>
     <div class="topnav">
       <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="Icons/back.png" width="30" height="30"></a>
-      <a href="feed.html"><img border="0" src="Icons/house.png" width="30" height="30"></a>
-      <a href="discover.html"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
+      <a href="feed.php"><img border="0" src="Icons/house.png" width="30" height="30"></a>
+      <a href="discover.php"><img border="0" src="Icons/compass.png" width="30" height="30"></a>
       <a href="checkClockLimit.php"><img border="0" src="Icons/music.png" width="30" height="30"></a>
       <a href="myClocks.php"><img border="0" src="Icons/user.png" width="30" height="30"></a>
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
+      <div class="dropdown">
+        <a>Account</a>
+        <div class="dropdown-content">
+            <a href="updateAccount.php">
+              <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
+              if($_SESSION["Premium"] == 0){
+                echo "Upgrade To Premium";
+              } 
+              else {
+                echo "Downgrade To Basic";
+              }?>
+            </a>
+            <a onclick=deleteAccount()>Deactivate Account</a>
+            <a href="start.php">Logout</a>
+        </div>
+      </div>
   </div>
   </body>
   <script>

@@ -1,5 +1,5 @@
 <?php
-// <!-- gets the clocks in the right order to display in "discover.html" -->
+// <!-- gets the clocks in the right order to display in "discover.php" -->
 session_start();
 // include db connect class
 require_once __DIR__ . '/dbConnect.php';

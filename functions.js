@@ -14,7 +14,7 @@ function sendClock(clockID) {
 }
 
 function openComments(clockID) {
-    window.open('comments.html?'+clockID,'_self');
+    window.open('comments.php?'+clockID,'_self');
 }
 
 function changeSound(clockID,rowID) {
@@ -139,4 +139,11 @@ function addComment(clockID,rowID=-1) {
         comment.value = "";
       }
     });
+}
+
+function deleteAccount() {
+    var ensure = confirm("Are you sure you want to deactivate your account? Your clocks will be permanently deleted.");
+    if (ensure) {
+      window.open('deleteAccount.php','_self');
+    }
 }

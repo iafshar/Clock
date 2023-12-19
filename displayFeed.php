@@ -1,5 +1,5 @@
 <?php
-// <!-- gets the clocks of all the other users that the user follows so that they can be accessed in "feed.html" -->
+// <!-- gets the clocks of all the other users that the user follows so that they can be accessed in "feed.php" -->
 session_start();
 $MyUserID = $_SESSION["UserID"];
 

@@ -88,7 +88,7 @@ session_start();
             <a href="start.php">Logout</a>
         </div>
       </div>
-  </div>
+    </div>
   <script>
     setUnreadCount();
 

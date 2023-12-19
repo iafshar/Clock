@@ -59,9 +59,9 @@ function setUnreadCount() {
 
 function openClock(clockID,mine=false) {
     if (mine) {
-      window.open('Clock_User/index.html?'+clockID,'_self');
+      window.open('Clock_User/index.php?'+clockID,'_self');
     } else {
-      window.open('Clock_ReadOnly/index.html?'+clockID,'_self');
+      window.open('Clock_ReadOnly/index.php?'+clockID,'_self');
     }
 }
 

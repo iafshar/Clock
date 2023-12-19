@@ -1,4 +1,7 @@
 <!-- This is what happens after the user clicks on the search icon and is about to search. they are presented with their five most recent searches -->
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -60,11 +63,28 @@
       <a href="inbox.php" id='chats' style='color:black'><img border="0" src="Icons/inbox.png" width="30" height="30"></a>
       <a class="active" href="search.php"><img border="0" src="Icons/magnifying-glass.png" width="30" height="30"></a>
 
-    <form autocomplete="off" action="searchAllUsers.php" method="post">
-      <input id="userSearch" type="text" name="search" placeholder="Search" required>
-      <input type="submit" value="🔍">
-    </form>
-  </div>
+      <form autocomplete="off" action="searchAllUsers.php" method="post">
+        <input id="userSearch" type="text" name="search" placeholder="Search" required>
+        <input type="submit" value="🔍">
+      </form>
+
+      <div class="dropdown">
+          <a>Account</a>
+          <div class="dropdown-content">
+              <a href="updateAccount.php">
+                <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
+                if($_SESSION["Premium"] == 0){
+                  echo "Upgrade To Premium";
+                } 
+                else {
+                  echo "Downgrade To Basic";
+                }?>
+              </a>
+              <a onclick=deleteAccount()>Deactivate Account</a>
+              <a href="start.php">Logout</a>
+          </div>
+      </div>
+    </div>
   <script>
     setUnreadCount();
 

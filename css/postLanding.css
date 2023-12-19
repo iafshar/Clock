@@ -31,12 +31,23 @@ body {
 .topnav a:hover {
   background-color: #f5bfcc;
   color: black;
+  cursor:pointer;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
   background-color: #faf39f;
   color: white;
+}
+
+.topnav form {
+  display: inline-block;
+  padding-top: 0%;
+}
+
+.topnav span {
+  display: inline-block;
+  padding-top: 0%;
 }
 
 button.followBtn {
@@ -56,15 +67,13 @@ button.messageBtn {
 }
 
 .dropdown {
-  display: inline-block;
-  position: relative;
-  left: 61%;
+  float: right;
   color: #faf39f;
   font-weight: bold;
 }
+
 .dropdown a {
   height: 60px;
-  
 }
 .dropdown-content {
   display: none;

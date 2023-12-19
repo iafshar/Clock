@@ -15,7 +15,7 @@ if (array_key_exists("Messages", $response)) {
             
             $record = array();
 
-            
+            $record["MessageID"] = $messages[$i]["MessageID"];
             $record["Color"] = $messages[$i]["Color"];
             $record["DateSent"] = $messages[$i]["DateSent"];
             $record["Type"] = $messages[$i]["Type"];

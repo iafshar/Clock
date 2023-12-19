@@ -23,6 +23,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // temp user array
         $record = array();
+        $record["MessageID"] = $row["MessageID"];
         $record["Content"] = $row["Content"];
         $record["DateSent"] = $row["DateSent"];
         $record["Type"] = $row["Type"];

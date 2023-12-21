@@ -17,6 +17,7 @@ session_start();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
+              console.log(myRecords);
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
@@ -25,10 +26,10 @@ session_start();
                    date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                    var Bold = myRecords.Bolds[i];
                    if (Bold == 0) {
-                    var newRow = "<tr class='table-row'><td>"+Username+"</td><td>"+date+"</td></tr>";
+                    var newRow = "<tr class='table-row' onclick=openChat('"+Username+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
                    }
                    else {
-                    var newRow = "<tr class='table-row'><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
+                    var newRow = "<tr class='table-row' onclick=openChat('"+Username+"')><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
                    }
                    
                    rows = rows+newRow;
@@ -43,22 +44,9 @@ session_start();
 
     </script>
     <script>
-    $(document).ready(function(){
-
-  // code to read selected table row cell data (values).
-      $("#messageTable").on('click','.table-row',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
-
-       var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-    //    document.getElementById("searchHeading").innerHTML = Username;
-    //    document.getElementById("dateHeading").innerHTML = "";
-       var xmlhttp = new XMLHttpRequest();
-       xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
-       xmlhttp.send();
-       window.open('chat.php','_self');
-      });
-    });
+      function openChat(username) {
+        window.open('chat.php?'+username,'_self');
+      }
 
     
     </script>

@@ -24,7 +24,7 @@ session_start();
           xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID, true);
         }
         xmlhttp.send();
-        window.open("chat.php","_self");
+        window.open("chat.php?"+Username,"_self");
         
 
       }

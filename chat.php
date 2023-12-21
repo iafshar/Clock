@@ -13,10 +13,17 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="functions.js"></script>
     <script>
+      var toUsername = "";
+      if(window.location.href.indexOf("?") > -1) {
+        toUsername = window.location.search.substring(1);
+      }
+
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
                 var myRecords = JSON.parse(this.responseText);
+                
                 var premium = (myRecords.Premium == 1);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
                 document.getElementById("messageBody").innerHTML = "<td><table><tr><textarea id='messageText' style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='submit' style='width:1400px;height:45px;' value='Enter' onclick=sendMessage('"+myRecords.otherUsername+"')></tr></table></td>";
@@ -102,7 +109,7 @@ session_start();
                 document.getElementById("resultRows").innerHTML = rows;
             }
         };
-      xmlhttp.open("GET", "intermediateMessages.php", true);
+      xmlhttp.open("GET", "getMessages.php?otherUsername="+toUsername, true);
       xmlhttp.send();
 
 
@@ -114,7 +121,7 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:'chat.php',
+            location:window.location.href,
             clockID:clockID,
             dislike:0
           },
@@ -142,7 +149,7 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:'chat.php',
+            location:window.location.href,
             clockID:clockID,
             dislike:1
           },
@@ -171,7 +178,7 @@ session_start();
           type: 'post',
           url: 'sendMessageInbox.php',
           data: {
-            Sender:sender,
+            toUsername:sender,
             message:message.value
           },
           success: function (response) {
@@ -179,7 +186,7 @@ session_start();
             myRecord = myRecords.Messages[0];
             myRecord.DateSent = new Date(myRecord.DateSent);
             myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-            newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"</td></tr>";
+            newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr>";
             rows = newRow + document.getElementById("resultRows").innerHTML;
             document.getElementById("resultRows").innerHTML = rows;
             message.value = "";

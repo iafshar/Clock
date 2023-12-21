@@ -7,9 +7,9 @@ $db = new DB_CONNECT();
 
 $fromUsername = $_SESSION["Username"];
 
-if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Sender'])){
+if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['toUsername'])){
     
-    $toUsername = $_POST['Sender'];
+    $toUsername = $_POST['toUsername'];
     $content = mysqli_real_escape_string($db->get_con(), $_POST['message']);
 
     $dateSent = date('Y-m-d H:i:s');
@@ -34,6 +34,7 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
         while ($row = $result->fetch_assoc()) {
             // temp user array
             $record = array();
+            $record["MessageID"] = $row["MessageID"];
             $record["Content"] = $row["Content"];
             $record["Type"] = $row["Type"];
             $record["DateSent"] = $row["DateSent"];
@@ -59,7 +60,6 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['Se
 
 
     $response["otherUsername"] = $toUsername;
-    $_SESSION['responseMessages'] = $response;
 
     echo json_encode($response);
     
@@ -84,48 +84,6 @@ else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
 
     $result = $db->get_con()->query($addMessage);
 
-
-    $getMessages = "SELECT * FROM `Messages`
-    WHERE ToUsername IN ('$fromUsername','$toUsername') AND FromUsername IN ('$toUsername','$fromUsername')
-        ORDER BY DateSent DESC";
-
-    $result = $db->get_con()->query($getMessages);
-
-    if ($result->num_rows > 0) {
-        $response["Messages"] = array();
-        while ($row = $result->fetch_assoc()) {
-            // temp user array
-            $record = array();
-            $record["Content"] = $row["Content"];
-            $record["Type"] = $row["Type"];
-            $record["DateSent"] = $row["DateSent"];
-            if ($row["ToUsername"] == $fromUsername) {
-                $record["Color"] = "#ffffff";
-                $record["sentByMe"] = 0; 
-            }
-            else {
-                $record["Color"] = "#03c6fc";
-                $record["sentByMe"] = 1;
-            }
-            
-
-            array_push($response["Messages"], $record);
-
-        }
-        $response["success"] = 1;
-
-    }
-    else {
-        $response["success"] = 0;
-    }
-
-
-    $response["otherUsername"] = $toUsername;
-    $_SESSION['responseMessages'] = $response;
-
-    # code...
-    
 }
 
-header("Location:http://localhost:8080/Clock/chat.php");
 ?>

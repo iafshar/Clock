@@ -76,11 +76,8 @@ session_start();
     </script>
     <script>
       function getMessages() {
-        var Username = document.getElementById("sender").value;
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "getMessages.php?sender=" + Username, true);
-        xmlhttp.send();
-        window.open('chat.php','_self');
+        Username = document.getElementById("sender").value;
+        window.open('chat.php?'+Username,'_self');
       }
 
       
@@ -127,10 +124,8 @@ session_start();
           </th>
           <th>
             <div class="message">
-              <form action="sendMessageInbox.php" method="post">
-                <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
-                <input type='hidden' id="sender" name='Sender' value="">
-              </form>
+              <button type="submit" class="messageBtn" onclick="getMessages()">Message</button>
+              <input type='hidden' id="sender" name='Sender' value="">
             </div>
           </th>
         </tr>

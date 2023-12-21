@@ -44,30 +44,16 @@ session_start();
   // code to read selected table row cell data (values).
       $("#clockTable").on('click','.table-row',function(){
        // get the current row
-       var currentRow=$(this).closest("tr");
+        var currentRow=$(this).closest("tr");
 
-       var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-       console.log(Username);
-       var message = (
-        <?php
-          session_start();
-          echo json_encode($_SESSION["message"]);
-        ?>
-        );
-        console.log(message);
-        if (message == 0) {
-          var xmlhttp = new XMLHttpRequest();
-          xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
-          xmlhttp.send();
-          window.open("otherProfile.php","_self");
-        }
-        else {
-          var xmlhttp = new XMLHttpRequest();
-
-          xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username, true);
-          xmlhttp.send();
-          window.open("chat.php","_self");
-        }
+        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+        console.log(Username);
+       
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+        xmlhttp.send();
+        window.open("otherProfile.php","_self");
+  
         
       });
     });

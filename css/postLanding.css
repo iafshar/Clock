@@ -58,8 +58,12 @@ button.messageBtn {
   background-color: #faf39f;
 }
 
-.table-row:hover{
+.table-row:hover {
   background-color: #faf39f;
+}
+
+.table-row-from-me {
+  background-color: #03c6fc;
 }
 
 .autocomplete-table-row:hover{

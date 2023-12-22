@@ -183,7 +183,7 @@ function mousePressed() {
   }
   }
   else if (screen == 1) {
-      if (mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
+    if (mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
       if (clickCount==2||clickCount==0){ //clicked as a condition
         clickCount = 1;
         stop1 = false;
@@ -202,17 +202,24 @@ function mousePressed() {
       }
       enter = hs1.tempo;
       screen = 0;
+      first = 0;
+      secnd = 0;
+      clickCount = 0;
     }
     else if (mouseX >= CLEAR_X - (CLEAR_WIDTH/2) && mouseX <= CLEAR_X + (CLEAR_WIDTH/2) && mouseY >= CLEAR_Y-nhRatio*20 && mouseY <= CLEAR_Y+nhRatio*20){ //clear button
       hs1.tempo = 0;
       first = 0;
       secnd = 0;
+      clickCount = 0;
     }
     else {
       for (i=0;i<nums.length;i++){
         if (dist(mouseX,mouseY,nums[i].x,nums[i].y)<nums[i].diameter/2){
-           hs1.tempo += nums[i].text;
-           hs1.tempo = int(hs1.tempo);
+          hs1.tempo += nums[i].text;
+          hs1.tempo = int(hs1.tempo);
+          first = 0;
+          secnd = 0;
+          clickCount = 0;
         }
       }
     }
@@ -282,6 +289,9 @@ function keyPressed(){
 
       hs1.tempo += str(keyCode-48);
       hs1.tempo = int(hs1.tempo);
+      first = 0;
+      secnd = 0;
+      clickCount = 0;
 
     }
     else if (keyCode == 13){
@@ -294,6 +304,9 @@ function keyPressed(){
         }
         enter = hs1.tempo;
         screen = 0;
+        first = 0;
+        secnd = 0;
+        clickCount = 0;
     }
   }
 }

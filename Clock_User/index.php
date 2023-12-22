@@ -8,6 +8,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="http://localhost:8080/Clock/css/postLanding.css" rel="stylesheet" type="text/css">
+  <script src="../functions.js"></script>
   <script>
     var clockID = -1;
     if(window.location.href.indexOf("?") > -1) {
@@ -68,7 +69,6 @@ session_start();
       </div>
   </div>
 </body>
-<script src="../functions.js"></script>
 <script>
   setUnreadCount();
 

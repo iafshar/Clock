@@ -308,5 +308,16 @@ function keyPressed(){
         secnd = 0;
         clickCount = 0;
     }
+    else if (keyCode == 8) {
+      if (hs1.tempo < 10) {
+        hs1.tempo = 0;
+      }
+      else {
+        hs1.tempo = int(str(hs1.tempo).slice(0, -1));
+      }
+      first = 0;
+      secnd = 0;
+      clickCount = 0;
+    }
   }
 }

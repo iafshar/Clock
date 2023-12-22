@@ -139,24 +139,37 @@ function mouseDragged() { // Move Circle
 }
 
 function keyPressed(){
-  if(!clockScreen && keyCode>=48 && keyCode<=57){
-    hs1.tempo += str(keyCode-48);
-    hs1.tempo = int(hs1.tempo);
-    first = 0;
-    secnd = 0;
-    clickCount = 0;
-  }
-  if(keyCode == 13 && !clockScreen){
-     if (hs1.tempo < 25){
-        hs1.tempo = 25;
-      }
-      else if (hs1.tempo > 225){
-        hs1.tempo = 225;
-      }
-      enter = hs1.tempo;
-      clockScreen = true;
+  if (!clockScreen) {
+    if(keyCode>=48 && keyCode<=57){
+      hs1.tempo += str(keyCode-48);
+      hs1.tempo = int(hs1.tempo);
       first = 0;
       secnd = 0;
       clickCount = 0;
+    }
+    if(keyCode == 13){
+       if (hs1.tempo < 25){
+          hs1.tempo = 25;
+        }
+        else if (hs1.tempo > 225){
+          hs1.tempo = 225;
+        }
+        enter = hs1.tempo;
+        clockScreen = true;
+        first = 0;
+        secnd = 0;
+        clickCount = 0;
+    }
+    else if (keyCode == 8) {
+      if (hs1.tempo < 10) {
+        hs1.tempo = 0;
+      }
+      else {
+        hs1.tempo = int(str(hs1.tempo).slice(0, -1));
+      }
+      first = 0;
+      secnd = 0;
+      clickCount = 0;
+    }
   }
 }

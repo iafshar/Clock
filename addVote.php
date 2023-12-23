@@ -8,7 +8,7 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 
-if (isset($_POST["location"]) && isset($_POST["dislike"])) {
+if (isset($_POST["dislike"])) {
     if (isset($_POST["clockID"])) {
         $ItemID = $_POST["clockID"];
         $item = 0;
@@ -21,7 +21,6 @@ if (isset($_POST["location"]) && isset($_POST["dislike"])) {
         $ItemID = $_POST["replyID"];
         $item = 2;
     }
-    $location = $_POST["location"];
     $dislike = $_POST["dislike"];
 }
 

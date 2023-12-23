@@ -120,7 +120,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             clockID:clockID,
             dislike:0
           },
@@ -148,7 +147,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             clockID:clockID,
             dislike:1
           },

@@ -52,7 +52,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             commentID:commentID,
             dislike:0
           },
@@ -76,7 +75,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             commentID:commentID,
             dislike:1
           },

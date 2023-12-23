@@ -80,7 +80,6 @@ function like(clockID,elem) {
       type: 'post',
       url: 'addVote.php',
       data: {
-        location:window.location.href,
         clockID:clockID,
         dislike:0
       },
@@ -104,7 +103,6 @@ function dislike(clockID,elem) {
       type: 'post',
       url: 'addVote.php',
       data: {
-        location:window.location.href,
         clockID:clockID,
         dislike:1
       },

@@ -45,7 +45,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             replyID:replyID,
             dislike:0
           },
@@ -69,7 +68,6 @@ session_start();
           type: 'post',
           url: 'addVote.php',
           data: {
-            location:window.location.href,
             replyID:replyID,
             dislike:1
           },

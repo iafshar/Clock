@@ -345,7 +345,8 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  overButton = 0;
+  overButton = 0; // will add 1 to this for each button that the mouse is hovering over and if it is greater than 0
+  //                 the mouse will be a pointer
 
   trashBtn.drawButton();
   keypadBtn.drawButton();

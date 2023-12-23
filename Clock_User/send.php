@@ -23,16 +23,16 @@ $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 $result = mysqli_query($conn, $Select) or die(mysqli_error($conn));
 $count = mysqli_num_rows($result);
 
-if ($count != 0 && $count != NULL){
+if ($count != 0 && $count != NULL){ // if there already exists a clock with this name that the user has made
   $Suggest = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name LIKE '%$Name%'";
   $resultSuggest = mysqli_query($conn, $Suggest) or die(mysqli_error($conn));
   $countSuggest = mysqli_num_rows($resultSuggest);
-  for ($i = 0;$i < $countSuggest;$i ++){
+  for ($i = 0;$i < $countSuggest;$i ++){ 
     $Suggestion = $Name . "$i";
     $ExistingSuggestion = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Suggestion'";
     $resultSuggestion = mysqli_query($conn, $ExistingSuggestion) or die(mysqli_error($conn));
     $countSuggestion = mysqli_num_rows($resultSuggestion);
-    if($countSuggestion == 0){
+    if($countSuggestion == 0){ // if the suggestion does not exist in the user's clocks, use it as the suggested name
       $Name = $Suggestion;
     }
   }
@@ -43,10 +43,10 @@ $Insert = "INSERT INTO Clocks (UserID, Name,Tempo,Shared,Date)
 
 $Select = "SELECT * FROM `Clocks` WHERE UserID='$UserID' AND Name='$Name'";
 
-if (mysqli_query($conn, $Insert)) {
+if (mysqli_query($conn, $Insert)) { // add the clock to the db
   
   $result = $db->get_con()->query($Select);
-  while ($row = $result->fetch_assoc()) {
+  while ($row = $result->fetch_assoc()) { // gets the clockID of the new clock to add the circles to the db
     $ClockID = $row["ClockID"];
   }
   $head = 1;
@@ -55,6 +55,7 @@ if (mysqli_query($conn, $Insert)) {
   $SoundIDs = array();
   $Xs = array();
   $Ys = array();
+  // circles are in the form of soundID,x,y so this separates them into different arrays
   for($i=0;$i<strlen($Circles);$i++){
    
    if($head > $tail){
@@ -85,7 +86,7 @@ if (mysqli_query($conn, $Insert)) {
     $Y = $Ys[$i];
     $CircInsert = "INSERT INTO Circles (ClockID,SoundID,X,Y)
      VALUES ('$ClockID','$SoundID','$X','$Y')";
-    mysqli_query($conn, $CircInsert);
+    mysqli_query($conn, $CircInsert); // adds the circles into the db
   }
   $response["success"] = 1;
   

@@ -1,4 +1,5 @@
 <?php
+// deletes a message
 session_start();
 require_once __DIR__ . '/dbConnect.php';
 

@@ -16,7 +16,7 @@ session_start();
     <script>
       var clockID = window.location.search.substring(1);
       var xmlhttp = new XMLHttpRequest();
-
+      // displays all the comments of the current clock
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
@@ -27,7 +27,7 @@ session_start();
                     var myRecord = myRecords.Comments[i];
                     myRecord.Date = new Date(myRecord.Date);
                     myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                    if (premium) {
+                    if (premium) { // if premium, the user can reply
                       var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><textarea id=replyBox-"+myRecord.CommentID+" style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea></td></tr><tr><td><input type='button' style='width:200px;height:45px;' value='View All' onclick=getReplies("+myRecord.CommentID+")><input type='submit' style='width:200px;height:45px;' value='Enter' onclick=addReply('"+myRecord.CommentID+"')></td></tr></table></td></tr>";
                     }
                     else {
@@ -47,7 +47,7 @@ session_start();
     </script>
     <script>
       function likeComment(commentID,elem) {
-        numLikes = document.getElementById("numLikes-"+commentID);
+        numLikes = document.getElementById("numLikes-"+commentID); //numLikes associated with the like button and the comment
         $.ajax({
           type: 'post',
           url: 'addVote.php',
@@ -58,12 +58,12 @@ session_start();
           },
           success: function (response) {
             if (response == 0) {
-              numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1;
-              elem.style.backgroundColor = "#efefef";
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1; // reduces the number of likes by 1 if it was an unlike
+              elem.style.backgroundColor = "#efefef"; // changes the color of the button
             }
             else {
-              numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1;
-              elem.style.backgroundColor = "#f39faa";
+              numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1; // increases the number of likes by 1 if it added a like
+              elem.style.backgroundColor = "#f39faa"; // changes the color of the button
             }
             
           }
@@ -71,7 +71,7 @@ session_start();
       }
 
       function dislikeComment(commentID,elem) {
-        numDislikes = document.getElementById("numDislikes-"+commentID);
+        numDislikes = document.getElementById("numDislikes-"+commentID); //numDislikes associated with the like button and the comment
         $.ajax({
           type: 'post',
           url: 'addVote.php',
@@ -82,12 +82,12 @@ session_start();
           },
           success: function (response) {
             if (response == 0) {
-              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1;
-              elem.style.backgroundColor = "#efefef";
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1; // reduces the number of dislikes by 1 if it was an unlike
+              elem.style.backgroundColor = "#efefef"; // changes the color of the button
             }
             else {
-              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1;
-              elem.style.backgroundColor = "#f39faa";
+              numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1; // increases the number of likes by 1 if it added a dislike
+              elem.style.backgroundColor = "#f39faa"; // changes the color of the button
             }
             
           }
@@ -101,7 +101,7 @@ session_start();
       
 
       function addReply(commentID) {
-        reply = document.getElementById("replyBox-"+commentID);
+        reply = document.getElementById("replyBox-"+commentID); // the replyBox associated with the comment
         $.ajax({
           type: 'post',
           url: 'addReply.php',
@@ -110,7 +110,7 @@ session_start();
             reply:reply.value
           },
           success: function () {
-            reply.value = "";
+            reply.value = ""; // clears the reply box
           }
         });
       }

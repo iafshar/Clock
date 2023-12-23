@@ -9,9 +9,9 @@ function preload(){ //This function runs before the program is fully loaded.
   OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
   CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
-  starting = 120;
-  edited = false;
-  remixed = false;
+  starting = 120; // default tempo
+  edited = false; // whether a clock is being editted or it is new
+  remixed = false; // whether a clock is a remix or not
   names = []; // will contain names of all clocks of the user to check when naming
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -66,12 +66,12 @@ function setup() {
   hRatio = height/734;
 
   if (width >= 445 && height >= 533) // checks the dimensions are good enough for the keypad screen
-  {
+  { // if they are big enough for the keypad screen, the aspect ratios will not be changed at all
     nwRatio = 1;
     nhRatio = 1;
   }
   else
-  {
+  { // if at least one of the dimensions are too small for the keypad, the aspect ratios will be changed
     nwRatio = wRatio;
     nhRatio = hRatio;
   }
@@ -79,7 +79,7 @@ function setup() {
   CLOCK_X = wRatio * 720;
   CLOCK_Y = hRatio * 347
 
-  RADIUS = Math.min((wRatio*250),(hRatio*250));
+  RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
 
   angle = 270;
   enter = 0;
@@ -361,14 +361,14 @@ function clock() {
   tempo = hs1.tempo/40;
   
 
-  lx = CLOCK_X + cos(radians(angle))*(RADIUS);
+  lx = CLOCK_X + cos(radians(angle))*(RADIUS); // x and y positions of the end point of the metronome
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
   strokeWeight(1);
   fill(clockColor);
 
 
   for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
-    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
+    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i); // draws the layers
   }
 
   side = (sqrt(2)/2)*RADIUS;
@@ -377,7 +377,7 @@ function clock() {
 
   stroke(BLACK);
 
-  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10);
+  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10); // draws the markers at every 45 degrees
   line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
   line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
   line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
@@ -388,7 +388,7 @@ function clock() {
 
   line(CLOCK_X, CLOCK_Y, lx, ly);
 
-  hit = false;
+  hit = false; // whether a circle has been hit or not
 
   pauseBtn.drawButton();
   rewindBtn.drawButton();
@@ -408,11 +408,13 @@ function clock() {
 
   if (rewindBtn.timePressed > 0) {
     if (millis() - rewindBtn.timePressed >= 500) {
+      // if the rewind button has been held for 500 or more milliseconds it will start moving the metronome backwards
       angle -= 250/40;
     }
   }
   else if (fastForwardBtn.timePressed > 0) {
     if (millis() - fastForwardBtn.timePressed >= 500) {
+      // if the fast forward button has been held for 500 or more milliseconds it will start moving the metronome forwards
       angle += 250/40;
     }
   }

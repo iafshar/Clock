@@ -9,7 +9,7 @@ class Button{
      this.buttonColor = buttonColor;
      this.hoverColor = hoverColor;
    }
-   overButton() {
+   overButton() { // if the mouse is over the button
     if (mouseX > this.x && mouseX < this.x+this.Width &&
        mouseY > this.y && mouseY < this.y+this.Height) {
       return true;
@@ -39,7 +39,7 @@ class Button{
 
 }
 
-class Option extends Button{
+class Option extends Button{ // for buttons that make circles
   constructor(x,y,Width,Height,text,sounds,counter,buttonColor,hoverColor) {
     super(x,y,Width,Height,text,buttonColor,hoverColor);
     this.sounds = sounds;
@@ -60,13 +60,13 @@ class PauseButton extends Button{
     else{
       var realColor = this.buttonColor;
     }
-    if (!this.paused) {
+    if (!this.paused) { // displays a pause symbol
       stroke(realColor);
       
       line(this.x,this.y,this.x,this.y+this.Height);
       line(this.x+this.Width,this.y,this.x+this.Width,this.y+this.Height);
     }
-    else {
+    else { // displays a play symbol
       strokeWeight(0);
       fill(realColor);
       triangle(this.x,this.y,this.x,this.y+this.Height,this.x+this.Width,this.y+(this.Height/2));
@@ -75,7 +75,7 @@ class PauseButton extends Button{
   }
 }
 
-class SeekButton extends Button{
+class SeekButton extends Button{ // for fast forward and rewind
   constructor(x,y,Width,Height,buttonColor,hoverColor,rewind) {
     super(x,y,Width,Height,"",buttonColor,hoverColor);
     this.rewind = rewind;
@@ -91,7 +91,7 @@ class SeekButton extends Button{
     }
     strokeWeight(0);
     fill(realColor);
-    if (!this.rewind) {
+    if (!this.rewind) { // chooses which direction to face the triangles
       triangle(this.x,this.y,this.x,this.y+this.Height,this.x+(this.Width/2),this.y+(this.Height/2));
       triangle(this.x+(this.Width/2),this.y,this.x+(this.Width/2),this.y+this.Height,this.x+this.Width,this.y+(this.Height/2));
     }
@@ -102,7 +102,7 @@ class SeekButton extends Button{
   }
 }
 
-class ImageButton extends Button{
+class ImageButton extends Button{ // for keypad and trash
   constructor(x,y,Width,Height,image,dragDrop=false) {
     super(x,y,Width,Height);
     this.image = image;

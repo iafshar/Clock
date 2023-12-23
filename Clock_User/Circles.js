@@ -19,7 +19,7 @@ class Circle {
     ellipse(this.ox, this.oy, this.diameter, this.diameter);
   }
   playSound(){
-    if (millis()-this.lastPlayed > 100) {
+    if (millis()-this.lastPlayed > 100) { // if it has been long enough since the circle has played its sound last
       this.sound.play();
       this.lastPlayed = millis();
     }

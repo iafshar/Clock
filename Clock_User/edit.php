@@ -17,10 +17,10 @@ $Shared = $_GET["shared"];
 $Date = date('Y-m-d H:i:s');
 
 
-$Delete = "DELETE FROM Circles Where ClockID='$ClockID'";
+$Delete = "DELETE FROM Circles Where ClockID='$ClockID'"; // deletes the circles of the clock temporarily
 
 $Edit = "UPDATE Clocks
-  SET Tempo='$Tempo', Shared='$Shared', Date='$Date'
+  SET Tempo='$Tempo', Shared='$Shared', Date='$Date' 
   WHERE ClockID='$ClockID'";
 
 if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
@@ -30,6 +30,7 @@ if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
   $SoundIDs = array();
   $Xs = array();
   $Ys = array();
+  // circles are in the form of soundID,x,y so this separates them into different arrays
   for($i=0;$i<strlen($Circles);$i++){
     if($head > $tail){
       if($count%3 == 0){
@@ -59,7 +60,7 @@ if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
     $Y = $Ys[$i];
     $CircInsert = "INSERT INTO Circles (ClockID,SoundID,X,Y)
      VALUES ('$ClockID','$SoundID','$X','$Y')";
-    mysqli_query($conn, $CircInsert);
+    mysqli_query($conn, $CircInsert); // inserts the new circles into the db
   }
  header("Location:http://localhost:8080/Clock/myClocks.php");
 

@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
         $record["ReplyID"] = $row["ReplyID"];
         $replyID = $row["ReplyID"];
 
-        $getLikes = "SELECT * FROM `Votes` WHERE ItemID='$replyID' AND Item=2 AND Dislike=0";
+        $getLikes = "SELECT * FROM `Votes` WHERE ItemID='$replyID' AND Item=2 AND Dislike=0"; // item == 2 means the item is a reply
         $result2 = $db->get_con()->query($getLikes);
         $record["NumOfLikes"] = $result2->num_rows;
 
@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
     // success
     $response["success"] = 1;
 } else {
-    // no products found
+    // no replies found
     $response["success"] = 0;
     $response["message"] = "No records found";
 

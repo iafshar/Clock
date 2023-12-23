@@ -158,9 +158,13 @@ session_start();
 						length.classList.remove("valid");
 						length.classList.add("invalid");
 					}
+
+					// if nothing is entered in any of the boxes dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}
+
+					// Decide whether to display a tick or a cross for the password being one the user hasnt used before
 					var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
@@ -175,6 +179,7 @@ session_start();
 				}
 
 				password2.onkeyup = function() {
+					// Validate that the two passwords match
 					document.getElementById("message").style.display = "block";
 					if (password2.value == password1.value) {
 						match.classList.remove("invalid");
@@ -184,6 +189,8 @@ session_start();
 						match.classList.remove("valid");
 						match.classList.add("invalid");
 					}
+
+					// if nothing is entered in any of the boxes dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}

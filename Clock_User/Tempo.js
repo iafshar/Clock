@@ -24,7 +24,7 @@ function keypad(){
   background(200);
   stroke(BLACK);
   strokeWeight(1);
-  if(hs1.tempo>999){
+  if(hs1.tempo>999){ // doesnt let a user enter more than 3 characters
     hs1.tempo = 0;
   }
   text(hs1.tempo,NUM_BUTTON_X + (2*NUM_BUTTON_DIAMETER),nhRatio*100);

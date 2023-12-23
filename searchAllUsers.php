@@ -35,7 +35,7 @@ $Username = str_replace(">","",$Username);
 $Username = str_replace("<","",$Username);
 
 $addSearch = "INSERT INTO `Searches` (UserID, Search)
-  VALUES ('$MyUserID','$Username')";
+  VALUES ('$MyUserID','$Username')"; // adds the search to the database
 
 if ($Username != NULL && strlen($Username) > 0){
   if ($_SESSION["message"] == 0) {
@@ -57,7 +57,7 @@ if ($Username != NULL && strlen($Username) > 0){
     $response["success"] = 1;
 }
 else {
-    // no products found
+    // no users found
     $response["success"] = 0;
     $response["message"] = "No records found";
     // // echo no users JSON

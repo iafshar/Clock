@@ -68,7 +68,7 @@ if ($result->num_rows > 0){
 }
   
 else {
-    // no products found
+    // no recordss found
   $response["success"] = 0;
   $response["message"] = "No records found";
 

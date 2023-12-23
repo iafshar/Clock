@@ -14,6 +14,7 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="functions.js"></script>
     <script>
+      // displays the search history of the user
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -37,6 +38,7 @@ session_start();
     $(document).ready(function(){
 
   // code to read selected table row cell data (values).
+  // if the user clicks on one of the recent searches
       $("#clockTable").on('click','.search-username',function(){
        // get the current row
        var currentRow=$(this).closest("tr");
@@ -44,6 +46,7 @@ session_start();
        var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
        var xmlhttp = new XMLHttpRequest();
 
+       //adds the search to the database and stores the result of the search in a session variable
        xmlhttp.open("GET", "searchAllUsers.php?RecentUsername=" + Username, true);
        xmlhttp.send();
        window.open("searchResults.php","_self");
@@ -108,15 +111,13 @@ session_start();
   <script>
 
   inp = document.getElementById("userSearch");
-  var ogRows = document.getElementById("resultRows").innerHTML;
-  if (inp) {
+  if (inp) { // if something is entered in the search bar
     inp.addEventListener("input", function(e) {
       var val = this.value;
       if (val.length > 0) {
-        document.getElementById("searchHeading").innerHTML = "Username";
-        document.getElementById("clearButton").innerHTML = "";
-        // document.querySelectorAll('th')[1].innerHTML = "Username";
-        autocomplete(val);
+        document.getElementById("searchHeading").innerHTML = "Username"; // change the heading from recents to Username
+        document.getElementById("clearButton").innerHTML = ""; // change the other heading from the clear button to an empty string
+        autocomplete(val); // call the autocomplete function
         $(document).ready(function(){
 
             
@@ -127,17 +128,18 @@ session_start();
 
             var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
             var xmlhttp = new XMLHttpRequest();
-
+            // stores the userID and username of the clicked user in session and adds the search to the database
             xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
             xmlhttp.send();
             window.open("otherProfile.php","_self");
           });
         });
       }
-      else {
+      else { // when the value of the search bar is empty
         document.getElementById("searchHeading").innerHTML = "Recents";
         document.getElementById("clearButton").innerHTML = "<input type='button' value='Clear' onclick='clearHistory()'>";
         var xmlhttp = new XMLHttpRequest();
+        // display recent searches
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
@@ -157,6 +159,7 @@ session_start();
   }
 
   function autocomplete(val) {
+    // displays all the users that are not the current user that start with val
     val = val.replaceAll("\"","");
     val = val.replaceAll("\'","");
     val = val.replaceAll("\\","");
@@ -183,7 +186,7 @@ session_start();
 
 </script>
 <script>
-  function clearHistory() {
+  function clearHistory() { // removes all the recent searches
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.open("GET", "clearHistory.php", true);
@@ -192,7 +195,7 @@ session_start();
   }
 </script>
 <script>
-  function deleteHistoryItem(element) {
+  function deleteHistoryItem(element) { // removes one search item
     
     item = element.getAttribute('item')
 

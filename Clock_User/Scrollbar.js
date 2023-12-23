@@ -57,7 +57,7 @@ class HScrollbar {
     }
   }
 
-  overEvent() {
+  overEvent() { // returns whether the mouse is over the scrollbar or not
     if (mouseX > this.xpos && mouseX < this.xpos+this.swidth &&
        mouseY > this.ypos && mouseY < this.ypos+this.sheight) {
       return true;

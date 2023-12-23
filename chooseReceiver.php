@@ -1,3 +1,4 @@
+<!-- called when choosing a person to send a clock to -->
 <?php 
 session_start();
 ?>
@@ -14,10 +15,11 @@ session_start();
     <script src="functions.js"></script>
     <script>
       function sendToUser(Username, clockID) {
-        message = document.getElementById('addMessage').value;
+        message = document.getElementById('addMessage').value; // value of the attached message of the clock - can be empty
         var xmlhttp = new XMLHttpRequest();
 
         if (message.length > 0) {
+          // have to encode the message because it doesnt take anything after a hash otherwise
           xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+encodeURIComponent(message), true);
         }
         else {
@@ -26,7 +28,6 @@ session_start();
         xmlhttp.send();
         window.open("chat.php?"+Username,"_self");
         
-
       }
 
       
@@ -93,6 +94,7 @@ session_start();
     </div>
     <script>
       var clockID = window.location.search.substring(1);
+      // display the usernames of the chats the user has with others
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -118,16 +120,15 @@ session_start();
   </script>
   <script>
 
-  inp = document.getElementById("userSearch");
-  var ogRows = document.getElementById("resultRows").innerHTML
+  inp = document.getElementById("userSearch"); // user can also search for people to sent it to
   if (inp) {
     inp.addEventListener("input", function(e) {
       var val = this.value;
-      if (val.length > 0) {
+      if (val.length > 0) { // if there is something entered in the search, change the heading from chats to username and call the autocomplete function
         document.getElementById("searchHeading").innerHTML = "Username";
         autocomplete(val);
       }
-      else {
+      else { // if nothing is entered in the search, display the chat headers normally
         document.getElementById("searchHeading").innerHTML = "Chats";
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -151,7 +152,7 @@ session_start();
     });
   }
 
-  function autocomplete(val) {
+  function autocomplete(val) { // displays all the users in the database that have usernames that start with what is entered in the search bar
     var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -8,6 +8,7 @@ $conn = $db->get_con();
 
 
 if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && isset($_GET["action"]) && ($_GET["action"]=="verify") && !isset($_POST["action"])) {
+    // for verifying email on signup
     $hash = $_GET["hash"];
     $email = $_GET["email"];
     $premium = $_GET["premium"];
@@ -17,7 +18,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
 
     $result = mysqli_query($conn, $CheckHash);
 
-    if ($result->num_rows == 0) {
+    if ($result->num_rows == 0) { // if the hash is not in the database
         header("Location:http://localhost:8080/Clock/invalidLink.html");
     }
     else {
@@ -29,7 +30,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
         $deleteHash = "DELETE FROM Hashes WHERE Hash='$hash' AND Email='$email' AND Reset=0";
         
 
-        if ($expirationDate <= $currentDate) {
+        if ($expirationDate <= $currentDate) { // if the hash has passed its expiration time
             mysqli_query($conn, $deleteHash);
             header("Location:http://localhost:8080/Clock/invalidLink.html");
         }
@@ -39,7 +40,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
             $_SESSION["Password"] = $Password;
             $_SESSION["Premium"] = $premium;
 
-            mysqli_query($conn, $deleteHash);
+            mysqli_query($conn, $deleteHash); // the hash is deleted because it is not needed anymore
 
             $Insert = "INSERT INTO Users (Username,Password,Email,Premium)
                 VALUES ('$Username', '$Password', '$email', '$premium')";

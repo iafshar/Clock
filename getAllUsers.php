@@ -1,5 +1,5 @@
 <?php
-
+// gets a list of all the users in the database excluding the current user
 session_start();
 
 $UserID = $_SESSION["UserID"];

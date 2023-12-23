@@ -8,6 +8,7 @@ $conn = $db->get_con();
 
 
 if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"]=="reset") && !isset($_POST["action"])){
+    // if the link is correct
     $hash = $_GET["hash"];
     $email = $_GET["email"];
     $currentDate = date("Y-m-d H:i:s");
@@ -16,7 +17,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
 
     $result = mysqli_query($conn, $CheckHash);
 
-    if ($result->num_rows == 0) {
+    if ($result->num_rows == 0) { // if the hash does not exist
         header("Location:http://localhost:8080/Clock/invalidLink.html");
     }
     else {
@@ -28,7 +29,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
         if ($expirationDate <= $currentDate) {
             header("Location:http://localhost:8080/Clock/invalidLink.html");
         }
-        else {
+        else { 
             $_SESSION["Email"] = $email;
             header("Location:http://localhost:8080/Clock/updatePassword.php");
         }

@@ -7,8 +7,8 @@ $db = new DB_CONNECT();
 
 $fromUsername = $_SESSION["Username"];
 
-if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['toUsername'])){
-    
+if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['toUsername'])){ 
+    // if a normal message has been sent through chat
     $toUsername = $_POST['toUsername'];
     $content = mysqli_real_escape_string($db->get_con(), $_POST['message']);
 
@@ -20,14 +20,14 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['to
         VALUES('$fromUsername','$toUsername',0,'$content','$dateSent',0)";
 
 
-    $result = $db->get_con()->query($addMessage);
+    $result = $db->get_con()->query($addMessage); // adds the message to the db
 
 
     $getMessages = "SELECT * FROM `Messages`
     WHERE ToUsername IN ('$fromUsername','$toUsername') AND FromUsername IN ('$toUsername','$fromUsername')
         ORDER BY DateSent DESC";
 
-    $result = $db->get_con()->query($getMessages);
+    $result = $db->get_con()->query($getMessages); // gets all messages with the new message
 
     if ($result->num_rows > 0) {
         $response["Messages"] = array();
@@ -65,24 +65,25 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['to
     
 }
 else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
+    // if a clock message is being sent
     $toUsername = $_GET['sendingUsername'];
     $clockID = $_GET['clockID'];
 
 
     $content = $clockID;
 
-    if (isset($_GET['addMessage'])) {
-        $content = $content . "," . $_GET['addMessage'];
+    if (isset($_GET['addMessage'])) { // if a message has been attached to the clock
+        $content = $content . "," . $_GET['addMessage']; // the content will be the clockID followed by the message separated by a comma
     }
     
     $dateSent = date('Y-m-d H:i:s');
 
     $content = mysqli_real_escape_string($db->get_con(), $content);
     $addMessage = "INSERT INTO Messages (FromUsername,ToUsername,Type,Content,DateSent,Viewed)
-        VALUES('$fromUsername','$toUsername',1,'$content','$dateSent',0)";
+        VALUES('$fromUsername','$toUsername',1,'$content','$dateSent',0)"; 
 
 
-    $result = $db->get_con()->query($addMessage);
+    $result = $db->get_con()->query($addMessage); // adds the message to the db
 
 }
 

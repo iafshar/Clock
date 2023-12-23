@@ -1,6 +1,6 @@
 
 <?php
-// <!-- gets the data required for the user to edit a clock with -->
+// <!-- gets the data required for the user to view a mini clock -->
 session_start();
 
 $response = array();
@@ -15,13 +15,13 @@ $ClockID = $_GET["ClockID"];
 
 $GetClock = "SELECT * FROM Clocks WHERE ClockID='$ClockID'";
 $result = $db->get_con()->query($GetClock);
-while ($row = $result->fetch_assoc()){
+while ($row = $result->fetch_assoc()){ // gets the clock
   $response["name"] = $row["Name"];
   $response["tempo"] = $row["Tempo"];
 }
 
 $GetCircles = "SELECT * FROM Circles WHERE ClockID='$ClockID'";
-$result = $db->get_con()->query($GetCircles);
+$result = $db->get_con()->query($GetCircles); // gets the circles attached to the clock
 
 if ($result->num_rows > 0){
   $response["Circles"] = array();
@@ -39,11 +39,11 @@ if ($result->num_rows > 0){
   // echoing JSON response(prints it)
   echo json_encode($response);
 } else {
-    // no products found
+    // no circles found
     $response["success"] = 0;
     $response["message"] = "No records found";
 
-    // echo no users JSON
+    // echo no circles JSON
     echo json_encode($response);
 }
  ?>

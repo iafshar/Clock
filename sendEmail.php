@@ -18,20 +18,20 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 
-if (isset($_POST['Forgot'])) {
-    $Email = $_POST['Forgot'];
+if (isset($_POST['Forgot'])) { // if an email is being sent because a user has forgotten their password
+    $Email = $_POST['Forgot']; // the user could have entered an email or a username
 
     $CheckEmail = "SELECT * FROM `Users` WHERE Email='$Email'";
     $result = mysqli_query($conn, $CheckEmail);
 
-    if ($result->num_rows == 0) {
+    if ($result->num_rows == 0) { // if no email exists that matches what the user entered
         $CheckUsername = "SELECT * FROM `Users` WHERE Username='$Email'";
         $result = mysqli_query($conn, $CheckUsername);
-        if ($result->num_rows == 0) {
+        if ($result->num_rows == 0) { // if no username exists that matches what the user entered
             header("Location:http://localhost:8080/Clock/forgotPassword.php");
         }
     } 
-    if ($result->num_rows > 0 ) {
+    if ($result->num_rows > 0 ) { // if the user entered something that is an existing username or email in the database
         $expirationFormat = mktime(
             date("H")+3, date("i"), date("s"), date("m") ,date("d"), date("Y")
             );
@@ -44,8 +44,8 @@ if (isset($_POST['Forgot'])) {
         }
 
         
-        $pt1 = md5(2418*2 . $Email);
-        $pt2 = substr(md5(uniqid(rand(),1)),3,10);
+        $pt1 = md5(2418*2 . $Email); // first part of the hash that uses the user's email
+        $pt2 = substr(md5(uniqid(rand(),1)),3,10); //second part of the hash that is random
         $hash = $pt1 . $pt2;
 
         $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Reset)
@@ -97,7 +97,7 @@ if (isset($_POST['Forgot'])) {
 
 }
 
-else {
+else { // if an email is being set because a user wants to sign up for an account
     $Email = $_SESSION["Email"];
     $Username = $_SESSION["Username"];
     $Password = $_SESSION["Password"];

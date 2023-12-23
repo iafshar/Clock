@@ -13,18 +13,18 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="functions.js"></script>
     <script>
+      // display usernames of people that the user has chats with
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
-              console.log(myRecords);
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
                    var date = myRecords.Dates[i];
                    date = new Date(date);
                    date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                   var Bold = myRecords.Bolds[i];
+                   var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                    if (Bold == 0) {
                     var newRow = "<tr class='table-row' onclick=openChat('"+Username+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
                    }

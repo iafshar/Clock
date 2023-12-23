@@ -8,7 +8,7 @@ function preload(){
   OPENHIHAT_SOUND = loadSound("../Sounds/openHiHat.mp3");
   CRASH_SOUND = loadSound("../Sounds/crash.mp3");
   var xmlhttp = new XMLHttpRequest();
-  starting = 120;
+  starting = 120; // default tempo
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         data = JSON.parse(this.responseText);
@@ -60,13 +60,13 @@ function setup() {
   bgColor = WHITE;
   clockColor = YELLOW;
 
-  CIRCLE_DIAMETER = Math.min((wRatio*20),(hRatio*20))
+  CIRCLE_DIAMETER = Math.min((wRatio*20),(hRatio*20)) // since the diameter should be the same in both height and width the lowest one will be taken
+
   circleOnScreen = false;
   CircleOutline = 0;
   MAX_CIRCLES = 24;
 
   checkMouseClicked = null;
-
 
   Width = width;
   Height = height;
@@ -142,10 +142,11 @@ function setup() {
 
   CLOCK_X = wRatio * 720;
   CLOCK_Y = hRatio * 347
-  RADIUS = Math.min((wRatio*250),(hRatio*250));
+  RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
+
   angle = 270;
 
-  if(typeof savedCircles !== 'undefined'){
+  if(typeof savedCircles !== 'undefined'){ // if there are circles for this clock
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
@@ -225,14 +226,14 @@ function clock() {
   drawSlider(hs1);
   tempo = hs1.tempo/40;
 
-  lx = CLOCK_X + cos(radians(angle))*(RADIUS);
+  lx = CLOCK_X + cos(radians(angle))*(RADIUS); // x and y positions of the end point of the metronome
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
   strokeWeight(1);
   fill(clockColor);
 
 
   for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
-    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
+    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i); // draws the layers
   }
 
   side = (sqrt(2)/2)*RADIUS;
@@ -245,7 +246,7 @@ function clock() {
 
   stroke(BLACK);
 
-  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10);
+  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10); // draws the markers at every 45 degrees
   line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
   line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
   line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
@@ -255,7 +256,7 @@ function clock() {
   line(CLOCK_X-side,CLOCK_Y+side,CLOCK_X-side-10,CLOCK_Y+side+10);
   line(CLOCK_X, CLOCK_Y, lx, ly);
 
-  hit = false;
+  hit = false; // whether a circle has been hit or not
 
   for (i = 0;i<circles.length;i++) {
     circles[i].drawCircle();

@@ -216,7 +216,8 @@ function setup() {
 
 function clock() {
   
-  if (localStorage.getItem("muteRow"+rowID)) {
+  if (localStorage.getItem("muteRow"+rowID)) { // if the muteRow with the rowID for this mini clock is in local storage
+    // unmute the mini clock
     mute = 0;
   }
   else {

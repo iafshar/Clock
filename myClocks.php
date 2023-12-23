@@ -3,7 +3,7 @@
 // <!-- the profile page of the user -->
 session_start();
 require_once __DIR__ . '/getUserID.php';
-if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
+if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) { 
   echo "<script>alert('".$_SESSION["Error"]."');</script>";
 }
 
@@ -28,15 +28,15 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
         }
       }
 
-      function changeShared(clockID,elem) {
+      function changeShared(clockID,elem) { // changes the shared value of a clock
         $.ajax({
           type: 'post',
           url: 'changeShared.php',
           data: {
             ClockID:clockID,
           },
-          success: function (response) {
-            if (elem.innerHTML === "Share") {
+          success: function () {
+            if (elem.innerHTML === "Share") { // changes what is displayed in the button that calls this function onclick
               elem.innerHTML = "Unshare";
             }
             else {
@@ -47,6 +47,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       }
 
       function checkEnter(elem) {
+        // if the enter key is pressed while the element is in focus, take it out of focus
         $(elem).on('keyup', function (e) {
           if (e.key === 'Enter' || e.keyCode === 13) {
               $(elem).blur();
@@ -55,6 +56,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       }
 
       function changeName(elem,clockID) {
+        // changes the name of a clock
         $.ajax({
           type: 'post',
           url: 'updateClockName.php',
@@ -63,6 +65,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
             clockID:clockID,
           },
           success: function (response) {
+            // changes what is displayed for the name of the clock to the new name
             elem.value = response;
           }
         });
@@ -71,6 +74,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     </script>
     
     <script>
+      // removes all the items stored in localStorage from landing
       localStorage.removeItem("loginUsername");
       localStorage.removeItem("signUpUsername");
       localStorage.removeItem("signUpEmail");
@@ -125,6 +129,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     </table>
 
   <script>
+    // if something is entered in the clock search box, call the autocomplete function on it
     inp = document.getElementById("clockSearch");
     if (inp) {
       inp.addEventListener("input", function(e) {
@@ -135,12 +140,13 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
 
     function autocomplete(val) {
       illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-      for (let i = 0; i < illegalChars.length; i++) {
+      for (let i = 0; i < illegalChars.length; i++) { // removes all illegal chars from the clock search
         val = val.replaceAll(illegalChars[i],"");
       }
-      val = val.replaceAll(" ","_");
+      val = val.replaceAll(" ","_"); // replaces spaces with underscores
       var xmlhttp = new XMLHttpRequest();
 
+      // gets all the clocks of the user but filters it to only show the ones that have names that start with what is currently in the search box
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var myRecords = JSON.parse(this.responseText);
@@ -171,6 +177,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       xmlhttp.send();
     }
   
+    // gets all the clocks of the user - displayed before searching
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {

@@ -132,14 +132,6 @@ function setup() {
   signUp = new Button(980,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SIGN-UP",YELLOW,LIGHT_YELLOW);
   login = new Button(980-BUTTON_WIDTH-10,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"LOGIN",YELLOW,LIGHT_YELLOW);
 
-  // snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
-  // kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
-  // cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbal,GREEN,LIGHT_GREEN);
-  // hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+210,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHat,ECLIPSE,LIGHT_ECLIPSE);
-  // openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+280,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHat,BLUE,LIGHT_BLUE);
-  // hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+350,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiTom,BROWN,LIGHT_BROWN);
-  // midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+420,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midTom,PURPLE,LIGHT_PURPLE);
-  // crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+490,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crash,TEAL,LIGHT_TEAL);
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+70,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
   cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+140,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
@@ -183,14 +175,6 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
-  // snareOp.drawButton();
-  // kickOp.drawButton();
-  // cymbalOp.drawButton();
-  // hiHatOp.drawButton();
-  // openHiHatOp.drawButton();
-  // hiTomOp.drawButton();
-  // midTomOp.drawButton();
-  // crashOp.drawButton();
   for(i=0;i<options.length;i++){
     options[i].drawButton();
   }

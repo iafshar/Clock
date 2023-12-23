@@ -45,7 +45,7 @@ session_start();
                     }
                   }
                   rows = rows+newRow;
-                  localStorage.removeItem("muteRow"+i);
+                  localStorage.removeItem("muteRow"+i); // for the sound of the mini clocks
               }
               document.getElementById("resultRows").innerHTML = rows;
             }

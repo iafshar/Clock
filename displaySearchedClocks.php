@@ -42,7 +42,7 @@ else {
 
 
 
-// get all products from products table
+// get all clocks from clocks table
 $sql = ("SELECT * FROM Clocks WHERE UserID='$SearchedUserID' AND Shared=1
         ORDER BY Date DESC");
 $result = $db->get_con()->query($sql);
@@ -93,7 +93,7 @@ if ($result->num_rows > 0) {
     // echoing JSON response(prints it)
     echo json_encode($response);
 } else {
-    // no products found
+    // no clocks found
     $response["success"] = 0;
     $response["message"] = "No records found";
 

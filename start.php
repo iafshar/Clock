@@ -20,6 +20,7 @@ session_unset();
 			</form>
 		</div>
 		<script>
+			// removes all these items from localStorage incase another user signs in or something
 			localStorage.removeItem("loginUsername");
 			localStorage.removeItem("signUpUsername");
     		localStorage.removeItem("signUpEmail");

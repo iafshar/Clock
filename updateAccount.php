@@ -1,4 +1,5 @@
 <?php
+// Updates a user's account to make it premium if it was basic before, or basic if it was premium before
 session_start();
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();

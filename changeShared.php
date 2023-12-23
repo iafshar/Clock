@@ -1,4 +1,5 @@
 <?php
+// changes the shared value of a clock in the database given its clockID
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
 // Create connection
@@ -13,6 +14,5 @@ if (isset($_POST["ClockID"])) {
 
     mysqli_query($conn, $changeShared);
 }
-echo "yes";
 
 ?>

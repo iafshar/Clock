@@ -11,7 +11,7 @@ $db = new DB_CONNECT();
 
 $Username = $_SESSION["Username"];
 
-// get all products from products table
+// get all users from users table
 $query = "SELECT * FROM `Users` WHERE Username='$Username'";
 $result = $db->get_con()->query($query);
 
@@ -21,7 +21,6 @@ if ($result->num_rows != NULL && $result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
         // temp user array
-        //$record = array();
         $UserID = $row["UserID"];
         $Email = $row["Email"];
         $Premium = $row["Premium"];

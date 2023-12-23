@@ -8,11 +8,12 @@ require_once __DIR__ . '/dbConnect.php';
 // connecting to db
 $db = new DB_CONNECT();
 
+$ClockID = 0;
+
 if (isset($_GET["clockID"])) {
-  $_SESSION["ClockID"] = $_GET["clockID"];
+  $ClockID = $_GET["clockID"];
 }
 
-$ClockID = $_SESSION["ClockID"];
 $MyUserID = $_SESSION["UserID"];
 
 $GetComments = "SELECT * FROM Comments WHERE ClockID='$ClockID'";
@@ -66,7 +67,7 @@ if ($result->num_rows > 0) {
 
   echo json_encode($response);
 } else {
-    // no products found
+    // no comments found
     $response["success"] = 0;
     $response["message"] = "No records found";
 

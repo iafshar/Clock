@@ -23,6 +23,7 @@ session_start();
 					<a href="login.php" class="already">Already have an account?</a>
 				</div>
 			</form>
+			<!-- sets the displays of the checklist and all the items in the checklist using the values stored in their respective session variables -->
 			<div id="message"
 			<?php
 				if (isset($_SESSION["messageDisplay"])) {
@@ -119,6 +120,7 @@ session_start();
 	
 			</script>
 			<script>
+				// doesn't get rid of the values entered by the user even if they are wrong to allow the user to change them themself
 				document.getElementById("username").value = localStorage.getItem('signUpUsername');
 				document.getElementById("email").value = localStorage.getItem('signUpEmail');
 				document.getElementById("password").value = localStorage.getItem('signUpPassword');
@@ -184,13 +186,16 @@ session_start();
 						length.classList.remove("valid");
 						length.classList.add("invalid");
 					}
+					// if nothing is entered in any of the boxes, dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0 && username.value.length == 0 && email.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}
 				}
 
+				// when the user starts to type something in the confirm password box
 				password2.onkeyup = function() {
 					document.getElementById("message").style.display = "block";
+					// check whether the two passwords match
 					if (password2.value == password1.value) {
 						match.classList.remove("invalid");
 						match.classList.add("valid");
@@ -199,6 +204,7 @@ session_start();
 						match.classList.remove("valid");
 						match.classList.add("invalid");
 					}
+					// if nothing is entered in any of the boxes, dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0 && username.value.length == 0 && email.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}
@@ -208,15 +214,13 @@ session_start();
 				var username = document.getElementById("username");
 
 				username.addEventListener('keydown', function(event) {
-					illegals = ['\\',"'","\"", ">", "<", "@", " "];
-					if (illegals.includes(event.key)) {
-						event.preventDefault();
-						username.selectionStart = username.selectionEnd = username.value.length;
-        				username.focus();
+					illegals = ['\\',"'","\"", ">", "<", "@"," "]; // characters that are not allowed to be in a username
+					if (illegals.includes(event.key)) { // if the current typed character is an illegal one
+						event.preventDefault(); // dont add the character to the box
 					}
 					
-					while (username.value.includes(" ")) {
-						username.value = username.value.replace(" ","");
+					while (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
+						username.value = username.value.replace(" ",""); // gets rid of the space
 					}
 				}, false);
 
@@ -226,7 +230,7 @@ session_start();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
 						var response = JSON.parse(this.responseText);
-							if (response.numUsers == 0) {
+							if (response.numUsers == 0) { // if the username is unique
 								usernameCheckbox.classList.remove("invalid");
 								usernameCheckbox.classList.add("valid");
 								usernameCheckbox.innerHTML = "Username must be unique";
@@ -240,6 +244,7 @@ session_start();
 					};
 					xmlhttp.open("GET", "checkAccount.php?checkbox=1&username="+username.value, true);
 					xmlhttp.send();
+					// if nothing is entered in any of the boxes, dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0 && username.value.length == 0 && email.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}
@@ -261,7 +266,7 @@ session_start();
 					};
 					xmlhttp.open("GET", "checkAccount.php?checkbox=1&email="+email.value, true);
 					xmlhttp.send();
-
+					// if nothing is entered in any of the boxes, dont display the checklist
 					if (password1.value.length == 0 && password2.value.length == 0 && username.value.length == 0 && email.value.length == 0) {
 						document.getElementById("message").style.display = "none";
 					}

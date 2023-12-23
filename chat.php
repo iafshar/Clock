@@ -15,22 +15,22 @@ session_start();
     <script>
       var toUsername = "";
       if(window.location.href.indexOf("?") > -1) {
-        toUsername = window.location.search.substring(1);
+        toUsername = window.location.search.substring(1); // the username of the user that the current user is chatting with
       }
 
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
                 var myRecords = JSON.parse(this.responseText);
                 
                 var premium = (myRecords.Premium == 1);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
+                
+                // message box
                 document.getElementById("messageBody").innerHTML = "<td><table><tr><textarea id='messageText' style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><input type='submit' style='width:1400px;height:45px;' value='Enter' onclick=sendMessage('"+myRecords.otherUsername+"')></tr></table></td>";
                 var rows = "";
                 if (myRecords) {
                   if (myRecords.Messages) {
-                      console.log(typeof myRecords.Messages);
                       myUserID = myRecords.myUserID;
                       var countClocks = 0; // since you can send the same clock over and over again, this is to keep track of which one to mute/unmute
                       for (i=0;i<myRecords.Messages.length;i++) {
@@ -41,7 +41,7 @@ session_start();
                           myRecord.DateSent = new Date(myRecord.DateSent);
                           myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                           if (myRecord.sentByMe == 0) {
-                            if (myRecord.Type == 1) { 
+                            if (myRecord.Type == 1) { // if the message is a clock
                               if (myUserID != myRecord.UserID) { // prevents user from being linked to their own profile page but from another perspective
                                 if (myRecord.Shared == 1) {
                                   if (premium) {
@@ -75,7 +75,7 @@ session_start();
                             }
                           }
                           else {
-                            if (myRecord.Type == 1) {
+                            if (myRecord.Type == 1) { // if the message is a clock
                               
                               if (myUserID != myRecord.UserID) {
                                 if (premium) {
@@ -99,10 +99,9 @@ session_start();
                               newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr>";
                             } 
                                          
-                          }
-                          console.log(myRecord);                
+                          }            
                           rows = rows+newRow;
-                          localStorage.removeItem("muteRow"+i);
+                          localStorage.removeItem("muteRow"+i); // if there are any previous muteRows with the current is, remove them to prevent them from affecting the sound values of the current iframes
                       }
                   }
                 }
@@ -116,7 +115,7 @@ session_start();
 
     </script>
     <script>
-      function likeChat(clockID) {
+      function likeChat(clockID) { 
         $.ajax({
           type: 'post',
           url: 'addVote.php',
@@ -126,9 +125,9 @@ session_start();
             dislike:0
           },
           success: function (response) {
-            buttons = document.getElementsByClassName("likeButton-"+clockID);
-            nums = document.getElementsByClassName("numLikes-"+clockID);
-            for (let i = 0; i < buttons.length; i++) {
+            buttons = document.getElementsByClassName("likeButton-"+clockID); // all the like buttons that are for the current clock
+            nums = document.getElementsByClassName("numLikes-"+clockID); // all the numLikes of the current clock
+            for (let i = 0; i < buttons.length; i++) { // changes the color of the like buttons and the values of the numLikes
               var button = buttons[i];
               var numLikes = nums[i];
               if (response == 0) {
@@ -154,9 +153,9 @@ session_start();
             dislike:1
           },
           success: function (response) {
-            buttons = document.getElementsByClassName("dislikeButton-"+clockID);
-            nums = document.getElementsByClassName("numDislikes-"+clockID);
-            for (let i = 0; i < buttons.length; i++) {
+            buttons = document.getElementsByClassName("dislikeButton-"+clockID); // all the dislike buttons that are for the current clock
+            nums = document.getElementsByClassName("numDislikes-"+clockID);// all the numDislikes of the current clock
+            for (let i = 0; i < buttons.length; i++) { // changes the color of the dislike buttons and the values of the numDislikes
               var button = buttons[i];
               var numDislikes = nums[i];
               if (response == 0) {
@@ -173,7 +172,7 @@ session_start();
       }
 
       function sendMessage(sender) {
-        message = document.getElementById("messageText");
+        message = document.getElementById("messageText"); // the message being sent
         $.ajax({
           type: 'post',
           url: 'sendMessageInbox.php',
@@ -187,26 +186,27 @@ session_start();
             myRecord.DateSent = new Date(myRecord.DateSent);
             myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
             newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr>";
-            rows = newRow + document.getElementById("resultRows").innerHTML;
+            rows = newRow + document.getElementById("resultRows").innerHTML; // adds a new row with the new message to the top of the chat
             document.getElementById("resultRows").innerHTML = rows;
-            message.value = "";
+            message.value = ""; // clears the message box
           }
         });
       }
 
       function deleteMessage(messageID,elem) {
-        while (!elem.classList.contains('table-row-from-me')) {
+        while (!elem.classList.contains('table-row-from-me')) { // sets elem to the row of the message
+          // have to do it in a while loop because there are different levels for clock messages and normal ones
           elem = elem.parentNode;
         }
-        i = elem.rowIndex;
+        i = elem.rowIndex; // which row the row of the message is in
         $.ajax({
           type: 'post',
           url: 'deleteMessage.php',
           data: {
             messageID:messageID,
-            rowID:i-1
+            rowID:i-1 // minus one because the message box at the top takes up one row
           },
-          success: function (response) {
+          success: function (response) { // deletes the row from the display
             document.getElementById("messageTable").deleteRow(i);
             console.log(JSON.parse(response));
           }

@@ -1,6 +1,6 @@
 
 <?php
-// <!-- adds a vote to the DB that is a dislike -->
+// <!-- adds a vote to the DB  -->
 session_start();
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();
@@ -28,21 +28,19 @@ if (isset($_POST["location"]) && isset($_POST["dislike"])) {
 $UserID = $_SESSION["UserID"];
 
 $Check = "SELECT * FROM Votes WHERE UserID='$UserID' AND ItemID='$ItemID' AND Item='$item' AND Dislike='$dislike'";
-$CheckResult = mysqli_query($conn, $Check) or die(mysqli_error($conn));
+$CheckResult = mysqli_query($conn, $Check) or die(mysqli_error($conn)); // checks if the vote already exists
 $CheckCount = mysqli_num_rows($CheckResult);
 
 $Unlike = "DELETE FROM Votes WHERE UserID='$UserID' AND ItemID='$ItemID' AND Item='$item' AND Dislike='$dislike'";
 $VoteInsert = "INSERT INTO Votes (UserID, ItemID, Item, Dislike)
   VALUES ('$UserID','$ItemID','$item','$dislike')";
 
-if ($CheckCount != 0){
+if ($CheckCount != 0){ // if the vote exists, it needs to be removed
     mysqli_query($conn, $Unlike);
     echo 0;
-    // header("Location:".$location);
 }
-else if (mysqli_query($conn, $VoteInsert)) {
+else if (mysqli_query($conn, $VoteInsert)) { // else it is added
     echo 1;
-    // header("Location:".$location);
 }
 else {
     echo "Error: " . $VoteInsert . "<br>" . mysqli_error($conn);

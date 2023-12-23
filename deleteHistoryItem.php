@@ -1,4 +1,5 @@
 <?php
+// deletes one item from a user's search history
 session_start();
 
 require_once __DIR__ . '/dbConnect.php';

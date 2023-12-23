@@ -11,8 +11,8 @@
     var rowID = window.location.search.substring(rowIDIndex,clockIDIndex);
     clockIDIndex += 8;
     var clockID = window.location.search.substring(clockIDIndex);
-    localStorage.removeItem("muteRow"+rowID);
-    var mute = 1;
+    localStorage.removeItem("muteRow"+rowID); // removes any previous muteRows to prevent getting the wrong value for mute
+    var mute = 1; // starts off muted
   </script>
   <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.15/p5.js'></script> -->
   <!-- <script src=

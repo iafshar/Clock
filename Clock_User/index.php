@@ -11,7 +11,7 @@ session_start();
   <script src="../functions.js"></script>
   <script>
     var clockID = -1;
-    if(window.location.href.indexOf("?") > -1) {
+    if(window.location.href.indexOf("?") > -1) { // if there is a question mark in the url
       clockID = window.location.search.substring(1);
     }
 

@@ -24,18 +24,23 @@
 			</div>
 			<script>
 				function save() {
+					// saves the username so that the user doesnt have to reenter it if they get the password wrong
 					var loginUsername = document.getElementById("username").value;
 					localStorage.setItem("loginUsername", loginUsername);
 				}
 				
-				if (document.referrer == window.location.href) {
+				if (document.referrer == window.location.href) { // if the previous page is the same, i.e. the user entered the wrong credentials
+					// display the checklist saying invalid credentials
 					document.getElementById("message").style.display = "block";
 				}
 				else {
+					// hide the checklist saying invalid credentials.
 					document.getElementById("message").style.display = "none";
 				}
 			</script>
 			<script>
+				// if there is something in localStorage[loginUsername] put it in the username field
+				// if not it will just put an empty string in that the user can just add to
 				document.getElementById("username").value = localStorage.getItem('loginUsername');
 			</script>
 		</div>

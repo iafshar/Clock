@@ -13,7 +13,7 @@ $response["myUserID"] = $MyUserID;
 $otherUsername = $_GET["otherUsername"];
 
 $viewMessages = "UPDATE Messages SET Viewed=1 WHERE ToUsername='$myUsername' AND FromUsername='$otherUsername'";
-$db->get_con()->query($viewMessages);
+$db->get_con()->query($viewMessages); // views all the messages in the chat with this user
 
 $getMessages = "SELECT * FROM `Messages`
  WHERE ToUsername IN ('$myUsername','$otherUsername') AND FromUsername IN ('$otherUsername','$myUsername')
@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
         $record["DateSent"] = $row["DateSent"];
         $record["Type"] = $row["Type"];
 
-        if ($record["Type"] == 1) {
+        if ($record["Type"] == 1) { // if it is a clock message
             $contents = explode(",",$row["Content"],2);
             array_push($contents,""); // prevents needing to check for length of array in javascript,
         //                             // if the length is now 2, it will add an empty string before the iframe which wont make a difference.

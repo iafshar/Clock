@@ -7,7 +7,7 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 //If the form is submitted
-if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['checkbox'])){
+if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['checkbox'])){ // if it comes from login
 //Assigning posted values to variables.
   $Username = $_POST['Username'];
   $Password = $_POST['Password'];
@@ -17,7 +17,7 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
   $count = mysqli_num_rows($result);
   $_SESSION["Username"] = $Username;
   $_SESSION["Password"] = $Password;
-  if ($count == 1) {
+  if ($count == 1) { // if the credentials exist
     while ($row = $result->fetch_assoc()) {
         $_SESSION['UserID'] = $row["UserID"];
         
@@ -27,26 +27,26 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
     header("Location:http://localhost:8080/Clock/login.php");
    }
 }
-else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
+else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes from signup
     if(isset($_GET['username'])) {
         $response = array();
         $Username = $_GET['username'];
-        $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'";
+        $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'"; // check if there is a user with the username
         $resultUser = mysqli_query($conn, $ExistingUser) or die(mysqli_error($conn));
-        $countUser = mysqli_num_rows($resultUser);
+        $countUser = mysqli_num_rows($resultUser); // number of users with the username (can be 0)
         $response['numUsers'] = $countUser;
         if ($countUser != 0){
             $Suggest = "SELECT * FROM `Users` WHERE Username LIKE '%$Username%'";
             $resultSuggest = mysqli_query($conn, $Suggest) or die(mysqli_error($conn));
             $countSuggest = mysqli_num_rows($resultSuggest);
             for ($i = 0;$i < $countSuggest;$i ++){
-            $Suggestion = $Username . "$i";
-            $ExistingSuggestion = "SELECT * FROM `Users` WHERE Username='$Suggestion'";
-            $resultSuggestion = mysqli_query($conn, $ExistingSuggestion) or die(mysqli_error($conn));
-            $countSuggestion = mysqli_num_rows($resultSuggestion);
-            if($countSuggestion == 0){
-                break;
-            }
+                $Suggestion = $Username . "$i";
+                $ExistingSuggestion = "SELECT * FROM `Users` WHERE Username='$Suggestion'"; // checks if the suggestion is in the database
+                $resultSuggestion = mysqli_query($conn, $ExistingSuggestion) or die(mysqli_error($conn));
+                $countSuggestion = mysqli_num_rows($resultSuggestion);
+                if($countSuggestion == 0){ // if the suggestion is not in the database, use that as the suggested username
+                    break;
+                }
             }
         
             $response['suggestion'] = $Suggestion;
@@ -55,11 +55,11 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
     else if (isset($_GET['email'])) {
         $response = array();
         $Email = $_GET['email'];
-        $ExistingEmail = "SELECT * FROM `Users` WHERE Email='$Email'";
+        $ExistingEmail = "SELECT * FROM `Users` WHERE Email='$Email'"; // check if the email is in the database
         $resultEmail = mysqli_query($conn, $ExistingEmail) or die(mysqli_error($conn));
-        $countEmail = mysqli_num_rows($resultEmail);
+        $countEmail = mysqli_num_rows($resultEmail); //number of times the email appears in the database
 
-        if ($countEmail != 0) {
+        if ($countEmail != 0) { // if the email exists in the database
             $response['addEmailClass'] = "invalid";
             $response['removeEmailClass'] = "valid";
         }
@@ -84,11 +84,11 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) {
                 
         }
 
-        $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'";
+        $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'"; // checks all the passwords used by the user before
         $result = mysqli_query($conn, $checkPwds);
         $response = array();
         
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0) { // if the password has been used by this user before
             $response["removeDifferentClass"] = "valid";
             $response["addDifferentClass"] = "invalid";
         }

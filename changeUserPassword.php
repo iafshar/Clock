@@ -1,5 +1,4 @@
 <?php
-// <!-- Adds the basic account to the DB -->
 session_start();
 $_SESSION["ErrorReset"] = "";
 require_once __DIR__ . '/dbConnect.php';
@@ -8,7 +7,7 @@ $db = new DB_CONNECT();
 $conn = $db->get_con();
 
 
-if (isset($_POST['Password1'])){
+if (isset($_POST['Password1'])){ 
   $invalid = FALSE;
 
   $Email = $_SESSION["Email"];
@@ -42,6 +41,7 @@ if (isset($_POST['Password1'])){
     $_SESSION["differentResetClass"] = "valid";
   }
 
+  //the following does validation for the new password
 
   $num = 0;
   $alpha = 0;
@@ -97,7 +97,7 @@ if (isset($_POST['Password1'])){
      $_SESSION["messageResetDisplay"] = "block";
      header("Location:http://localhost:8080/Clock/updatePassword.php");
   }
-  else {
+  else { // if the new password is valid
     $UserID = $_SESSION['UserID'];
     $updatePassword = "UPDATE USERS
         SET Password = '$Password1'
@@ -106,8 +106,8 @@ if (isset($_POST['Password1'])){
         $addPwd = "INSERT INTO Passwords (UserID,Password)
           VALUES ('$UserID','$Password1')";
         if (mysqli_query($conn, $addPwd)) {
-          $deleteHash = $_SESSION['deleteHash'];
-          mysqli_query($conn, $deleteHash);
+          $deleteHash = $_SESSION['deleteHash']; // the hash is not needed anymore because the user has successfully changed their password
+          mysqli_query($conn, $deleteHash);      // so it is deleted
           header("Location:http://localhost:8080/Clock/myClocks.php");
         }
         else {

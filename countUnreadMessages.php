@@ -1,4 +1,5 @@
 <?php
+// counts the number of users that have sent the user messages that they havent viewed
 session_start();
 
 require_once __DIR__ . '/dbConnect.php';

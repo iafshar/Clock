@@ -1,5 +1,5 @@
-function checkBack() {
-    if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") {
+function checkBack() { // for the back button
+    if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") { // only takes you back to pages that are still part of the app
       history.back();
     }
 }
@@ -17,20 +17,20 @@ function openComments(clockID) {
     window.open('comments.php?'+clockID,'_self');
 }
 
-function changeSound(clockID,rowID) {
+function changeSound(clockID,rowID) { // mutes/unmutes a clock
     for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
-      if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) {
-        if (localStorage.getItem("muteRow"+rowID)) {
-          localStorage.removeItem("muteRow"+rowID);
+      if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) { // finds the iframe to change the sound of
+        if (localStorage.getItem("muteRow"+rowID)) { // if a key called muteRow followed by the rowID of the iframe is in localStorage
+          localStorage.removeItem("muteRow"+rowID); // remove it from local storage
           document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
           break;
         }
         else {
-          localStorage.setItem("muteRow"+rowID,0);
+          localStorage.setItem("muteRow"+rowID,0); // add it to local storage
           document.getElementsByClassName("sound-icon")[i].src = "Icons/volume.png";
         }
       }
-      else {
+      else { // mute all the other iframes
         var source = document.getElementsByTagName("iframe")[i].src
         var rowIDIndex = source.indexOf("rowID=");
         rowIDIndex += 6;
@@ -43,6 +43,7 @@ function changeSound(clockID,rowID) {
 }
 
 function setUnreadCount() {
+  // add the number of unread chats to the inbox icon
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
@@ -65,7 +66,7 @@ function openClock(clockID,mine=false) {
     }
 }
 
-function iframeclick(elem,mine=false) {
+function iframeclick(elem,mine=false) { // called on load of all of the iframes
     elem.contentWindow.document.body.onclick = function() {
       var source = elem.src;
       var index = source.indexOf("clockID=") + 8;
@@ -74,7 +75,7 @@ function iframeclick(elem,mine=false) {
 }
 
 function like(clockID,elem) {
-    numLikes = document.getElementById("numLikes-"+clockID);
+    numLikes = document.getElementById("numLikes-"+clockID); // get the number of likes associated with this like button
     $.ajax({
       type: 'post',
       url: 'addVote.php',
@@ -84,11 +85,11 @@ function like(clockID,elem) {
         dislike:0
       },
       success: function (response) {
-        if (response == 0) {
-          numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1;
+        if (response == 0) { // if a like has been removed
+          numLikes.innerHTML = parseInt(numLikes.innerHTML) - 1; 
           elem.style.backgroundColor = "#efefef";
         }
-        else {
+        else { // if a like has been added
           numLikes.innerHTML = parseInt(numLikes.innerHTML) + 1;
           elem.style.backgroundColor = "#f39faa";
         }
@@ -98,7 +99,7 @@ function like(clockID,elem) {
 }
 
 function dislike(clockID,elem) {
-    numDislikes = document.getElementById("numDislikes-"+clockID);
+    numDislikes = document.getElementById("numDislikes-"+clockID); // get the number of dislikes associated with this dislike button
     $.ajax({
       type: 'post',
       url: 'addVote.php',
@@ -108,11 +109,11 @@ function dislike(clockID,elem) {
         dislike:1
       },
       success: function (response) {
-        if (response == 0) {
+        if (response == 0) { // if a dislike has been removed
           numDislikes.innerHTML = parseInt(numDislikes.innerHTML) - 1;
           elem.style.backgroundColor = "#efefef";
         }
-        else {
+        else { // if a dislike has been added
           numDislikes.innerHTML = parseInt(numDislikes.innerHTML) + 1;
           elem.style.backgroundColor = "#f39faa";
         }
@@ -122,7 +123,9 @@ function dislike(clockID,elem) {
 }
 
 function addComment(clockID,rowID=-1) {
-    if (rowID < 0) {
+  // rowID will only be used for chat because there can be many rows of the same clock so that will be the only time it will be greater than or equal to 0
+
+    if (rowID <= 0) { 
         comment = document.getElementById("commentBox-"+clockID);
     }
     else {
@@ -136,7 +139,7 @@ function addComment(clockID,rowID=-1) {
         comment:comment.value
       },
       success: function () {
-        comment.value = "";
+        comment.value = ""; // clear the comment box
       }
     });
 }

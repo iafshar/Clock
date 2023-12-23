@@ -1,5 +1,5 @@
 <?php
-
+// delete all things related to the user's account.
 session_start();
 require_once __DIR__ . '/dbConnect.php';
 $db = new DB_CONNECT();

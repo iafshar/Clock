@@ -2,9 +2,9 @@
 
 ## Creating a Clock
 
-A clock is a unique way of visualizing music. It uses a metronome that continuously spins around a circle with one point being fixed in the center. You can then add percussive sounds anywhere in the circle and when the metronome hits them, the sounds are played. The image below demonstrates how it looks. A red mini circle would represent the sound of a snare, a pink one would represent the sound of a kick, and a dark grey one would represent the sound of a hi hat.
+A clock is a unique way of visualizing music. It uses a metronome that continuously spins around a circle with one point being fixed in the center. You can then add percussive sounds anywhere in the circle and when the metronome hits them, the sounds are played. The image below demonstrates how it looks. The colors of the buttons will be the same as the colors of the mini circles that represent the sound identified by the text of the button. A red mini circle would represent the sound of a snare, a pink one would represent the sound of a kick, and so on.
 
-<img width="1440" alt="Screenshot 2023-08-24 at 3 51 42 PM" src="https://github.com/iafshar/Clock/assets/102998427/c6929aa2-ca96-45df-88f3-a0f4b464c0cb">
+<img width="1440" alt="Screenshot 2023-12-23 at 10 25 12 AM" src="https://github.com/iafshar/Clock/assets/102998427/08a1b557-ffd8-423c-8b8e-54e224c366e1">
 
 You can also change the tempo of your clock which would affect the speed at which the metronome spins. You can do this by dragging the slider at the bottom of the screen horizontally, or you can click on the keypad image in the top left corner which will take you to the page shown below.
 

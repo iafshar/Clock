@@ -19,7 +19,7 @@ session_start();
         var xmlhttp = new XMLHttpRequest();
 
         if (message.length > 0) {
-          // have to encode the message because it doesnt take anything after a hash otherwise
+          // have to encode the message because it doesnt take anything after a hashtag otherwise
           xmlhttp.open("GET", "sendMessageInbox.php?sendingUsername="+Username+"&clockID="+clockID+"&addMessage="+encodeURIComponent(message), true);
         }
         else {
@@ -93,6 +93,7 @@ session_start();
     </table>
     </div>
     <script>
+      var boldUsers = []
       var clockID = window.location.search.substring(1);
       // display the usernames of the chats the user has with others
       var xmlhttp = new XMLHttpRequest();
@@ -101,19 +102,27 @@ session_start();
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
-                   var Username = myRecords.Usernames[i];
-                   var date = myRecords.Dates[i];
-                   date = new Date(date);
-                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
-                   rows = rows+newRow;
+                  var Username = myRecords.Usernames[i];
+                  var date = myRecords.Dates[i];
+                  date = new Date(date);
+                  date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                  var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
+                  if (Bold == 0) {
+                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                  }
+                  else {
+                    boldUsers.push(Username);
+                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                  }
+                  
+                  rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
           }
       };
       xmlhttp.open("GET", "getMessageHeaders.php", true);
       xmlhttp.send();
-
+      
     </script>
   <script>
     document.getElementById('miniClock').src = 'http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID=-1clockID='+clockID;
@@ -136,12 +145,19 @@ session_start();
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
-                   var Username = myRecords.Usernames[i];
-                   var date = myRecords.Dates[i];
-                   date = new Date(date);
-                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                   var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
-                   rows = rows+newRow;
+                  var Username = myRecords.Usernames[i];
+                  var date = myRecords.Dates[i];
+                  date = new Date(date);
+                  date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                  var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
+                  if (Bold == 0) {
+                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                  }
+                  else {
+                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                  }
+                  
+                  rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
           }
@@ -161,7 +177,12 @@ session_start();
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td><td></td></tr>";
+              if (boldUsers.includes(myRecord)) {
+                var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td><strong>"+myRecord+"</strong></td><td></td></tr>";
+              } else {
+                var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td><td></td></tr>";
+              }
+              
               rows = rows+newRow;
             }
           }

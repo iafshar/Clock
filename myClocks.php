@@ -82,6 +82,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
       localStorage.removeItem("signUpPassword2");
 			localStorage.removeItem("resetPassword"); 
 			localStorage.removeItem("resetPassword2"); 
+      localStorage.removeItem("signUpPremium");
     </script>
   </head>
   <body>

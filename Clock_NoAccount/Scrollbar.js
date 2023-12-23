@@ -21,6 +21,7 @@ class HScrollbar {
     this.sposMax = this.xpos + this.swidth - this.sheight;
     this.numX = null;
     this.numY = null;
+    this.overText = false;
   }
   display() {
     noStroke();
@@ -38,9 +39,11 @@ class HScrollbar {
     this.tempo = round(this.spos/this.IncreaseTempo) + this.MinTempo;  
     textSize(30); 
     if(mouseX >= this.numX && mouseX <= this.numX+50 && mouseY >= this.numY-20 && mouseY <= this.numY+3){
+      this.overText = true;
       fill(LIGHT_YELLOW);
     }
     else{
+      this.overText = false;
       fill(clockColor); // colour of the text
     }
     

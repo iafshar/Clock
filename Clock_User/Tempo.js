@@ -21,6 +21,7 @@ function click() {
 }
 
 function keypad(){
+  overButton = 0;
   background(200);
   stroke(BLACK);
   strokeWeight(1);
@@ -30,6 +31,7 @@ function keypad(){
   text(hs1.tempo,NUM_BUTTON_X + (2*NUM_BUTTON_DIAMETER),nhRatio*100);
   if(mouseX >= CLEAR_X - (CLEAR_WIDTH/2) && mouseX <= CLEAR_X + (CLEAR_WIDTH/2) && mouseY >= CLEAR_Y-nhRatio*20 && mouseY <= CLEAR_Y+nhRatio*20){
     fill(WHITE);
+    overButton += 1;
   }
   else{
     fill(BLACK);
@@ -37,6 +39,7 @@ function keypad(){
   text("Clear",CLEAR_X,CLEAR_Y);
   if(mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
     fill(WHITE);
+    overButton += 1;
   }
   else{
     fill(BLACK);
@@ -44,6 +47,7 @@ function keypad(){
   text("Click", CLICK_X, CLICK_Y);
   if(mouseX >= ENTER_X - (ENTER_WIDTH/2) && mouseX <= ENTER_X + (ENTER_WIDTH/2) && mouseY >= ENTER_Y-nhRatio*20 && mouseY <= ENTER_Y+nhRatio*20){
     fill(WHITE);
+    overButton += 1;
   }
   else{
     fill(BLACK);
@@ -52,6 +56,14 @@ function keypad(){
 
   for(i=0;i<nums.length;i++){
     nums[i].drawButton();
+    overButton += nums[i].overButton();
+  }
+  
+  if (overButton > 0) {
+    cursor(HAND);
+  }
+  else {
+    cursor(ARROW);
   }
 
   click();

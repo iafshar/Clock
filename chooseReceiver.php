@@ -108,11 +108,11 @@ session_start();
                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                   var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                   if (Bold == 0) {
-                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
                   }
                   else {
                     boldUsers.push(Username);
-                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
                   }
                   
                   rows = rows+newRow;
@@ -151,10 +151,10 @@ session_start();
                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                   var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                   if (Bold == 0) {
-                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
                   }
                   else {
-                    var newRow = "<tr class='table-row' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
                   }
                   
                   rows = rows+newRow;
@@ -178,9 +178,9 @@ session_start();
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
               if (boldUsers.includes(myRecord)) {
-                var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td><strong>"+myRecord+"</strong></td><td></td></tr>";
+                var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td><strong>"+myRecord+"</strong></td><td></td></tr>";
               } else {
-                var newRow = "<tr class='table-row' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td><td></td></tr>";
+                var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td><td></td></tr>";
               }
               
               rows = rows+newRow;

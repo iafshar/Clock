@@ -27,6 +27,14 @@ body {
   font-size: 17px;
 }
 
+button:hover {
+  cursor:pointer;
+}
+
+iframe:hover {
+  cursor:pointer;
+}
+
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #f5bfcc;
@@ -64,6 +72,11 @@ button.messageBtn {
 
 .table-row-from-me {
   background-color: #03c6fc;
+}
+
+.table-row-clickable:hover {
+  background-color: #faf39f;
+  cursor:pointer;
 }
 
 .autocomplete-table-row:hover{

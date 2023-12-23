@@ -22,7 +22,7 @@ session_start();
               var rows = "";
               for (i=0;i<myRecords.length;i++) {
                    var myRecord = myRecords[i];
-                   var newRow = "<tr class='table-row'><td class='search-username'>"+myRecord+"</td><td><input type='button' value='X' item="+myRecord+" onclick=deleteHistoryItem(this)></td></tr>";
+                   var newRow = "<tr class='table-row-clickable'><td class='search-username'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
                    rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -68,7 +68,7 @@ session_start();
 
       <form autocomplete="off" action="searchAllUsers.php" method="post">
         <input id="userSearch" type="text" name="search" placeholder="Search" required>
-        <input type="submit" value="🔍">
+        <button type="submit">🔍</button>
       </form>
 
       <div class="dropdown">
@@ -98,8 +98,7 @@ session_start();
         <tr>
           <th id="searchHeading">Recents</th>
           <th id="clearButton">
-            <form action=""></form>
-            <input type="button" value="Clear" onclick="clearHistory()">
+            <button onclick="clearHistory()">Clear</button>
           </th>
         </tr>
       </thead>
@@ -122,7 +121,7 @@ session_start();
 
             
             // code to read selected table row cell data (values).
-          $("#clockTable").on('click','.autocomplete-table-row',function(){
+          $("#clockTable").on('click','.table-row-clickable',function(){
             // get the current row
             var currentRow=$(this).closest("tr");
 
@@ -137,7 +136,7 @@ session_start();
       }
       else { // when the value of the search bar is empty
         document.getElementById("searchHeading").innerHTML = "Recents";
-        document.getElementById("clearButton").innerHTML = "<input type='button' value='Clear' onclick='clearHistory()'>";
+        document.getElementById("clearButton").innerHTML = "<button onclick='clearHistory()'>Clear</button>";
         var xmlhttp = new XMLHttpRequest();
         // display recent searches
         xmlhttp.onreadystatechange = function() {
@@ -146,7 +145,7 @@ session_start();
                 var rows = "";
                 for (i=0;i<myRecords.length;i++) {
                     var myRecord = myRecords[i];
-                    var newRow = "<tr class='table-row'><td class='search-username'>"+myRecord+"</td><td><input type='button' value='X' item="+myRecord+" onclick=deleteHistoryItem(this)></td></tr>";
+                    var newRow = "<tr class='table-row-clickable'><td class='search-username'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
                     rows = rows+newRow;
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -173,7 +172,7 @@ session_start();
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='autocomplete-table-row'><td>"+myRecord+"</td><td></td></tr>";
+              var newRow = "<tr class='table-row-clickable'><td>"+myRecord+"</td><td></td></tr>";
               rows = rows+newRow;
             }
           }

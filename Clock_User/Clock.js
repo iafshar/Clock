@@ -345,20 +345,30 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
+  overButton = 0;
+
   trashBtn.drawButton();
   keypadBtn.drawButton();
 
+  overButton += trashBtn.overButton();
+  overButton += keypadBtn.overButton();
+
   for(i=0;i<options.length;i++){
     options[i].drawButton();
+    overButton += options[i].overButton();
   }
 
   saveBtn.drawButton();
   share.drawButton();
-  
+
+  overButton += saveBtn.overButton();
+  overButton += share.overButton();
 
   drawSlider(hs1);
 
   tempo = hs1.tempo/40;
+
+  overButton += hs1.overEvent();
   
 
   lx = CLOCK_X + cos(radians(angle))*(RADIUS); // x and y positions of the end point of the metronome
@@ -394,16 +404,28 @@ function clock() {
   rewindBtn.drawButton();
   fastForwardBtn.drawButton();
 
+  overButton += pauseBtn.overButton()
+  overButton += rewindBtn.overButton()
+  overButton += fastForwardBtn.overButton() 
+
   for (i = 0;i<circles.length;i++) {
     circles[i].drawCircle();
     circles[i].onScreen = true;
     circleOnScreen = true;
+    overButton += circles[i].overCircle();
 
     hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
     if (hit && !pauseBtn.paused){
       circles[i].playSound();
     }
+  }
+
+  if (overButton > 0) {
+    cursor(HAND);
+  }
+  else {
+    cursor(ARROW);
   }
 
   if (rewindBtn.timePressed > 0) {

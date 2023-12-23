@@ -175,15 +175,24 @@ function clock() {
   fill(clockColor); //colours the ellipse yellow
   ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
 
+  overButton = 0;
+
   for(i=0;i<options.length;i++){
     options[i].drawButton();
+    overButton += options[i].overButton();
   }
 
   signUp.drawButton();
   login.drawButton();
 
+  overButton += signUp.overButton();
+  overButton += login.overButton();
+
   drawSlider(hs1);
   tempo = hs1.tempo/40;
+
+  overButton += hs1.overEvent();
+  overButton += hs1.overText;
 
   lx = CLOCK_X + cos(radians(angle))*(RADIUS);
   ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
@@ -199,7 +208,6 @@ function clock() {
 
   fill(bgColor);
   stroke(bgColor);
-
 
 
   strokeWeight(5);
@@ -222,12 +230,20 @@ function clock() {
     circles[i].drawCircle();
     circles[i].onScreen = true;
     circleOnScreen = true;
+    overButton += circles[i].overCircle();
 
     hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
 
     if (hit){
-        circles[i].playSound();
+      circles[i].playSound();
     }
+  }
+
+  if (overButton > 0) {
+    cursor(HAND);
+  }
+  else {
+    cursor(ARROW);
   }
 
   angle += tempo;

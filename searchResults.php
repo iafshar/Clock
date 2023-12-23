@@ -23,7 +23,7 @@ session_start();
               var rows = "";
               for (i=0;i<myRecords.Users.length;i++) {
                   var myRecord = myRecords.Users[i];
-                  var newRow = "<tr class='table-row'><td>"+myRecord.Username+"</td></tr>";
+                  var newRow = "<tr class='table-row-clickable'><td>"+myRecord.Username+"</td></tr>";
                   rows = rows+newRow
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -42,7 +42,7 @@ session_start();
     $(document).ready(function(){
 
   // code to read selected table row cell data (values).
-      $("#clockTable").on('click','.table-row',function(){
+      $("#clockTable").on('click','.table-row-clickable',function(){
        // get the current row
         var currentRow=$(this).closest("tr");
 

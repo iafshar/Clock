@@ -15,6 +15,16 @@ class Circle {
     strokeWeight(this.outline);
     ellipse(this.ox, this.oy, this.diameter, this.diameter);
   }
+
+  overCircle(){
+    if (dist(mouseX,mouseY,this.ox,this.oy)<this.diameter/2){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   playSound(){
     if (millis()-this.lastPlayed > 100) {
       this.sound.play();

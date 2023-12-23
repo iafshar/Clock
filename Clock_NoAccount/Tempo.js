@@ -20,6 +20,7 @@ function click() {
 }
 
 function keypad(){
+  overButton = 0;
   background(200);
   strokeWeight(1);
   if(hs1.tempo>999){
@@ -27,6 +28,7 @@ function keypad(){
   }
   text(hs1.tempo,300,100);
   if(mouseX >= 365 && mouseX <= 437 && mouseY >= 80 && mouseY <= 120){
+    overButton += 1;
     fill(255);
   }
   else{
@@ -34,6 +36,7 @@ function keypad(){
   }
   text("Clear",400,100);
   if(mouseX >= 170 && mouseX <= 233 && mouseY >= 480 && mouseY <= 520){
+    overButton += 1;
     fill(255);
   }
   else{
@@ -41,6 +44,7 @@ function keypad(){
   }
   text("Click", 200, 500);
   if(mouseX >= 360 && mouseX <= 435 && mouseY >= 480 && mouseY <= 520){
+    overButton += 1;
     fill(255);
   }
   else{
@@ -50,6 +54,14 @@ function keypad(){
   
   for(i=0;i<nums.length;i++){
     nums[i].drawButton();
+    overButton += nums[i].overButton();
+  }
+
+  if (overButton > 0) {
+    cursor(HAND);
+  }
+  else {
+    cursor(ARROW);
   }
 
   click();

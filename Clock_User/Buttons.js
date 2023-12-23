@@ -11,7 +11,7 @@ class Button{
    }
    overButton() { // if the mouse is over the button
     if (mouseX > this.x && mouseX < this.x+this.Width &&
-       mouseY > this.y && mouseY < this.y+this.Height) {
+      mouseY > this.y && mouseY < this.y+this.Height) {
       return true;
     }
     else {
@@ -25,6 +25,7 @@ class Button{
     }
     else{
       var realColor = this.buttonColor;
+
     }
     stroke(realColor);
     strokeWeight(2.8);

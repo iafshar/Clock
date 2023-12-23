@@ -26,10 +26,10 @@ session_start();
                    date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                    var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                    if (Bold == 0) {
-                    var newRow = "<tr class='table-row' onclick=openChat('"+Username+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
+                    var newRow = "<tr class='table-row-clickable' onclick=openChat('"+Username+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
                    }
                    else {
-                    var newRow = "<tr class='table-row' onclick=openChat('"+Username+"')><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
+                    var newRow = "<tr class='table-row-clickable' onclick=openChat('"+Username+"')><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
                    }
                    
                    rows = rows+newRow;

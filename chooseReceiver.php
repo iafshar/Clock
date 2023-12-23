@@ -81,7 +81,7 @@ session_start();
       <tbody>
         <tr>
           <td>
-            <iframe src='' id='miniClock' width=410 height=205 ></iframe>
+            <iframe src='' id='miniClock' width=410 height=205 onload=iframeclick(this)></iframe>
           </td>
         </tr>
         <tr>

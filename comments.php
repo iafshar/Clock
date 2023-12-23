@@ -141,6 +141,7 @@ session_start();
         </div>
       </div>
   </div>
+  <iframe src="start.php"></iframe>
   </body>
   <script>
     setUnreadCount();

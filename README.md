@@ -6,7 +6,7 @@ A clock is a unique way of visualizing music. It uses a metronome that continuou
 
 <img width="1440" alt="Screenshot 2023-12-23 at 10 25 12 AM" src="https://github.com/iafshar/Clock/assets/102998427/08a1b557-ffd8-423c-8b8e-54e224c366e1">
 
-You can also change the tempo of your clock which would affect the speed at which the metronome spins. You can do this by dragging the slider at the bottom of the screen horizontally, or you can click on the keypad image in the top left corner which will take you to the page shown below.
+You can also delete a mini circle from the screen by dragging it and dropping it to the trash icon. Another thing you can do is change the tempo of your clock which would affect the speed at which the metronome spins. You can do this by dragging the slider at the bottom of the screen horizontally, or you can click on the keypad image in the bottom right corner which will take you to the page shown below.
 
 <img width="664" alt="Screenshot 2023-08-24 at 3 56 36 PM" src="https://github.com/iafshar/Clock/assets/102998427/8dd28c93-6e9b-4eac-9d37-bb1dd34fbaad">
 

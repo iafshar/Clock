@@ -6,14 +6,18 @@ $response = array();
 // include db connect class
 require_once __DIR__ . '/dbConnect.php';
 
+// connecting to db
+
+$db = new DB_CONNECT();
+
 $Username = NULL;
 
 if (array_key_exists("RecentUsername" , $_GET )){
-  $Username = $_GET["RecentUsername"];
+  $Username = mysqli_real_escape_string($db->get_con(),$_GET["RecentUsername"]);
 }
 
 else if (isset($_POST['search'])){
-  $Username = $_POST['search'];
+  $Username = mysqli_real_escape_string($db->get_con(),$_POST['search']);
 
 }
 
@@ -23,16 +27,6 @@ if (isset($_POST['message'])) {
 else {
   $_SESSION["message"] = 0;
 }
-
-// connecting to db
-
-$db = new DB_CONNECT();
-
-$Username = str_replace("\\","\\\\",$Username);
-$Username = str_replace("'","",$Username);
-$Username = str_replace("\"","",$Username);
-$Username = str_replace(">","",$Username);
-$Username = str_replace("<","",$Username);
 
 $addSearch = "INSERT INTO `Searches` (UserID, Search)
   VALUES ('$MyUserID','$Username')"; // adds the search to the database

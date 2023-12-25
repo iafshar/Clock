@@ -81,6 +81,7 @@ button.messageBtn {
 
 .autocomplete-table-row:hover{
   background-color: #faf39f;
+  cursor:pointer;
 }
 
 .dropdown {

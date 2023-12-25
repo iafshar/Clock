@@ -10,7 +10,7 @@ $db = new DB_CONNECT();
 
 $MyUserID = $_SESSION["UserID"];
 
-$SearchedUser = $_GET['Username'];
+$SearchedUser = mysqli_real_escape_string($db->get_con(),$_GET['Username']);
 $IDSearch = "SELECT * FROM `Users` WHERE Username='$SearchedUser'";
 $result = $db->get_con()->query($IDSearch);
 

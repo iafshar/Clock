@@ -21,9 +21,13 @@ session_start();
               var myRecords = JSON.parse(this.responseText);
               var rows = "";
               for (i=0;i<myRecords.length;i++) {
-                   var myRecord = myRecords[i];
-                   var newRow = "<tr class='table-row-clickable'><td class='search-username'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
-                   rows = rows+newRow;
+                  var myRecord = myRecords[i];
+                  myRecord = myRecord.replaceAll("'","&#39;");
+                  myRecord = myRecord.replaceAll(">","&#62;");
+                  myRecord = myRecord.replaceAll("\\","&#92;");
+                  myRecord = myRecord.replaceAll("<","&#60;");
+                  var newRow = "<tr class='table-row-clickable'><td class='search-username' id='recent"+i+"'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+                  rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
           }
@@ -121,7 +125,7 @@ session_start();
 
             
             // code to read selected table row cell data (values).
-          $("#clockTable").on('click','.table-row-clickable',function(){
+          $("#clockTable").on('click','.autocomplete-table-row',function(){
             // get the current row
             var currentRow=$(this).closest("tr");
 
@@ -145,7 +149,12 @@ session_start();
                 var rows = "";
                 for (i=0;i<myRecords.length;i++) {
                     var myRecord = myRecords[i];
-                    var newRow = "<tr class='table-row-clickable'><td class='search-username'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+                    myRecord = myRecord.replaceAll("'","&#39;");
+                    myRecord = myRecord.replaceAll(">","&#62;");
+                    myRecord = myRecord.replaceAll("\\","&#92;");
+                    myRecord = myRecord.replaceAll("<","&#60;");
+        
+                    var newRow = "<tr class='table-row-clickable'><td class='search-username' id='recent"+i+"'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
                     rows = rows+newRow;
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -159,11 +168,6 @@ session_start();
 
   function autocomplete(val) {
     // displays all the users that are not the current user that start with val
-    val = val.replaceAll("\"","");
-    val = val.replaceAll("\'","");
-    val = val.replaceAll("\\","");
-    val = val.replaceAll(">","");
-    val = val.replaceAll("<","");
     var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -172,7 +176,7 @@ session_start();
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='table-row-clickable'><td>"+myRecord+"</td><td></td></tr>";
+              var newRow = "<tr class='autocomplete-table-row'><td>"+myRecord+"</td><td></td></tr>";
               rows = rows+newRow;
             }
           }
@@ -195,8 +199,9 @@ session_start();
 </script>
 <script>
   function deleteHistoryItem(element) { // removes one search item
+    console.log("delete")
     
-    item = element.getAttribute('item')
+    item = element.getAttribute('item');
 
     var xmlhttp = new XMLHttpRequest();
 

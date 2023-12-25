@@ -140,11 +140,6 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     }
 
     function autocomplete(val) {
-      illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-      for (let i = 0; i < illegalChars.length; i++) { // removes all illegal chars from the clock search
-        val = val.replaceAll(illegalChars[i],"");
-      }
-      val = val.replaceAll(" ","_"); // replaces spaces with underscores
       var xmlhttp = new XMLHttpRequest();
 
       // gets all the clocks of the user but filters it to only show the ones that have names that start with what is currently in the search box

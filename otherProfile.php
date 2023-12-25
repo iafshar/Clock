@@ -140,11 +140,6 @@ session_start();
     }
 
     function autocomplete(val) {
-      illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-      for (let i = 0; i < illegalChars.length; i++) {
-        val = val.replaceAll(illegalChars[i],"");
-      }
-      val = val.replaceAll(" ","_");
       var xmlhttp = new XMLHttpRequest();
       // display clocks that have names that start with what is entered
       xmlhttp.onreadystatechange = function() {

@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
                     $record["Date"] = $row2["Date"];
                     $GetNumOfLikes = "SELECT * FROM Votes WHERE ItemID='$clockID' AND Item=0 AND Dislike=0";
                     $result4 = $db->get_con()->query($GetNumOfLikes);
-                    $record["NumOfLikes"] = $result3->num_rows;
+                    $record["NumOfLikes"] = $result4->num_rows;
                     $GetNumOfDislikes = "SELECT * FROM Votes WHERE ItemID='$clockID' AND Item=0 AND Dislike=1";
                     $result5 = $db->get_con()->query($GetNumOfDislikes);
                     $record["NumOfDislikes"] = $result5->num_rows;

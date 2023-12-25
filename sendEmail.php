@@ -99,7 +99,7 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
 
 else { // if an email is being set because a user wants to sign up for an account
     $Email = $_SESSION["Email"];
-    $Username = $_SESSION["Username"];
+    $Username = $_SESSION['Username'];
     $Password = $_SESSION["Password"];
     $Premium = $_SESSION["Premium"];
 
@@ -116,7 +116,13 @@ else { // if an email is being set because a user wants to sign up for an accoun
 
     mysqli_query($conn, $InsertHash);
 
-    $message = '<p>Dear '.$Username.',</p>';
+    $UnescapeUsername = "SELECT * FROM Hashes Where Username='$Username'";
+    $UsernameResult = $db->get_con()->query($UnescapeUsername); // need to do this because the user would see a backslash infront of special characters in their username in the email
+    while ($row = $UsernameResult->fetch_assoc()){
+        $Username2 = $row["Username"];
+    }
+
+    $message = '<p>Dear '.$Username2.',</p>';
     $message .= '<p>Please click on the following link to verify your email.</p>';
     $message .='<p><a href="http://localhost:8080/Clock/verifyEmail.php?hash='.$hash.'&email='.$Email.'&premium='.$Premium.'&action=verify" target="_blank">
     http://localhost:8080/Clock/verifyEmail.php?hash='.$hash.'&email='.$Email.'&premium='.$Premium.'&action=verify</a></p>';
@@ -124,7 +130,7 @@ else { // if an email is being set because a user wants to sign up for an accoun
         // this will probably have to change once this gets publicly hosted
         // had to set up a new email called iafsharclock@gmail.com the password for which is (Hint: usual mki)
         // then had to set up 2 factor authentication for that email.
-        // then had to set up an app password for that email which is what is passed in to mail->password on line 69
+        // then had to set up an app password for that email which is what is passed in to mail->password below
         // just followed instructions that port is 465
     $subject = "Email Verification";
     $mail = new PHPMailer();
@@ -139,12 +145,10 @@ else { // if an email is being set because a user wants to sign up for an accoun
     $mail->setFrom('iafsharclock@gmail.com', 'Clock Team');
 
         //receiver email address and name
-    $mail->addAddress($Email, $Username); 
+    $mail->addAddress($Email, $Username2); 
 
     $mail->Subject = $subject;
     $mail->Body = $message;
-
-
     if(!$mail->Send()){
         echo "Mailer Error: " . $mail->ErrorInfo;
     }else{

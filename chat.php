@@ -22,7 +22,6 @@ session_start();
       xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
-                console.log(myRecords);
                 var premium = (myRecords.Premium == 1);
                 document.getElementById("messageHeading").innerHTML = myRecords.otherUsernameNonEscaped;
                 

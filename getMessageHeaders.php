@@ -1,12 +1,14 @@
 <?php
 // gets the usernames of people that the current user has chats with
 session_start();
-$MyUsername = $_SESSION['Username'];
 
 
 require_once __DIR__ . '/dbConnect.php';
 
 $db = new DB_CONNECT();
+
+$MyUsername = $_SESSION['Username'];
+
 
 $getMessages = "SELECT * FROM `Messages` WHERE ToUsername='$MyUsername' OR FromUsername='$MyUsername'
     ORDER BY DateSent DESC"; 
@@ -20,7 +22,7 @@ $Dates = array();
 if ($result->num_rows > 0) {
     // looping through all results
     while ($row = $result->fetch_assoc()) {
-        if ($row["FromUsername"] != $MyUsername) { // add the from username if it is a message sent to me
+        if (mysqli_real_escape_string($db->get_con(),$row["FromUsername"]) != $MyUsername) { // add the from username if it is a message sent to me
             array_push($Usernames,$row["FromUsername"]);
         }
 
@@ -36,7 +38,7 @@ if ($result->num_rows > 0) {
     for ($i=0; $i < count($Usernames); $i++) { 
         // previously we had arrays for all messages, now we only want one per username
         if (!in_array($Usernames[$i],$uniqueUsernames)) { // if the current username is not in the unique usernames array
-            $curr = $Usernames[$i];
+            $curr = mysqli_real_escape_string($db->get_con(), $Usernames[$i]);
             $getUnreadMessages = "SELECT * FROM `Messages` WHERE ToUsername='$MyUsername' AND FromUsername='$curr' AND Viewed=0";
             $result2 = $db->get_con()->query($getUnreadMessages); // checks if there are any messages from that username that hasnt been viewed
             if ($result2->num_rows > 0) {
@@ -57,5 +59,6 @@ $response["Usernames"] = $Usernames;
 $response["Dates"] = $Dates;
 $response["Bolds"] = $bolds;
 echo json_encode($response);
+
 
 ?>

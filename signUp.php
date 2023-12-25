@@ -213,16 +213,16 @@ session_start();
 				var usernameCheckbox = document.getElementById("username-checkbox");
 				var username = document.getElementById("username");
 
-				username.addEventListener('keydown', function(event) {
-					illegals = ['\\',"'","\"", ">", "<", "@"," "]; // characters that are not allowed to be in a username
-					if (illegals.includes(event.key)) { // if the current typed character is an illegal one
-						event.preventDefault(); // dont add the character to the box
-					}
+				// username.addEventListener('keydown', function(event) {
+				// 	illegals = ['\\',"'","\"", ">", "<", "@"," "]; // characters that are not allowed to be in a username
+				// 	if (illegals.includes(event.key)) { // if the current typed character is an illegal one
+				// 		event.preventDefault(); // dont add the character to the box
+				// 	}
 					
-					while (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
-						username.value = username.value.replace(" ",""); // gets rid of the space
-					}
-				}, false);
+				// 	while (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
+				// 		username.value = username.value.replace(" ",""); // gets rid of the space
+				// 	}
+				// }, false);
 
 				username.onkeyup = function() {
 					document.getElementById("message").style.display = "block";

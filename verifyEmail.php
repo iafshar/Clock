@@ -23,7 +23,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
     }
     else {
         while ($row = $result->fetch_assoc()) {
-            $Username = $row["Username"];
+            $Username = mysqli_real_escape_string($conn, $row["Username"]);
             $Password = $row["Password"];
             $expirationDate = $row["ExpirationDate"];
         }
@@ -45,8 +45,8 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
             $Insert = "INSERT INTO Users (Username,Password,Email,Premium)
                 VALUES ('$Username', '$Password', '$email', '$premium')";
             
-            
             if (mysqli_query($conn, $Insert)) {
+                
                 $getUserID = "SELECT UserID FROM Users WHERE Username='$Username' AND Email='$email'";
                 $result2 = mysqli_query($conn, $getUserID);
                 while ($row = $result2->fetch_assoc()) {

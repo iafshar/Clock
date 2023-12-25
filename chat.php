@@ -22,9 +22,9 @@ session_start();
       xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
-                
+                console.log(myRecords);
                 var premium = (myRecords.Premium == 1);
-                document.getElementById("messageHeading").innerHTML = myRecords.otherUsername;
+                document.getElementById("messageHeading").innerHTML = myRecords.otherUsernameNonEscaped;
                 
                 // message box
                 document.getElementById("messageBody").innerHTML = "<td><table><tr><textarea id='messageText' style='height:100px;width:1400px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><button type='submit' style='width:1400px;height:45px;' onclick=sendMessage('"+myRecords.otherUsername+"')>Enter</button></tr></table></td>";

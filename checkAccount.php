@@ -9,8 +9,8 @@ $conn = $db->get_con();
 //If the form is submitted
 if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['checkbox'])){ // if it comes from login
 //Assigning posted values to variables.
-  $Username = $_POST['Username'];
-  $Password = $_POST['Password'];
+  $Username = mysqli_real_escape_string($conn, $_POST['Username']);
+  $Password = mysqli_real_escape_string($conn, $_POST['Password']);
   //Checking whether the values exist in the database or not
   $query = "SELECT * FROM `Users` WHERE Username='$Username' and Password='$Password'";
   $result = mysqli_query($conn, $query) or die(mysqli_error($conn));

@@ -9,7 +9,7 @@ $fromUsername = $_SESSION["Username"];
 
 if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['toUsername'])){ 
     // if a normal message has been sent through chat
-    $toUsername = $_POST['toUsername'];
+    $toUsername = mysqli_real_escape_string($db->get_con(), $_POST['toUsername']);
     $content = mysqli_real_escape_string($db->get_con(), $_POST['message']);
 
     $dateSent = date('Y-m-d H:i:s');
@@ -66,7 +66,7 @@ if(isset($_POST['message']) && strlen($_POST['message']) > 0 && isset($_POST['to
 }
 else if (isset($_GET['sendingUsername']) && isset($_GET['clockID'])) {
     // if a clock message is being sent
-    $toUsername = $_GET['sendingUsername'];
+    $toUsername = mysqli_real_escape_string($db->get_con() ,$_GET['sendingUsername']);
     $clockID = $_GET['clockID'];
 
 

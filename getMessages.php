@@ -10,7 +10,9 @@ $response = array();
 $MyUserID = $_SESSION['UserID'];
 $response["myUserID"] = $MyUserID;
 
-$otherUsername = $_GET["otherUsername"];
+$otherUsernameNonEscaped = urldecode($_GET["otherUsername"]);
+
+$otherUsername = mysqli_real_escape_string($db->get_con(), urldecode($_GET["otherUsername"]));
 
 $viewMessages = "UPDATE Messages SET Viewed=1 WHERE ToUsername='$myUsername' AND FromUsername='$otherUsername'";
 $db->get_con()->query($viewMessages); // views all the messages in the chat with this user
@@ -28,7 +30,7 @@ if ($result->num_rows > 0) {
         $record = array();
         $record["MessageID"] = $row["MessageID"];
 
-        if ($row["ToUsername"] == $myUsername) {
+        if (mysqli_real_escape_string($db->get_con(), $row["ToUsername"]) == $myUsername) {
             $record["Color"] = "#ffffff";
             $record["sentByMe"] = 0; 
         }
@@ -108,6 +110,7 @@ else {
 
 
 $response["otherUsername"] = $otherUsername;
+$response["otherUsernameNonEscaped"] = $otherUsernameNonEscaped;
 $response["Premium"] = $_SESSION["Premium"];
 $response["numMessages"] = $result->num_rows;
 echo json_encode($response);

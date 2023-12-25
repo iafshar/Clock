@@ -18,18 +18,21 @@ session_start();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               var myRecords = JSON.parse(this.responseText);
+              console.log(myRecords);
               var rows = "";
               for (i=0;i<myRecords.Usernames.length;i++) {
                    var Username = myRecords.Usernames[i];
+                   Username = Username.replaceAll("'","&#39;");
+                   console.log(Username);
                    var date = myRecords.Dates[i];
                    date = new Date(date);
                    date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                    var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                    if (Bold == 0) {
-                    var newRow = "<tr class='table-row-clickable' onclick=openChat('"+Username+"')><td>"+Username+"</td><td>"+date+"</td></tr>";
+                    var newRow = "<tr class='table-row-clickable' onclick=openChat(\""+Username+"\")><td>"+Username+"</td><td>"+date+"</td></tr>";
                    }
                    else {
-                    var newRow = "<tr class='table-row-clickable' onclick=openChat('"+Username+"')><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
+                    var newRow = "<tr class='table-row-clickable' onclick=openChat(\""+Username+"\")><td><strong>"+Username+"</strong></td><td><strong>"+date+"</strong></td></tr>";
                    }
                    
                    rows = rows+newRow;

@@ -31,17 +31,19 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes fr
     if(isset($_GET['username'])) {
         $response = array();
         $Username = $_GET['username'];
-        $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'"; // check if there is a user with the username
+        $EscapedUsername = mysqli_real_escape_string($conn, $_GET['username']);
+        $ExistingUser = "SELECT * FROM `Users` WHERE Username='$EscapedUsername'"; // check if there is a user with the username
         $resultUser = mysqli_query($conn, $ExistingUser) or die(mysqli_error($conn));
         $countUser = mysqli_num_rows($resultUser); // number of users with the username (can be 0)
         $response['numUsers'] = $countUser;
         if ($countUser != 0){
-            $Suggest = "SELECT * FROM `Users` WHERE Username LIKE '%$Username%'";
+            $Suggest = "SELECT * FROM `Users` WHERE Username LIKE '%$EscapedUsername%'";
             $resultSuggest = mysqli_query($conn, $Suggest) or die(mysqli_error($conn));
             $countSuggest = mysqli_num_rows($resultSuggest);
             for ($i = 0;$i < $countSuggest;$i ++){
                 $Suggestion = $Username . "$i";
-                $ExistingSuggestion = "SELECT * FROM `Users` WHERE Username='$Suggestion'"; // checks if the suggestion is in the database
+                $EscapedSuggestion = mysqli_real_escape_string($conn, $Suggestion);
+                $ExistingSuggestion = "SELECT * FROM `Users` WHERE Username='$EscapedSuggestion'"; // checks if the suggestion is in the database
                 $resultSuggestion = mysqli_query($conn, $ExistingSuggestion) or die(mysqli_error($conn));
                 $countSuggestion = mysqli_num_rows($resultSuggestion);
                 if($countSuggestion == 0){ // if the suggestion is not in the database, use that as the suggested username

@@ -18,6 +18,8 @@
 			</p>
 			</div>
 			<script>
+				localStorage.removeItem('resetPassword');
+				localStorage.removeItem('resetPassword2');
 				if (document.referrer == window.location.href) {
 					document.getElementById("message").style.display = "block";
 				}

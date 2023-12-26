@@ -26,7 +26,7 @@ if (isset($_POST['Password1'])){
   while ($row = $result->fetch_assoc()) {
     $_SESSION['UserID'] = $row["UserID"];
     $UserID = $_SESSION['UserID'];
-    $_SESSION['Username'] = $row["Username"];    
+    $_SESSION['Username'] = mysqli_real_escape_string($conn, $row["Username"]);    
   }
 
   $exists = FALSE;

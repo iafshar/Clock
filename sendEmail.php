@@ -20,13 +20,15 @@ $conn = $db->get_con();
 
 if (isset($_POST['Forgot'])) { // if an email is being sent because a user has forgotten their password
     $Email = $_POST['Forgot']; // the user could have entered an email or a username
+    $EscapedEmail =  mysqli_real_escape_string($conn, $Email);
 
-    $CheckEmail = "SELECT * FROM `Users` WHERE Email='$Email'";
+    $CheckEmail = "SELECT * FROM `Users` WHERE Email='$EscapedEmail'";
     $result = mysqli_query($conn, $CheckEmail);
 
     if ($result->num_rows == 0) { // if no email exists that matches what the user entered
-        $CheckUsername = "SELECT * FROM `Users` WHERE Username='$Email'";
+        $CheckUsername = "SELECT * FROM `Users` WHERE Username='$EscapedEmail'";
         $result = mysqli_query($conn, $CheckUsername);
+        
         if ($result->num_rows == 0) { // if no username exists that matches what the user entered
             header("Location:http://localhost:8080/Clock/forgotPassword.php");
         }
@@ -38,6 +40,7 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
         $expirationDate = date("Y-m-d H:i:s",$expirationFormat);
         
         while ($row = $result->fetch_assoc()) {
+            $EscapedUsername =  mysqli_real_escape_string($conn, $row["Username"]);
             $Username = $row["Username"];
             $Password = $row["Password"];
             $Email = $row["Email"];  
@@ -49,7 +52,7 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
         $hash = $pt1 . $pt2;
 
         $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Reset)
-        VALUES ('$Email', '$Username','$Password','$hash', '$expirationDate', 1)";
+        VALUES ('$Email', '$EscapedUsername','$Password','$hash', '$expirationDate', 1)";
 
         mysqli_query($conn, $InsertHash);
 

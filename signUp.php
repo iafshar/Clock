@@ -14,7 +14,7 @@ session_start();
 		<div class="signUp">
 			<form action="addAccount.php" method="post"> <!--Makes sure that the same errors are not presented if the user goes to a different page-->
 				<div>
-					<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" required>
+					<input type="text" name="Username" placeholder="Username" id="username" autocomplete="username" onpaste="usernamePaste(event)" required>
 					<input type="password" name="Password1" placeholder="Password" id="password" autocomplete="new-password" required>
 					<input type="password" name="Password2" placeholder="Confirm Password" id="confirm-password" autocomplete="new-password" required>
 					<input type="email" name="Email" placeholder="Email" id="email" autocomplete="email" required>
@@ -214,17 +214,30 @@ session_start();
 				var username = document.getElementById("username");
 
 				username.addEventListener('keydown', function(event) {
-					illegals = ['\\',"'","\"", ">", "<", "@"," "]; // characters that are not allowed to be in a username
+					illegals = ['\\',"'","\"", ">", "<", "@"]; // characters that are not allowed to be in a username
 					if (illegals.includes(event.key)) { // if the current typed character is an illegal one
 						event.preventDefault(); // dont add the character to the box
 					}
-					
-					while (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
+					if (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
 						username.value = username.value.replace(" ",""); // gets rid of the space
 					}
 				}, false);
 
+				function usernamePaste(e) {
+					var key = e.clipboardData.getData('text')
+					for (let i = 0; i < illegals.length; i++) {
+						if (key.includes(illegals[i])) {
+							e.preventDefault();
+						}
+					}
+				}
+
 				username.onkeyup = function() {
+					var cursor = this.selectionStart;
+					if (username.value.includes(" ")) { // when space is clicked twice on a mac it adds a period and a space
+						username.value = username.value.replace(" ",""); // gets rid of the space
+						this.setSelectionRange(cursor-1,cursor-1);
+					}
 					document.getElementById("message").style.display = "block";
 					var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {

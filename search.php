@@ -202,7 +202,7 @@ session_start();
     item = element.getAttribute('item');
 
     row = element.parentNode.parentNode; // row that the button is on
-    i = row.rowIndex;
+    i = row.rowIndex; // index that the row is on in the table
 
     var xmlhttp = new XMLHttpRequest();
 

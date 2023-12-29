@@ -194,7 +194,7 @@ session_start();
 
     xmlhttp.open("GET", "clearHistory.php", true);
     xmlhttp.send();
-    location.reload();
+    document.getElementById("resultRows").innerHTML = "";
   }
 </script>
 <script>

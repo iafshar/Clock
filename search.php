@@ -199,15 +199,16 @@ session_start();
 </script>
 <script>
   function deleteHistoryItem(element) { // removes one search item
-    console.log("delete")
-    
     item = element.getAttribute('item');
+
+    row = element.parentNode.parentNode; // row that the button is on
+    i = row.rowIndex;
 
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.open("GET", "deleteHistoryItem.php?item="+item, true);
     xmlhttp.send();
-    location.reload();
+    document.getElementById("clockTable").deleteRow(i);
 
   }
 </script>

@@ -6,7 +6,7 @@ $db = new DB_CONNECT();
 // Create connection
 $conn = $db->get_con();
 
-$ClockID = $_GET["ClockID"];
+$ClockID = $_POST["ClockID"];
 
 $DeleteCircles = "DELETE FROM Circles Where ClockID='$ClockID'";
 

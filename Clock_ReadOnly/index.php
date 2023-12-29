@@ -43,7 +43,9 @@ session_start();
     <a href="http://localhost:8080/Clock/inbox.php" id='chats' style='color:black'><img border="0" src="http://localhost:8080/Clock/Icons/inbox.png" width="30" height="30"></a>
     <a href="http://localhost:8080/Clock/search.php"><img border="0" src="http://localhost:8080/Clock/Icons/magnifying-glass.png" width="30" height="30"></a>
     <div class="dropdown">
-      <a>Account</a>
+      <a><?php
+            echo $_SESSION["Username"];
+        ?></a>
       <div class="dropdown-content">
         <a href="../updateAccount.php">
           <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium

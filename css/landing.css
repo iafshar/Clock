@@ -271,7 +271,6 @@ body {
 }
 
 a {
-  width: max-content;
   height: 20px;
   font-size: 20px;
   font-weight: bold;
@@ -353,6 +352,7 @@ a.already {
 a.create {
   display: inline-block;
   position: absolute;
+  padding-left: 10px;
   left: 59%;
   top: 80%;
   transform: translate(-50%, 0%);
@@ -362,6 +362,7 @@ a.create {
 a.forgot {
   display: inline-block;
   position: absolute;
+  padding-right: 10px;
   left: 41%;
   top: 80%;
   transform: translate(-50%, 0%);

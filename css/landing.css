@@ -187,8 +187,7 @@ body {
   width: 100%;
 }
 .choose {
-  display: flex;
-  justify-content: space-between;
+  overflow:auto;
 }
 
 .choose-premium {
@@ -230,6 +229,11 @@ body {
   transition: background-color 0.2s;
 }
 
+.choose-premium input:hover {
+	background-color: #fff8ef;
+  	transition: background-color 0.2s;
+}
+
 .choose-basic {
   position: absolute;
   left: 50%;
@@ -267,7 +271,11 @@ body {
   font-weight: bold;
   color: #f39faa;
   transition: background-color 0.2s;
+}
 
+.choose-basic input:hover {
+	background-color: #fff8ef;
+  	transition: background-color 0.2s;
 }
 
 a {
@@ -275,9 +283,6 @@ a {
   font-size: 20px;
   font-weight: bold;
   color: #faf39f;
-  position: relative;
-  right: 409px;
-  top: 250px;
 }
 
 
@@ -350,22 +355,24 @@ a.already {
 }
 
 a.create {
-  display: inline-block;
+  display: flex;
+  width: 20%;
   position: absolute;
   padding-left: 10px;
-  left: 59%;
+  left: 60%;
   top: 80%;
-  transform: translate(-50%, 0%);
+  transform: translate(-40%, 0%);
   text-align: center;
 }
 
 a.forgot {
-  display: inline-block;
+  display: flex;
+  width: 20%;
   position: absolute;
   padding-right: 10px;
-  left: 41%;
+  left: 40%;
   top: 80%;
-  transform: translate(-50%, 0%);
+  transform: translate(-40%, 0%);
   text-align: center;
 }
 

@@ -127,3 +127,17 @@ input#clock-name:not(:focus) {
 .deleteMessage {
   float: right;
 }
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+textarea {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}

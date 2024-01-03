@@ -148,3 +148,19 @@ function deleteAccount() {
       window.open('deleteAccount.php','_self');
     }
 }
+
+function updateAccount(elem,display=false) {
+  $.ajax({
+    type: 'post',
+    url: 'updateAccount.php',
+    success: function (response) {
+      if (response == 1) {
+        elem.innerHTML = "Downgrade To Basic";
+      }
+      else {
+        elem.innerHTML = "Upgrade To Premium";
+      }
+      rows = display();
+    }
+  });
+}

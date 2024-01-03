@@ -14,34 +14,39 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="functions.js"></script>
     <script>
-      var clockID = window.location.search.substring(1);
-      var xmlhttp = new XMLHttpRequest();
-      // displays all the comments of the current clock
-      xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              var myRecords = JSON.parse(this.responseText);
-              var premium = (myRecords.Premium == 1);
-              if(myRecords.success == 1) {
-                var rows = "";
-                for (i=0;i<myRecords.Comments.length;i++) {
-                    var myRecord = myRecords.Comments[i];
-                    myRecord.Date = new Date(myRecord.Date);
-                    myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-                    if (premium) { // if premium, the user can reply
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><textarea id=replyBox-"+myRecord.CommentID+" style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea></td></tr><tr><td><button type='button' style='width:200px;height:45px;' onclick=getReplies("+myRecord.CommentID+")>View All</button><button type='submit' style='width:200px;height:45px;' onclick=addReply('"+myRecord.CommentID+"')>Enter</button></td></tr></table></td></tr>";
-                    }
-                    else {
-                      var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><button type='button' style='width:200px;height:45px;' onclick=getReplies("+myRecord.CommentID+")>View Replies</button></td></tr></table></td></tr>";
-                    }
-                    rows = rows+newRow
-                }
-                document.getElementById("resultRows").innerHTML = rows;
-              }
-          }
-      };
 
-      xmlhttp.open("GET", "getComments.php?clockID="+clockID, true);
-      xmlhttp.send();
+      function displayComments() {
+        var clockID = window.location.search.substring(1);
+        var xmlhttp = new XMLHttpRequest();
+        // displays all the comments of the current clock
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myRecords = JSON.parse(this.responseText);
+                var premium = (myRecords.Premium == 1);
+                if(myRecords.success == 1) {
+                  var rows = "";
+                  for (i=0;i<myRecords.Comments.length;i++) {
+                      var myRecord = myRecords.Comments[i];
+                      myRecord.Date = new Date(myRecord.Date);
+                      myRecord.Date = myRecord.Date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
+                      if (premium) { // if premium, the user can reply
+                        var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><textarea id=replyBox-"+myRecord.CommentID+" style='height:100px;width:400px;font-size:30px;' name='reply' placeholder='Reply'></textarea></td></tr><tr><td><button type='button' style='width:200px;height:45px;' onclick=getReplies("+myRecord.CommentID+")>View All</button><button type='submit' style='width:200px;height:45px;' onclick=addReply('"+myRecord.CommentID+"')>Enter</button></td></tr></table></td></tr>";
+                      }
+                      else {
+                        var newRow = "<tr class='table-row'><td><table><tr><td>"+myRecord.Comment+"</td></tr><tr><td style='height:100px'></td></tr><tr><td><i style='font-size:15px;'>"+myRecord.Date+"</i></td></tr></table></td><td><table><tr><td><button class='likeButton' onclick=likeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.LikeColor+";'><img border='0' src='Icons/like.png' width='40' height='40'></button></td><td><button class='dislikeButton' onclick=dislikeComment("+myRecord.CommentID+",this) style='background-color: "+myRecord.DislikeColor+";'><img border='0' src='Icons/dislike.png' width='40' height='40'></button></td></tr><tr><td id=numLikes-"+myRecord.CommentID+">"+myRecord.NumOfLikes+"</td><td id=numDislikes-"+myRecord.CommentID+">"+myRecord.NumOfDislikes+"</td></tr></table></td><td><table><tr><td><button type='button' style='width:200px;height:45px;' onclick=getReplies("+myRecord.CommentID+")>View Replies</button></td></tr></table></td></tr>";
+                      }
+                      rows = rows+newRow
+                  }
+                  document.getElementById("resultRows").innerHTML = rows;
+                }
+            }
+        };
+
+        xmlhttp.open("GET", "getComments.php?clockID="+clockID, true);
+        xmlhttp.send();
+      }
+
+      displayComments();
 
 
     </script>
@@ -129,7 +134,7 @@ session_start();
             echo $_SESSION["Username"];
         ?></a>
         <div class="dropdown-content">
-            <a href="updateAccount.php">
+            <a onclick=updateAccount(this,displayComments)>
               <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
               if($_SESSION["Premium"] == 0){
                 echo "Upgrade To Premium";

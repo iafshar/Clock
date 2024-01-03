@@ -14,7 +14,7 @@ $ClockSearch = "SELECT * FROM `Clocks` WHERE UserID='$UserID'";
 $result = mysqli_query($conn, $ClockSearch) or die(mysqli_error($conn));
 $count = mysqli_num_rows($result);
 
-if ($count == 5 && $Premium == 0 || $count == 20 && $Premium == 1){ // if the number of clocks are at the clock limit 
+if ($count >= 5 && $Premium == 0 || $count >= 20 && $Premium == 1){ // if the number of clocks are at the clock limit 
     $_SESSION["Error"] = "You have reached your clock limit.";
     header("Location:http://localhost:8080/Clock/myClocks.php");
 }

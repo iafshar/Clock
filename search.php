@@ -80,7 +80,7 @@ session_start();
             echo $_SESSION["Username"];
         ?></a>
           <div class="dropdown-content">
-              <a href="updateAccount.php">
+              <a onclick=updateAccount(this)>
                 <?php // Checks if the user is a basic user and if they are, they will be presented with a button on the menu bar asking them if they want to upgrade to premium
                 if($_SESSION["Premium"] == 0){
                   echo "Upgrade To Premium";

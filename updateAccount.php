@@ -21,6 +21,7 @@ $Update = "UPDATE Users
 mysqli_query($conn, $Update);
 
 $_SESSION["Premium"] = $Premium;
-header("Location: myClocks.php");
+
+echo $Premium;
 
 ?>

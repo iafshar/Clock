@@ -21,7 +21,7 @@ body {
     text-align: center;
     position: absolute;
     left: 50%;
-    top: 65%;
+    top: 70%;
   	width: 200px;
     height: 60px;
   	padding: 15px;
@@ -41,7 +41,7 @@ body {
 .signUp form input[name="Password1"] {
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 46%;
     font-size: 27px;
     font-weight: bold;
     background-color: #f39faa;
@@ -55,7 +55,7 @@ body {
 .signUp form input[name="Password2"] {
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 54%;
     font-size: 27px;
     font-weight: bold;
     background-color: #f39faa;
@@ -69,7 +69,7 @@ body {
 .signUp form input[type="text"] {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 38%;
     font-size: 27px;
     font-weight: bold;
     background-color: #f39faa;
@@ -83,7 +83,7 @@ body {
 .signUp form input[type="email"] {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 62%;
     font-size: 27px;
     font-weight: bold;
     background-color: #f39faa;
@@ -187,7 +187,7 @@ body {
   width: 100%;
 }
 .choose {
-  overflow:auto;
+  overflow-x: scroll;
 }
 
 .choose-premium {
@@ -349,7 +349,7 @@ h1.basic-heading {
 a.already {
   position: absolute;
   left: 50%;
-  top: 80%;
+  top: 85%;
   transform: translate(-50%, 0%);
   text-align: center;
 }
@@ -382,14 +382,14 @@ a.forgot {
   background: #f1f1f1;
   color: #000;
   position: relative;
-  padding: 20px;
+  padding: 1px 3px;
   margin-top: 10px;
-  width: 450px;
+  width: 500px;
 }
 
 #message p {
-  padding: 10px 35px;
-  font-size: 18px;
+  padding: 0px 20px;
+  font-size: 15px;
   position: relative;
 }
 

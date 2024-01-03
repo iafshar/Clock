@@ -98,7 +98,7 @@ session_start();
                                 countClocks += 1;
                               }
                               else {
-                                newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr>";
+                                newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><table><tr><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr></table></td></tr>";
                               } 
                                           
                             }            
@@ -186,7 +186,7 @@ session_start();
             myRecord = myRecords.Messages[0];
             myRecord.DateSent = new Date(myRecord.DateSent);
             myRecord.DateSent = myRecord.DateSent.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
-            newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr>";
+            newRow = "<tr class='table-row-from-me'><td>"+myRecord.Content+"</td><td></td><td><table><tr><td><strong>Sent</strong><br>"+myRecord.DateSent+"<button type='button' class='deleteMessage' onclick=deleteMessage('"+myRecord.MessageID+"',this)><img border='0' src='Icons/trash.png' width='20' height='20'></button></td></tr></table></td></tr>";
             rows = newRow + document.getElementById("resultRows").innerHTML; // adds a new row with the new message to the top of the chat
             document.getElementById("resultRows").innerHTML = rows;
             message.value = ""; // clears the message box

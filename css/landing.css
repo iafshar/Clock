@@ -186,9 +186,6 @@ body {
   height: 100%;
   width: 100%;
 }
-.choose {
-  overflow-x: scroll;
-}
 
 .choose-premium {
   position: absolute;
@@ -201,7 +198,7 @@ body {
 
 .choose-premium p {
   height: 20px;
-  width: max-content;
+  width: 100%;
   font-size: 20px;
   color: #faf39f;
   font-weight: bold;
@@ -213,11 +210,11 @@ body {
 }
 
 .choose-premium input {
-  font-size: 27px;
+  font-size: 2.5vw;
   position: absolute;
-  left: 30%;
+  left: 25%;
   top: 45vh;
-  width: 37%;
+  width: 50%;
   height: 10vh;
   padding: 15px;
  	margin-top: 20px;
@@ -245,7 +242,7 @@ body {
 
 .choose-basic p {
   height: 20px;
-  width: max-content;
+  width: 100%;
   font-size: 20px;
   color: #faf39f;
   font-weight: bold;
@@ -257,11 +254,11 @@ body {
 }
 
 .choose-basic input {
-  font-size: 27px;
+  font-size: 2.5vw;
   position: absolute;
-  left: 30%;
+  left: 25%;
   top: 45vh;
-  width: 37%;
+  width: 50%;
   height: 10vh;
   padding: 15px;
  	margin-top: 20px;
@@ -322,7 +319,7 @@ a.noAccountBtn {
 h1.premium-heading {
   margin: 0;
   line-height: 1;
-  width: max-content;
+  width: 100%;
   font-size: 40px;
   position: absolute;
   color: #faf39f;
@@ -335,7 +332,7 @@ h1.premium-heading {
 h1.basic-heading {
   margin: 0;
   line-height: 1;
-  width: max-content;
+  width: 100%;
   font-size: 40px;
   position: absolute;
   color: #faf39f;

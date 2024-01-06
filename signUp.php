@@ -228,7 +228,11 @@ session_start();
 					for (let i = 0; i < illegals.length; i++) {
 						if (key.includes(illegals[i])) {
 							e.preventDefault();
+							return;
 						}
+					}
+					if (key.includes(' ')) {
+						e.preventDefault();
 					}
 				}
 

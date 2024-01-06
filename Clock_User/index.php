@@ -7,6 +7,9 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
   <link href="http://localhost:8080/Clock/css/postLanding.css" rel="stylesheet" type="text/css">
   <script src="../functions.js"></script>
   <script>
@@ -70,9 +73,29 @@ session_start();
         </div>
       </div>
   </div>
+  <div id="dialog" title="Name Your Clock"> <!--the actual contents of dialog box-->
+    <div id="clock-name-container" >
+    <input type="text" name="name" id="clock-name" width='50' height='100' maxlength="40" style="border: solid;" onpaste="clockNamePaste(event,this)" autocomplete="off"/><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- non-breaking spaces to make the ok and cancel buttons centered -->
+    <input type="button" value="OK" onclick="ok()" />
+    <input type="button" value="Cancel" onclick="cancel()" />
+    </div>
+   </div> 
 </body>
 <script>
   setUnreadCount();
+
+  $(document).ready(function () // creates the dialog box but doesnt show it
+  {   
+      $('#dialog').dialog({
+          autoOpen: false,
+          width: 250,
+          height: 180,
+          modal : true,
+          resizable: false,
+      show:"slow"
+      });
+  });
 
 </script>
 </html>

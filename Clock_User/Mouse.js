@@ -25,26 +25,68 @@ function mouseReleased() {
   }
 }
 
-function nameClock() {
-  illegalChars = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?'];
-  promptStr = "Name your new clock";
-  do {
-    clockName = prompt(promptStr);
-    if (clockName != null) {
-      clockName = clockName.replaceAll(" ","_");
-      for (let index = 0; index < illegalChars.length; index++) {
-        clockName = clockName.replaceAll(illegalChars[index],""); 
-      }
-      if (clockName.length > 40 ) {
-        clockName = clockName.substring(0,40);
-      }
-      promptStr = "You have already used that name. Please choose another one."
-    }
-  } while (clockName != null && names.includes(clockName.toLowerCase()));
+function cancel() { //Function called when Cancel button is pressed
+  close(); // for some reason just calling close doesnt work
+  return;
+}
 
-  if (clockName != null && clockName.length > 0) {
+function close(){ // closes the dialog box
+  $( "#dialog" ).dialog( 'close' );
+}
+
+function ok() {       //function called when ok button is pressed
+  clockName = $("input[name='name']").val(); 
+
+  if (clockName.length > 40) { // should never happen because the maxlength of the field is 40 but just in case
+    alert('Please enter a name that is shorter than 40 characters.');
+    return;
+  }
+  else if (names.includes(clockName.toLowerCase())) {
+    alertStr = "You have already used that name. Please choose another one."
+    alert(alertStr);
+    return;
+  }
+  else if (clockName.length > 0) { // the name is a unique name that is less than 40 chars and more than 0
     saving();
-  } 
+  }
+
+}
+
+function clockNamePaste(e,elem) { // called when user pastes to the clockname field
+  var key = e.clipboardData.getData('text') // what is copied to the clipboard
+  for (let i = 0; i < illegals.length; i++) {
+    if (key.includes(illegals[i])) { // if there is at least one illegal character in the string being pasted, dont paste anything
+      e.preventDefault();
+      return;
+    }
+  }
+  if (key.includes(' ')) { // replace spaces in the string being pasted with underscores
+    var newKey = key.replaceAll(' ','_');
+    e.preventDefault();
+    elem.value = newKey;
+  }
+}
+
+function nameClock() {
+  var clockNameField = document.getElementById('clock-name');
+  clockNameField.value = ""; // clears the value of the text field in case the user entered something before and pressed cancel
+  $("#dialog").dialog( "open" );
+
+  clockNameField.addEventListener('keydown', function(event) {
+    if (illegals.includes(event.key)) { // if the current typed character is an illegal one
+      event.preventDefault(); // dont add the character to the box
+
+    }
+    if (event.key == ' ') { // if the current typed character is a space
+      event.preventDefault();
+      var cursor = this.selectionStart; // position of the cursor
+      clockNameField.value = clockNameField.value.substring(0,cursor) + '_' + clockNameField.value.substring(this.selectionEnd);
+      this.setSelectionRange(cursor+1,cursor+1);
+    }
+    if (event.key == 'Enter') { // allows user to click enter to submit the name
+      ok();
+    }
+  }, false);
 }
 
 function mousePressed() {
@@ -184,7 +226,7 @@ function mousePressed() {
       // because if enter is 0, it doesnt set it to the tempo
     }
   }
-  else if (screen == 1) { //kepaf
+  else if (screen == 1) { //kepad
     if (mouseX >= CLICK_X - (CLICK_WIDTH/2) && mouseX <= CLICK_X + (CLICK_WIDTH/2) && mouseY >= CLICK_Y-nhRatio*20 && mouseY <= CLICK_Y+nhRatio*20){
       if (clickCount==2||clickCount==0){ //clicked as a condition
         clickCount = 1; // clicked for the first time

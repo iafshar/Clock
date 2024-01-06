@@ -263,6 +263,7 @@ function setup() {
   ENTER_WIDTH = textWidth("Enter") * (8/6);
   ENTER_Y = CLICK_Y;
 
+  illegals = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?']; // characters that are not allowed to be in a clockName
   clockName = "";
     
   if(( edited || remixed ) && typeof savedCircles !== 'undefined'){

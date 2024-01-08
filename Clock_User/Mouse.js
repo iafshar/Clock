@@ -52,7 +52,7 @@ function ok() {       //function called when ok button is pressed
 
 }
 
-function clockNamePaste(e,elem) { // called when user pastes to the clockname field
+function clockNamePaste(e) { // called when user pastes to the clockname field
   var key = e.clipboardData.getData('text') // what is copied to the clipboard
   for (let i = 0; i < illegals.length; i++) {
     if (key.includes(illegals[i])) { // if there is at least one illegal character in the string being pasted, dont paste anything
@@ -61,9 +61,7 @@ function clockNamePaste(e,elem) { // called when user pastes to the clockname fi
     }
   }
   if (key.includes(' ')) { // replace spaces in the string being pasted with underscores
-    var newKey = key.replaceAll(' ','_');
-    e.preventDefault();
-    elem.value = newKey;
+   e.preventDefault();
   }
 }
 
@@ -71,6 +69,11 @@ function nameClock() {
   var clockNameField = document.getElementById('clock-name');
   clockNameField.value = ""; // clears the value of the text field in case the user entered something before and pressed cancel
   $("#dialog").dialog( "open" );
+  var dialogElem = document.getElementsByClassName("ui-dialog ui-widget ui-widget-content ui-corner-all ui-front")[0]; // class of the jquery dialog box
+  //styling the dialog box to be at the top and be a certain height and width
+  dialogElem.style.height = "24%";
+  dialogElem.style.width = "16%";
+  dialogElem.style.top = "60px";
 
   clockNameField.addEventListener('keydown', function(event) {
     if (illegals.includes(event.key)) { // if the current typed character is an illegal one

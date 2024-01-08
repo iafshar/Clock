@@ -75,7 +75,7 @@ session_start();
   </div>
   <div id="dialog" title="Name Your Clock"> <!--the actual contents of dialog box-->
     <div id="clock-name-container" >
-    <input type="text" name="name" id="clock-name" width='50' height='100' maxlength="40" style="border: solid;" onpaste="clockNamePaste(event,this)" autocomplete="off"/><br><br>
+    <input type="text" name="name" id="clock-name" width='50' height='100' maxlength="40" style="border: solid;" onpaste="clockNamePaste(event)" onblur="setFocus(this)" autocomplete="off" autofocus="autofocus" /><br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- non-breaking spaces to make the ok and cancel buttons centered -->
     <input type="button" value="OK" onclick="ok()" />
     <input type="button" value="Cancel" onclick="cancel()" />
@@ -89,13 +89,34 @@ session_start();
   {   
       $('#dialog').dialog({
           autoOpen: false,
-          width: 250,
-          height: 180,
+          draggable: false,
           modal : true,
           resizable: false,
       show:"slow"
       });
   });
+
+  function setFocus(elem){
+    elem.focus();
+  }
+
+  // window.onload = function()
+  // { 
+  //   var dialogElem = document.getElementsByClassName("ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable")[0];
+  //   console.log(dialogElem);
+  //   dialogElem.style.height = "180px";
+  //   dialogElem.style.width = "250px";
+  //   console.log(dialogElem.style);
+    
+  // }
+  
+  // var dialogElem = document.getElementsByClassName("ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable")[0];
+  // console.log(dialogElem);
+  // dialogElem.style.height = "180px";
+  // dialogElem.style.width = "250px";
+  
+  // dialogElem.style('height','180px');
+  // dialogElem.style('width','250px');
 
 </script>
 </html>

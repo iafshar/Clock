@@ -110,11 +110,11 @@ session_start();
                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                   var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                   if (Bold == 0) {
-                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' name='"+Username+"' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
                   }
                   else {
                     boldUsers.push(Username);
-                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' name='"+Username+"' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
                   }
                   
                   rows = rows+newRow;
@@ -153,10 +153,10 @@ session_start();
                   date = date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric", second:"numeric"});
                   var Bold = myRecords.Bolds[i]; // decides whether username should be bold or not depending on whether the user has viewed their messages
                   if (Bold == 0) {
-                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' name='"+Username+"' onclick=sendToUser('"+Username+"','"+clockID+"')><td>"+Username+"</td><td>"+date+"</td></tr>";  
                   }
                   else {
-                    var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
+                    var newRow = "<tr class='table-row-clickable' name='"+Username+"' onclick=sendToUser('"+Username+"','"+clockID+"')><td><strong>"+Username+"</strong></td><td>"+date+"</td></tr>";  
                   }
                   
                   rows = rows+newRow;
@@ -171,28 +171,18 @@ session_start();
   }
 
   function autocomplete(val) { // displays all the users in the database that have usernames that start with what is entered in the search bar
-    var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var myRecords = JSON.parse(this.responseText);
-          var rows = "";
-          for (i=0;i<myRecords.length;i++) {
-            if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-              var myRecord = myRecords[i];
-              if (boldUsers.includes(myRecord)) {
-                var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td><strong>"+myRecord+"</strong></td><td></td></tr>";
-              } else {
-                var newRow = "<tr class='table-row-clickable' onclick=sendToUser('"+myRecord+"','"+clockID+"')><td>"+myRecord+"</td><td></td></tr>";
-              }
-              
-              rows = rows+newRow;
-            }
-          }
-          document.getElementById("resultRows").innerHTML = rows;
+    var tableRows = document.getElementsByClassName('table-row-clickable'); // list of all table rows
+      for (let i = 0; i < tableRows.length; i++) {
+        row = tableRows[i];
+        rowName = row.getAttribute('name');
+        if (rowName.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          row.style.display = ""; // if the username of the current user matches the string in the search, display it
         }
-      };
-      xmlhttp.open("GET", "getAllUsers.php", true);
-      xmlhttp.send();
+        else {
+          row.style.display = "none"; // if the username of the current user doesn't match the string in the search, hide it
+        }
+        
+      }
   }
 
 </script>

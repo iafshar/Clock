@@ -100,7 +100,6 @@ function mousePressed() {
     if (mouseY < hs1.ypos) {
       for(Op = 0;Op < options.length;Op ++){
         if(options[Op].overButton()){ // finds the option that has been clicked on
-          console.log(options[Op].counter);
           if(options[Op].counter < options[Op].sounds.length && !circles.includes(options[Op].sounds[options[Op].counter])){
             // if the circle does not already exist and it is under the limit for this circle
             circles.push(options[Op].sounds[options[Op].counter]); // adds the new circle to the circles array
@@ -395,6 +394,10 @@ function windowResized() {
     nhRatio = hRatio;
   }
 
+  oldCLOCK_X = CLOCK_X;
+  oldCLOCK_Y = CLOCK_Y;
+  oldRADIUS = RADIUS;
+
   CLOCK_X = wRatio * 720;
   CLOCK_Y = hRatio * 347
 
@@ -476,10 +479,26 @@ function windowResized() {
 
     circleX += (1.5 * CIRCLE_DIAMETER);
   }
+
+  for (let i = 0; i < circles.length; i++) {
+    currentCircle = circles[i];
+    currentCircle.diameter = CIRCLE_DIAMETER;
+    currentCircle.ox = (((currentCircle.ox - oldCLOCK_X) / oldRADIUS) * RADIUS) + CLOCK_X;
+    currentCircle.oy = (((currentCircle.oy - oldCLOCK_Y) / oldRADIUS) * RADIUS) + CLOCK_Y;
+  }
   // 1020
   // 890
   saveBtn = new Button(wRatio*1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
   share = new Button(wRatio*890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
+
+  snareCount = snareOp.counter;
+  kickCount = kickOp.counter;
+  cymbalCount = cymbalOp.counter;
+  hiHatCount = hiHatOp.counter;
+  openHiHatCount = openHiHatOp.counter;
+  hiTomCount = hiTomOp.counter;
+  midTomCount = midTomOp.counter;
+  crashCount = crashOp.counter;
 
   snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
   kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(BUTTON_HEIGHT+CIRCLE_DIAMETER),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
@@ -489,6 +508,7 @@ function windowResized() {
   hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(5*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
   midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(6*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
   crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(7*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
+
 
   options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
 

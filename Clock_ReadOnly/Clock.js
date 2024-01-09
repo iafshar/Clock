@@ -278,3 +278,47 @@ function draw(){
     clock();
   }
 }
+
+function windowResized() {
+  resizeCanvas(windowWidth,windowHeight);
+  wRatio = width/1440;
+  hRatio = height/734;
+
+  oldCLOCK_X = CLOCK_X;
+  oldCLOCK_Y = CLOCK_Y;
+  oldRADIUS = RADIUS;
+
+  CIRCLE_DIAMETER = Math.min((wRatio*20),(hRatio*20)) // since the diameter should be the same in both height and width the lowest one will be taken
+
+  Width = width;
+  Height = height;
+
+  SCROLLBAR_HEIGHT = hRatio*30;
+  starting = hs1.tempo;
+  hs1 = new HScrollbar(0, height-SCROLLBAR_HEIGHT, width, SCROLLBAR_HEIGHT,2,starting);
+  hs1.tempo = starting;
+
+  STARTING_CIRCLE_X = wRatio*20;
+  circleX = STARTING_CIRCLE_X;
+
+  snareY = hRatio * 20;
+  kickY = snareY + (4*CIRCLE_DIAMETER);
+  cymbalY = kickY + (4*CIRCLE_DIAMETER);
+  hiHatY = cymbalY + (4*CIRCLE_DIAMETER);
+  openHiHatY = hiHatY + (4*CIRCLE_DIAMETER);
+  hiTomY = openHiHatY + (4*CIRCLE_DIAMETER);
+  midTomY = hiTomY + (4*CIRCLE_DIAMETER);
+  crashY = midTomY + (4*CIRCLE_DIAMETER);
+
+  CLOCK_X = wRatio * 720;
+  CLOCK_Y = hRatio * 347
+  RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
+
+  for (let i = 0; i < circles.length; i++) {
+    currentCircle = circles[i];
+    currentCircle.diameter = CIRCLE_DIAMETER;
+    currentCircle.ox = (((currentCircle.ox - oldCLOCK_X) / oldRADIUS) * RADIUS) + CLOCK_X;
+    currentCircle.oy = (((currentCircle.oy - oldCLOCK_Y) / oldRADIUS) * RADIUS) + CLOCK_Y;
+  }
+
+}

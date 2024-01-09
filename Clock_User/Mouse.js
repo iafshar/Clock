@@ -378,7 +378,8 @@ function keyPressed(){
   }
 }
 
-function windowResized() {
+function windowResized() { // following happens when the user changes the size of the window
+  // resetting a bunch of important variables to work with the new window size
   resizeCanvas(windowWidth,windowHeight);
   wRatio = width/1440;
   hRatio = height/734;
@@ -417,7 +418,7 @@ function windowResized() {
   SCROLLBAR_HEIGHT = hRatio*30;
   starting = hs1.tempo;
   hs1 = new HScrollbar(0, height-SCROLLBAR_HEIGHT, width, SCROLLBAR_HEIGHT,2,starting);
-  hs1.tempo = starting;
+  hs1.tempo = starting; // needed because by default the tempo is set to minTempo (25)
 
   STARTING_CIRCLE_X = wRatio*20;
   circleX = STARTING_CIRCLE_X;
@@ -431,6 +432,7 @@ function windowResized() {
   crashY = midTomY + (4*CIRCLE_DIAMETER);
 
   for (let i = 0; i < MAX_CIRCLES; i++) {
+    // sets the circles that aren't on screen yet to new circle objects with new positions and diameters
     if (i == MAX_CIRCLES/2) {
       snareY += (2*CIRCLE_DIAMETER);
       kickY += (2*CIRCLE_DIAMETER);
@@ -481,6 +483,7 @@ function windowResized() {
   }
 
   for (let i = 0; i < circles.length; i++) {
+    // changes the positions and diameters of the circles that are on screen
     currentCircle = circles[i];
     currentCircle.diameter = CIRCLE_DIAMETER;
     currentCircle.ox = (((currentCircle.ox - oldCLOCK_X) / oldRADIUS) * RADIUS) + CLOCK_X;

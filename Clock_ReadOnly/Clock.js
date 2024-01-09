@@ -279,7 +279,8 @@ function draw(){
   }
 }
 
-function windowResized() {
+function windowResized() { // following happens when the user changes the size of the window
+  // resetting a bunch of important variables to work with the new window size
   resizeCanvas(windowWidth,windowHeight);
   wRatio = width/1440;
   hRatio = height/734;
@@ -315,6 +316,7 @@ function windowResized() {
   RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
 
   for (let i = 0; i < circles.length; i++) {
+    // changes the positions and diameters of the circles that are on screen
     currentCircle = circles[i];
     currentCircle.diameter = CIRCLE_DIAMETER;
     currentCircle.ox = (((currentCircle.ox - oldCLOCK_X) / oldRADIUS) * RADIUS) + CLOCK_X;

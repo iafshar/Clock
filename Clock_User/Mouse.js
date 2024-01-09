@@ -100,6 +100,7 @@ function mousePressed() {
     if (mouseY < hs1.ypos) {
       for(Op = 0;Op < options.length;Op ++){
         if(options[Op].overButton()){ // finds the option that has been clicked on
+          console.log(options[Op].counter);
           if(options[Op].counter < options[Op].sounds.length && !circles.includes(options[Op].sounds[options[Op].counter])){
             // if the circle does not already exist and it is under the limit for this circle
             circles.push(options[Op].sounds[options[Op].counter]); // adds the new circle to the circles array
@@ -376,4 +377,163 @@ function keyPressed(){
       clickCount = 0;
     }
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth,windowHeight);
+  wRatio = width/1440;
+  hRatio = height/734;
+
+  if (width >= 445 && height >= 533) // checks the dimensions are good enough for the keypad screen
+  { // if they are big enough for the keypad screen, the aspect ratios will not be changed at all
+    nwRatio = 1;
+    nhRatio = 1;
+  }
+  else
+  { // if at least one of the dimensions are too small for the keypad, the aspect ratios will be changed
+    nwRatio = wRatio;
+    nhRatio = hRatio;
+  }
+
+  CLOCK_X = wRatio * 720;
+  CLOCK_Y = hRatio * 347
+
+  RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
+
+  BUTTON_Y = hRatio * 20;
+  BUTTON_HEIGHT = hRatio * 50; //50
+  BUTTON_WIDTH = wRatio * 110;
+
+  SOUND_BUTTON_WIDTH = wRatio * 240;
+  SOUND_BUTTON_X = wRatio * 1150;
+
+  TEXT_SIZE = Math.min((wRatio*30),(hRatio*30));
+
+  CIRCLE_DIAMETER = Math.min((wRatio*20),(hRatio*20))
+
+  SCROLLBAR_HEIGHT = hRatio*30;
+  starting = hs1.tempo;
+  hs1 = new HScrollbar(0, height-SCROLLBAR_HEIGHT, width, SCROLLBAR_HEIGHT,2,starting);
+  hs1.tempo = starting;
+
+  STARTING_CIRCLE_X = wRatio*20;
+  circleX = STARTING_CIRCLE_X;
+  snareY = hRatio * 20;
+  kickY = snareY + (4*CIRCLE_DIAMETER);
+  cymbalY = kickY + (4*CIRCLE_DIAMETER);
+  hiHatY = cymbalY + (4*CIRCLE_DIAMETER);
+  openHiHatY = hiHatY + (4*CIRCLE_DIAMETER);
+  hiTomY = openHiHatY + (4*CIRCLE_DIAMETER);
+  midTomY = hiTomY + (4*CIRCLE_DIAMETER);
+  crashY = midTomY + (4*CIRCLE_DIAMETER);
+
+  for (let i = 0; i < MAX_CIRCLES; i++) {
+    if (i == MAX_CIRCLES/2) {
+      snareY += (2*CIRCLE_DIAMETER);
+      kickY += (2*CIRCLE_DIAMETER);
+      cymbalY += (2*CIRCLE_DIAMETER);
+      hiHatY += (2*CIRCLE_DIAMETER);
+      openHiHatY += (2*CIRCLE_DIAMETER);
+      hiTomY += (2*CIRCLE_DIAMETER);
+      midTomY += (2*CIRCLE_DIAMETER);
+      crashY += (2*CIRCLE_DIAMETER);
+
+      circleX = STARTING_CIRCLE_X;
+    }
+    snare = new Circle(SNARE_SOUND, CIRCLE_DIAMETER, circleX, snareY, RED);
+    kick = new Circle(KICK_SOUND, CIRCLE_DIAMETER, circleX, kickY, PINK);
+    cymbal = new Circle(CYMBAL_SOUND, CIRCLE_DIAMETER, circleX, cymbalY, GREEN);
+    hiHat = new Circle(HIHAT_SOUND, CIRCLE_DIAMETER, circleX, hiHatY, ECLIPSE);
+    openHiHat = new Circle(OPENHIHAT_SOUND, CIRCLE_DIAMETER, circleX, openHiHatY, BLUE);
+    hiTom = new Circle(HITOM_SOUND, CIRCLE_DIAMETER, circleX, hiTomY, BROWN);
+    midTom = new Circle(MIDTOM_SOUND, CIRCLE_DIAMETER, circleX, midTomY, PURPLE);
+    crash = new Circle(CRASH_SOUND, CIRCLE_DIAMETER, circleX, crashY, TEAL);
+
+    if (!circles.includes(snares[i])) {
+      snares[i] = snare;
+    }
+    if (!circles.includes(Kicks[i])) {
+      Kicks[i] = kick;
+    }
+    if (!circles.includes(cymbals[i])) {
+      cymbals[i] = cymbal;
+    }
+    if (!circles.includes(hiHats[i])) {
+      hiHats[i] = hiHat;
+    }
+    if (!circles.includes(openHiHats[i])) {
+      openHiHats[i] = openHiHat;
+    }
+    if (!circles.includes(hiToms[i])) {
+      hiToms[i] = hiTom;
+    }
+    if (!circles.includes(midToms[i])) {
+      midToms[i] = midTom;
+    }
+    if (!circles.includes(crashes[i])) {
+      crashes[i] = crash;
+    }
+
+    circleX += (1.5 * CIRCLE_DIAMETER);
+  }
+  // 1020
+  // 890
+  saveBtn = new Button(wRatio*1020,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SAVE",YELLOW,LIGHT_YELLOW);
+  share = new Button(wRatio*890,BUTTON_Y,BUTTON_WIDTH,BUTTON_HEIGHT,"SHARE",YELLOW,LIGHT_YELLOW);
+
+  snareOp = new Option(SOUND_BUTTON_X,BUTTON_Y,SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"SNARE",snares,snareCount,RED,LIGHT_RED);
+  kickOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(BUTTON_HEIGHT+CIRCLE_DIAMETER),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"KICK",Kicks,kickCount,PINK,LIGHT_PINK);
+  cymbalOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(2*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"RIDE",cymbals,cymbalCount,GREEN,LIGHT_GREEN);
+  hiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(3*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CLOSED HI-HAT",hiHats,hiHatCount,ECLIPSE,LIGHT_ECLIPSE);
+  openHiHatOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(4*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"OPEN HI-HAT",openHiHats,openHiHatCount,BLUE,LIGHT_BLUE);
+  hiTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(5*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"HI-TOM",hiToms,hiTomCount,BROWN,LIGHT_BROWN);
+  midTomOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(6*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"MID-TOM",midToms,midTomCount,PURPLE,LIGHT_PURPLE);
+  crashOp = new Option(SOUND_BUTTON_X,BUTTON_Y+(7*(BUTTON_HEIGHT+CIRCLE_DIAMETER)),SOUND_BUTTON_WIDTH,BUTTON_HEIGHT,"CRASH",crashes,crashCount,TEAL,LIGHT_TEAL);
+
+  options = [snareOp, kickOp, cymbalOp, hiHatOp, openHiHatOp, hiTomOp, midTomOp, crashOp];
+
+  PAUSE_WIDTH = Math.min((wRatio*30),(0.6*hRatio*50));
+  PAUSE_HEIGHT = Math.min((5/3)*(wRatio*30),(hRatio*50));
+  PAUSE_Y = CLOCK_Y-(PAUSE_HEIGHT/2);
+
+  pauseBtn = new PauseButton(CLOCK_X-(PAUSE_WIDTH/2),PAUSE_Y,PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,false);
+  rewindBtn = new SeekButton(CLOCK_X-(3.5*PAUSE_WIDTH),PAUSE_Y,2*PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,true);
+  fastForwardBtn = new SeekButton(CLOCK_X+(1.5*PAUSE_WIDTH),PAUSE_Y,2*PAUSE_WIDTH,PAUSE_HEIGHT,WHITE,VERY_LIGHT_YELLOW,false);
+
+  IMAGE_WIDTH = Math.min((wRatio*50),(hRatio*50));
+
+  keypadBtn = new ImageButton(wRatio*1380,hRatio*614,IMAGE_WIDTH,IMAGE_WIDTH,KEYPAD_IMAGE);
+  trashBtn = new ImageButton(wRatio*1380 - 1.2*(IMAGE_WIDTH),hRatio*614,IMAGE_WIDTH,IMAGE_WIDTH,TRASH_IMAGE,true);
+
+
+  NUM_BUTTON_DIAMETER = Math.min((nwRatio*50),(nhRatio*50));
+  NUM_BUTTON_X = nwRatio * 200;
+  NUM_BUTTON_Y = nhRatio * 200;
+
+  
+  one = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y,'1',NUM_BUTTON_DIAMETER);
+  two = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y,'2',NUM_BUTTON_DIAMETER);
+  three = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y,'3',NUM_BUTTON_DIAMETER);
+  four = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'4',NUM_BUTTON_DIAMETER);
+  five = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'5',NUM_BUTTON_DIAMETER);
+  six = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(2*NUM_BUTTON_DIAMETER),'6',NUM_BUTTON_DIAMETER);
+  seven = new NumButton(NUM_BUTTON_X,NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'7',NUM_BUTTON_DIAMETER);
+  eight = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'8',NUM_BUTTON_DIAMETER);
+  nine = new NumButton(NUM_BUTTON_X+(4*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(4*NUM_BUTTON_DIAMETER),'9',NUM_BUTTON_DIAMETER);
+  zero = new NumButton(NUM_BUTTON_X+(2*NUM_BUTTON_DIAMETER),NUM_BUTTON_Y+(6*NUM_BUTTON_DIAMETER),'0',NUM_BUTTON_DIAMETER);
+
+  nums = [one,two,three,four,five,six,seven,eight,nine,zero,];
+
+  CLEAR_X = NUM_BUTTON_X + (4*NUM_BUTTON_DIAMETER);
+  CLEAR_WIDTH = textWidth("Clear") * (8/6);
+  CLEAR_Y = nhRatio*100;
+
+
+  CLICK_X = NUM_BUTTON_X;
+  CLICK_WIDTH = textWidth("Click") * (8/6);
+  CLICK_Y = nhRatio*500;
+
+  ENTER_X = NUM_BUTTON_X + (4*NUM_BUTTON_DIAMETER);
+  ENTER_WIDTH = textWidth("Enter") * (8/6);
+  ENTER_Y = CLICK_Y;
 }

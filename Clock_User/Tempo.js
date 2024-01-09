@@ -28,6 +28,7 @@ function keypad(){
   if(hs1.tempo>999){ // doesnt let a user enter more than 3 characters
     hs1.tempo = 0;
   }
+  // console.log(hs1.tempo);
   text(hs1.tempo,NUM_BUTTON_X + (2*NUM_BUTTON_DIAMETER),nhRatio*100);
   if(mouseX >= CLEAR_X - (CLEAR_WIDTH/2) && mouseX <= CLEAR_X + (CLEAR_WIDTH/2) && mouseY >= CLEAR_Y-nhRatio*20 && mouseY <= CLEAR_Y+nhRatio*20){
     fill(WHITE);

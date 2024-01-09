@@ -16,7 +16,7 @@ $Searches = array();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $search = $row["Search"];
-
+        $search = $search . $row["Type"];
         array_unshift($Searches,$search); // adds current search to the front of the searches array because it will be displayed in order of recency
     }
 

@@ -22,8 +22,8 @@ while ($row = $result->fetch_assoc()) {
 
 }
 
-$addSearch = "INSERT INTO `Searches` (UserID, Search)
-  VALUES ('$MyUserID','$SearchedUser')";
+$addSearch = "INSERT INTO `Searches` (UserID, Search, Type)
+  VALUES ('$MyUserID','$SearchedUser',1)";
 $db->get_con()->query($addSearch);
 
 $_SESSION["SearchedUserID"] = $SearchedUserID;

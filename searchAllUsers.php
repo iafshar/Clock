@@ -28,8 +28,8 @@ else {
   $_SESSION["message"] = 0;
 }
 
-$addSearch = "INSERT INTO `Searches` (UserID, Search)
-  VALUES ('$MyUserID','$Username')"; // adds the search to the database
+$addSearch = "INSERT INTO `Searches` (UserID, Search, Type)
+  VALUES ('$MyUserID','$Username',0)"; // adds the search to the database
 
 if ($Username != NULL && strlen($Username) > 0){
   if ($_SESSION["message"] == 0) {

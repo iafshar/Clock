@@ -26,7 +26,16 @@ session_start();
                   myRecord = myRecord.replaceAll(">","&#62;");
                   myRecord = myRecord.replaceAll("\\","&#92;");
                   myRecord = myRecord.replaceAll("<","&#60;");
-                  var newRow = "<tr class='table-row-clickable'><td class='search-username' id='recent"+i+"'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+
+                  var type = myRecord.slice(-1);
+                  var icon;
+                  if (type == 0) {
+                    icon = "Icons/magnifying-glass.png";
+                  }
+                  else {
+                    icon = "Icons/user.png";
+                  }
+                  var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30' ></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item="+myRecord.slice(0,-1)+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
                   rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -39,24 +48,37 @@ session_start();
 
     </script>
     <script>
-    $(document).ready(function(){
+      $(document).ready(function(){
 
-  // code to read selected table row cell data (values).
-  // if the user clicks on one of the recent searches
-      $("#clockTable").on('click','.search-username',function(){
-       // get the current row
-       var currentRow=$(this).closest("tr");
+    // code to read selected table row cell data (values).
+    // if the user clicks on one of the recent searches
+        $("#clockTable").on('click','.search-username',function(){
+        // get the current row
+          var currentRow=$(this).closest("tr");
 
-       var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
-       var xmlhttp = new XMLHttpRequest();
+          var Username = currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+          var icon = currentRow.find(".search-type"); // get the src of the icon to determine what kind of search it is
+          var src = $(icon).attr('src'); 
+          
+          if (src === "Icons/magnifying-glass.png") { // if it is not a username search
+            var xmlhttp = new XMLHttpRequest();
 
-       //adds the search to the database and stores the result of the search in a session variable
-       xmlhttp.open("GET", "searchAllUsers.php?RecentUsername=" + Username, true);
-       xmlhttp.send();
-       window.open("searchResults.php","_self");
+            //adds the search to the database and stores the result of the search in a session variable
+            xmlhttp.open("GET", "searchAllUsers.php?RecentUsername=" + Username, true);
+            xmlhttp.send();
+            window.open("searchResults.php","_self");
+          }
+          
+          else {
+            var xmlhttp = new XMLHttpRequest();
+            // stores the userID and username of the clicked user in session and adds the search to the database
+            xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
+            xmlhttp.send();
+            window.open("otherProfile.php","_self");
+          }
+
+        });
       });
-    });
-
     
     </script>
   </head>
@@ -102,6 +124,7 @@ session_start();
     <table class="table" id="clockTable">
       <thead class="thead-light">
         <tr>
+          <th></th>
           <th id="searchHeading">Recents</th>
           <th id="clearButton">
             <button onclick="clearHistory()">Clear</button>
@@ -131,7 +154,7 @@ session_start();
             // get the current row
             var currentRow=$(this).closest("tr");
 
-            var Username=currentRow.find("td:eq(0)").text(); // get current row 2nd TD
+            var Username=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
             var xmlhttp = new XMLHttpRequest();
             // stores the userID and username of the clicked user in session and adds the search to the database
             xmlhttp.open("GET", "getOtherUserClocks.php?Username=" + Username, true);
@@ -155,8 +178,17 @@ session_start();
                     myRecord = myRecord.replaceAll(">","&#62;");
                     myRecord = myRecord.replaceAll("\\","&#92;");
                     myRecord = myRecord.replaceAll("<","&#60;");
+
+                    var type = myRecord.slice(-1);
+                    var icon;
+                    if (type == 0) {
+                      icon = "Icons/magnifying-glass.png";
+                    }
+                    else {
+                      icon = "Icons/user.png";
+                    }
         
-                    var newRow = "<tr class='table-row-clickable'><td class='search-username' id='recent"+i+"'>"+myRecord+"</td><td><button item="+myRecord+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+                    var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30'></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item="+myRecord.slice(0,-1)+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
                     rows = rows+newRow;
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -178,7 +210,7 @@ session_start();
           for (i=0;i<myRecords.length;i++) {
             if (myRecords[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
               var myRecord = myRecords[i];
-              var newRow = "<tr class='autocomplete-table-row'><td>"+myRecord+"</td><td></td></tr>";
+              var newRow = "<tr class='autocomplete-table-row'><td><img class='search-type' src='Icons/user.png' width='30' height='30'></td><td>"+myRecord+"</td><td></td></tr>";
               rows = rows+newRow;
             }
           }

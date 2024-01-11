@@ -80,6 +80,7 @@ body {
   	padding: 0 15px;
     transform: translate(-50%, 0%);
 }
+
 .signUp form input[type="email"] {
     position: absolute;
     left: 50%;
@@ -93,6 +94,36 @@ body {
     border: 3px solid #faf39f;
     padding: 0 15px;
     transform: translate(-50%, 0%);
+}
+
+.signUp form input[name="email1"] {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  font-size: 27px;
+  font-weight: bold;
+  background-color: #f39faa;
+  color: #faf39f;
+  width: 310px;
+  height: 50px;
+  border: 3px solid #faf39f;
+  padding: 0 15px;
+  transform: translate(-50%, 0%);
+}
+
+.signUp form input[name="email2"] {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  font-size: 27px;
+  font-weight: bold;
+  background-color: #f39faa;
+  color: #faf39f;
+  width: 310px;
+  height: 50px;
+  border: 3px solid #faf39f;
+  padding: 0 15px;
+  transform: translate(-50%, 0%);
 }
 
 .login form {

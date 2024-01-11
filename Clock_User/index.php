@@ -69,6 +69,7 @@ session_start();
               }?>
             </a>
             <a onclick=deleteAccount()>Deactivate Account</a>
+            <a href="../updateEmail.php">Change Email</a>
             <a href="../start.php">Logout</a>
         </div>
       </div>
@@ -100,23 +101,9 @@ session_start();
     elem.focus();
   }
 
-  // window.onload = function()
-  // { 
-  //   var dialogElem = document.getElementsByClassName("ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable")[0];
-  //   console.log(dialogElem);
-  //   dialogElem.style.height = "180px";
-  //   dialogElem.style.width = "250px";
-  //   console.log(dialogElem.style);
-    
-  // }
-  
-  // var dialogElem = document.getElementsByClassName("ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable")[0];
-  // console.log(dialogElem);
-  // dialogElem.style.height = "180px";
-  // dialogElem.style.width = "250px";
-  
-  // dialogElem.style('height','180px');
-  // dialogElem.style('width','250px');
-
+</script>
+<script>
+      // removes all the items stored in localStorage from landing
+      deleteLocalStorageLanding();
 </script>
 </html>

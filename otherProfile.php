@@ -82,6 +82,10 @@ session_start();
 
       
     </script>
+    <script>
+      // removes all the items stored in localStorage from landing
+      deleteLocalStorageLanding();
+    </script>
     
     <div class="topnav">
       <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="Icons/back.png" width="30" height="30"></a>
@@ -106,6 +110,7 @@ session_start();
               }?>
             </a>
             <a onclick=deleteAccount()>Deactivate Account</a>
+            <a href="updateEmail.php">Change Email</a>
             <a href="start.php">Logout</a>
         </div>
       </div>

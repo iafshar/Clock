@@ -57,6 +57,7 @@ session_start();
             }?>
           </a>
           <a onclick=deleteAccount()>Deactivate Account</a>
+          <a href="../updateEmail.php">Change Email</a>
           <a href="../start.php">Logout</a>
       </div>
     </div>
@@ -66,5 +67,9 @@ session_start();
   setUnreadCount();
 
 
+</script>
+<script>
+      // removes all the items stored in localStorage from landing
+      deleteLocalStorageLanding();
 </script>
 </html>

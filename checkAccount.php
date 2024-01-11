@@ -62,10 +62,18 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes fr
         if ($countEmail != 0) { // if the email exists in the database
             $response['addEmailClass'] = "invalid";
             $response['removeEmailClass'] = "valid";
+
+            // below is for updating email
+            $response['addWrongClass'] = "valid";
+            $response['removeWrongClass'] = "invalid";
         }
         else {
             $response['addEmailClass'] = "valid";
             $response['removeEmailClass'] = "invalid";
+
+            // below is for updating email
+            $response['addWrongClass'] = "invalid";
+            $response['removeWrongClass'] = "valid";
         }
     }
     else if (isset($_GET['password'])) { // reset password

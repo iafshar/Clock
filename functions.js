@@ -164,3 +164,16 @@ function updateAccount(elem,display=false) {
     }
   });
 }
+
+function deleteLocalStorageLanding() {
+  localStorage.removeItem("loginUsername");
+  localStorage.removeItem("signUpUsername");
+  localStorage.removeItem("signUpEmail");
+  localStorage.removeItem("signUpPassword");
+  localStorage.removeItem("signUpPassword2");
+  localStorage.removeItem("resetPassword"); 
+  localStorage.removeItem("resetPassword2"); 
+  localStorage.removeItem("signUpPremium");
+  localStorage.removeItem("oldEmail");
+  localStorage.removeItem("newEmail");  
+}

@@ -117,14 +117,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
     
     <script>
       // removes all the items stored in localStorage from landing
-      localStorage.removeItem("loginUsername");
-      localStorage.removeItem("signUpUsername");
-      localStorage.removeItem("signUpEmail");
-      localStorage.removeItem("signUpPassword");
-      localStorage.removeItem("signUpPassword2");
-			localStorage.removeItem("resetPassword"); 
-			localStorage.removeItem("resetPassword2"); 
-      localStorage.removeItem("signUpPremium");
+      deleteLocalStorageLanding();
     </script>
   </head>
   <body>
@@ -151,6 +144,7 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
               }?>
             </a>
             <a onclick=deleteAccount()>Deactivate Account</a>
+            <a href="updateEmail.php">Change Email</a>
             <a href="start.php">Logout</a>
         </div>
       </div>

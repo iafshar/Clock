@@ -13,7 +13,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
     $email = $_GET["email"];
     $currentDate = date("Y-m-d H:i:s");
 
-    $CheckHash = "SELECT * FROM `Hashes` WHERE Hash='$hash' AND Email='$email' AND Reset=1";
+    $CheckHash = "SELECT * FROM `Hashes` WHERE Hash='$hash' AND Email='$email' AND Type=1";
 
     $result = mysqli_query($conn, $CheckHash);
 
@@ -24,7 +24,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
         while ($row = $result->fetch_assoc()) {
             $expirationDate = $row["ExpirationDate"];
         }
-        $_SESSION['deleteHash'] = "DELETE FROM Hashes WHERE Hash='$hash' AND Email='$email' AND Reset=1";
+        $_SESSION['deleteHash'] = "DELETE FROM Hashes WHERE Hash='$hash' AND Email='$email' AND Type=1";
 
         if ($expirationDate <= $currentDate) {
             header("Location:http://localhost:8080/Clock/invalidLink.html");

@@ -48,7 +48,7 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
         $pt2 = substr(md5(uniqid(rand(),1)),3,10); //second part of the hash that is random
         $hash = $pt1 . $pt2;
 
-        $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Reset)
+        $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Type)
         VALUES ('$Email', '$Username','$Password','$hash', '$expirationDate', 1)";
 
         mysqli_query($conn, $InsertHash);
@@ -97,6 +97,74 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
 
 }
 
+else if (isset($_GET['oldEmail']) && isset($_GET['newEmail'])) { // change email
+    $oldEmail = $_GET['oldEmail'];
+    $newEmail = $_GET['newEmail'];
+
+    $UserID = $_SESSION["UserID"]; // Not necessary but just in case
+
+    $findUser = "SELECT * FROM `Users` WHERE UserID='$UserID' AND Email='$oldEmail'";
+    $result = mysqli_query($conn, $findUser);
+
+    while ($row = $result->fetch_assoc()) {
+        $Username = $row["Username"];
+        $Password = $row["Password"];
+        $Premium = $row["Premium"]; // only so we can use the same file used for signup (verifyEmail.php)
+    }
+
+    $expirationFormat = mktime(
+        date("H")+3, date("i"), date("s"), date("m") ,date("d"), date("Y")
+        );
+    $expirationDate = date("Y-m-d H:i:s",$expirationFormat);
+    $pt1 = md5(2418*2 . $Email);
+    $pt2 = substr(md5(uniqid(rand(),1)),3,10);
+    $hash = $pt1 . $pt2;
+
+    $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Type)
+    VALUES ('$newEmail', '$Username','$Password','$hash', '$expirationDate', 2)";
+
+    mysqli_query($conn, $InsertHash);
+
+    $message = '<p>Dear '.$Username.',</p>';
+    $message .= '<p>Please click on the following link to change your email to this one.</p>';
+    $message .='<p><a href="http://localhost:8080/Clock/verifyEmail.php?hash='.$hash.'&email='.$newEmail.'&premium='.$Premium.'&action=verifyNew" target="_blank">
+    http://localhost:8080/Clock/verifyEmail.php?hash='.$hash.'&email='.$newEmail.'&premium='.$Premium.'&action=verifyNew</a></p>';
+
+    // this will probably have to change once this gets publicly hosted
+    // had to set up a new email called iafsharclock@gmail.com the password for which is (Hint: usual mki)
+    // then had to set up 2 factor authentication for that email.
+    // then had to set up an app password for that email which is what is passed in to mail->password on line 69
+    // just followed instructions that port is 465
+    $subject = "Password Recovery";
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Enter your host here
+    $mail->SMTPAuth = true;
+    $mail->Username = "iafsharclock@gmail.com"; // Enter your email here
+    $mail->Password = "qhduwaasquwrjcyh"; //Enter your password here
+    $mail->Port = 465;                    //SMTP port
+    $mail->SMTPSecure = "ssl";
+    $mail->IsHTML(true);
+    $mail->setFrom('iafsharclock@gmail.com', 'Clock Team');
+
+    //receiver email address and name
+    $mail->addAddress($newEmail, $Username); 
+
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+
+
+    if(!$mail->Send()){
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    }else{
+        echo "<div class='error'>
+        <p>An email has been sent to your new email with instructions on how to change your email.</p>
+        </div><br /><br /><br />";
+
+    }    
+
+}
+
 else { // if an email is being set because a user wants to sign up for an account
     $Email = $_SESSION["Email"];
     $Username = $_SESSION["Username"];
@@ -111,7 +179,7 @@ else { // if an email is being set because a user wants to sign up for an accoun
     $pt2 = substr(md5(uniqid(rand(),1)),3,10);
     $hash = $pt1 . $pt2;
 
-    $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Reset)
+    $InsertHash = "INSERT INTO Hashes (Email,Username,Password,Hash,ExpirationDate,Type)
         VALUES ('$Email', '$Username','$Password','$hash', '$expirationDate', 0)";
 
     mysqli_query($conn, $InsertHash);

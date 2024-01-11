@@ -28,7 +28,7 @@ session_start();
                   var premium = (myRecords.Premium == 1);
                   document.getElementById("messageHeading").innerHTML = "<a href='otherProfile.php?clickedUserID="+myRecords.otherUserID+"' style='color:black'>"+myRecords.otherUsername+"</a>";
                   console.log(myRecords);
-                  // <a href='otherProfile.php?clickedUserID="+myRecords.otherUserID+"' style='color:black'>myRecords.otherUsername</a>
+                  
                   // message box
                   document.getElementById("messageBody").innerHTML = "<td><table><tr><textarea id='messageText' style='height:100px;font-size:30px;' name='message' placeholder='Message'></textarea></tr><tr><button type='submit' style='width:100%;height:45px;' onclick=sendMessage('"+myRecords.otherUsername+"')>Enter</button></tr></table></td>";
                   var rows = "";
@@ -260,7 +260,6 @@ session_start();
     <thead class="thead-light">
       <tr>
       <th id="messageHeading">Username</th>
-      <!-- <a href='otherProfile.php?clickedUserID="+myRecord.UserID+"' style='color:black'>"+myRecord.Username+"</a> -->
       </tr>
       
     </thead>

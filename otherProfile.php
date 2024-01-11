@@ -41,6 +41,7 @@ session_start();
                 var myRecords = JSON.parse(this.responseText);
                 var premium = (myRecords.Premium == 1);
                 document.getElementById("profileHeader").innerHTML = myRecords.Username;
+                document.getElementById("profileHeader").style.width = "max-content";
                 document.getElementById("sender").value = myRecords.Username;
                 document.getElementById("followBtn").innerHTML = myRecords.Following; // whether the follow button should say follow or unfollow
                 if(myRecords.success == 1) {
@@ -123,7 +124,7 @@ session_start();
   <table class="table" id="otherProfileTable">
       <thead class="thead-light">
         <tr>
-          <th><table><td id='profileHeader'></td><td><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required style='margin-left: 20px;'><img src='Icons/magnifying-glass.png' width='30' height='30'></td></table></th>
+          <th><span id='profileHeader' style='padding-right: 20%;'></span><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required ><img src='Icons/magnifying-glass.png' width='30' height='30'></th>
           <th>
             <div class="follow">
               <button type="submit" class="followBtn" id="followBtn" onclick=changeFollow(this)>Follow</button>

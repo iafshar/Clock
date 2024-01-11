@@ -124,7 +124,7 @@ session_start();
   <table class="table" id="otherProfileTable">
       <thead class="thead-light">
         <tr>
-          <th><span id='profileHeader' style='padding-right: 20%;'></span><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required ><img src='Icons/magnifying-glass.png' width='30' height='30'></th>
+          <th><span id='profileHeader' style='padding-right: 15%;'></span><input id='clockSearch' type='text' name='search' placeholder='Search' autocomplete='off' required ><img src='Icons/magnifying-glass.png' width='30' height='30'></th>
           <th>
             <div class="follow">
               <button type="submit" class="followBtn" id="followBtn" onclick=changeFollow(this)>Follow</button>

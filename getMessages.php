@@ -19,7 +19,19 @@ $getMessages = "SELECT * FROM `Messages`
  WHERE ToUsername IN ('$myUsername','$otherUsername') AND FromUsername IN ('$otherUsername','$myUsername')
     ORDER BY DateSent DESC";
 
+$getOtherUserID = "SELECT * FROM `Users` WHERE Username='$otherUsername'";
+
+$resultUserID = $db->get_con()->query($getOtherUserID);
+
+if ($resultUserID->num_rows > 0) {
+    while ($row = $resultUserID->fetch_assoc()) {
+        $response["otherUserID"] = $row["UserID"];
+    }
+}
+
 $result = $db->get_con()->query($getMessages);
+
+
 
 if ($result->num_rows > 0) {
     $response["Messages"] = array();
@@ -99,6 +111,7 @@ if ($result->num_rows > 0) {
         array_push($response["Messages"], $record);
 
     }
+
     $response["success"] = 1;
 
 }

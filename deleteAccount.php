@@ -22,6 +22,9 @@ $db->get_con()->query($deleteVotes);
 $deleteSearches = "DELETE FROM Searches WHERE UserID='$UserID'";
 $db->get_con()->query($deleteSearches);
 
+$deletePasswords = "DELETE FROM Passwords WHERE UserID='$UserID'";
+$db->get_con()->query($deletePasswords);
+
 $getClocks = "SELECT ClockID FROM Clocks WHERE UserID='$UserID'";
 
 $result = $db->get_con()->query($getClocks);

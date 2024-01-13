@@ -308,7 +308,7 @@ function mouseDragged() { // Move Circle
         buttonCheck = true;
       }
     }
-    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,RADIUS*2-365) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
+    if (circleOnScreen && clickedOnCircle != null && mouseY < hs1.ypos - CIRCLE_DIAMETER/2 && mouseY > 0 && mouseX > 0 && mouseX < width && !pointCircle(mouseX, mouseY, CLOCK_X, CLOCK_Y,2*(RADIUS/5+CIRCLE_DIAMETER)-(CIRCLE_DIAMETER/4)) && !buttonCheck){ //if the mouse is over the slider and you have clicked on a Circle you can drag it
       check = 0;
       for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
         // constrain the circles to the layers of the circles

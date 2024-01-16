@@ -35,7 +35,7 @@ session_start();
                   else {
                     icon = "Icons/user.png";
                   }
-                  var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30' ></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item="+myRecord.slice(0,-1)+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+                  var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30' ></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item='"+myRecord+"' onclick=deleteHistoryItem(this)>X</button></td></tr>";
                   rows = rows+newRow;
               }
               document.getElementById("resultRows").innerHTML = rows;
@@ -193,7 +193,7 @@ session_start();
                       icon = "Icons/user.png";
                     }
         
-                    var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30'></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item="+myRecord.slice(0,-1)+" onclick=deleteHistoryItem(this)>X</button></td></tr>";
+                    var newRow = "<tr class='table-row-clickable'><td class='search-username'><img class='search-type' src='"+icon+"' width='30' height='30'></td><td class='search-username' id='recent"+i+"' >"+myRecord.slice(0,-1)+"</td><td><button item='"+myRecord+"' onclick=deleteHistoryItem(this)>X</button></td></tr>";
                     rows = rows+newRow;
                 }
                 document.getElementById("resultRows").innerHTML = rows;
@@ -239,7 +239,6 @@ session_start();
 <script>
   function deleteHistoryItem(element) { // removes one search item
     item = element.getAttribute('item');
-
     row = element.parentNode.parentNode; // row that the button is on
     i = row.rowIndex; // index that the row is on in the table
 
@@ -247,7 +246,13 @@ session_start();
 
     xmlhttp.open("GET", "deleteHistoryItem.php?item="+item, true);
     xmlhttp.send();
-    document.getElementById("clockTable").deleteRow(i);
+    document.getElementsByClassName('search-type')[i-1].style.display = 'none'; // sets the display of the search type image to none
+    element.style.display = 'none'; // sets the display of the delete button to none
+    row.className = "deleting"; // sets the row to its deleting class to make them disappear smoothly
+    window.setTimeout(function() {
+      // animation takes 400 ms so deletes the row after 800 ms to ensure animation is done
+          row.parentNode.removeChild(row);
+      }, 800);
 
   }
 </script>

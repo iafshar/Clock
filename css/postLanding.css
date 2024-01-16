@@ -70,6 +70,50 @@ button.messageBtn {
   background-color: #faf39f;
 }
 
+td {
+  transition: font-size 400ms ease-in-out, padding 400ms ease-in-out, height 400ms ease-in-out;
+}
+.deleting > td {
+  font-size: 0;
+  padding: 0;
+  border-width: 0;
+  color: transparent;
+  height: 0;
+}
+
+table {
+  transition: font-size 400ms ease-in-out, padding 400ms ease-in-out, height 400ms ease-in-out;
+}
+
+.deleting > table {
+  font-size: 0;
+  padding: 0;
+  border-width: 0;
+  color: transparent;
+  height: 0;
+}
+
+iframe {
+  transition: height 400ms ease-in-out, width 400ms ease-in-out, display 400ms ease-in-out;
+}
+
+.delete-iframe {
+  height: 0;
+  width: 0;
+  border-width: 0;
+  display: none;
+}
+
+textarea {
+  transition: height 400ms ease-in-out, width 400ms ease-in-out, display 400ms ease-in-out;
+}
+
+.delete-comment {
+  height: 0;
+  width: 0;
+  display: none;
+}
+
 .table-row-from-me {
   background-color: #03c6fc;
 }

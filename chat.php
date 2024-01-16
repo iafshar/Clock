@@ -196,11 +196,13 @@ session_start();
       }
 
       function deleteMessage(messageID,elem) {
-        while (!elem.classList.contains('table-row-from-me')) { // sets elem to the row of the message
+        row = elem;
+        while (!row.classList.contains('table-row-from-me')) { // sets elem to the row of the message
           // have to do it in a while loop because there are different levels for clock messages and normal ones
-          elem = elem.parentNode;
+          row = row.parentNode;
+
         }
-        i = elem.rowIndex; // which row the row of the message is in
+        i = row.rowIndex; // which row the row of the message is in
         $.ajax({
           type: 'post',
           url: 'deleteMessage.php',
@@ -208,9 +210,58 @@ session_start();
             messageID:messageID,
             rowID:i-1 // minus one because the message box at the top takes up one row
           },
-          success: function (response) { // deletes the row from the display
-            document.getElementById("messageTable").deleteRow(i);
-            console.log(JSON.parse(response));
+          success: function () { // deletes the row from the display
+            // following is done to make the delete animation smooth
+            // have to set display to all buttons, like button images, bold, strong, and italic words to none
+            buttons = $(row).find('button'); // all buttons in the row
+            for (let index = 0; index < buttons.length; index++) { 
+              var button = buttons[index];
+              button.style.display = 'none'; 
+            }
+            // also have to set the iframe, comment areas and all table rows within the row and current row to their deleting class 
+            // which makes them disappear smoothly
+            if ($(row).find('iframe').length > 0) {
+              $(row).find('iframe')[0].className = "delete-iframe";
+            }
+            if ($(row).find('textarea').length > 0) {
+              $(row).find('textarea')[0].className = "delete-comment";
+            }
+            tableRows = $(row).find('tr'); // all table rows in current row
+            for (let index = 0; index < tableRows.length; index++) {
+              var tableRow = tableRows[index];
+              tableRow.className = "deleting";
+            }
+
+            bolds = $(row).find('b'); // all bold texts in current row
+            for (let index = 0; index < bolds.length; index++) {
+              var bold = bolds[index];
+              bold.style.display = 'none';
+            }
+
+            italics = $(row).find('i'); // all italic texts in current row
+            for (let index = 0; index < italics.length; index++) {
+              var italic= italics[index];
+              italic.style.display = 'none';
+            }
+
+            strongs = $(row).find('strong'); // all strong texts in current row
+            for (let index = 0; index < strongs.length; index++) {
+              var strong = strongs[index];
+              strong.style.display = 'none';
+            }
+
+            imgs = $(row).find('img'); // all images in current row
+            for (let index = 0; index < imgs.length; index++) {
+              var img = imgs[index];
+              img.style.display = 'none';
+            }
+         
+            row.className = "deleting";
+
+            window.setTimeout(function() {
+              // animation takes 400 ms so deletes the row after 500 ms to ensure animation is done
+              document.getElementById("messageTable").deleteRow(i);
+            }, 500);
           }
         });
       }

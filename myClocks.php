@@ -25,11 +25,12 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
 
       function deleteClock(clockID,name,elem) {
         var ensure = confirm("Are you sure you want to delete "+name);
+        row = elem;
         if(ensure){
-          while (!elem.classList.contains('table-row')) { // sets elem to the row of the clock
-            elem = elem.parentNode;
-            i = elem.rowIndex;
+          while (!row.classList.contains('table-row')) { // sets elem to the row of the clock
+            row = row.parentNode;
           }
+          i = row.rowIndex;
           $.ajax({
             type: 'post',
             url: 'delete.php',
@@ -37,7 +38,50 @@ if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) {
               ClockID:clockID,
             },
             success: function () {
-              document.getElementById("clockTable").deleteRow(i); // +1 because the search box is the first row
+              // following is done to make the delete animation smooth
+              // have to set display to all buttons, like button images, input for clockName, and date in italics to none
+              buttons = $(row).find('button'); // all buttons in the row
+              for (let index = 0; index < buttons.length; index++) { 
+                var button = buttons[index];
+                button.style.display = 'none'; 
+              }
+
+              // also have to set the iframe and all table rows within the row and current row to their deleting class 
+              // which makes them disappear smoothly
+              if ($(row).find('iframe').length > 0) {
+                $(row).find('iframe')[0].className = "delete-iframe";
+              }
+              tableRows = $(row).find('tr'); // all table rows in current row
+              for (let index = 0; index < tableRows.length; index++) {
+                var tableRow = tableRows[index];
+                tableRow.className = "deleting";
+              }
+
+              italics = $(row).find('i'); // all italic texts in current row
+              for (let index = 0; index < italics.length; index++) {
+                var italic= italics[index];
+                italic.style.display = 'none';
+              }
+
+              imgs = $(row).find('img'); // all images in current row
+              for (let index = 0; index < imgs.length; index++) {
+                var img = imgs[index];
+                img.style.display = 'none';
+              }
+
+              inputs = $(row).find('input'); // all inputs in current row
+              for (let index = 0; index < inputs.length; index++) {
+                var input = inputs[index];
+                input.style.display = 'none';
+              }
+          
+              row.className = "deleting";
+
+              window.setTimeout(function() {
+                // animation takes 400 ms so deletes the row after 500 ms to ensure animation is done
+                document.getElementById("clockTable").deleteRow(i);
+              }, 500);
+              
             }
           });
         }

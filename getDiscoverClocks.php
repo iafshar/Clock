@@ -48,6 +48,7 @@ if ($result->num_rows > 0) {
         $record["NumOfLikes"] = $likes;
         $record["NumOfDislikes"] = $dislikes;
         $record["Ratio"] = $dislikes/$likes;
+        $record["Popularity"] = $likes + $dislikes;
         $checkLiked = "SELECT * FROM Votes WHERE UserID='$MyUserID' AND ItemID='$ClockID' AND Item=0 AND Dislike=0";
         if ($db->get_con()->query($checkLiked)->num_rows > 0) {
           $record["LikeColor"] = "#f39faa";
@@ -71,7 +72,7 @@ if ($result->num_rows > 0) {
     $response["success"] = 1;
     $response["ClocksSorted"] = array();
     if(count($response["ClocksUnsorted"]) > 0) {
-      array_push($response["ClocksSorted"], merge_sort($response["ClocksUnsorted"],"Ratio"));
+      array_push($response["ClocksSorted"], merge_sort($response["ClocksUnsorted"],"Ratio","Popularity"));
     }
 		// Now a merge sort function which I have created has been applied to the unsorted clocks
 		// and the array now has all the clocks sorted by their like:dislike ratio

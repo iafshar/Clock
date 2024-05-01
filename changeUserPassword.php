@@ -99,7 +99,7 @@ if (isset($_POST['Password1'])){
   }
   else { // if the new password is valid
     $UserID = $_SESSION['UserID'];
-    $updatePassword = "UPDATE USERS
+    $updatePassword = "UPDATE Users
         SET Password = '$Password1'
         WHERE UserID = '$UserID'";
     if (mysqli_query($conn, $updatePassword)) {

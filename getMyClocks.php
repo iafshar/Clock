@@ -3,8 +3,11 @@
 /*
  * Following code will list all the records on the table
  */
-session_start();
-include '/getUserID.php';
+if (session_status()!=1) {
+    session_start();
+}
+
+include __DIR__ . '/getUserID.php';
 
 $_SESSION["tempo"] = 0;
 $_SESSION["Error"] = "";

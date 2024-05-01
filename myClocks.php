@@ -1,7 +1,6 @@
 
 <?php
 // <!-- the profile page of the user -->
-session_start();
 require_once __DIR__ . '/getUserID.php';
 if (isset($_SESSION["Error"]) && strlen($_SESSION["Error"]) > 0) { 
   echo "<script>alert('".$_SESSION["Error"]."');</script>";

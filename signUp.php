@@ -6,7 +6,7 @@ session_start();
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Sign-Up</title>
+		<title>Clock | Sign-Up</title>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 		<link href="css/landing.css" rel="stylesheet" type="text/css">
 	</head>

@@ -5,6 +5,7 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clock</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="http://localhost:8080/Clock/css/postLanding.css" rel="stylesheet" type="text/css">
   <script src="../functions.js"></script>

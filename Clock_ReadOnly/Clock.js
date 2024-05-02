@@ -145,8 +145,67 @@ function setup() {
   RADIUS = Math.min((wRatio*250),(hRatio*250)); // since the radius should be the same in both height and width the lowest one will be taken
 
   angle = 270;
+  
+}
 
-  if(typeof savedCircles !== 'undefined'){ // if there are circles for this clock
+function clock() {
+  background(bgColor);
+  strokeWeight(1);
+  fill(clockColor); //colours the ellipse yellow
+  ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
+
+  drawSlider(hs1);
+  tempo = hs1.tempo/40;
+
+  lx = CLOCK_X + cos(radians(angle))*(RADIUS); // x and y positions of the end point of the metronome
+  ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
+  strokeWeight(1);
+  fill(clockColor);
+
+
+  for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
+    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i); // draws the layers
+  }
+
+  side = (sqrt(2)/2)*RADIUS;
+
+  fill(bgColor);
+  stroke(bgColor);
+
+
+  strokeWeight(5);
+
+  stroke(BLACK);
+
+  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10); // draws the markers at every 45 degrees
+  line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
+  line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
+  line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
+  line(CLOCK_X-side,CLOCK_Y-side,CLOCK_X-side-10,CLOCK_Y-side-10);
+  line(CLOCK_X+side,CLOCK_Y-side,CLOCK_X+side+10,CLOCK_Y-side-10);
+  line(CLOCK_X+side,CLOCK_Y+side,CLOCK_X+side+10,CLOCK_Y+side+10);
+  line(CLOCK_X-side,CLOCK_Y+side,CLOCK_X-side-10,CLOCK_Y+side+10);
+  line(CLOCK_X, CLOCK_Y, lx, ly);
+
+  hit = false; // whether a circle has been hit or not
+
+  for (i = 0;i<circles.length;i++) {
+    circles[i].drawCircle();
+    circles[i].onScreen = true;
+    circleOnScreen = true;
+
+    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
+
+    if (hit){
+        circles[i].playSound();
+    }
+  }
+
+  angle += tempo;
+}
+
+function draw(){
+  if(typeof savedCircles !== 'undefined' && circles.length == 0){ // if there are circles for this clock
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
@@ -215,65 +274,7 @@ function setup() {
       }
     }
   }
-}
 
-function clock() {
-  background(bgColor);
-  strokeWeight(1);
-  fill(clockColor); //colours the ellipse yellow
-  ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
-
-  drawSlider(hs1);
-  tempo = hs1.tempo/40;
-
-  lx = CLOCK_X + cos(radians(angle))*(RADIUS); // x and y positions of the end point of the metronome
-  ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
-  strokeWeight(1);
-  fill(clockColor);
-
-
-  for(i = RADIUS/5;i < RADIUS+1;i += RADIUS/5){
-    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i); // draws the layers
-  }
-
-  side = (sqrt(2)/2)*RADIUS;
-
-  fill(bgColor);
-  stroke(bgColor);
-
-
-  strokeWeight(5);
-
-  stroke(BLACK);
-
-  line(CLOCK_X,CLOCK_Y-RADIUS,CLOCK_X,CLOCK_Y-RADIUS-10); // draws the markers at every 45 degrees
-  line(CLOCK_X+RADIUS,CLOCK_Y,CLOCK_X+RADIUS+10,CLOCK_Y);
-  line(CLOCK_X,CLOCK_Y+RADIUS,CLOCK_X,CLOCK_Y+RADIUS+10);
-  line(CLOCK_X-RADIUS,CLOCK_Y,CLOCK_X-RADIUS-10,CLOCK_Y);
-  line(CLOCK_X-side,CLOCK_Y-side,CLOCK_X-side-10,CLOCK_Y-side-10);
-  line(CLOCK_X+side,CLOCK_Y-side,CLOCK_X+side+10,CLOCK_Y-side-10);
-  line(CLOCK_X+side,CLOCK_Y+side,CLOCK_X+side+10,CLOCK_Y+side+10);
-  line(CLOCK_X-side,CLOCK_Y+side,CLOCK_X-side-10,CLOCK_Y+side+10);
-  line(CLOCK_X, CLOCK_Y, lx, ly);
-
-  hit = false; // whether a circle has been hit or not
-
-  for (i = 0;i<circles.length;i++) {
-    circles[i].drawCircle();
-    circles[i].onScreen = true;
-    circleOnScreen = true;
-
-    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
-
-    if (hit){
-        circles[i].playSound();
-    }
-  }
-
-  angle += tempo;
-}
-
-function draw(){
   if(clockScreen){
     clock();
   }

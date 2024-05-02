@@ -143,7 +143,67 @@ function setup() {
   CLOCK_Y = (734/2-20)/4;
   angle = 270;
 
-  if(typeof savedCircles !== 'undefined'){
+}
+
+function clock() {
+  cursor(HAND); // iframe so cursor will always be a hand when it hovers over it
+  if (localStorage.getItem("muteRow"+rowID)) { // if the muteRow with the rowID for this mini clock is in local storage
+    // unmute the mini clock
+    mute = 0;
+  }
+  else {
+    mute = 1;
+  }
+
+  background(bgColor);
+  strokeWeight(1);
+  fill(clockColor); //colours the ellipse yellow
+  ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
+
+  tempo = starting/40;
+
+  strokeWeight(0);
+  fill(0);
+  
+  text(starting,370,185);
+
+  lx = CLOCK_X + cos(radians(angle))*(RADIUS);
+  ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
+  strokeWeight(1);
+  fill(clockColor);
+
+
+  for(i = 50/4;i < 251/4;i += 50/4){
+    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
+  }
+
+  side = (sqrt(2)/2)*RADIUS;
+
+
+  stroke(BLACK);
+
+
+  line(CLOCK_X, CLOCK_Y, lx, ly);
+
+  hit = false;
+
+  for (i = 0;i<circles.length;i++) {
+    circles[i].drawCircle();
+    circles[i].onScreen = true;
+    circleOnScreen = true;
+
+    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
+
+    if (hit && mute == 0){
+        circles[i].playSound();
+    }
+  }
+
+  angle += tempo;
+}
+
+function draw(){
+  if(typeof savedCircles !== 'undefined' && circles.length == 0){
     for(i=0;i<savedCircles.length;i++){
       savedCircle = savedCircles[i];
       if(savedCircle.SoundID == 1){
@@ -212,66 +272,7 @@ function setup() {
       }
     }
   }
-}
 
-function clock() {
-  cursor(HAND); // iframe so cursor will always be a hand when it hovers over it
-  if (localStorage.getItem("muteRow"+rowID)) { // if the muteRow with the rowID for this mini clock is in local storage
-    // unmute the mini clock
-    mute = 0;
-  }
-  else {
-    mute = 1;
-  }
-
-  background(bgColor);
-  strokeWeight(1);
-  fill(clockColor); //colours the ellipse yellow
-  ellipse(CLOCK_X, CLOCK_Y, RADIUS*2, RADIUS*2);
-
-  tempo = starting/40;
-
-  strokeWeight(0);
-  fill(0);
-  
-  text(starting,370,185);
-
-  lx = CLOCK_X + cos(radians(angle))*(RADIUS);
-  ly = CLOCK_Y + sin(radians(angle))*(RADIUS);
-  strokeWeight(1);
-  fill(clockColor);
-
-
-  for(i = 50/4;i < 251/4;i += 50/4){
-    ellipse(CLOCK_X, CLOCK_Y, RADIUS*2-i, RADIUS*2-i);
-  }
-
-  side = (sqrt(2)/2)*RADIUS;
-
-
-  stroke(BLACK);
-
-
-  line(CLOCK_X, CLOCK_Y, lx, ly);
-
-  hit = false;
-
-  for (i = 0;i<circles.length;i++) {
-    circles[i].drawCircle();
-    circles[i].onScreen = true;
-    circleOnScreen = true;
-
-    hit = lineCircle(CLOCK_X, CLOCK_Y, lx, ly, circles[i].ox, circles[i].oy, CIRCLE_DIAMETER/2, circleOnScreen);
-
-    if (hit && mute == 0){
-        circles[i].playSound();
-    }
-  }
-
-  angle += tempo;
-}
-
-function draw(){
   if(clockScreen){
     clock();
   }

@@ -266,77 +266,6 @@ function setup() {
   illegals = ['§','±','`','~',',','<','=','+','[',']','{','}',':',';','|','\\',"'","\"",'/','?']; // characters that are not allowed to be in a clockName
   clockName = "";
     
-  if(( edited || remixed ) && typeof savedCircles !== 'undefined'){
-    for(i=0;i<savedCircles.length;i++){
-      
-      savedCircle = savedCircles[i];
-    
-      if(savedCircle.SoundID == 1){
-        currentCircle = snareOp.sounds[snareOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        snareOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 2){
-        currentCircle = kickOp.sounds[kickOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        kickOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 3){
-        currentCircle = cymbalOp.sounds[cymbalOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        cymbalOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 4){
-        currentCircle = hiHatOp.sounds[hiHatOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        hiHatOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 5){
-        currentCircle = openHiHatOp.sounds[openHiHatOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        openHiHatOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 6){
-        currentCircle = hiTomOp.sounds[hiTomOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        hiTomOp.counter ++;
-      }
-      else if(savedCircle.SoundID == 7){
-        currentCircle = midTomOp.sounds[midTomOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        midTomOp.counter ++;
-      }
-      else{
-        currentCircle = crashOp.sounds[crashOp.counter];
-        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
-        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
-        currentCircle.drawCircle();
-        circles.push(currentCircle);
-        crashOp.counter ++;
-      }
-    }
-  }
 }
 
 function clock() {
@@ -448,6 +377,77 @@ function clock() {
 }
 
 function draw(){
+  if(( edited || remixed ) && typeof savedCircles !== 'undefined' && circles.length == 0){
+    // puts the saved circles on the screen if this is an edited or remixed clock
+    for(i=0;i<savedCircles.length;i++){
+      savedCircle = savedCircles[i];
+    
+      if(savedCircle.SoundID == 1){
+        currentCircle = snareOp.sounds[snareOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        snareOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 2){
+        currentCircle = kickOp.sounds[kickOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        kickOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 3){
+        currentCircle = cymbalOp.sounds[cymbalOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        cymbalOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 4){
+        currentCircle = hiHatOp.sounds[hiHatOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        hiHatOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 5){
+        currentCircle = openHiHatOp.sounds[openHiHatOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        openHiHatOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 6){
+        currentCircle = hiTomOp.sounds[hiTomOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        hiTomOp.counter ++;
+      }
+      else if(savedCircle.SoundID == 7){
+        currentCircle = midTomOp.sounds[midTomOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        midTomOp.counter ++;
+      }
+      else{
+        currentCircle = crashOp.sounds[crashOp.counter];
+        currentCircle.ox = (savedCircle.X * RADIUS) + CLOCK_X;
+        currentCircle.oy = (savedCircle.Y * RADIUS) + CLOCK_Y;
+        currentCircle.drawCircle();
+        circles.push(currentCircle);
+        crashOp.counter ++;
+      }
+    }
+  }
   if(screen == 0){
     clock();
   }

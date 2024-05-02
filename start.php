@@ -3,7 +3,7 @@ $_SESSION["Error"] = NULL; // This will be a string containing all the errors th
 session_unset();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
 		<title>Clock | Welcome</title>

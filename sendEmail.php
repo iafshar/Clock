@@ -168,7 +168,7 @@ else if (isset($_GET['oldEmail']) && isset($_GET['newEmail'])) { // change email
 else { // if an email is being set because a user wants to sign up for an account
     $Email = $_SESSION["Email"];
     $Username = $_SESSION["Username"];
-    $Password = $_SESSION["Password"];
+    $Password = $_SESSION["Password"]; // should now have the hashed password
     $Premium = $_SESSION["Premium"];
 
     $expirationFormat = mktime(

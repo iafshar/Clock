@@ -32,6 +32,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
     else {
         while ($row = $result->fetch_assoc()) {
             $Username = $row["Username"];
+            // this will now be hashed password
             $Password = $row["Password"];
             $expirationDate = $row["ExpirationDate"];
         }
@@ -45,7 +46,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
         else {
             $_SESSION["Email"] = $email;
             $_SESSION["Username"] = $Username;
-            $_SESSION["Password"] = $Password;
+            $_SESSION["Password"] = $Password; // hashed pwd (is this needed?)
             $_SESSION["Premium"] = $premium;
             if ($reset == 0) {
     
@@ -53,6 +54,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
     
                 $Insert = "INSERT INTO Users (Username,Password,Email,Premium)
                     VALUES ('$Username', '$Password', '$email', '$premium')";
+                    // insert hashed pwd
                 
                 
                 if (mysqli_query($conn, $Insert)) {
@@ -64,6 +66,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
                     }
                     $addPwd = "INSERT INTO Passwords (UserID,Password)
                             VALUES ('$UserID','$Password')";
+                    // hashed pwd
     
                     if (mysqli_query($conn, $addPwd)) {
                         header("Location:http://localhost:8080/Clock/myClocks.php");

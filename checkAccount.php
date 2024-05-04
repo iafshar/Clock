@@ -12,17 +12,24 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
   $Username = $_POST['Username'];
   $Password = $_POST['Password'];
   //Checking whether the values exist in the database or not
-  $query = "SELECT * FROM `Users` WHERE Username='$Username' and Password='$Password'";
+  
+  $query = "SELECT * FROM `Users` WHERE Username='$Username'";
   $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
   $count = mysqli_num_rows($result);
+
   $_SESSION["Username"] = $Username;
-  $_SESSION["Password"] = $Password;
+
   if ($count == 1) { // if the credentials exist
     while ($row = $result->fetch_assoc()) {
         $_SESSION['UserID'] = $row["UserID"];
-        
+        $hashedPassword = $row["Password"];
     }
+    if (!password_verify($Password,$hashedPassword)) {
+        header("Location:http://localhost:8080/Clock/login.php");
+    }
+    else {
     header("Location:http://localhost:8080/Clock/myClocks.php");
+    }
    } else {
     header("Location:http://localhost:8080/Clock/login.php");
    }

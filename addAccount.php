@@ -18,7 +18,6 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
 
   $_SESSION["Premium"] = $Premium;
   $_SESSION["Username"] = $Username;
-  $_SESSION["Password"] = $Password;
   $_SESSION["Email"] = $Email;
 
   $ExistingUser = "SELECT * FROM `Users` WHERE Username='$Username'"; // checks if there is already a user with the same username
@@ -115,6 +114,8 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
     header("Location:http://localhost:8080/Clock/signUp.php");
   }
   else{
+    // hash password here and set session["Password"] to it
+    $_SESSION["Password"] = $Password;
     header("Location:http://localhost:8080/Clock/sendEmail.php");
   }
 }

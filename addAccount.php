@@ -115,7 +115,8 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   }
   else{
     // hash password here and set session["Password"] to it
-    $_SESSION["Password"] = $Password;
+    $hashedPassword = mysqli_real_escape_string($conn, password_hash($Password, PASSWORD_DEFAULT));
+    $_SESSION["Password"] = $hashedPassword;
     header("Location:http://localhost:8080/Clock/sendEmail.php");
   }
 }

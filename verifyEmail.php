@@ -46,7 +46,6 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
         else {
             $_SESSION["Email"] = $email;
             $_SESSION["Username"] = $Username;
-            $_SESSION["Password"] = $Password; // hashed pwd (is this needed?)
             $_SESSION["Premium"] = $premium;
             if ($reset == 0) {
     

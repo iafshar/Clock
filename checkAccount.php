@@ -34,7 +34,7 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
     header("Location:http://localhost:8080/Clock/login.php");
    }
 }
-else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes from signup
+else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes from signup or updatePassword
     if(isset($_GET['username'])) {
         $response = array();
         $Username = $_GET['username'];
@@ -83,7 +83,8 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes fr
             $response['removeWrongClass'] = "valid";
         }
     }
-    else if (isset($_GET['password'])) { // reset password
+    else if (isset($_GET['password'])) { // if it comes from updatePassword
+        // check if new password has not been used before
         $Email = $_SESSION["Email"];
         $Password1 = $_GET['password'];
 
@@ -99,11 +100,19 @@ else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes fr
                 
         }
 
-        $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'"; // checks all the passwords used by the user before
+        $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID'"; // checks all the passwords used by the user before
         $result = mysqli_query($conn, $checkPwds);
         $response = array();
+        $invalid = FALSE;
+        while ($row = $result->fetch_assoc()) {
+            if (password_verify($Password1,$row["Password"])) {
+                // if password exists in user's password history
+                $invalid = TRUE;
+                break;
+            }
+        }
         
-        if ($result->num_rows > 0) { // if the password has been used by this user before
+        if ($invalid) { // if the password has been used by this user before
             $response["removeDifferentClass"] = "valid";
             $response["addDifferentClass"] = "invalid";
         }

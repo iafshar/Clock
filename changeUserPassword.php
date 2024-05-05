@@ -16,9 +16,6 @@ if (isset($_POST['Password1'])){
   $Password2 = mysqli_real_escape_string($conn, $_REQUEST['Password2']);
 
 
-  $_SESSION["Password"] = $Password1;
-
-
   $findUser = "SELECT * FROM `Users` WHERE Email='$Email'";
 
   $result = mysqli_query($conn, $findUser);
@@ -30,10 +27,18 @@ if (isset($_POST['Password1'])){
   }
 
   $exists = FALSE;
-  $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID' AND Password='$Password1'";
+  $checkPwds = "SELECT * FROM `Passwords` WHERE UserID='$UserID'";
   $result = mysqli_query($conn, $checkPwds);
 
-  if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    if (password_verify($Password1,$row["Password"])) {
+        // if password exists in user's password history
+        $exists = TRUE;
+        break;
+    }
+  }
+
+  if ($exists) {
     $invalid = TRUE;
     $_SESSION["differentResetClass"] = "invalid";
   }
@@ -99,12 +104,13 @@ if (isset($_POST['Password1'])){
   }
   else { // if the new password is valid
     $UserID = $_SESSION['UserID'];
+    $hashedPassword = mysqli_real_escape_string($conn, password_hash($Password1, PASSWORD_DEFAULT));
     $updatePassword = "UPDATE Users
-        SET Password = '$Password1'
+        SET Password = '$hashedPassword'
         WHERE UserID = '$UserID'";
     if (mysqli_query($conn, $updatePassword)) {
         $addPwd = "INSERT INTO Passwords (UserID,Password)
-          VALUES ('$UserID','$Password1')";
+          VALUES ('$UserID','$hashedPassword')";
         if (mysqli_query($conn, $addPwd)) {
           $deleteHash = $_SESSION['deleteHash']; // the hash is not needed anymore because the user has successfully changed their password
           mysqli_query($conn, $deleteHash);      // so it is deleted

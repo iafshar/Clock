@@ -54,7 +54,7 @@ else {
     // no users found
     $response["success"] = 0;
     $response["message"] = "No records found";
-    // // echo no users JSON
+    // // echo no users
 }
 $_SESSION['response'] = $response;
 header("Location:http://localhost:8080/Clock/searchResults.php");

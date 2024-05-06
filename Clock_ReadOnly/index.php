@@ -8,7 +8,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clock</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link href="https://clockdrum.000webhostapp.com/css/postLanding.css" rel="stylesheet" type="text/css">
+  <link href="http://localhost:8080/Clock/css/postLanding.css" rel="stylesheet" type="text/css">
   <script src="../functions.js"></script>
   <script>
     var clockID = window.location.search.substring(1);
@@ -37,13 +37,13 @@ session_start();
 
 <body>
   <div class="topnav">
-    <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="https://clockdrum.000webhostapp.com/Icons/back.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/feed.php"><img border="0" src="https://clockdrum.000webhostapp.com/Icons/house.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/discover.php"><img border="0" src="https://clockdrum.000webhostapp.com/Icons/compass.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/checkClockLimit.php"><img border="0" src="https://clockdrum.000webhostapp.com/Icons/music.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/myClocks.php"><img border="0" src="https://clockdrum.000webhostapp.com/Icons/user.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/inbox.php" id='chats' style='color:black'><img border="0" src="https://clockdrum.000webhostapp.com/Icons/inbox.png" width="30" height="30"></a>
-    <a href="https://clockdrum.000webhostapp.com/search.php"><img border="0" src="https://clockdrum.000webhostapp.com/Icons/magnifying-glass.png" width="30" height="30"></a>
+    <a href="#" id="backBtn" onclick=checkBack()><img border="0" src="http://localhost:8080/Clock/Icons/back.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/feed.php"><img border="0" src="http://localhost:8080/Clock/Icons/house.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/discover.php"><img border="0" src="http://localhost:8080/Clock/Icons/compass.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/checkClockLimit.php"><img border="0" src="http://localhost:8080/Clock/Icons/music.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/myClocks.php"><img border="0" src="http://localhost:8080/Clock/Icons/user.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/inbox.php" id='chats' style='color:black'><img border="0" src="http://localhost:8080/Clock/Icons/inbox.png" width="30" height="30"></a>
+    <a href="http://localhost:8080/Clock/search.php"><img border="0" src="http://localhost:8080/Clock/Icons/magnifying-glass.png" width="30" height="30"></a>
     <div class="dropdown">
       <a><?php
             echo $_SESSION["Username"];

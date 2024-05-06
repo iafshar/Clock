@@ -100,7 +100,7 @@ if (isset($_POST['Password1'])){
   }
   if($invalid) {
      $_SESSION["messageResetDisplay"] = "block";
-     header("Location:https://clockdrum.000webhostapp.com/updatePassword.php");
+     header("Location:http://localhost:8080/Clock/updatePassword.php");
   }
   else { // if the new password is valid
     $UserID = $_SESSION['UserID'];
@@ -114,7 +114,7 @@ if (isset($_POST['Password1'])){
         if (mysqli_query($conn, $addPwd)) {
           $deleteHash = $_SESSION['deleteHash']; // the hash is not needed anymore because the user has successfully changed their password
           mysqli_query($conn, $deleteHash);      // so it is deleted
-          header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
+          header("Location:http://localhost:8080/Clock/myClocks.php");
         }
         else {
             echo "Error: " . $addPwd . "<br>" . mysqli_error($conn);

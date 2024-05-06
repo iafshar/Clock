@@ -111,13 +111,13 @@ if (isset($_POST['Username']) and isset($_POST['Password1']) and isset($_POST['E
   if($invalid) { // if anything is invalid display the checklist and link back to signup
     $_SESSION["messageDisplay"] = "block";
 
-    header("Location:https://clockdrum.000webhostapp.com/signUp.php");
+    header("Location:http://localhost:8080/Clock/signUp.php");
   }
   else{
     // hash password here and set session["Password"] to it
     $hashedPassword = mysqli_real_escape_string($conn, password_hash($Password, PASSWORD_DEFAULT));
     $_SESSION["Password"] = $hashedPassword;
-    header("Location:https://clockdrum.000webhostapp.com/sendEmail.php");
+    header("Location:http://localhost:8080/Clock/sendEmail.php");
   }
 }
 

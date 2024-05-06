@@ -18,7 +18,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
     $result = mysqli_query($conn, $CheckHash);
 
     if ($result->num_rows == 0) { // if the hash does not exist
-        header("Location:https://clockdrum.000webhostapp.com/invalidLink.html");
+        header("Location:http://localhost:8080/Clock/invalidLink.html");
     }
     else {
         while ($row = $result->fetch_assoc()) {
@@ -27,16 +27,16 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["action"]) && (
         $_SESSION['deleteHash'] = "DELETE FROM Hashes WHERE Hash='$hash' AND Email='$email' AND Type=1";
 
         if ($expirationDate <= $currentDate) {
-            header("Location:https://clockdrum.000webhostapp.com/invalidLink.html");
+            header("Location:http://localhost:8080/Clock/invalidLink.html");
         }
         else { 
             $_SESSION["Email"] = $email;
-            header("Location:https://clockdrum.000webhostapp.com/updatePassword.php");
+            header("Location:http://localhost:8080/Clock/updatePassword.php");
         }
     }
 }
 else {
-    header("Location:https://clockdrum.000webhostapp.com/invalidLink.html");
+    header("Location:http://localhost:8080/Clock/invalidLink.html");
 }
 
 ?>

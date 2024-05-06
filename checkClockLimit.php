@@ -16,7 +16,7 @@ $count = mysqli_num_rows($result);
 
 if ($count >= 5 && $Premium == 0 || $count >= 20 && $Premium == 1){ // if the number of clocks are at the clock limit 
     $_SESSION["Error"] = "You have reached your clock limit.";
-    header("Location:http://localhost:8080/Clock/myClocks.php");
+    header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
 }
 else {
     $_SESSION["Error"] = "";
@@ -24,7 +24,7 @@ else {
     if (isset($_GET["clockID"])) { // only true for remix
         $clockID .= "?".$_GET["clockID"];
     }
-    header("Location:http://localhost:8080/Clock/Clock_User/index.php".$clockID);
+    header("Location:https://clockdrum.000webhostapp.com/Clock_User/index.php".$clockID);
 }
 
 ?>

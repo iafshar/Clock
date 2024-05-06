@@ -25,13 +25,13 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
         $hashedPassword = $row["Password"];
     }
     if (!password_verify($Password,$hashedPassword)) {
-        header("Location:http://localhost:8080/Clock/login.php");
+        header("Location:https://clockdrum.000webhostapp.com/login.php");
     }
     else {
-    header("Location:http://localhost:8080/Clock/myClocks.php");
+    header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
     }
    } else {
-    header("Location:http://localhost:8080/Clock/login.php");
+    header("Location:https://clockdrum.000webhostapp.com/login.php");
    }
 }
 else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes from signup or updatePassword

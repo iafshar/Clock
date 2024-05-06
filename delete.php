@@ -42,5 +42,5 @@ $DeleteClock = "DELETE FROM Clocks WHERE ClockID='$ClockID'";
 
 mysqli_query($conn, $DeleteClock);
 
-header("Location:http://localhost:8080/Clock/myClocks.php");
+header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
 ?>

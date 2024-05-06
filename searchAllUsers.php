@@ -57,10 +57,10 @@ else {
     // // echo no users
 }
 $_SESSION['response'] = $response;
-header("Location:https://clockdrum.000webhostapp.com/searchResults.php");
+header("Location:http://localhost:8080/Clock/searchResults.php");
 }
 else if (strlen($Username) == 0) {
-  header("Location:https://clockdrum.000webhostapp.com/search.php");
+  header("Location:http://localhost:8080/Clock/search.php");
 }
 
 ?>

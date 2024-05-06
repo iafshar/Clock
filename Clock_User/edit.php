@@ -62,7 +62,7 @@ if (mysqli_query($conn, $Delete) && mysqli_query($conn, $Edit)) {
      VALUES ('$ClockID','$SoundID','$X','$Y')";
     mysqli_query($conn, $CircInsert); // inserts the new circles into the db
   }
- header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
+ header("Location:http://localhost:8080/Clock/myClocks.php");
 
  } else {
      echo "Error: " . $Delete . "<br>" . $Edit . "<br>" . mysqli_error($conn);

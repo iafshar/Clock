@@ -1,5 +1,5 @@
 function checkBack() { // for the back button
-    if (document.referrer.substring(0,28) == "https://clockdrum.000webhostapp.com/") { // only takes you back to pages that are still part of the app
+    if (document.referrer.substring(0,28) == "http://localhost:8080/Clock/") { // only takes you back to pages that are still part of the app
       history.back();
     }
 }
@@ -19,7 +19,7 @@ function openComments(clockID) {
 
 function changeSound(clockID,rowID) { // mutes/unmutes a clock
     for (let i = 0; i < document.getElementsByTagName("iframe").length; i++) {
-      if (document.getElementsByTagName("iframe")[i].src == "https://clockdrum.000webhostapp.com/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) { // finds the iframe to change the sound of
+      if (document.getElementsByTagName("iframe")[i].src == "http://localhost:8080/Clock/Clock_ReadOnlySmall/index.html?rowID="+rowID+"clockID="+clockID) { // finds the iframe to change the sound of
         if (localStorage.getItem("muteRow"+rowID)) { // if a key called muteRow followed by the rowID of the iframe is in localStorage
           localStorage.removeItem("muteRow"+rowID); // remove it from local storage
           document.getElementsByClassName("sound-icon")[i].src = "Icons/mute.png";
@@ -54,7 +54,7 @@ function setUnreadCount() {
     };
 
     
-    xmlhttp.open("GET", "https://clockdrum.000webhostapp.com/countUnreadMessages.php", true);
+    xmlhttp.open("GET", "http://localhost:8080/Clock/countUnreadMessages.php", true);
     xmlhttp.send();
 }
 

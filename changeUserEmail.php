@@ -40,10 +40,10 @@ if (isset($_POST['email1'])){
 
     if ($invalid) {
         $_SESSION["messageEmailDisplay"] = "block";
-        header("Location:https://clockdrum.000webhostapp.com/updateEmail.php");
+        header("Location:http://localhost:8080/Clock/updateEmail.php");
     }
     else {
-        header("Location:https://clockdrum.000webhostapp.com/sendEmail.php?oldEmail=".$Email1."&newEmail=".$Email2);
+        header("Location:http://localhost:8080/Clock/sendEmail.php?oldEmail=".$Email1."&newEmail=".$Email2);
     }
 
 }

@@ -28,11 +28,11 @@ if (isset($_POST['Username']) && isset($_POST['Password']) && !isset($_GET['chec
         header("Location:http://localhost:8080/Clock/login.php");
     }
     else {
-    header("Location:http://localhost:8080/Clock/myClocks.php");
+        header("Location:http://localhost:8080/Clock/myClocks.php");
     }
-   } else {
+  } else {
     header("Location:http://localhost:8080/Clock/login.php");
-   }
+  }
 }
 else if (isset($_GET['checkbox']) && $_GET['checkbox'] == 1) { // if it comes from signup or updatePassword
     if(isset($_GET['username'])) {

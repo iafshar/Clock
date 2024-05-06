@@ -60,7 +60,7 @@ $db->get_con()->query($deleteUser);
 
 $_SESSION = array();
 
-header("Location:http://localhost:8080/Clock/start.php");
+header("Location:https://clockdrum.000webhostapp.com/start.php");
 
 
 ?>

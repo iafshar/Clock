@@ -27,7 +27,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
     $result = mysqli_query($conn, $CheckHash);
 
     if ($result->num_rows == 0) { // if the hash is not in the database
-        header("Location:http://localhost:8080/Clock/invalidLink.html");
+        header("Location:https://clockdrum.000webhostapp.com/invalidLink.html");
     }
     else {
         while ($row = $result->fetch_assoc()) {
@@ -41,7 +41,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
 
         if ($expirationDate <= $currentDate) { // if the hash has passed its expiration time
             mysqli_query($conn, $deleteHash);
-            header("Location:http://localhost:8080/Clock/invalidLink.html");
+            header("Location:https://clockdrum.000webhostapp.com/invalidLink.html");
         }
         else {
             $_SESSION["Email"] = $email;
@@ -68,7 +68,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
                     // hashed pwd
     
                     if (mysqli_query($conn, $addPwd)) {
-                        header("Location:http://localhost:8080/Clock/myClocks.php");
+                        header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
                     }
                     else {
                         echo "Error: " . $addPwd . "<br>" . mysqli_error($conn);
@@ -84,7 +84,7 @@ if (isset($_GET["hash"]) && isset($_GET["email"]) && isset($_GET["premium"]) && 
                 WHERE Username = '$Username' AND Password='$Password'";
 
                 if (mysqli_query($conn, $updateEmail)) {
-                    header("Location:http://localhost:8080/Clock/myClocks.php");
+                    header("Location:https://clockdrum.000webhostapp.com/myClocks.php");
                 }
                 else {
                     echo "Error: " . $updateEmail . "<br>" . mysqli_error($conn);

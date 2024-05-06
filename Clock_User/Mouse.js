@@ -144,7 +144,7 @@ function mousePressed() {
 
             xmlhttp.open("GET", "edit.php?ClockID="+clockID+"&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
             xmlhttp.send();
-            window.open("http://localhost:8080/Clock/myClocks.php", '_self');
+            window.open("https://clockdrum.000webhostapp.com/myClocks.php", '_self');
           }
           else{ // if it is a new clock
             nameClock(); 
@@ -188,7 +188,7 @@ function mousePressed() {
 
               xmlhttp.open("GET", "edit.php?ClockID="+clockID+"&tempo=" + hs1.tempo + "&shared=" + shared + "&Circles=" + circs, true);
               xmlhttp.send();
-              window.open("http://localhost:8080/Clock/myClocks.php", '_self');
+              window.open("https://clockdrum.000webhostapp.com/myClocks.php", '_self');
           }
           else{ // if it is a new clock
             nameClock();

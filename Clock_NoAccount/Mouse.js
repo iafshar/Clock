@@ -19,10 +19,10 @@ function mousePressed() {
       }
     }
     if (signUp.overButton()){
-      window.open("http://localhost:8080/Clock/choose.html", "_self")
+      window.open("https://clockdrum.000webhostapp.com/choose.html", "_self")
     }
     else if (login.overButton()) {
-      window.open("http://localhost:8080/Clock/login.php", "_self")
+      window.open("https://clockdrum.000webhostapp.com/login.php", "_self")
     }
     for (i = 0;i<circles.length;i++){
       if (circleOnScreen && pointCircle(circles[i].ox, circles[i].oy, mouseX, mouseY, CIRCLE_DIAMETER/2)){

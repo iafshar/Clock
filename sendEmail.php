@@ -87,9 +87,20 @@ if (isset($_POST['Forgot'])) { // if an email is being sent because a user has f
         if(!$mail->Send()){
             echo "Mailer Error: " . $mail->ErrorInfo;
         }else{
-            echo "<div class='error'>
-            <p>An email has been sent to you with instructions on how to reset your password.</p>
-            </div><br /><br /><br />";
+            echo "
+            <!DOCTYPE html>
+            <html lang='en' dir='ltr'>
+            <head>
+                <meta charset='utf-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Clock | Email</title>
+            </head>
+            <body>
+                <div class='error'>
+                <p>An email has been sent to you with instructions on how to reset your password.</p>
+                </div><br /><br /><br />
+            </body>
+            </html>";
 
         }
 
@@ -157,9 +168,20 @@ else if (isset($_GET['oldEmail']) && isset($_GET['newEmail'])) { // change email
     if(!$mail->Send()){
         echo "Mailer Error: " . $mail->ErrorInfo;
     }else{
-        echo "<div class='error'>
-        <p>An email has been sent to your new email with instructions on how to change your email.</p>
-        </div><br /><br /><br />";
+        echo "
+        <!DOCTYPE html>
+        <html lang='en' dir='ltr'>
+	    <head>
+		    <meta charset='utf-8'>
+		    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		    <title>Clock | Email</title>
+	    </head>
+        <body>
+            <div class='error'>
+            <p>An email has been sent to your new email with instructions on how to change your email.</p>
+            </div><br /><br /><br />
+        </body>
+        </html>";
 
     }    
 
@@ -216,9 +238,20 @@ else { // if an email is being set because a user wants to sign up for an accoun
     if(!$mail->Send()){
         echo "Mailer Error: " . $mail->ErrorInfo;
     }else{
-        echo "<div class='error'>
-        <p>An email has been sent to you with a verification link.</p>
-        </div><br /><br /><br />";
+        echo "
+        <!DOCTYPE html>
+        <html lang='en' dir='ltr'>
+	    <head>
+		    <meta charset='utf-8'>
+		    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		    <title>Clock | Email</title>
+	    </head>
+        <body>
+            <div class='error'>
+            <p>An email has been sent to you with a verification link.</p>
+            </div><br /><br /><br />
+        </body>
+        </html>";
 
     }
 

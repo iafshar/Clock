@@ -32,12 +32,14 @@ session_start();
     
     <script>
       function displayOtherProfile() {
+        
         const urlParams = new URLSearchParams(window.location.search);
         const clickedUserID = urlParams.get('clickedUserID');
-
+        console.log(urlParams);
         var xmlhttp = new XMLHttpRequest();
 
         xmlhttp.onreadystatechange = function() {
+            console.log("hehe");
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
                 var premium = (myRecords.Premium == 1);
@@ -64,10 +66,10 @@ session_start();
                 }
             }
         };
-        if (urlParams.size == 0) {
-          xmlhttp.open("GET", "displaySearchedClocks.php", true); // if a user reaches profile by clicking insearch results
+        if (clickedUserID == null) {
+          xmlhttp.open("GET", "displaySearchedClocks.php", true); // if a user reaches profile by clicking in search results
         }
-        else if (clickedUserID != null) {
+        else {
           xmlhttp.open("GET", "displaySearchedClocks.php?UserID="+clickedUserID, true); // if user reaches profile by clicking on their username in autocomplete search rather than searching
         }
         xmlhttp.send();

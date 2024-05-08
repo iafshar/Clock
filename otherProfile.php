@@ -35,11 +35,9 @@ session_start();
         
         const urlParams = new URLSearchParams(window.location.search);
         const clickedUserID = urlParams.get('clickedUserID');
-        console.log(urlParams);
         var xmlhttp = new XMLHttpRequest();
 
         xmlhttp.onreadystatechange = function() {
-            console.log("hehe");
             if (this.readyState == 4 && this.status == 200) {
                 var myRecords = JSON.parse(this.responseText);
                 var premium = (myRecords.Premium == 1);
